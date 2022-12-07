@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="assets/plugins/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/plugins/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/plugins/lightgallery/src/lightgallery-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 <body>
 
