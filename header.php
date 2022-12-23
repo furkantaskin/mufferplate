@@ -25,11 +25,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/plugins/lightgallery/src/lightgallery-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/<?=$callcss?>.min.css">
 </head>
 <body>
 
