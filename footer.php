@@ -1,6 +1,6 @@
 <footer>
 
 </footer>
-<script src="assets/js/<?=$callFile?>.js"></script>
+<script src="assets/js/<?=$calljs?>.js"></script>
 </body>
 </html>
