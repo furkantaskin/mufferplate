@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholders";
+
+@import "vendors/bootstrap/bootstrap-grid";
+@import "vendors/swiper/swiper";
+@import "vendors/swiper/effect-fade";
+@import "vendors/normalize";
+
+@import "base/typography";
+@import "base/base";
+@import "base/animations";
+
+@import "components/components";
+
+@import "layout/header";
+@import "layout/footer";
+
+@import "pages/home";
+
+
+
