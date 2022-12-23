@@ -13,11 +13,6 @@
     background: $repeat $position/$size url($image)
 }
 
-@mixin logo-mask($background: $dark_orange){
-    @include mask-parameters('../img/logo.svg');
-    background-color: $background;
-    aspect-ratio: 220/76;
-}
 
 
 $xs: 575;
