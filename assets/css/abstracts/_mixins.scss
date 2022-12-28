@@ -38,6 +38,6 @@ $uwqhd: 3440;
     aspect-ratio: list.slash(strip-units($w), strip-units($h));
   }
   @supports not(aspect-ratio: 1/1) {
-    padding-bottom: #{calculate_padding($w,$h)}px;
+    padding-bottom: #{calculate_padding($w,$h)};
   }
 }
