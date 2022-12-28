@@ -1,18 +1,21 @@
-@mixin mask-parameters($image){
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+@use "sass:list";
+
+@mixin mask-parameters($image: null) {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  @if ($image) {
     -webkit-mask-image: url($image);
     mask-image: url($image);
+  }
 }
 
-@mixin background($repeat:no-repeat, $position: center, $size: contain, $image){
-    background: $repeat $position/$size url($image)
+@mixin background($repeat:no-repeat, $position: center, $size: contain, $image) {
+  background: $repeat $position/$size url($image)
 }
-
 
 
 $xs: 575;
@@ -24,8 +27,17 @@ $xxl: 1600;
 $wqhd: 2200;
 $uwqhd: 3440;
 
-@mixin responsive($max-width, $min-width: -1){
-    @media screen and (min-width: #{$min-width + 1}px) and (max-width: #{$max-width}px){
-        @content;
-    }
+@mixin responsive($max-width, $min-width: -1) {
+  @media screen and (min-width: #{$min-width + 1}px) and (max-width: #{$max-width}px) {
+    @content;
+  }
+}
+
+@mixin calc_ar($w, $h) {
+  @supports (aspect-ratio: 1/1) {
+    aspect-ratio: list.slash(strip-units($w), strip-units($h));
+  }
+  @supports not(aspect-ratio: 1/1) {
+    padding-bottom: #{calculate_padding($w,$h)}px;
+  }
 }
