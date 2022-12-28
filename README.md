@@ -27,7 +27,11 @@ Bu kısım package.json içinde zaten tanımlı. Son build için `npm run build`
 
 Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir.
 
+Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben Jetbrains ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
 
+```bash
+npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
+```
 
 ## Ek Kütüphaneler
 
@@ -39,3 +43,4 @@ Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu k�
 ## Kullanılan Teknolojiler
 
 - webpack
+- PostCSS (Autoprefixer)
