@@ -1,0 +1,13 @@
+%transition3 {
+    -webkit-transition: .3s ease all;
+    -o-transition: .3s ease all;
+    transition: .3s ease all;
+  }
+  
+  %noscrollbar{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
