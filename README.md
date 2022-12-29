@@ -12,6 +12,22 @@ Tek yapılması gereken repoyu içeri aktarmak.
 gh repo clone furkantaskin/boilerplate
 ```
 
+## Destelenen Cihazlar
+
+[Browserslist](https://browsersl.ist/) kullanarak desteklenen tarayıcılar için bilgileri ekledim. Desteklenen en düşük sürümler şu şekilde
+
+- Chrome 105
+- Chrome for Android 108
+- Safari iOS 14
+- Edge 105
+- Samsung Internet 16
+- Safari 15.6
+- Firefox 14
+- Opera 89
+- Opera Mini
+- Firefox Android 107
+- Opera Mobile 72
+
 ## Konfigürasyon
 
 JS dosyaları için Webpack kullanılmakta. Webpack başta ana dizindeki assets içinde bulunan src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir. 
