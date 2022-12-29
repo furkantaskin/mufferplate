@@ -25,7 +25,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="assets/css/<?=$callcss?>.min.css">
+    <link rel="stylesheet" href="assets/css/pages/<?=$callcss?>.css?v=<?=rand()?>">
 </head>
 <body>
 
