@@ -12,7 +12,7 @@ Tek yapılması gereken repoyu içeri aktarmak.
 gh repo clone furkantaskin/boilerplate
 ```
 
-## Destelenen Cihazlar
+## Desteklenen Cihazlar
 
 [Browserslist](https://browsersl.ist/) kullanarak desteklenen tarayıcılar için bilgileri ekledim. Desteklenen en düşük sürümler şu şekilde
 
