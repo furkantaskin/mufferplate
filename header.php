@@ -21,8 +21,8 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="assets/css/pages/<?=$callcss?>.css?v=<?=rand()?>">
