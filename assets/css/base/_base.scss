@@ -2,3 +2,72 @@ body{
     position: relative;
     overflow-x: hidden;
 }
+a{
+    text-decoration: none;
+}
+
+*:focus{
+    outline: none;
+}
+
+// Fonts
+.akrobat-semibold {
+    font-family: "akrobatsemibold", sans-serif;
+}
+
+.akrobat-regular{
+    font-family: "akrobatregular", sans-serif;
+}
+
+.akrobat-black{
+    font-family: "akrobatblack", sans-serif;
+}
+
+.akrobat-bold{
+    font-family: 'akrobatbold', sans-serif;
+}
+
+
+// Flexbox
+.d-flex{
+    display: flex;
+}
+
+.justify-content-between{
+    justify-content: space-between;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.justify-content-end{
+    justify-content: flex-end;
+}
+
+.align-items-start{
+    align-items: flex-start;
+}
+.align-items-center{
+    align-items: center;
+}
+
+.align-items-end{
+    align-items: flex-end;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+// Positions
+.p-abs{
+    position: absolute;
+}
+
+.p-rel{
+    position: relative;
+}
+
+
+
