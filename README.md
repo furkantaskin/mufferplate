@@ -30,6 +30,10 @@ gh repo clone furkantaskin/boilerplate
 
 ## Konfigürasyon
 
+Şu an için CSS ve JS için konfigürasyon gerekiyor. CSS için gereken çok önemli olmasa da JS'in temeli şu anda Webpack'e dayalı.
+
+### JS (Webpack)
+
 JS dosyaları için Webpack kullanılmakta. Webpack başta ana dizindeki assets içinde bulunan src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir. 
 
 
@@ -37,16 +41,25 @@ Dev ortamındayken hızlı bir şekilde build almak için aşağıdaki kod kulla
 ```bash
 npm run watch
 ```
-
 Bu kısım package.json içinde zaten tanımlı. Son build için `npm run build` kullanılabilir. Burada production modu ile build işlemi yapacaktır.
 
 
+### CSS (Sass ve Postcss)
 Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir.
 
 Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben Jetbrains ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
 
 ```bash
 npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
+```
+
+### Favicon
+
+Favicon çok önemli değil ancak şu an için tüm cihazlarla uyumlu olan favicon yapısı var. Dilenirse bu standart forma da dönüştürülebilir.
+
+```html 
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 ```
 
 ## Ek Kütüphaneler
