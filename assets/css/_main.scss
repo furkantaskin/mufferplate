@@ -1,24 +1,18 @@
 @charset "UTF-8";
 
-@import "abstracts/variables";
-@import "abstracts/functions";
-@import "abstracts/mixins";
-@import "abstracts/placeholders";
+@forward "abstracts/variables" as var-*;
+@forward "abstracts/functions" as func-*;
+@forward "abstracts/mixins" as mixin-*;
+@forward "abstracts/placeholders" as place-*;
 
-@import "vendors/bootstrap";
-@import "vendors/normalize";
+@use "vendors/bootstrap";
 
 /*
 @import "vendors/swiper/swiper";
 */
 
-@import "base/typography";
-@import "base/base";
-@import "base/animations";
+@forward "base/typography";
+@forward "base/base";
+@forward "base/animations";
 
-@import "components/components";
-
-@import "layout/header";
-@import "layout/footer";
-
-
+@forward "components/components" as comp-*;
