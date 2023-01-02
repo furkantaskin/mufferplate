@@ -1,6 +1,6 @@
 <?php 
-$callcss ="homepage";
-$calljs = "changethispart";
+$callcss ="home";
+$calljs = "home";
 include "header.php"; 
 ?>
 <main>
