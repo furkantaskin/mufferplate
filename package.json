@@ -13,7 +13,7 @@
     "not dead"
   ],
   "name": "boilerplate",
-  "description": "<img src=\"https://img.shields.io/badge/Bootstrap-5.2.3-brightgreen\" alt=\"Bootstrap\"> <img src=\"https://img.shields.io/badge/Lightgallery-2.6.1-brightgreen\" alt=\"Lightgallery\"> <img src=\"https://img.shields.io/badge/Swiper-8.4.5-brightgreen\" alt=\"Swiper\">",
+  "description": "",
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
