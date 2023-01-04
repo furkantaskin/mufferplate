@@ -13,7 +13,7 @@
     "not dead"
   ],
   "name": "boilerplate",
-  "description": "",
+  "description": "Personal template for projects",
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
