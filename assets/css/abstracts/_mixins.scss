@@ -1,4 +1,5 @@
 @use "sass:list";
+@use "functions" as f;
 
 @mixin mask-parameters($image: null) {
   -webkit-mask-size: contain;
@@ -35,10 +36,10 @@ $uwqhd: 3440;
 
 @mixin calc_ar($w, $h) {
   @supports (aspect-ratio: 1/1) {
-    aspect-ratio: list.slash(strip-units($w), strip-units($h));
+    aspect-ratio: list.slash(f.strip-units($w), f.strip-units($h));
   }
   @supports not(aspect-ratio: 1/1) {
-    padding-bottom: #{calculate_padding($w,$h)};
+    padding-bottom: #{f.calculate_padding($w,$h)};
   }
 }
 
