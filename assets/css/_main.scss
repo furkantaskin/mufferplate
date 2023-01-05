@@ -1,15 +1,12 @@
 @charset "UTF-8";
 
-@forward "abstracts/variables" as var-*;
-@forward "abstracts/functions" as func-*;
-@forward "abstracts/mixins" as mixin-*;
-@forward "abstracts/placeholders" as place-*;
+@forward "abstracts/variables";
+@forward "abstracts/functions";
+@forward "abstracts/mixins";
+@forward "abstracts/placeholders";
 
 @use "vendors/bootstrap";
 
-/*
-@import "vendors/swiper/swiper";
-*/
 
 @forward "base/typography";
 @forward "base/base";
