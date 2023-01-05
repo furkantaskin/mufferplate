@@ -62,7 +62,7 @@ $uwqhd: 3440;
 
 @mixin pos_abs($top: 0, $right: 0, $bottom: 0, $left: 0){
   @supports (inset: 0){
-    inset: $top, $right, $bottom, $left;
+    inset: $top $right $bottom $left;
   }
   @supports not (inset: 0){
     top: $top;
