@@ -71,3 +71,12 @@ $uwqhd: 3440;
     left: $left;
   }
 }
+
+@mixin is_gap($row_gap: 0, $col_gap: 0){
+  @supports (gap: ($row_gap * 1px) ($col_gap * 1px)){
+    gap: ($row_gap * 1px) ($col_gap * 1px);
+  }
+  @supports not (gap: ($row_gap * 1px) ($col_gap * 1px)){
+    @content;
+  }
+}
