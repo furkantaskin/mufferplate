@@ -33,30 +33,30 @@ a{
     display: flex;
 }
 
-.justify-content-between{
+.j-b{
     justify-content: space-between;
 }
 
-.justify-content-center{
+.j-c{
     justify-content: center;
 }
 
-.justify-content-end{
+.j-e{
     justify-content: flex-end;
 }
 
-.align-items-start{
+.a-s{
     align-items: flex-start;
 }
-.align-items-center{
+.a-c{
     align-items: center;
 }
 
-.align-items-end{
+.a-e{
     align-items: flex-end;
 }
 
-.flex-column{
+.f-c{
     flex-direction: column;
 }
 
