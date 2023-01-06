@@ -25,6 +25,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="assets/css/vendors/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/pages/<?=$callcss?>.css?v=<?=rand()?>">
 </head>
 <body>
