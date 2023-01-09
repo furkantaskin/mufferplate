@@ -30,5 +30,16 @@
   "bugs": {
     "url": "https://github.com/furkantaskin/boilerplate/issues"
   },
-  "homepage": "https://github.com/furkantaskin/boilerplate#readme"
+  "homepage": "https://github.com/furkantaskin/boilerplate#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "printWidth": 70
+
+  }
 }
