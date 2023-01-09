@@ -65,7 +65,7 @@ Favicon çok önemli değil ancak şu an için tüm cihazlarla uyumlu olan favic
 ## Ek Kütüphaneler
 
 - Bootstrap
-- Lightgallery
+- Photoswipe
 - Swiper slider
 - normalize.css
 
