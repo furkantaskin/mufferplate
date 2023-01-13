@@ -1,4 +1,5 @@
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Collapse } from 'bootstrap';
 
 const swiper = new Swiper('.swiper', {
   modules: [Navigation, Pagination, Scrollbar],
@@ -8,4 +9,10 @@ const swiper = new Swiper('.swiper', {
     prevEl: '.swiper-button-prev',
   },
   // ...
+});
+
+const accordionParent = document.getElementById('abilitiesFaq');
+
+new Collapse(accordionParent, {
+  toggle: false,
 });
