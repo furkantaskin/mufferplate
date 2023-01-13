@@ -1,14 +1,9 @@
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Collapse } from 'bootstrap';
 
-const swiper = new Swiper('.swiper', {
-  modules: [Navigation, Pagination, Scrollbar],
-  speed: 500,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  // ...
+document.querySelectorAll('.prodgallery a img').forEach((e) => {
+  e.parentElement.dataset.pswpWidth = e.naturalWidth;
+  e.parentElement.dataset.pswpHeight = e.naturalHeight;
 });
 
 const accordionParent = document.getElementById('abilitiesFaq');
