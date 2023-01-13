@@ -1,4 +1,4 @@
-import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
+import Swiper, { Navigation, Pagination } from 'swiper';
 import { Collapse } from 'bootstrap';
 
 document.querySelectorAll('.prodgallery a img').forEach((e) => {
@@ -10,4 +10,8 @@ const accordionParent = document.getElementById('abilitiesFaq');
 
 new Collapse(accordionParent, {
   toggle: false,
+});
+
+const swiper = new Swiper('.swiper', {
+  modules: [Navigation, Pagination],
 });
