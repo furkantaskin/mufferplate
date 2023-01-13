@@ -41,23 +41,16 @@ $uwqhd: 3440;
 @mixin calc_ar($w, $h, $has_child: false) {
   @supports (aspect-ratio: 1/1) {
     aspect-ratio: list.slash(f.strip-units($w), f.strip-units($h));
-    @if $has_child {
-      & > .ar-child {
-        width: 100%;
-        height: 100%;
-      }
-    }
   }
   @supports not (aspect-ratio: 1/1) {
     padding-bottom: #{f.calculate_padding($w, $h)};
     @content;
-
-    @if $has_child {
-      & > .ar-child {
-        @include pos_abs(0, 0, 0, 0);
-        width: 100%;
-        height: 100%;
-      }
+  }
+  @if $has_child {
+    & > .ar-child {
+      @include pos_abs(0, 0, 0, 0);
+      width: 100%;
+      height: 100%;
     }
   }
 }
