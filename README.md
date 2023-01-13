@@ -34,8 +34,7 @@ Verimi artırmak için mümkün olduğunca modül yapısı ve sayfaya özel yap�
 
 ### JS
 
-JS dosyaları için Webpack kullanılmakta. Webpack başta ana dizindeki assets içinde bulunan src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir. 
-
+JS dosyaları için Webpack kullanılmakta. Webpack başta ana dizindeki assets içinde bulunan src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir.
 
 #### Webpack
 
@@ -66,15 +65,14 @@ Webpack detaylı dokümantasyon için -> [Webpack](https://webpack.js.org/)
 
 Photoswipe kendi sitesinde de çalıştırma için bazı detaylar istemektedir. Özelleştirme dışında varsayılan temel kullanım için HTML/CSS ve JS içinde düzenleme gerekmektedir.
 
-1. HTML içinde anchor elementlere `data-pswp-width` ve `data-pswp-height` dataları eklenmelidir. 
+1. HTML içinde anchor elementlere `data-pswp-width` ve `data-pswp-height` dataları eklenmelidir.
 2. JS içinde modül tanımlaması yapılmalıdır
 3. CSS dosyaları içeri eklenmelidir.
 
 Birinci ve ikinci madde tek bir dosyada yapılabilir. Kullanılacak görseller farklı olacağı için burada JS ile resimlerin asıl ölçüleri gönderilebilir.
 
-
 ```js
-document.querySelectorAll(".prodgallery a img").forEach((e) => {
+document.querySelectorAll('.prodgallery a img').forEach((e) => {
   e.parentElement.dataset.pswpWidth = e.naturalWidth;
   e.parentElement.dataset.pswpHeight = e.naturalHeight;
 });
@@ -84,12 +82,12 @@ Artık Photoswipe etkinleştirilebilir.
 
 ```js
 const prodGallery = new PhotoSwipeLightbox({
-    gallery: ".prodgallery",
-    children: "a",
-    pswpModule: () => import("photoswipe"),
-  });
+  gallery: '.prodgallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe'),
+});
 
-  prodGallery.init();
+prodGallery.init();
 ```
 
 Photoswipe detaylı dokümantasyon için -> [Photoswipe](https://photoswipe.com/getting-started/)
@@ -107,8 +105,22 @@ const swiper = new Swiper('.swiper', {
 
 Burada değişken tanımlaması zorundlu değil ancak dilenirse tanımlanabilir. Metodlar ve eventler sık kullanılacaksa değişkene atanması iyi olacaktır.
 
+Swiper detaylı dokümantasyon için -> [Swiper](https://swiperjs.com/)
 
-### CSS (Sass ve Postcss)
+#### Bootstrap Utilities
+
+Bootstrap kendi sitesinde dokümantasyona her şeyi anlatmış ama bana nedense eksik geldi. Yeni bir element eklemek için dilenirse parent elemente veya her bir farklı elemente tıpkı Swiper'a benzer bir atama yapılabilir. Örneğin bir id'si `abilitiesFaq` olan bir element içinde bulunan birden fazla akordiyonu çalıştırmak için çok kısa bir kod yeterlidir.
+
+```js
+const accordionParent = document.getElementById('abilitiesFaq');
+new Collapse(accordionParent, {
+  toggle: false,
+});
+```
+
+Bootstrap detaylı dokümantasyon için -> [Bootstrap](https://getbootstrap.com/)
+
+### CSS
 
 Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir.
 
@@ -117,6 +129,10 @@ Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben Jetbra
 ```bash
 npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
 ```
+
+#### Mixin'ler
+
+Sass içindeki mixinler belirli bir çalışma programı içermektedir. Bunlardan en önemlisi `aspect-ratio` denilebilir. Kullanımı çok kafa karıştırıyor gibi hissettirse de mantığı çok basittir. (Gerekli açıklama için bkz: [Changelog](CHANGELOG.md)). Tek yapılması gereken sağlıklı bir işlem için `aspect-ratio` verilecek parent elementin hemen içine yeni bir element oluşturup class adına `ar-child` vermek yeterlidir. Sistem gerisini halledecektir.
 
 ### Favicon
 
