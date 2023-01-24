@@ -36,7 +36,7 @@ JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src kla
 
 #### esbuild
 
-- Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kısımda webpack prod derlemesi için çok vakit kaybettiği için esbuild tercih edildi. Eğer ileri dönemlerde Vanilla PHP entegrasyonunu da başarabilirsem custom bir sistem yerine direkt olarka Vite alt yapısı ile çalışma planım var. Şimdilik esbuild sorunsuz gibi görünüyor. Tabii ki dev mode ve prod mode olarak henüz ayıramadım. Bu kısımda da watch mode bana sistemin başarılı olup olmadığını söyleyemediği için (daha doğrusu ben yapamadığım için) kullanılan IDE üzerinden Action on Save oluşturulması gerekiyor. Bunun için Jetbrains kullandığımdan dolayı Jetbrains üzerinden şu işlemlerin yapılması yeterlidir.
+Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kısımda webpack prod derlemesi için çok vakit kaybettiği için esbuild tercih edildi. Eğer ileri dönemlerde Vanilla PHP entegrasyonunu da başarabilirsem custom bir sistem yerine direkt olarka Vite alt yapısı ile çalışma planım var. Şimdilik esbuild sorunsuz gibi görünüyor. Tabii ki dev mode ve prod mode olarak henüz ayıramadım. Bu kısımda da watch mode bana sistemin başarılı olup olmadığını söyleyemediği için (daha doğrusu ben yapamadığım için) kullanılan IDE üzerinden Action on Save oluşturulması gerekiyor. Bunun için Jetbrains kullandığımdan dolayı Jetbrains üzerinden şu işlemlerin yapılması yeterlidir.
 
 1. File Watcher sayfasından yeni bir wathcer oluştur.
 2. File type kısmı Any ya da JS olabilir.
