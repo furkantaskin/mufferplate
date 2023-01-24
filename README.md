@@ -32,7 +32,7 @@ Verimi artırmak için mümkün olduğunca modül yapısı ve sayfaya özel yap�
 
 ### JS
 
-JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir.
+JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir. Mobil için JS operasyonları common.js içinde gerçekleşmektedir.
 
 #### esbuild
 
