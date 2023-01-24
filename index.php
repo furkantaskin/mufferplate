@@ -1,9 +1,1 @@
-<?php 
-$callcss ="home";
-$calljs = "home";
-include "header.php"; 
-?>
-<main>
-    
-</main>
-<?php include "footer.php"; ?>
+<?php include "dist/index.php"; ?>
