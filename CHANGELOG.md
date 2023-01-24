@@ -20,6 +20,11 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
   - Ana dizindeki assets klasörü kaldırıldı
   - Görseller ve fontlar theme klasörüne aktarıldı
 
+### Düzeltmeler
+
+- Sass içinde `call_template` mixin'i argümansız çağrılınca yaşanan hata giderildi. Argümansız çağrılan `call_template` mixin'i varsayılan olarak 0.3 saniyelik transition özelliğini çağıracak
+- Sass içinde tanımsız olan `$green` değişkeninden kaynaklı olarak yaşanan derleme hatası giderildi. `$green` için varsayılan yeşil rengi atandı.
+
 ## 2023.01.13
 
 ### Yeni Eklenenler
