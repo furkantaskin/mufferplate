@@ -48,13 +48,13 @@ Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kıs
 esbuild konfigürasyon dosyasında (esbuild.config.mjs) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa şu satırların değiştirilmesi gerekiyor:
 
 ```js
-const outdir = new URL(`./dist/assets/js/`, import.meta.url).pathname; // Ana dizin içindeki dist klasöründe arama yapacaktır.
+const outdir = new URL(`./theme/assets/js/`, import.meta.url)
+  .pathname; // Ana dizin içindeki dist klasöründe arama yapacaktır.
 
 // Tüm dosyalarda uzun uzun tam dizin belirtmek yerine çalışacak dosyaların aynı klasör altında olması (klasör derinliği fark etmez) şartı sağlandığı sürece
 // bu fonksiyon direkt olarak o dizine gidecektir.
 function mergeFiles(filePath) {
-  return new URL(`./assets/src/pages/${filePath}`, import.meta.url)
-    .pathname;
+  return new URL(`./src/pages/${filePath}`, import.meta.url).pathname;
 }
 ```
 
