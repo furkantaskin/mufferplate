@@ -1,15 +1,13 @@
 # Personal Boilerplate
 
-<img src="https://img.shields.io/badge/Bootstrap-5.2.3-brightgreen" alt="Bootstrap"> <img src="https://img.shields.io/badge/Photoswipe-5.3.3-brightgreen" alt="Lightgallery"> <img src="https://img.shields.io/badge/Swiper-8.4.5-brightgreen" alt="Swiper"> <img src="https://img.shields.io/badge/webpack-5.75.0-blue" alt="Webpack"> <img src="https://img.shields.io/badge/Autoprefixer-10.4.13-blue" alt="Autoprefixer">
+<img src="https://img.shields.io/badge/Bootstrap-5.2.3-brightgreen" alt="Bootstrap"> <img src="https://img.shields.io/badge/Photoswipe-5.3.3-brightgreen" alt="Lightgallery"> <img src="https://img.shields.io/badge/Swiper-8.4.5-brightgreen" alt="Swiper"> <img src="https://img.shields.io/badge/esbuild-0.17.4-blue" alt="esbuild"> <img src="https://img.shields.io/badge/Autoprefixer-10.4.13-blue" alt="Autoprefixer">
 
 Bu reponun amacı sürekli olarak internet sitelerini oluştururken projeyi yeniden başlatma ve kaynakları güncelleme gereksinimini ortadan kaldırmaktır. Bu reponun içindeki dosyaları kendi projelerinize kopyalayarak kullanabilirsiniz.
-
-Şu an için temel klasör yapısı ve include işlemlerini vermektedir ancak ileri dönemlerde SASS yapısını da eklemeyi düşünüyorum. Bunun yanı sıra mobilde kullanılan menünün eksikliği ve JS içinde mobil menüyü çağırırken gereken çeşitli snippetlar da eklenerek burası daha güzel bir konuma getirilebilir. Bunun için bir to-do list oluşturulabilir veya bu kısım issue olarak açılabilir. Şimdilik ikisini de yapacağım.
 
 Tek yapılması gereken repoyu içeri aktarmak.
 
 ```bash
-gh repo clone furkantaskin/boilerplate
+git clone https://github.com/furkantaskin/boilerplate.git
 ```
 
 ## Desteklenen Cihazlar
@@ -30,36 +28,41 @@ gh repo clone furkantaskin/boilerplate
 
 ## Konfigürasyon
 
-Verimi artırmak için mümkün olduğunca modül yapısı ve sayfaya özel yapı gözetilmektedir. Bu yüzden webpack ile Sass başta olmak üzere diğer kısımlarda da çeşitli ince noktalar bulunmaktadır.
+Verimi artırmak için mümkün olduğunca modül yapısı ve sayfaya özel yapı gözetilmektedir. Bu yüzden esbuild ile Sass başta olmak üzere diğer kısımlarda da çeşitli ince noktalar bulunmaktadır.
 
 ### JS
 
-JS dosyaları için Webpack kullanılmakta. Webpack başta ana dizindeki assets içinde bulunan src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir.
+JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir.
 
-#### Webpack
+#### esbuild
 
-Ana dizinde bulunan `webpack.config.js` içinde sayfaya özel js oluşturmak için
+- Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kısımda webpack prod derlemesi için çok vakit kaybettiği için esbuild tercih edildi. Eğer ileri dönemlerde Vanilla PHP entegrasyonunu da başarabilirsem custom bir sistem yerine direkt olarka Vite alt yapısı ile çalışma planım var. Şimdilik esbuild sorunsuz gibi görünüyor. Tabii ki dev mode ve prod mode olarak henüz ayıramadım. Bu kısımda da watch mode bana sistemin başarılı olup olmadığını söyleyemediği için (daha doğrusu ben yapamadığım için) kullanılan IDE üzerinden Action on Save oluşturulması gerekiyor. Bunun için Jetbrains kullandığımdan dolayı Jetbrains üzerinden şu işlemlerin yapılması yeterlidir.
+
+1. File Watcher sayfasından yeni bir wathcer oluştur.
+2. File type kısmı Any ya da JS olabilir.
+3. Sürekli sürekli çalışmaması için scope kısmından Current File seçilecek.
+4. Program kısmı node olacak (node.js için CLI kısmında ne tanımlı ise o olacak).
+5. Arguments kısmı `$ContentRoot$/esbuild.config.mjs` olacak. Buradaki `$ContentRoot$` projenin açıldığı ana dizini seçmektedir. Örneğin localhost/boilerplate ise `$ContentRoot$` bu şekilde gelecektir.
+6. Kontrol için Show console seçeneği Always olabilir.
+
+esbuild konfigürasyon dosyasında (esbuild.config.mjs) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa şu satırların değiştirilmesi gerekiyor:
 
 ```js
+const outdir = new URL(`./dist/assets/js/`, import.meta.url).pathname; // Ana dizin içindeki dist klasöründe arama yapacaktır.
 
-entry: {
-        home: {
-            import: ['./assets/src/common.js', './assets/src/pages/home.js'],
-        },
-    },
+// Tüm dosyalarda uzun uzun tam dizin belirtmek yerine çalışacak dosyaların aynı klasör altında olması (klasör derinliği fark etmez) şartı sağlandığı sürece
+// bu fonksiyon direkt olarak o dizine gidecektir.
+function mergeFiles(filePath) {
+  return new URL(`./assets/src/pages/${filePath}`, import.meta.url)
+    .pathname;
+}
 ```
 
-şeklinde sayfalara göre modül oluşturulamsı gerekir. Buradaki `common.js` dosyası tüm sayfalarda görülen ortak kodlar için bulunmaktadır.
+Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler fonksiyonlar altında tek tek toplanabilir.
 
-Dev ortamındayken hızlı bir şekilde build almak için aşağıdaki kod kullanılabilir.
+İleri dönemlerde bootstrap ve diğer kütüphaneler ile frameworkler için de CSS bundle olayı denenecek.
 
-```bash
-npm run watch
-```
-
-Bu kısım package.json içinde zaten tanımlı. Son build için `npm run build` kullanılabilir. Burada production modu ile build işlemi yapacaktır.
-
-Webpack detaylı dokümantasyon için -> [Webpack](https://webpack.js.org/)
+esbuild detaylı dokümantasyon için -> [esbuild](https://esbuild.github.io/)
 
 #### Photoswipe
 
@@ -150,7 +153,10 @@ Favicon çok önemli değil ancak şu an için tüm cihazlarla uyumlu olan favic
 - Swiper
 - normalize.css
 
-## Kullanılan Teknolojiler
+## Kullanılan Yazılımlar
 
-- webpack
+- esbuild
 - PostCSS (Autoprefixer)
+- Bootstrap
+- Swiper
+- Photoswipe
