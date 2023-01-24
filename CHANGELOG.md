@@ -2,6 +2,24 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.01.24
+
+### Yeni Eklenenler
+
+- esbuild yeni bundler olarak eklendi
+
+### Değişenler
+
+- Lisans türü ISC yerine MIT olarak güncellendi
+- Paket private hale getirildi
+- Ana yapı güncellendi
+  - Sitenin son hali theme klasörü içinde toplandı
+  - Derlenen CSS ve JS için theme klasörüne klasörler eklendi
+  - Footer, index ve header PHP dosyaları theme klasörüne eklendi
+  - Ana dizinden theme klasörüne index.php için aktarım yapıldı
+  - Ana dizindeki assets klasörü kaldırıldı
+  - Görseller ve fontlar theme klasörüne aktarıldı
+
 ## 2023.01.13
 
 ### Yeni Eklenenler
