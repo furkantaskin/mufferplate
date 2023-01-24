@@ -9,3 +9,10 @@ a {
 *:focus {
   outline: none;
 }
+
+@for $i from 1 through 36 {
+  $width: round(percentage($i/36) * 1000) / 1000;
+  .col-#{$i} {
+    width: $width;
+  }
+}
