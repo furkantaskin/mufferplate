@@ -125,7 +125,7 @@ Bootstrap detaylı dokümantasyon için -> [Bootstrap](https://getbootstrap.com/
 
 ### CSS
 
-Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir.
+Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir. Mümkün olduğunca import ifadesinden kaçmaya çalıştım ancak kontrol bir noktada zorlaşabilir.
 
 Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben Jetbrains ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
 
