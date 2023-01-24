@@ -145,6 +145,8 @@ Ayrıca Output paths to refresh kısmı da güncellenmelidir
 $ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map
 ```
 
+Bunun yanı sıra özel column yapısı için bir column generator oluşturuldu. Daha hassas yaklaşımlar için sütun sayısı 36 olarak eklendi. Dilenirse bu sayı azaltılabilir. Generator `src/css/base/_base.scss` içinde bulunmaktadır.
+
 #### Mixin'ler
 
 Sass içindeki mixinler belirli bir çalışma programı içermektedir. Bunlardan en önemlisi `aspect-ratio` denilebilir. Kullanımı çok kafa karıştırıyor gibi hissettirse de mantığı çok basittir. (Gerekli açıklama için bkz: [Changelog](CHANGELOG.md)). Tek yapılması gereken sağlıklı bir işlem için `aspect-ratio` verilecek parent elementin hemen içine yeni bir element oluşturup class adına `ar-child` vermek yeterlidir. Sistem gerisini halledecektir.
