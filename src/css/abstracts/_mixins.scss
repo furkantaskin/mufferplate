@@ -55,7 +55,7 @@ $uwqhd: 3440;
   }
 }
 
-@mixin call_template($template, $trans_number: 0.3s) {
+@mixin call_template($template: 'transition', $trans_number: 0.3s) {
   @if $template == 'transition' {
     -webkit-transition: $trans_number ease all;
     -o-transition: $trans_number ease all;
