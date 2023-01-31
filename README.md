@@ -172,6 +172,16 @@ Görsellere otomatik olarak genişlik ve yükseklik ataması yapılması için �
 
 Buradakki `<?=domain?>` kısmı header dosyasında tanımlı olmakla birlikte `giveAttr()` fonksiyonuna da aynı yerden müdahale edilebilir.
 
+### Görseller
+
+Görseller jpg veya png olarak yüklenebilir. Daha yüksek performans için WebP formatı daha avantajlı olacaktır. Bunun için terminalden görsellerin bulunduğu klasöre gidip aşağıdaki kodun çalışıtırlması yeterlidir.
+
+```bash
+for file in *.jpg ; do cwebp -q 80 "$file" -o "${file%.jpg}.webp"; rm "$file"; done
+```
+
+PNG için aynı işlemin yapılması gerekiyorsa buradaki `.jpg` kısmı `.png` ile değiştirilebilir. Direkt olarak dosyaların üstüne yazacağı için yedekleme yapılması uygun olacaktır.
+
 ## Ek Kütüphaneler
 
 - Bootstrap
