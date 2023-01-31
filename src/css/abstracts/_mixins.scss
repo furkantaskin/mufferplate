@@ -47,6 +47,7 @@ $uwqhd: 3440;
     @content;
   }
   @if $has_child {
+    position: relative;
     & > .ar-child {
       @include pos_abs(0, 0, 0, 0);
       width: 100%;
