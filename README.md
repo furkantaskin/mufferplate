@@ -160,6 +160,18 @@ Favicon çok önemli değil ancak şu an için tüm cihazlarla uyumlu olan favic
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 ```
 
+### PHP
+
+Normalde Lighthouse veya diğer performans ölçütleri görseller için bir `width` ve `height` değeri beklemekte. Bu performans skorlarını etkilediği için PHP içinde ilk anda bunlar hesaplanmakta. SVG dışındaki görsel formatlarını (JPG, PNG, WebP) destekleyen fonksiyonun `img` etiketi içine çağrılması yeterlidir. Görsellerin doğal boyutlarını çekeceği için CLS etiketlenebilir. Test edilmesi sağlıklı olacaktır.
+
+Görsellere otomatik olarak genişlik ve yükseklik ataması yapılması için şu şekilde bir kullanım gerekecektir
+
+```php
+<img src='<?=domain?>assets/img/gorseladi.webp' <?=giveAttr(domain."assets/img/gorseladi.webp")?> alt=''>
+```
+
+Buradakki `<?=domain?>` kısmı header dosyasında tanımlı olmakla birlikte `giveAttr()` fonksiyonuna da aynı yerden müdahale edilebilir.
+
 ## Ek Kütüphaneler
 
 - Bootstrap
