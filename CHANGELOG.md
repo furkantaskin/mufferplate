@@ -2,6 +2,25 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.01.31
+
+### Yeni Eklenenler
+
+- .htaccess içine theme klasörüne yönlendirme için kurallar eklendi (artık görseller, css ve js dosyaları theme/assets klasöründe aranıyor)
+- Hata raporlama varsayılan olarak açık hale getirildi
+- Swiper içindeki CSS dosyaları için kullanılan scss dosyalarına modül importu eklendi. Artık home.scss içinde Swiper'ın temel stilleri çağrılmakta (dosyaları node_modules içinde aramakta)
+- Lighthouse içindeki explicit width height sorununu gidermek için PHP fonksiyonu hazırlandı. Bu fonksiyon ile görsellere ilk anda otomatik olarak width ve height attirbuteleri tanımlanmakta
+
+### Değişenler
+
+- Component stylesheet dosyası artık namespace olmadan aktarılabilir hale getirildi
+- Grid sayısı 36'dan 30'a düşürüldü.
+
+### Düzeltmeler
+
+- Aspect-ratio hesaplamasında konumlamadaki hata giderildi. `aspect-ratio` verilen elementin içindeki `ar-child` elementi absolute almasına rağmen ana elementte relative olmadığı için düzende kaymaların yaşanması önlendi
+- Header ve footer için SCSS dosyalarında main dosyasının importu esnasında yaşanan namespace hatası giderildi. Artık değişkenler ve mixinler `m.$degisken_adi` veya `@include m.mixin_adi()` şeklinde çağrılabilir
+
 ## 2023.01.24
 
 ### Yeni Eklenenler
