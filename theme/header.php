@@ -1,3 +1,12 @@
+<?php
+define("domain", "http://$_SERVER[HTTP_HOST]/promosyonjet/theme/");
+
+function giveAttr($file)
+{
+    return strval(getimagesize($file)[3]);
+}
+
+?>
 <!doctype html>
 <html lang="tr" dir="ltr">
 <head>
