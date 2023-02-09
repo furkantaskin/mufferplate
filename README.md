@@ -131,25 +131,55 @@ Bootstrap detaylı dokümantasyon için -> [Bootstrap](https://getbootstrap.com/
 
 Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir. Mümkün olduğunca import ifadesinden kaçmaya çalıştım ancak kontrol bir noktada zorlaşabilir.
 
-Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben Jetbrains ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
+Bu kısımda kullanıcılara iki opsiyon sunulmaktadır.
+
+1. Sadece PostCSS ile autoprefixer kullanılarak dosyalar optimize edilebilir.
+2. Gulp.js kullanılarak Sass derlemesi, autoprefixer, CSS küçültme ve PurgeCSS işlemleri tek seferde yapılabilir. Ancak derleme işlemi ilk seçeneğe göre uzun sürecektir.
+
+#### PostCSS ile autoprefix
+
+Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben JetBrains IDE'leri ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
 
 ```bash
 npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
 ```
 
-Ek olarak çıktının theme klasörüne gitmesi için bazı düzenlemeler yapılması gerekiyor. Öncelikle File Watcher kısmında arguments alanı şu şekilde değiştirilmelidir
+Ek olarak çıktının theme klasörüne gitmesi için bazı düzenlemeler yapılması gerekiyor. Adımlar şu şekilde: Öncelikle File Watcher kısmında arguments alanı şu şekilde değiştirilmelidir
 
+1. Arguments: `$FileName$:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css --style=compressed`
+2. Output paths to refresh: `$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map`
+
+#### Gulp.js ile Derleme
+
+Gulp.js kullanılması durumunda dosyaların kaydedilmesinden sonra şu işlemler gerçekleşmektedir:
+
+1. Dosya normal dosya ise Sass ile derle. Değilse modülün bağlı olduğu dosyaları derle.
+2. Dosyaları theme/assets/css klasörüne taşı
+3. Dosyaları CSSNANO ile optimize et.
+4. Dosyaları Autoprefixer ile .browserslistrc içindeki kurallara göre optimize et
+5. PurgeCSS ile kullanılmayan seçicileri sil.
+
+Burada Swiper, tüm işlemleri JS üzerinden yaptığı için Swiper'ın içeri aktarıldığı yerde PurgeCSS için safelist oluşturulması gerekmektedir. Vendors klasöründe bulunan \_swiper.scss dosyasındaki yorum satırları kaldırılırsa PurgeCSS Swiper seçicilerini es geçecektir. SCSS dosyası şu an için aşağıdaki gibidir:
+
+```scss
+/*! purgecss start ignore */
+@import '../../../node_modules/swiper/swiper';
+/*! purgecss end ignore */
 ```
-$FileName$:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css --style=compressed
-```
 
-Ayrıca Output paths to refresh kısmı da güncellenmelidir
+Gulp çalıştırmak için
 
-```plain
-$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map
-```
+File Watcher kısmına yeni bir işlem ekleyerek şu adımların izlenmesi yeterlidir.
 
-Bunun yanı sıra özel column yapısı için bir column generator oluşturuldu. Daha hassas yaklaşımlar için sütun sayısı 36 olarak eklendi. Dilenirse bu sayı azaltılabilir. Generator `src/css/base/_base.scss` içinde bulunmaktadır.
+1. File type: SCSS style sheet olacak
+2. Scope: Project Files
+3. Program: gulp
+4. Arguments: --file=$FilePath$
+5. (Opsiyonel) İşlemleri görmek için Show console: Always
+
+#### Grid Yapısı
+
+Bootstrap'ın grid yapısına müdahale edilmeyecek durumlarda sadece columnların gerekmesi halinde column generator kullanılabilir. Daha hassas yaklaşımlar için sütun sayısı 36 olarak eklendi. Dilenirse bu sayı azaltılabilir. Generator `src/css/base/_base.scss` içinde bulunmaktadır.
 
 #### Mixin'ler
 
