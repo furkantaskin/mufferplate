@@ -41,6 +41,10 @@ Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kıs
 1. File Watcher sayfasından yeni bir wathcer oluştur.
 2. File type kısmı Any ya da JS olabilir.
 3. Sürekli sürekli çalışmaması için scope kısmından Current File seçilecek.
+
+- Bu kısımda config dosyalarından dolayı bundle çalışmasını engellemek için custom bir scope oluşturulabilir. Sadece siteye ait JS dosyalarının çalışması için şu şekilde tanımlama yapılabilir
+  `file:*.js&&!file:gulpfile.js&&!file:postcss.config.js&&!file:.eslintrc.js`
+
 4. Program kısmı node olacak (node.js için CLI kısmında ne tanımlı ise o olacak).
 5. Arguments kısmı `$ContentRoot$/esbuild.config.mjs` olacak. Buradaki `$ContentRoot$` projenin açıldığı ana dizini seçmektedir. Örneğin localhost/boilerplate ise `$ContentRoot$` bu şekilde gelecektir.
 6. Kontrol için Show console seçeneği Always olabilir.
