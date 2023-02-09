@@ -15,12 +15,6 @@
   "devDependencies": {
     "eslint": "^8.31.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 4 versions",
-    "iOS>=14",
-    "not dead"
-  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
