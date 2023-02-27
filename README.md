@@ -219,6 +219,12 @@ Görseller jpg veya png olarak yüklenebilir. Daha yüksek performans için WebP
 for file in *.jpg ; do cwebp -q 80 "$file" -o "${file%.jpg}.webp"; rm "$file"; done
 ```
 
+Ya da recursive işlem için aşağıdaki kod da kullanılabilir
+
+```bash
+find . -type f -name "*.jpg" -exec sh -c 'cwebp -q 80 "$0" -o "${0%.jpg}.webp"; rm "$0"' {} \;
+```
+
 PNG için aynı işlemin yapılması gerekiyorsa buradaki `.jpg` kısmı `.png` ile değiştirilebilir. Direkt olarak dosyaların üstüne yazacağı için yedekleme yapılması uygun olacaktır.
 
 ## Ek Kütüphaneler
