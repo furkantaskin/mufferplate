@@ -8,6 +8,8 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - `mergeFiles` fonksiyonu kaldırıldı. Artık dosyaların bir array içinde gönderilmesi yeterli.
 - Bootstrap için değişken tanımlamaları `_variables.scss` dosyasından `_bootstrap.scss` dosyasına taşındı. Bootstrap'ın container veya diğer alanlarına müdahale gerektiği durumlarda kontrolü en iyi şekilde sağlamak için değişkenler `_bootstrap.scss` dosyasına aktarıldı.
+- SCSS ve JS dosya isimleri, PurgeCSS operasyonunda kolaylık sağlaması için referans PHP dosyası ile aynı olacak şekilde güncellendi
+- Değişken isimleri PHP standartlarına uygun olacak şekilde güncellendi.
 
 ## 2023.01.31
 
