@@ -1,6 +1,6 @@
 <footer>
 
 </footer>
-<script src="assets/js/<?=$call_js?>.js?v=<?=rand()?>"></script>
+<script src="<?=domain?>assets/js/<?=$call_js?>.js?v=<?=rand()?>"></script>
 </body>
 </html>
