@@ -5,9 +5,16 @@ const startTime = new Date().getTime();
 const outdir = new URL(`./theme/assets/js/`, import.meta.url)
   .pathname;
 
+function mergeFiles(filePaths) {
+  return filePaths.map(
+    (filePath) =>
+      new URL(`./src/pages/${filePath}`, import.meta.url).pathname
+  );
+}
+
 await esbuild
   .build({
-    entryPoints: ['index.js'],
+    entryPoints: mergeFiles(['index.js']),
     bundle: true,
     minify: true,
     treeShaking: true,
