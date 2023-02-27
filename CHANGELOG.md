@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.02.27
+
+### Değişenler
+
+- `mergeFiles` fonksiyonu kaldırıldı. Artık dosyaların bir array içinde gönderilmesi yeterli.
+
 ## 2023.01.31
 
 ### Yeni Eklenenler
