@@ -241,3 +241,4 @@ PNG için aynı işlemin yapılması gerekiyorsa buradaki `.jpg` kısmı `.png` 
 - Bootstrap
 - Swiper
 - Photoswipe
+- cwebp
