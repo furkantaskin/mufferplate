@@ -19,7 +19,7 @@ function giveAttr($file)
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/css/vendors/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/pages/<?=$callcss?>.css?v=<?=rand()?>">
+    <link rel="stylesheet" href="assets/css/pages/<?=$call_css?>.css?v=<?=rand()?>">
 </head>
 <body>
 
