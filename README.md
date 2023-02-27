@@ -180,6 +180,9 @@ File Watcher kısmına yeni bir işlem ekleyerek şu adımların izlenmesi yeter
 4. Arguments: --file=$FilePath$
 5. (Opsiyonel) İşlemleri görmek için Show console: Always
 
+> **Warning**
+> Gulp içindeki PurgeCSS işleminin doğru çalışabilmesi için CSS dosyalarının adlarının, içeri aktarıldığı PHP dosyası ile aynı isimde olması gerekmektedir. Bundan dolayı örnek olarak index.php içinde home yerine index olarak CSS dosyasının çağrılması ve `./src/css/pages` klasöründeki SCSS dosyasının isminin güncellenmesi yeterlidir. Diğer durumlarda PurgeCSS referans dosyayı bulamayacağı için içeriği temizleyebilir.
+
 #### Grid Yapısı
 
 Bootstrap'ın grid yapısına müdahale edilmeyecek durumlarda sadece columnların gerekmesi halinde column generator kullanılabilir. Daha hassas yaklaşımlar için sütun sayısı 36 olarak eklendi. Dilenirse bu sayı azaltılabilir. Generator `src/css/base/_base.scss` içinde bulunmaktadır.
