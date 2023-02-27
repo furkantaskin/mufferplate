@@ -4,6 +4,10 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.02.27
 
+### Yeni Eklenenler
+
+- Mobil menü ve mobil header alanı eklendi.
+
 ### Değişenler
 
 - `mergeFiles` fonksiyonu kaldırıldı. Artık dosyaların bir array içinde gönderilmesi yeterli.
