@@ -7,7 +7,7 @@ const outdir = new URL(`./theme/assets/js/`, import.meta.url)
 
 await esbuild
   .build({
-    entryPoints: ['home.js'],
+    entryPoints: ['index.js'],
     bundle: true,
     minify: true,
     treeShaking: true,
