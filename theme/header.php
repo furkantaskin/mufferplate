@@ -24,3 +24,25 @@ function giveAttr($file)
 <body>
 
 <header></header>
+
+<div class="mobileHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <a href="" class="logo">
+                    <img src="<?=domain?>assets/img/svg/logo.svg" alt="">
+                </a>
+            </div>
+            <div class="col-6">
+                <div class="menuButton">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mobileMenu"></div>
