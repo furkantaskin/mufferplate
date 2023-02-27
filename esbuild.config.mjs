@@ -5,13 +5,9 @@ const startTime = new Date().getTime();
 const outdir = new URL(`./theme/assets/js/`, import.meta.url)
   .pathname;
 
-function mergeFiles(filePath) {
-  return new URL(`./src/pages/${filePath}`, import.meta.url).pathname;
-}
-
 await esbuild
   .build({
-    entryPoints: [mergeFiles('home.js')],
+    entryPoints: ['home.js'],
     bundle: true,
     minify: true,
     treeShaking: true,
