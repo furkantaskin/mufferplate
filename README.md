@@ -134,6 +134,13 @@ Bootstrap detaylı dokümantasyon için -> [Bootstrap](https://getbootstrap.com/
 
 Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu kısma dikkat edilmesi gerekir. Çünkü hata verebilir. Mümkün olduğunca import ifadesinden kaçmaya çalıştım ancak kontrol bir noktada zorlaşabilir.
 
+#### Sass ile Derleme
+
+Tüm CSS dosyaları SCSS formatındadır ve src klasöründe tutulmaktadır. Çıktıların theme klasöründe olması için File Watcher içinde düzenleme gerekmektedir. File Watcher kısmında şu düzenlemelerin yapılması gerekmektedir.
+
+1. Arguments: `$FileName$:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css --style=compressed`
+2. Output paths to refresh: `$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map`
+
 Bu kısımda kullanıcılara iki opsiyon sunulmaktadır.
 
 1. Sadece PostCSS ile autoprefixer kullanılarak dosyalar optimize edilebilir.
@@ -146,11 +153,6 @@ Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben JetBra
 ```bash
 npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
 ```
-
-Ek olarak çıktının theme klasörüne gitmesi için bazı düzenlemeler yapılması gerekiyor. Adımlar şu şekilde: Öncelikle File Watcher kısmında arguments alanı şu şekilde değiştirilmelidir
-
-1. Arguments: `$FileName$:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css --style=compressed`
-2. Output paths to refresh: `$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map`
 
 #### Gulp.js ile Derleme
 
