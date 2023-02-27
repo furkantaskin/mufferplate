@@ -49,7 +49,7 @@ Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kıs
 5. Arguments kısmı `$ContentRoot$/esbuild.config.mjs` olacak. Buradaki `$ContentRoot$` projenin açıldığı ana dizini seçmektedir. Örneğin localhost/boilerplate ise `$ContentRoot$` bu şekilde gelecektir.
 6. Kontrol için Show console seçeneği Always olabilir.
 
-esbuild konfigürasyon dosyasında (esbuild.config.mjs) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa şu satırların değiştirilmesi gerekiyor:
+esbuild konfigürasyon dosyasında (esbuild.config.mjs) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa `outdir` değişkeninin güncellenmesi ve `mergeFiles` fonksiyonu eklenip URL içindeki dizinin güncellenmesi yeterlidir. Sonrasında esbuild içindeki `entryPoints` kısmına dosyalar array içinde gönderilmesi sonrası build işlemi gerçekleştirilecektir.
 
 ```js
 const outdir = new URL(`./theme/assets/js/`, import.meta.url)
@@ -57,8 +57,11 @@ const outdir = new URL(`./theme/assets/js/`, import.meta.url)
 
 // Tüm dosyalarda uzun uzun tam dizin belirtmek yerine çalışacak dosyaların aynı klasör altında olması (klasör derinliği fark etmez) şartı sağlandığı sürece
 // bu fonksiyon direkt olarak o dizine gidecektir.
-function mergeFiles(filePath) {
-  return new URL(`./src/pages/${filePath}`, import.meta.url).pathname;
+function mergeFiles(filePaths) {
+  return filePaths.map(
+    (filePath) =>
+      new URL(`./src/pages/${filePath}`, import.meta.url).pathname
+  );
 }
 ```
 
