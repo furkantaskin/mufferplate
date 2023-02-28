@@ -1,31 +1,42 @@
-import * as esbuild from 'esbuild';
-import { URL } from 'url';
+import esbuild from 'esbuild';
+import path from 'path';
 
-const startTime = new Date().getTime();
-const outdir = new URL(`./theme/assets/js/`, import.meta.url)
-  .pathname;
+let startTime;
+
+const watchPlugin = {
+  name: 'watch-plugin',
+  setup(build) {
+    build.onStart(() => {
+      startTime = new Date().getTime();
+      console.log(`Build started.`);
+    });
+    build.onEnd((result) => {
+      if (result.errors.length > 0) {
+        console.log('Build failed. Error: ', result.errors[0].text);
+      } else {
+        console.log(
+          `Build completed in ${new Date().getTime() - startTime}ms.`
+        );
+      }
+    });
+  },
+};
 
 function mergeFiles(filePaths) {
-  return filePaths.map(
-    (filePath) =>
-      new URL(`./src/pages/${filePath}`, import.meta.url).pathname
+  const sourceFolder = 'src/pages';
+  return filePaths.map((filePath) =>
+    path.join(sourceFolder, filePath)
   );
 }
 
-await esbuild
-  .build({
-    entryPoints: mergeFiles(['index.js']),
-    bundle: true,
-    minify: true,
-    treeShaking: true,
-    sourcemap: 'external',
-    outdir: outdir,
-  })
-  .then(() =>
-    console.log(
-      `Bundling is done in ${
-        (new Date().getTime() - startTime) / 1000
-      } s and outdir is ${outdir}`
-    )
-  )
-  .catch((error) => console.log(`Error: ${error}`));
+let ctx = await esbuild.context({
+  entryPoints: mergeFiles(['index.js']),
+  bundle: true,
+  minify: true,
+  treeShaking: true,
+  sourcemap: 'external',
+  outdir: 'dist',
+  plugins: [watchPlugin],
+});
+
+await ctx.watch();
