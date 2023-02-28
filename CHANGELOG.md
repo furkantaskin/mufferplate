@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.02.28
+
+### Değişenler
+
+- esbuild konfigürasyonu güncellendi. Artık esbuild çalıştırma işlemi için File Watcher operasyonuna gerek kalmadı. Kullanıcılar `npm run watch` komutu ile esbuild'i aktive edebilir ve js dosyalarındaki değişimi takip edebilirler.
+- Paket yapısı commonJS'ten module yapısına güncellendi.
+
 ## 2023.02.27
 
 ### Yeni Eklenenler
