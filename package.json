@@ -26,6 +26,8 @@
     "sass": "^1.58.0"
   },
   "scripts": {
+    "esbuild": "node esbuild-config.js",
+    "sass": "sass --style=compressed --watch src/css/pages:theme/assets/css --load-path=src/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
