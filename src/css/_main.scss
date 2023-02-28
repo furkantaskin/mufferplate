@@ -7,6 +7,8 @@
 
 @use 'vendors/bootstrap';
 
+@forward 'vendors/normalize';
+
 @forward 'base/typography';
 @forward 'base/base';
 @forward 'base/utilities';
