@@ -6,8 +6,9 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Değişenler
 
-- esbuild konfigürasyonu güncellendi. Artık esbuild çalıştırma işlemi için File Watcher operasyonuna gerek kalmadı. Kullanıcılar `npm run watch` komutu ile esbuild'i aktive edebilir ve js dosyalarındaki değişimi takip edebilirler.
+- esbuild konfigürasyonu güncellendi. Artık esbuild çalıştırma işlemi için File Watcher operasyonuna gerek kalmadı. Kullanıcılar `npm run esbuild` komutu ile esbuild'i aktive edebilir ve js dosyalarındaki değişimi takip edebilirler.
 - Paket yapısı commonJS'ten module yapısına güncellendi.
+- Sass içinden File Watcher operasyonu kaldırıldı. Yerine npm script eklendi. Artık `npm run sass`ile otomatik derleme işlemi yapılabilmekte.
 
 ## 2023.02.27
 
