@@ -23,7 +23,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - SCSS ve JS dosya isimleri, PurgeCSS operasyonunda kolaylık sağlaması için referans PHP dosyası ile aynı olacak şekilde güncellendi
 - Değişken isimleri PHP standartlarına uygun olacak şekilde güncellendi.
 
-### Düzetlmeler
+### Düzeltmeler
 
 - Sunucunun dosyaları ana dizinde araması yerine theme klasöründe araması için dosya çağırma işlemlerinde `domain` sabiti eklendi
 - Header içinde CSS dosyası çağrılırken dosyayı yanlış dizinde arama hatası giderildi.
