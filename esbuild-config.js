@@ -8,14 +8,21 @@ const watchPlugin = {
   setup(build) {
     build.onStart(() => {
       startTime = new Date().getTime();
-      console.log(`Build started.`);
+      console.log(`\x1b[33m Build started.`);
     });
     build.onEnd((result) => {
       if (result.errors.length > 0) {
-        console.log('Build failed. Error: ', result.errors[0].text);
+        console.log(
+          '\x1b[31m Build failed. Error: ',
+          result.errors[0].text
+        );
       } else {
         console.log(
-          `Build completed in ${new Date().getTime() - startTime}ms.`
+          `\x1b[32m Build completed in ${
+            new Date().getTime() - startTime
+          }ms.  [${new Date().toLocaleTimeString('en-GB', {
+            hour12: false,
+          })}]  `
         );
       }
     });
@@ -33,9 +40,11 @@ let ctx = await esbuild.context({
   entryPoints: mergeFiles(['index.js']),
   bundle: true,
   minify: true,
+  logLevel: 'warning',
   treeShaking: true,
   sourcemap: 'external',
-  outdir: 'dist',
+  color: true,
+  outdir: 'theme/assets/js',
   plugins: [watchPlugin],
 });
 
