@@ -36,38 +36,11 @@ JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src kla
 
 #### esbuild
 
-Derleme ve bundling işlemini hızlandırmak için esbuild kullanıldı. Bu kısımda webpack prod derlemesi için çok vakit kaybettiği için esbuild tercih edildi. Eğer ileri dönemlerde Vanilla PHP entegrasyonunu da başarabilirsem custom bir sistem yerine direkt olarka Vite alt yapısı ile çalışma planım var. Şimdilik esbuild sorunsuz gibi görünüyor. Tabii ki dev mode ve prod mode olarak henüz ayıramadım. Bu kısımda da watch mode bana sistemin başarılı olup olmadığını söyleyemediği için (daha doğrusu ben yapamadığım için) kullanılan IDE üzerinden Action on Save oluşturulması gerekiyor. Bunun için Jetbrains kullandığımdan dolayı Jetbrains üzerinden şu işlemlerin yapılması yeterlidir.
+esbuild dosyasında (esbuild-config.js) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa dosya `mergeFiles` fonksiyonu içindeki `sourceFolder` değişkeni ve context içindeki `outdir` propunun değişmesi gerekmektedir. `npm run watch` ile sistem çalıştırılabilir ve otomatik olarak dosya yenilemesi yapıldığında çıktıyı sistem verebilir.
 
-1. File Watcher sayfasından yeni bir wathcer oluştur.
-2. File type kısmı Any ya da JS olabilir.
-3. Sürekli sürekli çalışmaması için scope kısmından Current File seçilecek.
+Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler, kendilerine has fonksiyonlar altında tek tek toplanabilir.
 
-- Bu kısımda config dosyalarından dolayı bundle çalışmasını engellemek için custom bir scope oluşturulabilir. Sadece siteye ait JS dosyalarının çalışması için şu şekilde tanımlama yapılabilir
-  `file:*.js&&!file:gulpfile.js&&!file:postcss.config.js&&!file:.eslintrc.js`
-
-4. Program kısmı node olacak (node.js için CLI kısmında ne tanımlı ise o olacak).
-5. Arguments kısmı `$ContentRoot$/esbuild.config.mjs` olacak. Buradaki `$ContentRoot$` projenin açıldığı ana dizini seçmektedir. Örneğin localhost/boilerplate ise `$ContentRoot$` bu şekilde gelecektir.
-6. Kontrol için Show console seçeneği Always olabilir.
-
-esbuild konfigürasyon dosyasında (esbuild.config.mjs) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa `outdir` değişkeninin güncellenmesi ve `mergeFiles` fonksiyonunun düzenlenip URL içindeki dizinin güncellenmesi yeterlidir. Sonrasında esbuild içindeki `entryPoints` kısmına dosyalar array içinde gönderilmesi sonrası build işlemi gerçekleştirilecektir.
-
-```js
-const outdir = new URL(`./theme/assets/js/`, import.meta.url)
-  .pathname; // Ana dizin içindeki dist klasöründe arama yapacaktır.
-
-// Tüm dosyalarda uzun uzun tam dizin belirtmek yerine çalışacak dosyaların aynı klasör altında olması (klasör derinliği fark etmez) şartı sağlandığı sürece
-// bu fonksiyon direkt olarak o dizine gidecektir.
-function mergeFiles(filePaths) {
-  return filePaths.map(
-    (filePath) =>
-      new URL(`./src/pages/${filePath}`, import.meta.url).pathname
-  );
-}
-```
-
-Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler fonksiyonlar altında tek tek toplanabilir.
-
-İleri dönemlerde bootstrap ve diğer kütüphaneler ile frameworkler için de CSS bundle olayı denenecek.
+İleri dönemlerde bootstrap ve diğer kütüphaneler ile frameworkler için de CSS bundle olayı denenerek Sass derlemesinin esbuild içinden yapılması hedeflenmektedir.
 
 esbuild detaylı dokümantasyon için -> [esbuild](https://esbuild.github.io/)
 
