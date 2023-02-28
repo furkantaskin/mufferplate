@@ -109,12 +109,9 @@ Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu k�
 
 #### Sass ile Derleme
 
-Tüm CSS dosyaları SCSS formatındadır ve src klasöründe tutulmaktadır. Çıktıların theme klasöründe olması için File Watcher içinde düzenleme gerekmektedir. File Watcher kısmında şu düzenlemelerin yapılması gerekmektedir.
+Tüm CSS dosyaları SCSS formatındadır ve src klasöründe tutulmaktadır. Kolay bir şekilde işlem yapabilmek için `npm run sass` komutu çalıştırılabilir. Sass bu kısımda src/css/pages klasöründeki scss dosyalarını derleyecektir. Partial dosyalar ise src/css içindeki tüm partial dosyalar olacak şekilde eklenmiştir. En son olarak da sourcemap oluşturacak ve dosyayı sıkıştıracaktır.
 
-1. Arguments: `$FileName$:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css --style=compressed`
-2. Output paths to refresh: `$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css:$ContentRoot$/theme/assets/css/$FileNameWithoutExtension$.css.map`
-
-Bu kısımda kullanıcılara iki opsiyon sunulmaktadır.
+Sass içinde optimizasyon planı varsa bunun için kullanıcılara iki opsiyon sunulmaktadır.
 
 1. Sadece PostCSS ile autoprefixer kullanılarak dosyalar optimize edilebilir.
 2. Gulp.js kullanılarak Sass derlemesi, autoprefixer, CSS küçültme ve PurgeCSS işlemleri tek seferde yapılabilir. Ancak derleme işlemi ilk seçeneğe göre uzun sürecektir.
