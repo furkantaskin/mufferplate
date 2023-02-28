@@ -36,7 +36,7 @@ JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src kla
 
 #### esbuild
 
-esbuild dosyasında (esbuild-config.js) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa dosya `mergeFiles` fonksiyonu içindeki `sourceFolder` değişkeni ve context içindeki `outdir` propunun değişmesi gerekmektedir. `npm run watch` ile sistem çalıştırılabilir ve otomatik olarak dosya yenilemesi yapıldığında çıktıyı sistem verebilir.
+esbuild dosyasında (esbuild-config.js) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer klasörlerin yeri değişiyorsa dosya `mergeFiles` fonksiyonu içindeki `sourceFolder` değişkeni ve context içindeki `outdir` propunun değişmesi gerekmektedir. `npm run esbuild` ile sistem çalıştırılabilir ve otomatik olarak dosya yenilemesi yapıldığında çıktıyı sistem verebilir.
 
 Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler, kendilerine has fonksiyonlar altında tek tek toplanabilir.
 
