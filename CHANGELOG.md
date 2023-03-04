@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.03.04
+
+### Yeni Eklenenler
+
+- Selectbox içindeki varsayılan oku gizlemek için opsiyon eklendi. Okun gizlenmesinin istendiği selectbox içine `@include call_template("noarrow")` şeklinde mixinin çağrılması yeterli olacaktır.
+
 ## 2023.02.28
 
 ### Değişenler
