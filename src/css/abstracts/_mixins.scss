@@ -67,6 +67,9 @@ $uwqhd: 3440;
     &::-webkit-scrollbar {
       display: none;
     }
+  } @else if $template == 'noarrow' {
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
 }
 
