@@ -197,6 +197,14 @@ find . -type f -name "*.jpg" -exec sh -c 'cwebp -q 80 "$0" -o "${0%.jpg}.webp"; 
 
 PNG için aynı işlemin yapılması gerekiyorsa buradaki `.jpg` kısmı `.png` ile değiştirilebilir. Direkt olarak dosyaların üstüne yazacağı için yedekleme yapılması uygun olacaktır.
 
+### SVG
+
+Normalde SVG dosyaları içeriye `<img/>` etiketi ya da direkt olarak CSS içinde maske olarak çağrılabiliyordu. Ancak çok fazla SVG dosyasını içeriye aktarmak istekte artışa sebep olacağı için sprite oluşturuldu.
+[SVG Sprites](https://svgsprit.es) üzerinden svg dosyalar bir `<symbol>` haline getirilebilir ve bu şekilde çağırma işlemi yapılabilir.
+
+> **Warning**
+> SVG dosyaları bir ViewBox ihtiyacı duyacağı için çağrılan elementin ViewBox ölçülerinin çağrıldığı `<svg>` elementi içine eklenmesi gerekmektedir.
+
 ## Ek Kütüphaneler
 
 - Bootstrap
