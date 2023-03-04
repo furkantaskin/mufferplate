@@ -7,6 +7,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Yeni Eklenenler
 
 - Selectbox içindeki varsayılan oku gizlemek için opsiyon eklendi. Okun gizlenmesinin istendiği selectbox içine `@include call_template("noarrow")` şeklinde mixinin çağrılması yeterli olacaktır.
+- SVG'lerin dosya yerine içerik olarak çağrılabilmesi için sprite eklendi. Artık `<use>` elemeneti ile tek bir dosyadan çağırma işlemi yapılabilir.
 
 ## 2023.02.28
 
