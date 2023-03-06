@@ -1,9 +1,9 @@
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { Collapse } from 'bootstrap';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import commonInc from '../common';
+import { mobileMenu } from '../common';
 
-commonInc();
+mobileMenu();
 
 document.querySelectorAll('.prodgallery a img').forEach((e) => {
   e.parentElement.dataset.pswpWidth = e.naturalWidth;
