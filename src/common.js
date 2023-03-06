@@ -1,4 +1,4 @@
-function commonInc() {
+export function mobileMenu() {
   let showMenu = false;
   const mobileMenu = document.querySelector('.mobileMenu');
   function toggleMenu(isActive) {
@@ -30,5 +30,3 @@ function commonInc() {
   mobileMenu.style.paddingTop =
     document.querySelector('.mobileHeader').clientHeight * 1.5 + 'px';
 }
-
-export default commonInc;
