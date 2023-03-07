@@ -13,21 +13,15 @@
     "swiper": "^8.4.5"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "cssnano": "^5.1.14",
     "eslint": "^8.31.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-cssnano": "^2.1.3",
-    "gulp-purgecss": "^5.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "minimist": "^1.2.7",
     "sass": "^1.58.0"
   },
   "scripts": {
     "esbuild": "node esbuild-config.js",
-    "sass": "sass --style=compressed --watch src/css/pages:theme/assets/css --load-path=src/css",
+    "sass": "sass --style=compressed --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
