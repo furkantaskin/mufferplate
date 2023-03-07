@@ -111,46 +111,20 @@ Bootstrap SASS dosyası aktarılırken belirli importları kendim yaptım. Bu k�
 
 Tüm CSS dosyaları SCSS formatındadır ve src klasöründe tutulmaktadır. Kolay bir şekilde işlem yapabilmek için `npm run sass` komutu çalıştırılabilir. Sass bu kısımda src/css/pages klasöründeki scss dosyalarını derleyecektir. Partial dosyalar ise src/css içindeki tüm partial dosyalar olacak şekilde eklenmiştir. En son olarak da sourcemap oluşturacak ve dosyayı sıkıştıracaktır.
 
-Sass içinde optimizasyon planı varsa bunun için kullanıcılara iki opsiyon sunulmaktadır.
+Sass işleminden sonra optimizasyon planı varsa bunun için kullanıcılara PostCSS opsiyonu sunulmaktadır.
 
-1. Sadece PostCSS ile autoprefixer kullanılarak dosyalar optimize edilebilir.
-2. Gulp.js kullanılarak Sass derlemesi, autoprefixer, CSS küçültme ve PurgeCSS işlemleri tek seferde yapılabilir. Ancak derleme işlemi ilk seçeneğe göre uzun sürecektir.
+#### PostCSS ile Optimizasyon
 
-#### PostCSS ile autoprefix
+Tüm CSS işlemleri bittikten sonra PostCSS ile optimizasyon yapılabilir. Bu kısımda PostCSS, npm içinde tanımlı olan dizinler arasında işlem yapacak ve son olarak optimize halini çıkaracaktır. Şu an için varsayılan input ve output klasörleri aynı olup `./theme/assets/css` klasörünü baz almaktadır. PostCSS'i çalıştırmak için `npm run postcss` komutu yeterlidir.
 
-Ayrıca uyumluluk için save sonrası autoprefixer çalışmaktadır. Ben JetBrains IDE'leri ile çalıştığım için configuration kısmına yeni bir shell script eklenebilir
-
-```bash
-npx postcss assets/css/pages/*.css --use=autoprefixer -m -r
-```
-
-#### Gulp.js ile Derleme
-
-Gulp.js kullanılması durumunda dosyaların kaydedilmesinden sonra şu işlemler gerçekleşmektedir:
-
-1. Dosya normal dosya ise Sass ile derle. Değilse modülün bağlı olduğu dosyaları derle.
-2. Dosyaları theme/assets/css klasörüne taşı
-3. Dosyaları CSSNANO ile optimize et.
-4. Dosyaları Autoprefixer ile .browserslistrc içindeki kurallara göre optimize et
-5. PurgeCSS ile kullanılmayan seçicileri sil.
-
-Burada Swiper, tüm işlemleri JS üzerinden yaptığı için Swiper'ın içeri aktarıldığı yerde PurgeCSS için safelist oluşturulması gerekmektedir. Vendors klasöründe bulunan \_swiper.scss dosyasındaki yorum satırları kaldırılırsa PurgeCSS Swiper seçicilerini es geçecektir. SCSS dosyası şu an için aşağıdaki gibidir:
+> **Warning**
+> PurgeCSS, eklentilerin JS dosyalarını formattan dolayı es geçeceği için burada Swiper için özel tanımlama gerekecektir.
 
 ```scss
 /*! purgecss start ignore */
 @import '../../../node_modules/swiper/swiper';
 /*! purgecss end ignore */
 ```
-
-Gulp çalıştırmak için
-
-File Watcher kısmına yeni bir işlem ekleyerek şu adımların izlenmesi yeterlidir.
-
-1. File type: SCSS style sheet olacak
-2. Scope: Project Files
-3. Program: gulp
-4. Arguments: --file=$FilePath$
-5. (Opsiyonel) İşlemleri görmek için Show console: Always
 
 #### Grid Yapısı
 
