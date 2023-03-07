@@ -2,6 +2,16 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.03.07
+
+### Eklenenler
+
+- CSS optimizasyon işlemi için PostCSS eklendi. Artık nihai işlemi (cssnano, autoprefixer ve PurgeCSS) PostCSS dosyası yapmakta.
+
+### Değişenler
+
+- Gulp iptal edildi. PurgeCSS için dosya adlarına göre işlem yapma aşaması sorun yaşattığı için gulpfile kaldırıldı.
+
 ## 2023.03.04
 
 ### Yeni Eklenenler
