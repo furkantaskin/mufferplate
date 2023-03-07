@@ -20,7 +20,8 @@ cssFiles.forEach((cssFile) => {
     `${themeFolder}/header.php`,
     `${themeFolder}/footer.php`,
     ...content[cssFile].map(
-      (template) => `${themeFolder}/${template}`
+      (template) => `${themeFolder}/${template}`,
+      `${themeFolder}/assets/js/${cssFilename}.js`
     ),
   ];
 });
