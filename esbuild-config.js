@@ -1,5 +1,6 @@
 import esbuild from 'esbuild';
 import path from 'path';
+import { config } from 'dotenv';
 
 let startTime;
 
@@ -39,10 +40,10 @@ function mergeFiles(filePaths) {
 let ctx = await esbuild.context({
   entryPoints: mergeFiles(['index.js']),
   bundle: true,
-  minify: true,
+  minify: process.env.NODE_ENV === 'production' ? true : false,
   logLevel: 'warning',
   treeShaking: true,
-  sourcemap: 'external',
+  sourcemap: process.env.NODE_ENV === 'production' ? false : 'inline',
   color: true,
   outdir: 'theme/assets/js',
   plugins: [watchPlugin],
