@@ -7,7 +7,7 @@ config();
 let startTime;
 
 console.log(
-  `\x1b[96m Running under ${process.env.NODE_ENV} build. Don't forget to change NODE_ENV to production for final bundling. \x1b[039m`
+  `\x1b[96m Running under ${process.env.NODE_ENV} build. \x1b[039m`
 );
 
 const watchPlugin = {
