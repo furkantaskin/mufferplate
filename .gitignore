@@ -1,9 +1,5 @@
 .DS_Store
 .idea/
 node_modules/
-assets/css/style.min.css
-assets/css/style.min.css.map
-assets/plugins/rellax
-assets/css/pages/*.css
-assets/css/pages/*.map
 theme/assets/css
+theme/assets/js
