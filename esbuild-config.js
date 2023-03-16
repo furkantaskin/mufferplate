@@ -4,6 +4,8 @@ import { config } from 'dotenv';
 
 config();
 
+const sourceDir = 'src/pages';
+const outDir = 'theme/assets/js';
 let startTime;
 
 console.log(
@@ -36,7 +38,7 @@ const watchPlugin = {
 };
 
 function mergeFiles(filePaths) {
-  const sourceFolder = 'src/pages';
+  const sourceFolder = sourceDir;
   return filePaths.map((filePath) =>
     path.join(sourceFolder, filePath)
   );
@@ -50,7 +52,7 @@ let ctx = await esbuild.context({
   treeShaking: true,
   sourcemap: process.env.NODE_ENV === 'production' ? false : 'inline',
   color: true,
-  outdir: 'theme/assets/js',
+  outdir: outDir,
   plugins: [watchPlugin],
 });
 
