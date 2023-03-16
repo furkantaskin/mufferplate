@@ -13,7 +13,6 @@ define("domain", "http://$_SERVER[HTTP_HOST]/boilerplate/theme/");
     <title>Starter Kit</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/src/css/vendors/bootstrap.min.css">
     <link rel="stylesheet" href="<?=domain?>assets/css/<?=$call_file?>.css?v=<?=rand()?>">
 </head>
 <body>
