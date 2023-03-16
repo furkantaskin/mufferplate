@@ -40,6 +40,8 @@ esbuild dosyasında (esbuild-config.js) bundle çıkış ve kaynak klasörlerini
 
 Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler, kendilerine has fonksiyonlar altında tek tek toplanabilir.
 
+JS derlemesinde bazı kısımların es geçilmemesi önemlidir. Son JS dosyasının minify edilebilmesi için ana dizinde bir .env dosyası açılmalı ve key olarak NODE_ENV gönderilmedilir. Bu keyin değerinin production olması durumunda sistem JS dosyasını küçültecek ve kaynağı kaldıracaktır.
+
 İleri dönemlerde bootstrap ve diğer kütüphaneler ile frameworkler için de CSS bundle olayı denenerek Sass derlemesinin esbuild içinden yapılması hedeflenmektedir.
 
 esbuild detaylı dokümantasyon için -> [esbuild](https://esbuild.github.io/)
