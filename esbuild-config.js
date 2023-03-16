@@ -2,20 +2,25 @@ import esbuild from 'esbuild';
 import path from 'path';
 import { config } from 'dotenv';
 
+config();
+
 let startTime;
+
+console.log(
+  `\x1b[96m Running under ${process.env.NODE_ENV} build. Don't forget to change NODE_ENV to production for final bundling. \x1b[039m`
+);
 
 const watchPlugin = {
   name: 'watch-plugin',
   setup(build) {
     build.onStart(() => {
       startTime = new Date().getTime();
-      console.log(`\x1b[33m Build started.`);
+      console.log(`\x1b[33m Build started. \x1b[039m`);
     });
     build.onEnd((result) => {
       if (result.errors.length > 0) {
         console.log(
-          '\x1b[31m Build failed. Error: ',
-          result.errors[0].text
+          `\x1b[31m Build failed. Error: ${result.errors[0].text} \x1b[039m`
         );
       } else {
         console.log(
