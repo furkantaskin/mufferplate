@@ -6,11 +6,11 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Eklenenler
 
-- Bundle için yeni script eklendi. Nihai CSS dosyası oluşturulurken artık `npm run bundlecss` işlemi yeterli olacak. (c920851)
+- Bundle için yeni script eklendi. Nihai CSS dosyası oluşturulurken artık `npm run bundlecss` işlemi yeterli olacak.
 
 ### Değişenler
 
-- esbuild artık kullanıcının çalıştığı ortam değişkeni hakkında bilgi verebilecek şekilde güncellendi. (0f72fe0)
+- esbuild artık kullanıcının çalıştığı ortam değişkeni hakkında bilgi verebilecek şekilde güncellendi.
 - esbuild içindeki kaynak ve çıktı klasörleri ana değişken olarak atandı.
 - Kullanılmayan font tanımlamaları kaldırıldı.
 - JS ve CSS için çağrılması gereken dosyalar ayrı ayrı değişkenlerden gelmek yerine tek bir değişkenden gelecek şekilde düzenlendi. PHP sayfasında kullanılacak assetlerin `$call_file` değişkeninde tanımlanması ve isimlerinin bu değişken değeri ile aynı olması yeterli.
