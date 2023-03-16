@@ -22,6 +22,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - JS içindeki modül yapısındaki hata giderildi. Common dosyası artık lib klasöründen çağrılacak şekilde düzenlendi.
 - Normalize içindeki parent selector hatası giderildi.
 - `dotenv` paketi eksikliğinden dolayı esbuild içinde yaşanan hata giderildi.
+- Header içinde kullanılmayan Bootstrap tanımlaması kaldırıldı
 
 ## 2023.03.13
 
