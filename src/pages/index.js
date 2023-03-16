@@ -1,7 +1,7 @@
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { Collapse } from 'bootstrap';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import { mobileMenu } from '../common';
+import { mobileMenu } from '../lib/common';
 
 mobileMenu();
 
