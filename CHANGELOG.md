@@ -11,23 +11,23 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Değişenler
 
 - esbuild artık kullanıcının çalıştığı ortam değişkeni hakkında bilgi verebilecek şekilde güncellendi. (0f72fe0)
-- esbuild içindeki kaynak ve çıktı klasörleri ana değişken olarak atandı (4a7fe66)
-- Kullanılmayan font tanımlamaları kaldırıldı. (cd3c795)
-- JS ve CSS için çağrılması gereken dosyalar ayrı ayrı değişkenlerden gelmek yerine tek bir değişkenden gelecek şekilde düzenlendi. PHP sayfasında kullanılacak assetlerin `$call_file` değişkeninde tanımlanması ve isimlerinin bu değişken değeri ile aynı olması yeterli. (af5653b)
-- `giveAttr` fonksiyonu kaldırıldı. Görsel olarak bozuluma sebep olduğu için yeni alternatif bulunana dek bu fonksiyon iptal edildi. (3bdb31d)
-- `components` partial dosyası kaldırıldı. Artık componentler ayrı ayrı partial içinde oluşturularak sayfalarda ayrı bir şekilde çağrılabilecek. (38cfedb)
+- esbuild içindeki kaynak ve çıktı klasörleri ana değişken olarak atandı.
+- Kullanılmayan font tanımlamaları kaldırıldı.
+- JS ve CSS için çağrılması gereken dosyalar ayrı ayrı değişkenlerden gelmek yerine tek bir değişkenden gelecek şekilde düzenlendi. PHP sayfasında kullanılacak assetlerin `$call_file` değişkeninde tanımlanması ve isimlerinin bu değişken değeri ile aynı olması yeterli.
+- `giveAttr` fonksiyonu kaldırıldı. Görsel olarak bozuluma sebep olduğu için yeni alternatif bulunana dek bu fonksiyon iptal edildi.
+- `components` partial dosyası kaldırıldı. Artık componentler ayrı ayrı partial içinde oluşturularak sayfalarda ayrı bir şekilde çağrılabilecek.
 
 ### Düzeltmeler
 
-- JS içindeki modül yapısındaki hata giderildi. Common dosyası artık lib klasöründen çağrılmakta (af28b6f)
-- Normalize içindeki parent selector hatası giderildi. (368b20d)
-- `dotenv` paketi eksikliğinden dolayı esbuild içinde yaşanan hata giderildi. (44c7216)
+- JS içindeki modül yapısındaki hata giderildi. Common dosyası artık lib klasöründen çağrılacak şekilde düzenlendi.
+- Normalize içindeki parent selector hatası giderildi.
+- `dotenv` paketi eksikliğinden dolayı esbuild içinde yaşanan hata giderildi.
 
 ## 2023.03.13
 
 ### Eklenenler
 
-- Production mode kontrol etme özelliği getirildi. Kullanıcı artık sourcemap ve minify işlemlerini `NODE_ENV` ortam değişkeni ile kontrol edebilecek. Bu değişkenin production olması durumunda sistem JS dosyasını küçültüp sourcemap çıktısını iptal edebilecek. (f6205ba)
+- Production mode kontrol etme özelliği getirildi. Kullanıcı artık sourcemap ve minify işlemlerini `NODE_ENV` ortam değişkeni ile kontrol edebilecek. Bu değişkenin production olması durumunda sistem JS dosyasını küçültüp sourcemap çıktısını iptal edebilecek.
 
 ### Değişenler
 
