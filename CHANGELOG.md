@@ -2,6 +2,14 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.06
+
+## Eklenenler
+- Opsiyon olarak pnpm eklendi.
+
+### Düzeltmeler
+- esbuild içinde kapanmayan ANSI code sorunu giderildi. Terminalde yaşanan renk taşma sorunu kaldırıldı.
+
 ## 2023.03.16
 
 ### Eklenenler
