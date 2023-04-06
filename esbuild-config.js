@@ -30,7 +30,7 @@ const watchPlugin = {
             new Date().getTime() - startTime
           }ms.  [${new Date().toLocaleTimeString('en-GB', {
             hour12: false,
-          })}]  `
+          })}]  \x1b[039m`
         );
       }
     });
