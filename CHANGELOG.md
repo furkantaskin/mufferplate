@@ -13,6 +13,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - esbuild için watch modu opsiyonel hale getirildi. Eğer geliştirme ortamı production değilse otomatik olarak watch modu altında çalışacaktır. Production olması durumunda tekseferlik olarak bundle işlemi gerçekleştirilecektir.
 - JS dosyaları dev ortamında mangle işlemine uğramadan plain olarak görünecek şekilde yapılandırıldı. Debug ederken JS dosyalarında değişken isimlerinden kaynaklı olarak takibin zorlaşması sorunu ortadan kaldırıldı.
 - Akrobat font ailesi ve buna bağlı utility seçicileri (selectors) kaldırıldı.
+- Bootstrap içinde grid ve container özelleştirilebildiği için özel grid oluşturucu, wrapper ve container tanımlamaları kaldırıldı. Özel grid için Bootstrap'ın kendi değişkenleri kullanılabilir.
 
 ## 2023.04.06
 
