@@ -6,11 +6,16 @@ config();
 
 const sourceDir = 'src/pages';
 const outDir = 'theme/assets/js';
+const getEnv = process.env.NODE_ENV;
 let startTime;
 
-console.log(
-  `\x1b[96m Running under ${process.env.NODE_ENV} build. \x1b[039m`
-);
+if (getEnv !== undefined) {
+  console.log(`\x1b[96m Running under ${getEnv} build. \x1b[039m`);
+} else {
+  console.log(
+    `\x1b[35m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
+  );
+}
 
 const watchPlugin = {
   name: 'watch-plugin',
@@ -44,16 +49,21 @@ function mergeFiles(filePaths) {
   );
 }
 
-let ctx = await esbuild.context({
-  entryPoints: mergeFiles(["index.js"]),
+const options = {
+  entryPoints: mergeFiles(['index.js']),
   bundle: true,
-  minify: process.env.NODE_ENV === "production",
-  logLevel: "warning",
-  treeShaking: process.env.NODE_ENV === "production",
-  sourcemap: process.env.NODE_ENV === "production" ? false : "inline",
+  minify: getEnv === 'production',
+  logLevel: 'warning',
+  treeShaking: getEnv === 'production',
+  sourcemap: getEnv === 'production' ? false : 'inline',
   color: true,
   outdir: outDir,
   plugins: [watchPlugin],
-});
+};
 
-await ctx.watch();
+if (getEnv !== 'production') {
+  let ctx = await esbuild.context(options);
+  ctx.watch();
+} else {
+  await esbuild.build(options);
+}
