@@ -45,12 +45,12 @@ function mergeFiles(filePaths) {
 }
 
 let ctx = await esbuild.context({
-  entryPoints: mergeFiles(['index.js']),
+  entryPoints: mergeFiles(["index.js"]),
   bundle: true,
-  minify: process.env.NODE_ENV === 'production' ? true : false,
-  logLevel: 'warning',
-  treeShaking: true,
-  sourcemap: process.env.NODE_ENV === 'production' ? false : 'inline',
+  minify: process.env.NODE_ENV === "production",
+  logLevel: "warning",
+  treeShaking: process.env.NODE_ENV === "production",
+  sourcemap: process.env.NODE_ENV === "production" ? false : "inline",
   color: true,
   outdir: outDir,
   plugins: [watchPlugin],
