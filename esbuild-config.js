@@ -9,14 +9,6 @@ const outDir = 'theme/assets/js';
 const getEnv = process.env.NODE_ENV;
 let startTime;
 
-if (getEnv !== undefined) {
-  console.log(`\x1b[96m Running under ${getEnv} build. \x1b[039m`);
-} else {
-  console.log(
-    `\x1b[35m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
-  );
-}
-
 const watchPlugin = {
   name: 'watch-plugin',
   setup(build) {
@@ -60,6 +52,16 @@ const options = {
   outdir: outDir,
   plugins: [watchPlugin],
 };
+
+if (getEnv !== undefined) {
+  console.log(`\x1b[96m Running under ${getEnv} build. \x1b[039m`);
+} else {
+  console.log(
+    `\x1b[35m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
+  );
+}
+
+
 
 if (getEnv !== 'production') {
   let ctx = await esbuild.context(options);
