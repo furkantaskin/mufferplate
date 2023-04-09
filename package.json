@@ -18,6 +18,7 @@
     "dotenv": "^16.0.3",
     "esbuild": "0.17.15",
     "eslint": "^8.37.0",
+    "pers-sign": "^0.4.3",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
     "sass": "^1.60.0"
