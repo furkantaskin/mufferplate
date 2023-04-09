@@ -1,6 +1,6 @@
 # Personal Boilerplate
 
-<img src="https://img.shields.io/badge/Bootstrap-5.2.3-brightgreen" alt="Bootstrap"> <img src="https://img.shields.io/badge/Photoswipe-5.3.3-brightgreen" alt="Lightgallery"> <img src="https://img.shields.io/badge/Swiper-8.4.5-brightgreen" alt="Swiper"> <img src="https://img.shields.io/badge/esbuild-0.17.4-blue" alt="esbuild"> <img src="https://img.shields.io/badge/Autoprefixer-10.4.13-blue" alt="Autoprefixer">
+<img src="https://img.shields.io/badge/Bootstrap-5.3.0-brightgreen" alt="Bootstrap"> <img src="https://img.shields.io/badge/Photoswipe-5.3.7-brightgreen" alt="Lightgallery"> <img src="https://img.shields.io/badge/Swiper-9.2.0-brightgreen" alt="Swiper"> <img src="https://img.shields.io/badge/esbuild-0.17.15-blue" alt="esbuild"> <img src="https://img.shields.io/badge/Autoprefixer-10.4.14-blue" alt="Autoprefixer"> <img src="https://img.shields.io/badge/cssnano-6.0.0-blue" alt="cssnano"> <img src="https://img.shields.io/badge/PostCSS-8.4.21-blue" alt="PostCSS"> <img src="https://img.shields.io/badge/Sass-1.60.0-blue" alt="Sass">
 
 Bu reponun amacı sürekli olarak internet sitelerini oluştururken projeyi yeniden başlatma ve kaynakları güncelleme gereksinimini ortadan kaldırmaktır. Bu reponun içindeki dosyaları kendi projelerinize kopyalayarak kullanabilirsiniz.
 
