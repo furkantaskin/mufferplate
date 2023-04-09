@@ -15,32 +15,3 @@ a {
 *:focus {
   outline: none;
 }
-
-.container {
-  max-width: 1200px;
-  width: 100%;
-  padding: 0 10px;
-  margin: 0 auto;
-}
-
-.col-wrapper {
-  margin: 0 -10px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-@for $i from 1 through 36 {
-  $width: math.div(round(percentage(math.div($i, 30)) * 1000), 1000);
-  .col-#{$i} {
-    flex: 0 0 auto;
-    width: $width;
-    padding: 0 5px;
-  }
-}
-
-@for $i from 1 through 36 {
-  $width: math.div(round(percentage(math.div($i, 30)) * 1000), 1000);
-  .offset-#{$i} {
-    margin-left: $width;
-  }
-}
