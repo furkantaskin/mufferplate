@@ -2,13 +2,20 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.12
+
+### Eklenenler
+
+- Artık npm içinde iki ayrı komut çalıştırma yerine tek komut çalıştırma özelliği getirildi. `npm run dev` ve `npm run build` komutları ile esbuild ve sass işlemleri yapılabilir. dev ve build parametreleri ile sass ve esbuild'in sırasıyla dev ve production durumlarındaki çalışma durumları etknileştirilebilir.
+- esbuild için cli parametreleri eklendi. Artık `node esbuild.config.js production` şeklinde ikinci ortam durumu gönderilebilir. Eğer yoksa .env dosyası içinde bulunan `NODE_ENV` değişkeni kullanılacaktır.	Eğer o da yoksa varsayılan olarak development değeri atanacaktır. 
+
 ## 2023.04.09
 
-## Eklenenler
+### Eklenenler
 
 - Production için bundle işlemini hızlıca yapabilmek için yeni script eklendi. Artık `npm run build` ile SCSS ve JS dosyaları otomatik olarak sıkıştırılacak. Talebe göre PostCSS de burada kullanılabilir.
 
-## Değişenler
+### Değişenler
 
 - esbuild için watch modu opsiyonel hale getirildi. Eğer geliştirme ortamı production değilse otomatik olarak watch modu altında çalışacaktır. Production olması durumunda tekseferlik olarak bundle işlemi gerçekleştirilecektir.
 - JS dosyaları dev ortamında mangle işlemine uğramadan plain olarak görünecek şekilde yapılandırıldı. Debug ederken JS dosyalarında değişken isimlerinden kaynaklı olarak takibin zorlaşması sorunu ortadan kaldırıldı.
@@ -17,7 +24,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.04.06
 
-## Eklenenler
+### Eklenenler
 - Opsiyon olarak pnpm eklendi.
 
 ### Düzeltmeler
