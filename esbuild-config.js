@@ -2,11 +2,21 @@ import esbuild from 'esbuild';
 import path from 'path';
 import { config } from 'dotenv';
 
+let getEnv = null;
+
+process.argv.forEach((val) => {
+  if (val === 'production') {
+    getEnv = val;
+  } else {
+    getEnv = 'development';
+  }
+})
+
+
 config();
 
 const sourceDir = 'src/pages';
 const outDir = 'theme/assets/js';
-const getEnv = process.env.NODE_ENV;
 let startTime;
 
 const watchPlugin = {
