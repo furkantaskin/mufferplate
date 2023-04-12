@@ -8,7 +8,7 @@ process.argv.forEach((val) => {
   if (val === 'production') {
     getEnv = val;
   } else {
-    getEnv = 'development';
+    getEnv = process.env.NODE_ENV || 'development'
   }
 })
 
