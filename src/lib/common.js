@@ -20,8 +20,8 @@ export function mobileMenu() {
   document
     .querySelector('.menuButton')
     .addEventListener('click', () => {
-      toggleMenu(showMenu);
       showMenu = !showMenu;
+      toggleMenu(showMenu);
     });
 
   mobileMenu.innerHTML =
