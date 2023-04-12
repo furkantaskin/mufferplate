@@ -9,6 +9,10 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Artık npm içinde iki ayrı komut çalıştırma yerine tek komut çalıştırma özelliği getirildi. `npm run dev` ve `npm run build` komutları ile esbuild ve sass işlemleri yapılabilir. dev ve build parametreleri ile sass ve esbuild'in sırasıyla dev ve production durumlarındaki çalışma durumları etknileştirilebilir.
 - esbuild için cli parametreleri eklendi. Artık `node esbuild.config.js production` şeklinde ikinci ortam durumu gönderilebilir. Eğer yoksa .env dosyası içinde bulunan `NODE_ENV` değişkeni kullanılacaktır.	Eğer o da yoksa varsayılan olarak development değeri atanacaktır. 
 
+### Düzeltmeler
+
+- Mobil menüdeki çift tıklama sorunu giderildi. Sayfaya ilk girişte mobil menü butonu ilk tıklamada çalışmak yerine ikinci tıklamadan sonra normale dönüyor. Değer değişimi fonksiyondan sonra olduğu için sistem bunu fark etmiyor. Fonksiyon ve değer değişiminin sırası güncellendi.
+
 ## 2023.04.09
 
 ### Eklenenler
