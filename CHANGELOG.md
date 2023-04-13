@@ -2,6 +2,19 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.13
+
+### Eklenenler
+- Asenksron yükleme işlemi için örnek Google Font içinden Montserrat ailesi eklendi. Render blocking sorununun önlenmesi (asenkron kullanım) için özel attribute kullanıldı. Kaynak: [Page Speed Checklist](https://pagespeedchecklist.com/asynchronous-google-fonts)
+- Font tanımlaması için mixin eklendi. Sürekli font tanımlamasında uzun uzun yazmak yerine fontların parameterlerinn gönderilmesi yeterli. Şu an için mixin `font-size`, `font-weight` ve `line-height` desteklemekte. Sırasıyla bu değerler varsayılan olarak 500, 16px ve 1 değerlerini almakta. Örnek bir elementte kullanmak için
+
+```scss
+@include get_font(700, 18px, 1.2);
+```
+
+şeklinde bir kullanım yapılabilir.
+
+
 ## 2023.04.12
 
 ### Eklenenler
