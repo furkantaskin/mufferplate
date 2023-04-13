@@ -15,6 +15,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Değişenler
 - esbuild için bilgilendirme renkleri güncellendi. Artık ilk başlangıçta sarı renk ile çalışma ortamını bilgilendirirken her bir derleme aşamasının başlangıcını turkuaz renk ile yazmakta. 
+- `ul` elementi için bullet markerlar kaldırıldı.
 
 
 ## 2023.04.12
