@@ -109,3 +109,8 @@ $uwqhd: 3440;
     @content;
   }
 }
+
+
+@mixin get_font($font_weight: 500, $font_size: 16px, $line_height: 1, $font_family: ("Montserrat", sans-serif)){
+  font: #{$font_weight} #{$font_size}/#{$line_height} #{$font_family};
+}
