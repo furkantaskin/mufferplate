@@ -2,9 +2,16 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.14
+
+### Eklenenler
+
+- Tam genişlik ve tam yükseklik için yeni utility sınıfları eklendi. `w-100`, `h-100` sınıfları ile elementlerin genişliği ve yüksekliği tam olarak ayarlanabilir.
+
 ## 2023.04.13
 
 ### Eklenenler
+
 - Asenksron yükleme işlemi için örnek Google Font içinden Montserrat ailesi eklendi. Render blocking sorununun önlenmesi (asenkron kullanım) için özel attribute kullanıldı. Kaynak: [Page Speed Checklist](https://pagespeedchecklist.com/asynchronous-google-fonts)
 - Font tanımlaması için mixin eklendi. Sürekli font tanımlamasında uzun uzun yazmak yerine fontların parameterlerinn gönderilmesi yeterli. Şu an için mixin `font-size`, `font-weight` ve `line-height` desteklemekte. Sırasıyla bu değerler varsayılan olarak 500, 16px ve 1 değerlerini almakta. Örnek bir elementte kullanmak için
 
@@ -14,6 +21,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 şeklinde bir kullanım yapılabilir.
 
 ### Değişenler
+
 - esbuild için bilgilendirme renkleri güncellendi. Artık ilk başlangıçta sarı renk ile çalışma ortamını bilgilendirirken her bir derleme aşamasının başlangıcını turkuaz renk ile yazmakta. 
 - `ul` elementi için bullet markerlar kaldırıldı.
 
