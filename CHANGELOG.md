@@ -11,8 +11,10 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ```scss
 @include get_font(700, 18px, 1.2);
 ```
-
 şeklinde bir kullanım yapılabilir.
+
+### Değişenler
+- esbuild için bilgilendirme renkleri güncellendi. Artık ilk başlangıçta sarı renk ile çalışma ortamını bilgilendirirken her bir derleme aşamasının başlangıcını turkuaz renk ile yazmakta. 
 
 
 ## 2023.04.12
