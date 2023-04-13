@@ -1,5 +1,7 @@
 @use 'sass:list';
 @use 'functions' as f;
+@import '../../../node_modules/pers-sign/css/module';
+
 
 @mixin mask-parameters($image: null) {
   -webkit-mask-size: contain;
@@ -57,7 +59,6 @@ $uwqhd: 3440;
 }
 
 @mixin call_template($template: 'transition', $trans_number: 0.3s) {
-  @import '../../../node_modules/pers-sign/css/module';
   @if $template == 'transition' {
     -webkit-transition: $trans_number ease all;
     -o-transition: $trans_number ease all;
