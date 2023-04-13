@@ -17,12 +17,12 @@
     "concurrently": "^8.0.1",
     "cssnano": "^6.0.0",
     "dotenv": "^16.0.3",
-    "esbuild": "0.17.15",
-    "eslint": "^8.37.0",
+    "esbuild": "0.17.16",
+    "eslint": "^8.38.0",
     "pers-sign": "^0.4.3",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
-    "sass": "^1.60.0"
+    "sass": "^1.62.0"
   },
   "scripts": {
     "esbuild": "node esbuild-config.js",
