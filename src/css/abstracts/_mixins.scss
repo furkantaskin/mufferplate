@@ -2,7 +2,6 @@
 @use 'functions' as f;
 @import '../../../node_modules/pers-sign/css/module';
 
-
 @mixin mask-parameters($image: null) {
   -webkit-mask-size: contain;
   mask-size: contain;
@@ -110,9 +109,12 @@ $uwqhd: 3440;
   }
 }
 
-
-@mixin get_font($font_weight: 500, $font_size: 16px, $line_height: 1){
+@mixin get_font(
+  $font_weight: 500,
+  $font_size: 16px,
+  $line_height: 1
+) {
   font-weight: #{$font_weight};
   font-size: #{$font_size};
-    line-height: #{$line_height};
+  line-height: #{$line_height};
 }
