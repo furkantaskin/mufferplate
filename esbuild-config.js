@@ -24,7 +24,7 @@ const watchPlugin = {
   setup(build) {
     build.onStart(() => {
       startTime = new Date().getTime();
-      console.log(`\x1b[33m Build started. \x1b[039m`);
+      console.log(`\x1b[96m Build started. \x1b[039m`);
     });
     build.onEnd((result) => {
       if (result.errors.length > 0) {
@@ -64,10 +64,10 @@ const options = {
 };
 
 if (getEnv !== undefined) {
-  console.log(`\x1b[96m Running under ${getEnv} build. \x1b[039m`);
+  console.log(`\x1b[31m Running under ${getEnv} build. \x1b[039m`);
 } else {
   console.log(
-    `\x1b[35m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
+    `\x1b[31m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
   );
 }
 
