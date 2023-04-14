@@ -30,3 +30,12 @@ export function mobileMenu() {
   mobileMenu.style.paddingTop =
     document.querySelector('.mobileHeader').clientHeight * 1.5 + 'px';
 }
+
+
+export function setTitle(){
+  document.querySelectorAll("a").forEach((e) => {
+    if (e.innerText){
+      e.setAttribute("title", e.innerText);
+    }
+  });
+}
