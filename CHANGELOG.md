@@ -2,6 +2,18 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.15
+
+### Eklenenler
+
+- Otomatik olarak anchor elementlere title eklemek için fonksiyonu oluşturuldu. Bu fonksiyon direkt olarak anchor elementin içinde herhangi bir metin varsa bu içeriği title olarak ekleyecektir. Eğer yoksa title oluşturmayacaktır. Örnek olarak
+
+```html
+<a href="#">Deneme içerik</a> <!-- Bu element için title değeri Deneme içerik olacaktır -->
+
+<a href="#"><img src="https://www.foobar.com"> </a> <!-- Bu element için title değeri oluşturulmayacaktır -->
+```
+
 ## 2023.04.14
 
 ### Eklenenler
