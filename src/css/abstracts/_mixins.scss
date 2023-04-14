@@ -1,6 +1,5 @@
 @use 'sass:list';
 @use 'functions' as f;
-@import '../../../node_modules/pers-sign/css/module';
 
 @mixin mask-parameters($image: null) {
   -webkit-mask-size: contain;
