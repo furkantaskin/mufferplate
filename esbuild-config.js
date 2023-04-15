@@ -44,17 +44,18 @@ const watchPlugin = {
   },
 };
 
-async function mergeFiles(filePaths = null) {
+function mergeFiles(filePaths = null) {
   try {
     let files;
     if (filePaths !== null) {
       files = filePaths;
     } else {
-      files = await fs.promises.readdir(sourceDir);
+      files = fs.readdirSync(sourceDir);
       files = files.filter(file => path.extname(file) === '.js');
     }
-
-    return files.map((filePath) => path.join(sourceDir, filePath));
+    const newMap =files.map((filePath) => path.join(sourceDir, filePath));
+    console.log(typeof newMap, newMap)
+    return newMap
   } catch (err) {
     console.log('Error getting directory information. Reason:', err);
     return null;
