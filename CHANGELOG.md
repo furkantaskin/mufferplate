@@ -2,6 +2,11 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.16
+
+### Değişenler
+- `background` mixin'i içinde görsel opsiyonel hale getirildi. Eğer görsel gönderilmezse `background-repeat`, `background-position` ve `background-size` özellikleri kullanılacaktır. Görselin gönderilmesi durumunda görsel de bu özelliğe dahil olacaktır.
+
 ## 2023.04.15
 
 ### Eklenenler
@@ -14,6 +19,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 <a href="#"><img src="https://www.foobar.com"> </a> <!-- Bu element için title değeri oluşturulmayacaktır -->
 ```
+
 
 ## 2023.04.14
 
