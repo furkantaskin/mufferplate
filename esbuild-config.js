@@ -44,10 +44,10 @@ const watchPlugin = {
   },
 };
 
-async function mergeFiles(filePaths) {
+async function mergeFiles(filePaths = null) {
   try {
     let files;
-    if (filePaths && filePaths.length) {
+    if (filePaths !== null) {
       files = filePaths;
     } else {
       files = await fs.promises.readdir(sourceDir);
