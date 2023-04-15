@@ -1,17 +1,29 @@
 import esbuild from 'esbuild';
 import path from 'path';
+import fs from 'fs';
 import { config } from 'dotenv';
 
 let getEnv = null;
+
+const scssTemplate = `@use '../main' as m;
+@use '../layout/header';
+@use '../layout/footer';
+`
+
+const jsTemplate = `import { mobileMenu, setTitle } from '../lib/common';
+
+mobileMenu();
+setTitle();
+`
+
 
 process.argv.forEach((val) => {
   if (val === 'production') {
     getEnv = val;
   } else {
-    getEnv = process.env.NODE_ENV || 'development'
+    getEnv = process.env.NODE_ENV || 'development';
   }
-})
-
+});
 
 config();
 
@@ -44,18 +56,50 @@ const watchPlugin = {
   },
 };
 
+
 function mergeFiles(filePaths = null) {
   try {
     let files;
     if (filePaths !== null) {
       files = filePaths;
     } else {
+      const phpDir = 'theme';
+      const jsDir = 'src/pages';
+      const scssDir = 'src/css/pages';
+      const phpFiles = fs
+        .readdirSync(phpDir)
+        .filter((file) => path.extname(file) === '.php' && !['header.php', 'footer.php', 'header-page.php'].includes(file));
+
+      phpFiles.forEach((file) => {
+        const jsFilePath = path.join(
+          jsDir,
+          path.basename(file, '.php') + '.js'
+        );
+        const scssFilePath = path.join(
+          scssDir,
+          path.basename(file, '.php') + '.scss'
+        );
+
+        if (!fs.existsSync(jsFilePath)) {
+          fs.writeFileSync(
+            jsFilePath, jsTemplate
+          );
+        }
+        if (!fs.existsSync(scssFilePath)) {
+          fs.writeFileSync(
+            scssFilePath, scssTemplate
+          );
+        }
+      });
       files = fs.readdirSync(sourceDir);
-      files = files.filter(file => path.extname(file) === '.js');
+      files = files.filter((file) => path.extname(file) === '.js');
     }
-    const newMap =files.map((filePath) => path.join(sourceDir, filePath));
-    console.log(typeof newMap, newMap)
-    return newMap
+
+    const newMap = files.map((filePath) =>
+      path.join(sourceDir, filePath)
+    );
+    console.log(newMap)
+    return newMap;
   } catch (err) {
     console.log('Error getting directory information. Reason:', err);
     return null;
@@ -81,8 +125,6 @@ if (getEnv !== undefined) {
     `\x1b[31m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
   );
 }
-
-
 
 if (getEnv !== 'production') {
   let ctx = await esbuild.context(options);
