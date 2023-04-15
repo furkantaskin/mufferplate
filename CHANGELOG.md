@@ -4,7 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.04.16
 
+### Eklenenler
+
+- Otomatik dosya oluşturma modu ekledi. Eğer açılan PHP dosyasına dair js ve css dosyaları ilgili klasörlerde yoksa, sistem otomatik olarak bu dosyaları oluşturup önceden tanımlanan template içerikleri ekleyecektir. Bu sayede dosya oluşturma işleminde manuel çalıştırmaya gerek kalmamaktadır. Eğer esbuild içine derlenecek dosyalar elle gönderilirse bu dosyalar otomatik olarak oluşturulmayacaktır. Ayrıca eğer dosyalar mevcutsa yeni dosya oluşturma işlemi yapmayacaktır.
+
 ### Değişenler
+
 - `background` mixin'i içinde görsel opsiyonel hale getirildi. Eğer görsel gönderilmezse `background-repeat`, `background-position` ve `background-size` özellikleri kullanılacaktır. Görselin gönderilmesi durumunda görsel de bu özelliğe dahil olacaktır.
 
 ## 2023.04.15
