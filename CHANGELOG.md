@@ -6,6 +6,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Eklenenler
 
+- esbuild içinde otomatik dizin okuma eklendi. Eğer `entryPoints` olarak çağırılan `mergeFiles` fonksiyonuna dosyalar dizin formatında gönderilirse, sistem o dosyaları işleyecek. Eğer herhangi bir argüman gönderilmezse bu durumda `src/pages` klasörü içindeki js dosyalarını otomatik olarak okuyup işleme alacak.
 - Otomatik olarak anchor elementlere title eklemek için fonksiyonu oluşturuldu. Bu fonksiyon direkt olarak anchor elementin içinde herhangi bir metin varsa bu içeriği title olarak ekleyecektir. Eğer yoksa title oluşturmayacaktır. Örnek olarak
 
 ```html
