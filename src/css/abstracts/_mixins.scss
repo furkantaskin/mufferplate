@@ -18,9 +18,14 @@
   $repeat: no-repeat,
   $position: center,
   $size: contain,
-  $image
+  $image: null
 ) {
-  background: $repeat $position/$size url($image);
+  @if ($image) {
+    background: $repeat $position/$size url($image);
+  }
+  @else {
+    background: $repeat $position/$size;
+  }
 }
 
 $xs: 575;
