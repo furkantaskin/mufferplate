@@ -16,6 +16,9 @@ mobileMenu();
 setTitle();
 `;
 
+config();
+
+
 process.argv.forEach((val) => {
   if (val === 'production') {
     getEnv = val;
@@ -24,7 +27,14 @@ process.argv.forEach((val) => {
   }
 });
 
-config();
+
+if (getEnv !== undefined) {
+  console.log(`\x1b[33m Running under ${getEnv} build. \x1b[039m`);
+} else {
+  console.log(
+    `\x1b[31m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
+  );
+}
 
 const sourceDir = 'src/pages';
 const outDir = 'theme/assets/js';
@@ -80,11 +90,11 @@ function generateFiles() {
     );
 
     if (!fs.existsSync(jsFilePath)) {
-      console.log(`\x1b[96m Generating JS files. \x1b[039m`);
+      console.log(`\x1b[96m Generating JS file ${jsFilePath}. \x1b[039m`);
       fs.writeFileSync(jsFilePath, jsTemplate);
     }
     if (!fs.existsSync(scssFilePath)) {
-      console.log(`\x1b[96m Generating CSS files. \x1b[039m`);
+      console.log(`\x1b[96m Generating SCSS file ${scssFilePath}. \x1b[039m`);
       fs.writeFileSync(scssFilePath, scssTemplate);
     }
   });
@@ -125,13 +135,6 @@ const options = {
   plugins: [watchPlugin],
 };
 
-if (getEnv !== undefined) {
-  console.log(`\x1b[33m Running under ${getEnv} build. \x1b[039m`);
-} else {
-  console.log(
-    `\x1b[31m WARNING! No environment found. Running under development build as default. You can create .env file or manually declare NODE_ENV \x1b[039m`
-  );
-}
 
 if (getEnv !== 'production') {
   let ctx = await esbuild.context(options);
