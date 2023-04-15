@@ -8,14 +8,13 @@ let getEnv = null;
 const scssTemplate = `@use '../main' as m;
 @use '../layout/header';
 @use '../layout/footer';
-`
+`;
 
 const jsTemplate = `import { mobileMenu, setTitle } from '../lib/common';
 
 mobileMenu();
 setTitle();
-`
-
+`;
 
 process.argv.forEach((val) => {
   if (val === 'production') {
@@ -56,6 +55,40 @@ const watchPlugin = {
   },
 };
 
+function generateFiles() {
+  const phpDir = 'theme';
+  const jsDir = 'src/pages';
+  const scssDir = 'src/css/pages';
+  const phpFiles = fs
+    .readdirSync(phpDir)
+    .filter(
+      (file) =>
+        path.extname(file) === '.php' &&
+        !['header.php', 'footer.php', 'header-page.php'].includes(
+          file
+        )
+    );
+
+  phpFiles.forEach((file) => {
+    const jsFilePath = path.join(
+      jsDir,
+      path.basename(file, '.php') + '.js'
+    );
+    const scssFilePath = path.join(
+      scssDir,
+      path.basename(file, '.php') + '.scss'
+    );
+
+    if (!fs.existsSync(jsFilePath)) {
+      console.log(`\x1b[96m Generating JS files. \x1b[039m`);
+      fs.writeFileSync(jsFilePath, jsTemplate);
+    }
+    if (!fs.existsSync(scssFilePath)) {
+      console.log(`\x1b[96m Generating CSS files. \x1b[039m`);
+      fs.writeFileSync(scssFilePath, scssTemplate);
+    }
+  });
+}
 
 function mergeFiles(filePaths = null) {
   try {
@@ -63,34 +96,9 @@ function mergeFiles(filePaths = null) {
     if (filePaths !== null) {
       files = filePaths;
     } else {
-      const phpDir = 'theme';
-      const jsDir = 'src/pages';
-      const scssDir = 'src/css/pages';
-      const phpFiles = fs
-        .readdirSync(phpDir)
-        .filter((file) => path.extname(file) === '.php' && !['header.php', 'footer.php', 'header-page.php'].includes(file));
-
-      phpFiles.forEach((file) => {
-        const jsFilePath = path.join(
-          jsDir,
-          path.basename(file, '.php') + '.js'
-        );
-        const scssFilePath = path.join(
-          scssDir,
-          path.basename(file, '.php') + '.scss'
-        );
-
-        if (!fs.existsSync(jsFilePath)) {
-          fs.writeFileSync(
-            jsFilePath, jsTemplate
-          );
-        }
-        if (!fs.existsSync(scssFilePath)) {
-          fs.writeFileSync(
-            scssFilePath, scssTemplate
-          );
-        }
-      });
+      if (getEnv !== 'production') {
+        generateFiles();
+      }
       files = fs.readdirSync(sourceDir);
       files = files.filter((file) => path.extname(file) === '.js');
     }
@@ -98,7 +106,6 @@ function mergeFiles(filePaths = null) {
     const newMap = files.map((filePath) =>
       path.join(sourceDir, filePath)
     );
-    console.log(newMap)
     return newMap;
   } catch (err) {
     console.log('Error getting directory information. Reason:', err);
