@@ -44,12 +44,17 @@ const watchPlugin = {
   },
 };
 
-async function mergeFiles() {
+async function mergeFiles(filePaths) {
   try {
-    // get list of all js files from source directory
-    const files = await fs.promises.readdir(sourceDir);
-    const jsFiles = files.filter(file => path.extname(file) === '.js');
-    return jsFiles.map((filePath) => path.join(sourceDir, filePath));
+    let files;
+    if (filePaths && filePaths.length) {
+      files = filePaths;
+    } else {
+      files = await fs.promises.readdir(sourceDir);
+      files = files.filter(file => path.extname(file) === '.js');
+    }
+
+    return files.map((filePath) => path.join(sourceDir, filePath));
   } catch (err) {
     console.log('Error getting directory information. Reason:', err);
     return null;
