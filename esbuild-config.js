@@ -4,6 +4,9 @@ import fs from 'fs';
 import { config } from 'dotenv';
 
 let getEnv = null;
+const sourceDir = 'src/pages';
+const outDir = 'theme/assets/js';
+let startTime;
 
 const scssTemplate = `@use '../main' as m;
 @use '../layout/header';
@@ -36,9 +39,7 @@ if (getEnv !== undefined) {
   );
 }
 
-const sourceDir = 'src/pages';
-const outDir = 'theme/assets/js';
-let startTime;
+
 
 const watchPlugin = {
   name: 'watch-plugin',
