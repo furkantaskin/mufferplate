@@ -27,7 +27,7 @@
   "scripts": {
     "esbuild": "node esbuild-config.js",
     "sass": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
-    "bundlecss": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
+    "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
     "dev": "concurrently --kill-others \"npm run sass\" \"node esbuild-config.js development\"",
     "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node esbuild-config.js production"
   },
