@@ -32,17 +32,21 @@ Verimi artırmak için mümkün olduğunca modül yapısı ve sayfaya özel yap�
 
 ### JS
 
-JS dosyaları için esbuild kullanılmakta. esbuild başta ana dizindeki src klasörüne bakacaktır. Sayfalara özel js varsa o zaman js dosyalarının pages klasöründe toplanması yeterlidir. Mobil için JS operasyonları common.js içinde gerçekleşmektedir.
+JS dosyalarında bunlder olarak esbuild kullanılmakta. Varsayılan olarak ana dizinde bulunan `src/pages` dizinindeki JS dosyalarını baz alarak çıktılarını `theme/assets/js` klasöründe toplayacaktır. Bu kısımda mümkün olan en yüksek özelleştirme imkanını sağlamaya çalıştım.
+
+Giriş ve çıkış dizinleri değiştirilecekse `sourceDir` ve `outDir` değişkenlerindeki dizinlerin güncellenmesi yeterli olacaktır. esbuild kalan kısımları otomatik olarak düzenlemektedir.
+
+Mobil ve otomatik title gibi işlemler ise `src/lib/common.js` içinde gerçekleşmektedir. Bunların kullanılacak alana import edilmesi otomatik olarak mobil menü interaksiyonlarını sağlayacaktır.
 
 #### esbuild
 
-esbuild dosyasında (esbuild-config.js) bundle çıkış ve kaynak klasörlerinin de belirtilmesi gerekecektir. Boilerplate düzeni korunacaksa değerlerin değişmesine gerek yok. Eğer kaynak ve çıktı klasörlerin yeri değişiyorsa `sourceDir` ile `outDir` değişkenlerine müdahale edilebilir. `npm run esbuild` ile sistem çalıştırılabilir ve otomatik olarak dosya yenilemesi yapıldığında çıktıyı sistem verebilir.
+esbuild burada iki mod altında çalışmaktadır. Bunlar development ve production şeklindedir. Eğer sistem ya da site henüz geliştirme aşamasında ise `npm run dev` veya `npm run esbuild` komutu ile esbuild dev modunda etkinleştirilebilir. Bu kısım gerekirse ana dizinde oluşturulacak bir .env dosyası ile değiştirilebilir.
 
-Modül yapısı korunabilmesi için common.js dosyası bir export içinde tüm komutları göndermektedir. Bu kısım dilendiği şekilde düzenlenebilir. İleri dönemlerde bu işlevler, kendilerine has fonksiyonlar altında tek tek toplanabilir.
+esbuild bu kısımda `theme` klasörü içindeki belirli PHP dosyaları (header ve footer gibi ortak kullanılan dosyalar) dışında sayfa olarak görev gören PHP dosyalarını otomatik olarak algılayıp `src/pages` klasöründe bunlara ait JS dosyalarını oluşturacak ve template içeriğ ekleyecektir. Bu template konfigürasyon dosyasındaki (esbuild.config.js) `jsTemplate` değişkeninden düzenlenebilir. Tek yapılması gereken yeni sayfa oluşturulduktan sonra esbuild'in yeniden çalıştırılmasıdır. Eğer sayfalar belirli ise sayfaların hepsinin açılmasının ardından komutun çalıştırılması da, komutun sürekli çalıştırılmasının önüne geçecektir.  Eğer JS dosyaları zaten mevcutsa herhangi bir düzenleme yapmadan sistem sadece yeni dosyaları baz alarak devam edecek ve mevcut dosyaları es geçecektir.
 
-JS derlemesinde bazı kısımların es geçilmemesi önemlidir. Son JS dosyasının minify edilebilmesi için ana dizinde bir .env dosyası açılmalı ve key olarak NODE_ENV gönderilmedilir. Bu keyin değerinin production olması durumunda sistem JS dosyasını küçültecek ve kaynağı kaldıracaktır.
+Modül yapısı korunabilmesi için common.js dosyası, mobil menü ve title ekleme işlemleri için ayrı ayrı fonksiyonlar içermektedir. Bu fonksiyonar `mobileMenu` ve `setTitle` şeklindedir. 
 
-İleri dönemlerde bootstrap ve diğer kütüphaneler ile frameworkler için de CSS bundle olayı denenerek Sass derlemesinin esbuild içinden yapılması hedeflenmektedir.
+Eğer terminal kısmından çalıştırılacaksa argüman olarak `production` değerinin gönderilmesi durumunda esbuild JS dosyalarının son halini bundle edecek ve JS dosyasını sıkıştıracaktır. Sourcemap ve minify işlemlerinin yanı sıra tree shaking işlemi de production altında etkinleştirilecektir.
 
 esbuild detaylı dokümantasyon için -> [esbuild](https://esbuild.github.io/)
 
@@ -88,7 +92,7 @@ const swiper = new Swiper('.swiper', {
 });
 ```
 
-Burada değişken tanımlaması zorundlu değil ancak dilenirse tanımlanabilir. Metodlar ve eventler sık kullanılacaksa değişkene atanması iyi olacaktır.
+Burada değişken tanımlaması zorunlu değil ancak dilenirse tanımlanabilir. Metodlar ve eventler sık kullanılacaksa değişkene atanması iyi olacaktır.
 
 Swiper detaylı dokümantasyon için -> [Swiper](https://swiperjs.com/)
 
@@ -128,13 +132,36 @@ Tüm CSS işlemleri bittikten sonra PostCSS ile optimizasyon yapılabilir. Bu k�
 /*! purgecss end ignore */
 ```
 
-#### Grid Yapısı
-
-Bootstrap'ın grid yapısına müdahale edilmeyecek durumlarda sadece columnların gerekmesi halinde column generator kullanılabilir. Daha hassas yaklaşımlar için sütun sayısı 36 olarak eklendi. Dilenirse bu sayı azaltılabilir. Generator `src/css/base/_base.scss` içinde bulunmaktadır.
-
 #### Mixin'ler
 
 Sass içindeki mixinler belirli bir çalışma programı içermektedir. Bunlardan en önemlisi `aspect-ratio` denilebilir. Kullanımı çok kafa karıştırıyor gibi hissettirse de mantığı çok basittir. (Gerekli açıklama için bkz: [Changelog](CHANGELOG.md)). Tek yapılması gereken sağlıklı bir işlem için `aspect-ratio` verilecek parent elementin hemen içine yeni bir element oluşturup class adına `ar-child` vermek yeterlidir. Sistem gerisini halledecektir.
+
+##### `calc-ar`
+
+```scss
+@mixin calc_ar($w, $h, $has_child: false){}
+```
+
+`calc-ar` mixin'i ileri dönemde kaldırmayı planladığım bir mixin. Safari 14 sürümünde `aspect-ratio` çalışmadığı için geleneksel yöntem olan `padding-bottom` işlemi gerekmektedir. Bu yüzden tarayıcılarda bunun desteklenmediği durumda `aspect-ratio` kullanılan alanın buna uygun modifiye edilmesi gerekir.
+
+`calc-ar` mixin'i üç parametre almaktadır. İlk kısımda genişlik ve yükseklik değerleri gönderilebilir. Bu kısımda birimleri otomatik olarak silecektir. Bu yüzden değerin piksel ya da normal gönderilmesi önemli değildir. Eğer en boy oranı verilen element içinde başka elementler varsa üçüncü parametrede true değeri gönderilmelidir. Bu durumda `padding-bottom` değeri hesaplanacak ve `ar-child` elementine absolute position verilerek ana element içinde boydan boya alan kaplaması sağlanacaktır. Zamanla Safari 14 kullanan cihaz oranı azaldığı için bu mixin kaldırılacaktır.
+
+
+##### `pos_abs`
+
+```scss
+@mixin pos_abs($top: 0, $right: 0, $bottom: 0, $left: 0){}
+```
+
+`pos_abs` da tıpkı `calc_ar` gibi ileride kaldırılacak olan bir mixin'dir. Bunun amacı da `inset` desteklemeyen tarayıcılarda otomatik olarak `top, right, bottom, left` değerlerini vermektir. Bu değerlerin de gereken birimde (px, rem vb.) gönderilmesi gerekmektedir. Varsayılan olarak tüm kenarlara 0 değeri verilmiştir.
+
+##### `get_font`
+
+```scss
+@mixin get_font($font_weight: 500, $font_size: 16px, $line_height: 1){}
+```
+
+`get_font` mixin'i, uzun uzun yazılan font değerlerini kısaltmak için kullanılmaktadır. Bu mixin'i kullanmak için `font-weight`, `font-size` ve `line-height` değerleri gönderilmelidir. Bu değerlerin birimleri de gönderilmesi gerekmektedir. Varsayılan olarak `font-weight` değeri 500, `font-size` değeri 16px ve `line-height` değeri 1 olarak tanımlanmıştır. `font-family` özelliği body içinde tanımlanabileceği için bu kısma eklenmedi.
 
 ### Favicon
 
@@ -144,18 +171,6 @@ Favicon çok önemli değil ancak şu an için tüm cihazlarla uyumlu olan favic
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 ```
-
-### PHP
-
-Normalde Lighthouse veya diğer performans ölçütleri görseller için bir `width` ve `height` değeri beklemekte. Bu performans skorlarını etkilediği için PHP içinde ilk anda bunlar hesaplanmakta. SVG dışındaki görsel formatlarını (JPG, PNG, WebP) destekleyen fonksiyonun `img` etiketi içine çağrılması yeterlidir. Görsellerin doğal boyutlarını çekeceği için CLS etiketlenebilir. Test edilmesi sağlıklı olacaktır.
-
-Görsellere otomatik olarak genişlik ve yükseklik ataması yapılması için şu şekilde bir kullanım gerekecektir
-
-```php
-<img src='<?=domain?>assets/img/gorseladi.webp' <?=giveAttr(domain."assets/img/gorseladi.webp")?> alt=''>
-```
-
-Buradakki `<?=domain?>` kısmı header dosyasında tanımlı olmakla birlikte `giveAttr()` fonksiyonuna da aynı yerden müdahale edilebilir.
 
 ### Görseller
 
