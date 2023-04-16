@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "esbuild": "0.17.16",
     "eslint": "^8.38.0",
+    "fs-extra": "^11.1.1",
     "pers-sign": "^0.4.3",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
@@ -29,7 +30,8 @@
     "sass": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
     "dev": "concurrently --kill-others \"npm run sass\" \"node esbuild-config.js development\"",
-    "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node esbuild-config.js production"
+    "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node esbuild-config.js production",
+    "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
     "type": "git",
