@@ -32,7 +32,7 @@ define("domain", "http://$_SERVER[HTTP_HOST]/boilerplate/theme/");
                 </a>
             </div>
             <div class="col-6">
-                <div class="menuButton">
+                <div class="menuButton d-flex a-c">
                     <span></span>
                     <span></span>
                     <span></span>
