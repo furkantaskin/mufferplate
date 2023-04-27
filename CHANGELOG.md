@@ -2,6 +2,11 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.04.27
+
+### Değişenler
+- Projenin adresi çekilirken projenin adını manuel olarak boilerplate yerine proje adı olarak değiştirmek yerine projenin kurulu olduğu dizine yönlenecek şekilde güncellendi. Artık header içinde domain kısmının elle güncellenmesine gerek duyulmuyor.
+
 ## 2023.04.16
 
 ### Eklenenler
