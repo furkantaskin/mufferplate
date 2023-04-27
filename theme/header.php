@@ -1,5 +1,15 @@
 <?php
-define("domain", "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]theme/");
+
+$directory = explode("/", $_SERVER['REQUEST_URI'])[1];
+define("domain", "http://$_SERVER[HTTP_HOST]/$directory/theme/");
+
+
+function getViewBox($spriteId){
+    $spriteSheetPath = domain.'assets/img/svg/sprite.svg';
+    $spriteSheet = new SimpleXMLElement(file_get_contents($spriteSheetPath));
+    $sprite = $spriteSheet->xpath("//*[@id='$spriteId']")[0];
+    return (string)$sprite['viewBox'];
+}
 
 ?>
 <!doctype html>
