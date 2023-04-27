@@ -4,11 +4,16 @@ $directory = explode("/", $_SERVER['REQUEST_URI'])[1];
 define("domain", "http://$_SERVER[HTTP_HOST]/$directory/theme/");
 
 
-function getViewBox($spriteId){
-    $spriteSheetPath = domain.'assets/img/svg/sprite.svg';
+function getViewBox($spriteId)
+{
+    $spriteSheetPath = domain . 'assets/img/svg/sprite.svg';
     $spriteSheet = new SimpleXMLElement(file_get_contents($spriteSheetPath));
     $sprite = $spriteSheet->xpath("//*[@id='$spriteId']")[0];
-    return (string)$sprite['viewBox'];
+    $viewBox = (string)$sprite['viewBox'];
+    return
+        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='$viewBox'>
+<use xlink:href='" . domain . "assets/img/svg/sprite.svg#" . $spriteId . "'/>
+</svg>";
 }
 
 ?>
