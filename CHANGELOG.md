@@ -4,6 +4,17 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.04.27
 
+### Eklenenler
+- Sprite SVG kulllanırken otonatik olarak viewbox değerlerini çekmek için fonksiyon eklendi. Bu kısımda çağırılacak symbol elementin id değerinin `getViewBox()` fonksiyonuna string olarak gönderilmesi yeterli olacaktır. Örnek olarak 
+
+```php 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="<?=getViewBox('angle_left')?>">
+        <use xlink:href="<?= domain ?>assets/img/svg/sprite.svg#angle_left"/>
+    </svg>
+```
+
+şeklinde bir işlem ile viewBox değeri otomatik olarak alınabilir.
+
 ### Değişenler
 - Projenin adresi çekilirken projenin adını manuel olarak boilerplate yerine proje adı olarak değiştirmek yerine projenin kurulu olduğu dizine yönlenecek şekilde güncellendi. Artık header içinde domain kısmının elle güncellenmesine gerek duyulmuyor.
 
