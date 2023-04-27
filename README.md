@@ -7,7 +7,7 @@ Bu reponun amacı sürekli olarak internet sitelerini oluştururken projeyi yeni
 Tek yapılması gereken repoyu içeri aktarmak.
 
 ```bash
-git clone https://github.com/furkantaskin/boilerplate.git
+git clone https://github.com/furkantaskin/mufferplate.git
 ```
 
 ## Desteklenen Cihazlar
