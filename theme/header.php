@@ -1,5 +1,5 @@
 <?php
-define("domain", "http://$_SERVER[HTTP_HOST]/boilerplate/theme/");
+define("domain", "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]theme/");
 
 ?>
 <!doctype html>
