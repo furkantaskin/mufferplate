@@ -1,5 +1,6 @@
 <?php 
-$call_file = "index";
+$call_css = "index";
+$call_js = "";
 include "header.php"; 
 ?>
 <main>
