@@ -1,13 +1,13 @@
 @use 'sass:list';
 @use 'functions' as f;
 
-@mixin mask-parameters($image: null) {
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+@mixin mask-parameters($size: contain, $position: center, $repeat: no-repeat, $image: null) {
+  -webkit-mask-size: $size;
+  mask-size: $size;
+  -webkit-mask-repeat: $repeat;
+  mask-repeat: $repeat;
+  -webkit-mask-position: $position;
+  mask-position: $position;
   @if ($image) {
     -webkit-mask-image: url($image);
     mask-image: url($image);
