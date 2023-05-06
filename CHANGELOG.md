@@ -2,6 +2,19 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.05.06
+
+### Değişenler
+
+- Sprite içindeki SVG'yi çağırmak için gereken `getViewBox` fonksiyonunun ismi `getSprite` olarak güncellendi.
+## 2023.05.05
+
+### Değişenler
+
+- JS dosyası için opsiyonel alan eklendi. Normalde `$call_file` değişkenine atanmış olan değer hem CSS hem de JS için geliyordu ancak bazı sayfaların aynı JS dosyasını kullandığı yerler oluyordu. Boşuna yeni JS dosyaları oluşturmak yerine tek bir JS çağrılabilmesi için bu değişken `$call_css` ve `$call_js` olarak eski haline güncellendi. Eğer `$call_js` içine dosya adı gönderilirse sistem bunu çağıracak, eğer bu değişken boşsa `$call_css` içindeki dosyası JS olarak arayacak.
+- `ul` elementi için varsayılan paddin ve margin kaldırıldı.
+- `mask_parameters` mixin'i için tüm değerler keyword parameter olacak şekilde güncellendi.
+
 ## 2023.04.27
 
 ### Eklenenler
