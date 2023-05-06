@@ -4,7 +4,7 @@ $directory = explode("/", $_SERVER['REQUEST_URI'])[1];
 define("domain", "http://$_SERVER[HTTP_HOST]/$directory/theme/");
 
 
-function getViewBox($spriteId)
+function getSprite($spriteId)
 {
     $spriteSheetPath = domain . 'assets/img/svg/sprite.svg';
     $spriteSheet = new SimpleXMLElement(file_get_contents($spriteSheetPath));
