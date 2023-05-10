@@ -71,7 +71,7 @@
   }
 
   .mobileMenu {
-    @include m.call_template(transition, 0.4s);
+    @include m.call_template($trans_number: .4s);
     position: fixed;
     left: 100vw;
     width: 100vw;
