@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.05.12
+
+### Değişenler
+
+- Otomatik olarak anchor elementlere title ekleyen fonksiyon kaldırıldı. İçerik kısmında sorun yaşandığı için elle title atanmasına karar verildi.
+
+
 ## 2023.05.06
 
 ### Değişenler
