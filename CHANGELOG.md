@@ -8,7 +8,6 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Otomatik olarak anchor elementlere title ekleyen fonksiyon kaldırıldı. İçerik kısmında sorun yaşandığı için elle title atanmasına karar verildi.
 
-
 ## 2023.05.06
 
 ### Değişenler
