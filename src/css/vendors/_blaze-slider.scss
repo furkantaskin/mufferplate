@@ -1,30 +1,31 @@
+$slides-to-show: 1;
+$slide-gap: 1px;
+$slide-width: calc(
+        (100% - ($slides-to-show - 1) * $slide-gap) /
+        $slides-to-show
+);
+
 .blaze-slider {
-    --slides-to-show: 1;
-    --slide-gap: 1px;
-    direction: ltr
-  }
-  
-  .blaze-container {
-    position: relative
-  }
-  
-  .blaze-track-container {
-    overflow: hidden
-  }
-  .blaze-track {
-    will-change: transform;
-    touch-action: pan-y;
-    display: flex;
-    gap: var(--slide-gap);
-    --slide-width: calc(
-            (100% - (var(--slides-to-show) - 1) * var(--slide-gap)) /
-            var(--slides-to-show)
-    );
-    box-sizing: border-box
-  }
-  
-  .blaze-track > * {
-    box-sizing: border-box;
-    width: var(--slide-width);
-    flex-shrink: 0
-  }
+  direction: ltr
+}
+
+.blaze-container {
+  position: relative
+}
+
+.blaze-track-container {
+  overflow: hidden
+}
+.blaze-track {
+  will-change: transform;
+  touch-action: pan-y;
+  display: flex;
+  gap: $slide-gap;
+  box-sizing: border-box
+}
+
+.blaze-track > * {
+  box-sizing: border-box;
+  width: $slide-width;
+  flex-shrink: 0
+}
