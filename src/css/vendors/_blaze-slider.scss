@@ -1,7 +1,21 @@
+@use "sass:list";
+
+// $example_map: ("2000px": (2, 10px), "1200": (3, 20px), "1024px": (4, 30px), "600px": (5,10px));
+
+@mixin responsive_width($rules_map){
+  @each $bp, $ng in $rules_map{
+    @media screen and (max-width: $bp){
+      --slides-to-show: #{list.nth($ng, 1)};
+      --slide-gap: #{list.nth($ng, 2)};
+    }
+  }
+}
+
+
 .blaze-slider {
   --slides-to-show: 1;
-  --slide-gap: 1px;
-  direction: ltr
+  --slide-gap: 0px;
+  direction: ltr;
 }
 
 .blaze-container {
@@ -20,11 +34,8 @@
           (100% - (var(--slides-to-show) - 1) * var(--slide-gap)) /
           var(--slides-to-show)
   );
-  box-sizing: border-box
-}
-
-.blaze-track > * {
-  box-sizing: border-box;
-  width: var(--slide-width);
-  flex-shrink: 0
+  & > *{
+    width: var(--slide-width);
+    flex-shrink : 0;
+  }
 }
