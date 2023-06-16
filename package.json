@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "mufferplate",
   "description": "Personal template for projects",
   "version": "1.0.0",
   "author": "Furkan Taşkın",
@@ -7,6 +7,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "blaze-slider": "^1.9.3",
     "bootstrap": "5.3.0-alpha3",
     "photoswipe": "^5.3.7",
     "swiper": "^9.2.4"
