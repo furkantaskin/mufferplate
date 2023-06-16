@@ -26,21 +26,21 @@
     "sass": "^1.62.1"
   },
   "scripts": {
-    "esbuild": "node esbuild-config.js",
+    "esbuild": "node mufferplate.js",
     "sass": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
-    "dev": "concurrently --kill-others \"npm run sass\" \"node esbuild-config.js development\"",
-    "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node esbuild-config.js production",
+    "dev": "concurrently --kill-others \"npm run sass\" \"node mufferplate.js development\"",
+    "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node mufferplate.js production",
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/furkantaskin/boilerplate.git"
+    "url": "git+https://github.com/furkantaskin/mufferplate.git"
   },
   "bugs": {
-    "url": "https://github.com/furkantaskin/boilerplate/issues"
+    "url": "https://github.com/furkantaskin/mufferplate/issues"
   },
-  "homepage": "https://github.com/furkantaskin/boilerplate#readme",
+  "homepage": "https://github.com/furkantaskin/mufferplate#readme",
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
