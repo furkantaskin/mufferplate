@@ -63,6 +63,16 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Tam genişlik ve tam yükseklik için yeni utility sınıfları eklendi. `w-100`, `h-100` sınıfları ile elementlerin genişliği ve yüksekliği tam olarak ayarlanabilir.
 
+## 2023.06.16
+
+### Eklenenler
+
+- Blaze Slider eklendi. Bazı temel slide işlemleri için Swiper kullanmak kaynak dosyalarda yüke sebep oluyordu. Temel işlemlerde daha yüksek hız için artık Blaze kullanılabilir.
+
+### Değişenler
+
+- Konfigürasyon dosyasının adı güncellendi. Konfigürasyon dosyası sadece esbuild için değil, projenin birçok kaynak işlemini içerdiği için proje adına uygun şekilde güncellendi.
+
 ## 2023.04.13
 
 ### Eklenenler
