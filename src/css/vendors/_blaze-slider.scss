@@ -1,11 +1,6 @@
-$slides-to-show: 1;
-$slide-gap: 1px;
-$slide-width: calc(
-        (100% - ($slides-to-show - 1) * $slide-gap) /
-        $slides-to-show
-);
-
 .blaze-slider {
+  --slides-to-show: 1;
+  --slide-gap: 1px;
   direction: ltr
 }
 
@@ -20,12 +15,16 @@ $slide-width: calc(
   will-change: transform;
   touch-action: pan-y;
   display: flex;
-  gap: $slide-gap;
+  gap: var(--slide-gap);
+  --slide-width: calc(
+          (100% - (var(--slides-to-show) - 1) * var(--slide-gap)) /
+          var(--slides-to-show)
+  );
   box-sizing: border-box
 }
 
 .blaze-track > * {
   box-sizing: border-box;
-  width: $slide-width;
+  width: var(--slide-width);
   flex-shrink: 0
 }
