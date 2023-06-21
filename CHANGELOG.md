@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.06.21
+
+### Değişenler
+
+- Artık sprite fonksiyonu ve domain tanımlaması header içinde değil, components klasöründen ayrı ayrı yapılmakta. Böylece birden fazla header bulunan projelerde her header için düzenleme yapmaya gerek kalmamakta.
+
 ## 2023.06.16
 
 ### Eklenenler
