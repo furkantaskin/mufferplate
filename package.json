@@ -30,7 +30,7 @@
     "esbuild": "node mufferplate.js",
     "sass": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
-    "dev": "concurrently --kill-others \"npm run sass\" \"node mufferplate.js development\"",
+    "dev": "concurrently --names \"Sass,esbuild\" -c \"bgMagenta.bold,bgYellow.bold\" --kill-others \"npm run sass\" \"node mufferplate.js development\"",
     "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node mufferplate.js production",
     "bundle": "npm run build && node bundlephp.cjs"
   },
