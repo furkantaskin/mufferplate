@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.07.222
+
+### Değişenler
+
+- Browserslist konfigürasyon dosyası iptal edildi. Desteklenen tarayıcıların listesi package.json içine taşındı
+- Eski NPM kalabalığının iptal edilmesi için package-lock.json kaldırıldı.
+
 ## 2023.06.24
 
 ### Eklenenler
