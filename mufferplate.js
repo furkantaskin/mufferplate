@@ -4,7 +4,7 @@ import fs from 'fs';
 import { config } from 'dotenv';
 
 let getEnv = null;
-const sourceDir = 'src/pages';
+const sourceDir = 'src/js/pages';
 const outDir = 'theme/assets/js';
 let startTime;
 
@@ -68,7 +68,7 @@ const watchPlugin = {
 
 function generateFiles() {
   const phpDir = 'theme';
-  const jsDir = 'src/pages';
+  const jsDir = 'src/js/pages';
   const scssDir = 'src/css/pages';
   const phpFiles = fs
     .readdirSync(phpDir)
