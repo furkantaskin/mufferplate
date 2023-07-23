@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.07.23
+
+### Değişenler
+
+- JS için kaynak dosyaların yolu güncellendi. Artık src klasörü içinde direkt olarak bulunmak yerine src/js içinde tutulacaklar.
+
 ## 2023.07.222
 
 ### Değişenler
