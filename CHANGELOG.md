@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.08.01
+
+### Değişenler
+
+- Tüm paketler güncel sürüme yükseltildi (e234de9)
+- Swiper kullanımı v10'a göre güncellendi. Artık modüller ek bir import ile gelmekte.
+
 ## 2023.07.23
 
 ### Değişenler
