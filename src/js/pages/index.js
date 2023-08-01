@@ -1,4 +1,5 @@
-import Swiper, { Navigation, Pagination } from 'swiper';
+import Swiper from 'swiper';
+import {Navigation, Pagination} from 'swiper/modules';
 import BlazeSlider from "blaze-slider";
 import { Collapse } from 'bootstrap';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
