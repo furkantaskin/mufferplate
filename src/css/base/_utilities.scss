@@ -1,5 +1,15 @@
 @import '../../../node_modules/pers-sign/css/module';
 
+// Display
+
+.d-block{
+  display: block;
+}
+
+.d-none{
+  display: none;
+}
+
 // Flexbox
 .d-flex {
   display: flex;
