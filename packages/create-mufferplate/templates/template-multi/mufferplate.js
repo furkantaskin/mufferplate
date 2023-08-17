@@ -13,7 +13,7 @@ const scssTemplate = `@use '../main' as m;
 @use '../layout/footer';
 `;
 
-const jsTemplate = `import { mobileMenu, setTitle } from '../lib/common';
+const jsTemplate = `import { mobileMenu } from '../lib/common';
 
 mobileMenu();
 setTitle();
