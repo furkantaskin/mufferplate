@@ -43,6 +43,26 @@ $uwqhd: 3440;
   }
 }
 
+@mixin bs_responsive($min_width) {
+  @media screen and (min-width: #{$min-width + 1}px) {
+    @content;
+  }
+}
+
+@mixin no_hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin get_transition($dur: 0.3s, $prop: all) {
+  -webkit-transition: $dur ease $prop;
+  -o-transition: $dur ease $prop;
+  transition: $dur ease $prop;
+}
+
 @mixin calc_ar($w, $h, $has_child: false) {
   @supports (aspect-ratio: 1/1) {
     aspect-ratio: list.slash(f.strip-units($w), f.strip-units($h));
@@ -61,12 +81,8 @@ $uwqhd: 3440;
   }
 }
 
-@mixin call_template($template: 'transition', $trans_number: 0.3s) {
-  @if $template == 'transition' {
-    -webkit-transition: $trans_number ease all;
-    -o-transition: $trans_number ease all;
-    transition: $trans_number ease all;
-  } @else if $template == 'noscroll' {
+@mixin call_template($template) {
+  @if $template == 'noscroll' {
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
