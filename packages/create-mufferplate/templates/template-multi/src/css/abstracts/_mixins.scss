@@ -58,9 +58,11 @@ $uwqhd: 3440;
 }
 
 @mixin get_transition($dur: 0.3s, $prop: all) {
-  -webkit-transition: $dur ease $prop;
-  -o-transition: $dur ease $prop;
-  transition: $dur ease $prop;
+  @media (prefers-reduced-motion: no-preference) {
+    -webkit-transition: $dur ease $prop;
+    -o-transition: $dur ease $prop;
+    transition: $dur ease $prop;
+  }
 }
 
 @mixin calc_ar($w, $h, $has_child: false) {
