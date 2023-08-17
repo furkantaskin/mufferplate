@@ -125,7 +125,7 @@ function mergeFiles(filePaths = null) {
 }
 
 const options = {
-  entryPoints: mergeFiles(),
+  entryPoints: ["src/js/main.js"],
   bundle: true,
   minify: getEnv === 'production',
   logLevel: 'warning',

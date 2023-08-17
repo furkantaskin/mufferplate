@@ -8,7 +8,6 @@
   "type": "module",
   "dependencies": {
     "blaze-slider": "^1.9.3",
-    "bootstrap": "5.3.0-alpha3",
     "photoswipe": "^5.3.7",
     "swiper": "^9.2.4"
   },
@@ -22,16 +21,16 @@
     "eslint": "^8.39.0",
     "fs-extra": "^11.1.1",
     "pers-sign": "^0.4.3",
-    "postcss": "^8.4.23",
+    "postcss": "^8.4.27",
     "postcss-cli": "^10.1.0",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "tailwindcss": "^3.3.3"
   },
   "scripts": {
     "esbuild": "node mufferplate.js",
-    "sass": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
-    "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
-    "dev": "concurrently --names \"Sass,esbuild\" -c \"bgMagenta.bold,bgYellow.bold\" --kill-others \"npm run sass\" \"node mufferplate.js development\"",
-    "build": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css && node mufferplate.js production",
+    "tw": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
+    "dev": "concurrently --names \"Tailwind,esbuild\" -c \"bgCyan.bold,bgYellow.bold\" --kill-others \"npm run tw\" \"node mufferplate.js development\"",
+    "build": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production && node mufferplate.js production",
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
