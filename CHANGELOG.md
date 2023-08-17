@@ -2,6 +2,20 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.08.17
+
+### Eklenenler
+
+- **Yeni npm komutu!** Artık git reposu clone edilmek yerine npm kullanılarak proje çağrılabilir. Bu kısımda tek çıktılı veya çok çıktılı olma durumlarına göre kullanıcıya seçenekler sunulacaktır. Bootstrap için tek ve çok sayfalı çıktılar sunulurken Tailwind şu an için sadece tek sayfalı çıktıda çalışmakta. Tailwind'in de hazırlanması için çalışmalar devam ediyor. `npx create-mufferplate@latest` komutu ile istenilen yapı seçilebilir.
+
+- Bootstrap'ın kendi yapısındaki breakpointlere göre responsive hazırlanması için `bs_responsive()` şeklinde yeni mixin eklendi. 
+- Mobildeki hover sorununu çözmek için `no_hover()` mixin'i eklendi. Bu mixin içine hover durumundaki özellikler yazılırsa mobilde gösterilmeyecek.
+
+### Değişenler
+- `call_template()` mixin'indeki transition işlemi artık yeni mixin içinde yapılıyor. `get_transition()` ile Ttransition işlemlerinde `$dur` ve `$prop` parametreleri ile hangi efektin hangi sürede uygulanacağı gösterilebilir. İleri dönemde çoklu prop için çalışmalar ypaılacak.
+
+
+
 ## 2023.08.01
 
 ### Değişenler
