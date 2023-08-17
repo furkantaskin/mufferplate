@@ -1,0 +1,63 @@
+{
+  "name": "mufferplate",
+  "description": "Personal template for projects",
+  "version": "1.0.0",
+  "author": "Furkan Taşkın",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "blaze-slider": "^1.9.3",
+    "bootstrap": "5.3.0-alpha3",
+    "photoswipe": "^5.3.7",
+    "swiper": "^9.2.4"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.0.1",
+    "cssnano": "^6.0.0",
+    "dotenv": "^16.0.3",
+    "esbuild": "^0.17.18",
+    "eslint": "^8.39.0",
+    "fs-extra": "^11.1.1",
+    "pers-sign": "^0.4.3",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "sass": "^1.62.1"
+  },
+  "scripts": {
+    "esbuild": "node mufferplate.js",
+    "sass": "sass --color --watch --embed-source-map src/css/main.scss:theme/assets/css/main.css --load-path=src/css",
+    "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
+    "dev": "concurrently --names \"Sass,esbuild\" -c \"bgMagenta.bold,bgYellow.bold\" --kill-others \"npm run sass\" \"node mufferplate.js development\"",
+    "build": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/mai.css && node mufferplate.js production",
+    "bundle": "npm run build && node bundlephp.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furkantaskin/mufferplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/furkantaskin/mufferplate/issues"
+  },
+  "homepage": "https://github.com/furkantaskin/mufferplate#readme",
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "printWidth": 70
+  },
+  "browserslist": [
+    ">= 0.5%",
+    "last 2 major versions",
+    "not dead",
+    "Chrome >= 60",
+    "Firefox >= 60",
+    "Firefox ESR",
+    "iOS >= 12",
+    "Safari >= 12",
+    "not Explorer <= 11"
+  ]
+}

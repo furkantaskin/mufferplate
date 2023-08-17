@@ -1,0 +1,29 @@
+{
+  "name": "create-mufferplate",
+  "version": "0.14.0",
+  "description": "Create mufferplate project",
+  "author": "Furkan Taskin",
+  "license": "MIT",
+  "bin": {
+    "create-mufferplate": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template-*",
+    "templates"
+  ],
+  "keywords": [
+    "starter",
+    "mufferplate",
+    "php",
+    "js"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --platform=node --outfile=index.js"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "kolorist": "^1.8.0",
+    "minimist": "^1.2.8"
+  }
+}

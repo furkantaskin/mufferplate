@@ -1,0 +1,9 @@
+@use '../main' as m;
+@use '../layout/header';
+@use '../layout/footer';
+@use '../vendors/swiper';
+
+main {
+  // Use mixins or functions like @include m.calc_ar(200px, 10px);
+  @include m.calc_ar(200px, 10px);
+}
