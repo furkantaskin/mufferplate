@@ -10,6 +10,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Bootstrap'ın kendi yapısındaki breakpointlere göre responsive hazırlanması için `bs_responsive()` şeklinde yeni mixin eklendi. 
 - Mobildeki hover sorununu çözmek için `no_hover()` mixin'i eklendi. Bu mixin içine hover durumundaki özellikler yazılırsa mobilde gösterilmeyecek.
+- Transition işleminde eğer kullaıcı `prefers-reduced-motion` altında siteyi geziyorsa transition tanımlanan işlemlerde animasyon oynatılmayacak.
 
 ### Değişenler
 - `call_template()` mixin'indeki transition işlemi artık yeni mixin içinde yapılıyor. `get_transition()` ile Ttransition işlemlerinde `$dur` ve `$prop` parametreleri ile hangi efektin hangi sürede uygulanacağı gösterilebilir. İleri dönemde çoklu prop için çalışmalar ypaılacak.
