@@ -33,7 +33,7 @@ function emptyDir(dir) {
 const templates = [
   {
     name: 'single',
-    display: 'Single CSS',
+    display: 'Single Output (Single CSS and Single JS Output)',
     color: green,
     variants: [
       {
@@ -50,7 +50,7 @@ const templates = [
   },
   {
     name: 'multi',
-    display: 'Multiple CSS',
+    display: 'Multiple Output (Multiple CSS and Multiple JS Output)',
     color: blue,
   },
 ];
