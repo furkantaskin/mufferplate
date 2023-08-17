@@ -1,3 +1,5 @@
-export default getConfig = {
+const getConfig = {
     entryPath: "src",
 }
+
+export default getConfig

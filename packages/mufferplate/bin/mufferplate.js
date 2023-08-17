@@ -1,6 +1,9 @@
+#!/usr/bin/env node
+
 import esbuild from 'esbuild';
 import path from 'path';
 import fs from 'node:fs';
+import { fileURLToPath } from 'url';
 
 
 let getEnv = null;
@@ -19,4 +22,4 @@ mobileMenu();
 setTitle();
 `;
 
-console.log(import.meta.url);
+console.log(fileURLToPath(import.meta.url));
