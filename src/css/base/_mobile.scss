@@ -30,7 +30,7 @@
       position: relative;
       margin-left: auto;
       span {
-        @include m.call_template();
+        @include m.get_transition();
         width: 100%;
         height: 3px;
         background-color: #fff;
@@ -71,7 +71,7 @@
   }
 
   .mobileMenu {
-    @include m.call_template($trans_number: .4s);
+    @include m.get_transition($dur: .4s);
     position: fixed;
     left: 100vw;
     width: 100vw;

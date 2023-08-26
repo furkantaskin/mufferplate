@@ -26,10 +26,13 @@ include "components/svg-sprite.php";
 
 <body>
 
-    <header>
+    <header class="header_lg">
+        <div class="container">
+            <nav aria-label="Main menu"></nav>
+        </div>
     </header>
 
-    <div class="mobileHeader">
+    <header class="header_sm">
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -47,6 +50,8 @@ include "components/svg-sprite.php";
                 </div>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="mobileMenu"></div>
+    <div class="mobileMenu">
+        <nav aria-label="Mobile menu"></nav>
+    </div>
