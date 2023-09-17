@@ -2,6 +2,16 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.09.17
+
+### Eklenenler
+
+- Mobil menü için JSON yapısı eklendi. Artık sistem JSON dosyasındaki hiyerarşiyi takip ederek mobil menüyü oluşturabilecek.
+
+### Değişenler
+
+- Responsive ve transitionn için kullanılan mixinler güncellendi. Artık transition mixin'i için hangi property'nin ne kadar süreceği map mantığı ile eklenebilir. Responsive için de gerekli akış kontrolleri eklendi.
+
 ## 2023.08.17
 
 ### Eklenenler
