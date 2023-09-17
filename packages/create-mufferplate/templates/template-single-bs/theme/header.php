@@ -28,7 +28,7 @@ include "components/svg-sprite.php";
 
     <header class="header_lg">
         <div class="container">
-            <nav aria-label="Main menu"></nav>
+            <nav aria-label="Main menu" id="main-nav"></nav>
         </div>
     </header>
 
@@ -53,5 +53,5 @@ include "components/svg-sprite.php";
     </header>
 
     <div class="mobileMenu">
-        <nav aria-label="Mobile menu"></nav>
+        <nav aria-label="Mobile menu" id="nav-mobile-1"></nav>
     </div>

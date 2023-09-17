@@ -1,14 +1,14 @@
-.mobileHeader,
+.header_sm,
 .mobileMenu {
   display: none;
 }
 
-@include responsive($xs) {
-  header {
+@include responsive(xs) {
+  header_lg {
     display: none;
   }
 
-  .mobileHeader {
+  .header_sm {
     display: block;
     position: relative;
     top: 0;
@@ -69,7 +69,7 @@
   }
 
   .mobileMenu {
-    @include get_transition($dur: .4s);
+    @include get_transition((left:0.4s, opacity:0.4s));
     position: fixed;
     left: 100vw;
     width: 100vw;
@@ -84,4 +84,29 @@
       opacity: 1;
     }
   }
+}
+
+nav[id^=nav-mobile]{
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  gap: 15px;
+  a{
+    color: #fff;
+  }
+}
+
+nav[id^=nav-mobile]:not(#nav-mobile-1){
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(100%);
+  background-color: v.$primary;
+  @include get_transition((transform: .4s));
+}
+
+nav[id^=nav-mobile]:not(#nav-mobile-1).show{
+  transform: translateX(0);
 }

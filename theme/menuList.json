@@ -1,0 +1,122 @@
+{
+    "detail": {
+      "logo": "https://www.domain.com/assets/img/svg/logo.svg"
+    },
+    "menus": [
+      {
+        "name": "Anasayfa",
+        "uid": "anasayfa-0",
+        "url": "https://www.domain.com"
+      },
+      {
+        "name": "Hakkımızda",
+        "uid": "hakkimizda-0",
+        "url": "https://www.domain.com/hakkimizda",
+        "isActive": true
+      },
+      {
+        "name": "Hizmetlerimiz",
+        "uid": "hizmetler-0",
+        "url": "https://www.domain.com/hizmetlerimiz",
+        "submenu": {
+          "back": "hizmetler-0",
+          "menus": [
+            {
+              "name": "Hizmet 1",
+              "seflink": "hizmet-1",
+              "url": "https://www.domain.com/hizmetlerimiz/hizmet-1"
+            },
+            {
+              "name": "Hizmet 2",
+              "seflink": "hizmet-2",
+              "url": "https://www.domain.com/hizmetlerimiz/hizmet-2",
+              "isActive": true
+            },
+            {
+              "name": "Hizmet 3",
+              "seflink": "hizmet-3",
+              "url": "https://www.domain.com/hizmetlerimiz/hizmet-3",
+              "submenu": {
+                "back": "hizmetler-3",
+                "menus": [
+                  {
+                    "name": "Hizmet 1 3",
+                    "url": "https://www.domain.com/hizmetlerimiz/hizmet-1"
+                  },
+                  {
+                    "name": "Hizmet 2 3",
+                    "url": "https://www.domain.com/hizmetlerimiz/hizmet-2",
+                    "isActive": true
+                  },
+                  {
+                    "name": "Hizmet 3 3",
+                    "url": "https://www.domain.com/hizmetlerimiz/hizmet-3"
+                  },
+                  {
+                    "name": "Hizmet 4 3",
+                    "url": "https://www.domain.com/hizmetlerimiz/hizmet-4"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Hizmet 4",
+              "url": "https://www.domain.com/hizmetlerimiz/hizmet-4"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Blog",
+        "url": "https://www.domain.com/blog",
+        "submenu": {
+            "back": "blog",
+            "menus": [
+              {
+                "name": "Blog 1",
+                "url": "https://www.domain.com/hizmetlerimiz/hizmet-1"
+              },
+              {
+                "name": "Blog 2",
+                "url": "https://www.domain.com/hizmetlerimiz/hizmet-2",
+                "isActive": true
+              },
+              {
+                "name": "Blog 3",
+                "url": "https://www.domain.com/hizmetlerimiz/hizmet-3"
+              },
+              {
+                "name": "Blog 4",
+                "url": "https://www.domain.com/hizmetlerimiz/hizmet-4",
+                "submenu": {
+                    "back": "blog-4",
+                    "menus": [
+                        {
+                          "name": "Blog 4 1",
+                          "url": "https://www.domain.com/hizmetlerimiz/hizmet-1"
+                        },
+                        {
+                          "name": "Blog 4 2",
+                          "url": "https://www.domain.com/hizmetlerimiz/hizmet-2",
+                          "isActive": true
+                        },
+                        {
+                          "name": "Blog 4 3",
+                          "url": "https://www.domain.com/hizmetlerimiz/hizmet-3"
+                        },
+                        {
+                          "name": "Blog 4 4",
+                          "url": "https://www.domain.com/hizmetlerimiz/hizmet-4"
+                        }
+                      ]
+                }
+              }
+            ]
+          }
+      },
+      {
+        "name": "İletişim",
+        "url": "https://www.domain.com/iletisim"
+      }
+    ]
+  }
