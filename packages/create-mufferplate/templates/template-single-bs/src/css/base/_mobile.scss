@@ -103,7 +103,7 @@ nav[id^=nav-mobile]:not(#nav-mobile-1){
   width: 100vw;
   height: 100vh;
   transform: translateX(100%);
-  background-color: v.$primary;
+  background-color: $primary;
   @include get_transition((transform: .4s));
 }
 
