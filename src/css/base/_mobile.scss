@@ -6,7 +6,7 @@
 }
 
 @include m.responsive(xs) {
-  header_lg {
+  .header_lg {
     display: none;
   }
 

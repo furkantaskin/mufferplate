@@ -1,0 +1,281 @@
+@use "sass:map";
+@use "sass:math";
+
+// Generated custom framework from mixture of Bootstrap and Tailwind
+
+// Variables
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+$grid-gutter: 15px;
+$number-of-col: 12;
+
+
+
+$utilities: (
+  "display": (
+    property: display,
+    values: (
+      block: block,
+      flex: flex,
+      inline-block: inline-block,
+      inline-flex: inline-flex,
+      hidden: none
+    )
+  ),
+  "position": (
+    property: position,
+    values: (
+      relative: relative,
+      absolute: absolute,
+      fixed: fixed
+    )
+  ),
+  "align": (
+    property: align-items,
+    values: (
+      items-start: flex-start,
+      items-end: flex-end,
+      items-center: center,
+      items-baseline: baseline,
+      items-stretch: stretch
+    )
+  ), 
+  "justify": (
+    property: justify-content,
+    values: (
+      justify-normal: normal,
+      justify-start: start,
+      justify-end: end,
+      justify-center: center,
+      justify-between: space-between,
+    )
+  ),
+  "flex-direction": (
+    property: flex-direction,
+    values: (
+      flex-row: row,
+      flex-row-reverse: row-reverse,
+      flex-col: col,
+      flex-col-reverse: col-reverse
+    )
+  ),
+  "flex-wrap": (
+    property: flex-wrap,
+    values: (
+      flex-wrap: wrap,
+      flex-wrap-reverse: wrap-reverse,
+      flex-nowrap: nowrap
+    )
+  ),
+  "text-align": (
+    property: text-align,
+    values: (
+      text-left: left,
+      text-center: center,
+      text-right: right,
+      text-justify: justify
+    )
+  ),
+  "font-weight": (
+    property: font-weight,
+    values: (
+      font-thin: 100,
+      font-extralight: 200,
+      font-light: 300,
+      font-regular: 400,
+      font-medium: 500,
+      font-semibold: 600,
+      font-bold: 700,
+      font-extrabold: 800,
+      font-black: 900
+    )
+  ),
+  "object-fit": (
+    property: object-fit,
+    values: (
+      object-contain: contain,
+      object-cover: cover,
+      object-fill: fill,
+      object-none: none
+    )
+  ),
+  "object-position": (
+    property: object-position,
+    values: (
+      object-center: center,
+      object-top: top,
+      object-bottom: bottom,
+      object-left: left,
+      object-right: right,
+      object-left-top: left top,
+      object-right-top: right top,
+      object-right-bottom: right bottom,
+      object-left-bottom: left bottom,
+    )
+  )
+);
+
+// Initials
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 #{$grid-gutter * (-1)};
+  & > *[class^="col-"] {
+    flex: 0 0 auto;
+    padding: 0 $grid-gutter;
+  }
+}
+
+.container,
+.container-fluid {
+  width: 100%;
+  padding: {
+    left: $grid-gutter;
+    right: $grid-gutter;
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+%pseudo-absolute{
+  position: absolute;
+  content: '';
+}
+.after-absolute{
+  &::after{
+    @extend %pseudo-absolute;
+  }
+}
+
+.before-absolute{
+  &::before{
+    @extend %pseudo-absolute;
+  }
+}
+
+// Functions
+@function to-fixed($float, $digits: 4) {
+  $sass-precision: 5;
+
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+      + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+      + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+
+  $pow: math.pow(10, $digits);
+  @return math.div(math.round($float * $pow), $pow);
+}
+
+@function generate-width($divider, $dividee) {
+  @return to-fixed(math.div($divider, $dividee)) * 100%;
+}
+
+// Column and Offset Generator
+@each $key, $val in $grid-breakpoints {
+  @if $val != 0 {
+    @media screen and (min-width: #{$val}) {
+
+      // Responsive columns and order start
+      @for $i from 1 through $number-of-col {
+        .col-#{$key}-#{$i} {
+          width: generate-width($i, $number-of-col);
+        }
+        .order-#{$key}-#{$i}{
+          order: $i;
+        }
+        @if $i != $number-of-col {
+          .offset-#{$key}-#{$i} {
+            margin-left: generate-width($i, $number-of-col);
+          }
+        }
+      }
+      // Responsive columns and order end
+
+      // Responsive width height start
+      @for $i from 0 through 4 {
+        .w-#{$key}-#{$i*25}{
+          width: generate-width($i, 4);
+        }
+        .h-#{$key}-#{$i*25}{
+          height: generate-width($i, 4);
+        }
+      }
+      // Responive width height end
+
+      // Responsive utilities start
+      @each $property, $map in $utilities{
+        @each $util-key, $util-val in map.get($map, values){
+          .#{$key}\:#{$util-key}{
+            #{$property}: $util-val;
+          }
+        }
+      }
+      // Responsive utilities end
+      
+    }
+    
+  } @else {
+
+    // Columns and order start
+    @for $i from 1 through $number-of-col {
+      .col-#{$i} {
+        width: generate-width($i, $number-of-col);
+      }
+      .offset-#{$i}{
+        margin-left: generate-width($i, $number-of-col);
+      }
+      .order-#{$i}{
+        order: $i
+      }
+    }
+    // Columns and order end
+
+    // Width height start
+    @for $i from 0 through 4 {
+      .w-#{$key}-#{$i*25}{
+        width: generate-width($i, 4);
+      }
+      .h-#{$key}-#{$i*25}{
+        height: generate-width($i, 4);
+      }
+    }
+    // Width end
+
+    // Utilities start
+    @each $property, $map in $utilities{
+      @each $util-key, $util-val in map.get($map, values){
+        .#{$util-key}{
+          #{$property}: $util-val;
+        }
+      }
+    }
+    // Utilities end
+  }
+}
+
+// Container Generator
+@each $key, $val in $container-max-widths {
+  @media screen and (min-width: #{map.get($grid-breakpoints, $key)}) {
+    .container {
+      max-width: $val;
+    }
+  }
+}

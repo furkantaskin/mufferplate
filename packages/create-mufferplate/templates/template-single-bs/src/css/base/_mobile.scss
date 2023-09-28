@@ -4,7 +4,7 @@
 }
 
 @include responsive(xs) {
-  header_lg {
+  .header_lg {
     display: none;
   }
 
