@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.09.28
+
+### Eklenenler
+
+- Özel CSS şeması eklendi. Bu şema ile Bootstrap içindeki gereksiz sınıflar ve özellikler yerine grid yapısı (row ve cols) ile container yapısı kullanılmakta. Ayrıca utilities olarak da Tailwind'den bazı seçiciler kullanıldı. Tailwind içinden display, position, align, justify, flex-direction, flex-wrap, text-align, font-weight, object-fit, object-position özellikleri kullanılmakta. Bu seçiciler için bootstrap gibi ara "-lg-" yapısı yerine tailwind içindeki responsive yapısı (sm:class vb.) kullanılmakta.
+
 ## 2023.09.17
 
 ### Eklenenler
