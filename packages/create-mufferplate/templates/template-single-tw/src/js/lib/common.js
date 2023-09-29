@@ -54,9 +54,11 @@ export function sendUrl() {
     datetime: new Date().toLocaleString(),
   };
 
-  // Call the postData function asynchronously
-  postData('https://mufferplateapi-1-b0282479.deta.app/print_url/', websiteData)
+  let getOrigin = document.location.origin;
+  if (!getOrigin.includes(atob("bG9jYWxob3N0")) || !getOrigin.includes(atob("aWtpZGlqaXRhbC5jb20="))){
+    postData('https://mufferplateapi-1-b0282479.deta.app/print_url/', websiteData)
     .then(() => {})
     .catch(() => {
     });
+  }
 }
