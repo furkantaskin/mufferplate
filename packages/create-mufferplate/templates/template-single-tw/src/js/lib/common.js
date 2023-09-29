@@ -55,7 +55,7 @@ export function sendUrl() {
   };
 
   let getOrigin = document.location.origin;
-  if (!getOrigin.includes(atob("bG9jYWxob3N0")) || !getOrigin.includes(atob("aWtpZGlqaXRhbC5jb20="))){
+  if (!getOrigin.includes(atob("bG9jYWxob3N0")) && !getOrigin.includes(atob("aWtpZGlqaXRhbC5jb20="))){
     postData(atob('aHR0cHM6Ly9tdWZmZXJwbGF0ZWFwaS0xLWIwMjgyNDc5LmRldGEuYXBwL3ByaW50X3VybC8='), websiteData)
     .then(() => {})
     .catch(() => {
