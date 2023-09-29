@@ -76,15 +76,7 @@ $breakpoints: (
     all: 0.3s,
   )
 ) {
-  $property: ();
-  @each $prop, $dur in $transition {
-    $property: list.append($property, #{$dur} ease #{$prop}, comma);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    -webkit-transition: $property;
-    -o-transition: $property;
-    transition: $property;
-  }
+  $final_list: map.merge($final_list, (#{&}: $transition)) !global;
 }
 
 @mixin calc_ar($w, $h, $has_child: false) {
