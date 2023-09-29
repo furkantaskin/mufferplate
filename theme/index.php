@@ -4,8 +4,12 @@ $call_js = "";
 include "header.php"; 
 ?>
 <main>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.7 53.7">
-        <use xlink:href="<?= domain ?>assets/img/svg/sprite.svg#youtube"/>
-    </svg>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" style="background: red">4 sütun</div>
+            <div class="col-lg-5" style="background: green">5 sütun</div>
+            <div class="col-lg-3" style="background: blue">3 sütun</div>
+        </div>
+    </div>
 </main>
 <?php include "footer.php"; ?>

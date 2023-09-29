@@ -1,6 +1,7 @@
-@use "sass:map";
-@use "sass:math";
-
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:meta';
 // Generated custom framework from mixture of Bootstrap and Tailwind
 
 // Variables
@@ -23,39 +24,38 @@ $container-max-widths: (
 
 $grid-gutter: 15px;
 $number-of-col: 12;
-
-
+$is-mobile-first: false;
 
 $utilities: (
-  "display": (
+  'display': (
     property: display,
     values: (
       block: block,
       flex: flex,
       inline-block: inline-block,
       inline-flex: inline-flex,
-      hidden: none
-    )
+      hidden: none,
+    ),
   ),
-  "position": (
+  'position': (
     property: position,
     values: (
       relative: relative,
       absolute: absolute,
-      fixed: fixed
-    )
+      fixed: fixed,
+    ),
   ),
-  "align": (
+  'align': (
     property: align-items,
     values: (
       items-start: flex-start,
       items-end: flex-end,
       items-center: center,
       items-baseline: baseline,
-      items-stretch: stretch
-    )
-  ), 
-  "justify": (
+      items-stretch: stretch,
+    ),
+  ),
+  'justify': (
     property: justify-content,
     values: (
       justify-normal: normal,
@@ -63,35 +63,35 @@ $utilities: (
       justify-end: end,
       justify-center: center,
       justify-between: space-between,
-    )
+    ),
   ),
-  "flex-direction": (
+  'flex-direction': (
     property: flex-direction,
     values: (
       flex-row: row,
       flex-row-reverse: row-reverse,
       flex-col: col,
-      flex-col-reverse: col-reverse
-    )
+      flex-col-reverse: col-reverse,
+    ),
   ),
-  "flex-wrap": (
+  'flex-wrap': (
     property: flex-wrap,
     values: (
       flex-wrap: wrap,
       flex-wrap-reverse: wrap-reverse,
-      flex-nowrap: nowrap
-    )
+      flex-nowrap: nowrap,
+    ),
   ),
-  "text-align": (
+  'text-align': (
     property: text-align,
     values: (
       text-left: left,
       text-center: center,
       text-right: right,
-      text-justify: justify
-    )
+      text-justify: justify,
+    ),
   ),
-  "font-weight": (
+  'font-weight': (
     property: font-weight,
     values: (
       font-thin: 100,
@@ -102,19 +102,19 @@ $utilities: (
       font-semibold: 600,
       font-bold: 700,
       font-extrabold: 800,
-      font-black: 900
-    )
+      font-black: 900,
+    ),
   ),
-  "object-fit": (
+  'object-fit': (
     property: object-fit,
     values: (
       object-contain: contain,
       object-cover: cover,
       object-fill: fill,
-      object-none: none
-    )
+      object-none: none,
+    ),
   ),
-  "object-position": (
+  'object-position': (
     property: object-position,
     values: (
       object-center: center,
@@ -126,8 +126,8 @@ $utilities: (
       object-right-top: right top,
       object-right-bottom: right bottom,
       object-left-bottom: left bottom,
-    )
-  )
+    ),
+  ),
 );
 
 // Initials
@@ -135,10 +135,12 @@ $utilities: (
   display: flex;
   flex-wrap: wrap;
   margin: 0 #{$grid-gutter * (-1)};
-  & > *[class^="col-"] {
-    flex: 0 0 auto;
-    padding: 0 $grid-gutter;
-  }
+}
+
+*[class^='col-'] {
+  flex: 0 0 auto;
+  padding: 0 $grid-gutter;
+  width: 100%;
 }
 
 .container,
@@ -154,18 +156,18 @@ $utilities: (
   }
 }
 
-%pseudo-absolute{
+%pseudo-absolute {
   position: absolute;
   content: '';
 }
-.after-absolute{
-  &::after{
+.after-absolute {
+  &::after {
     @extend %pseudo-absolute;
   }
 }
 
-.before-absolute{
-  &::before{
+.before-absolute {
+  &::before {
     @extend %pseudo-absolute;
   }
 }
@@ -192,13 +194,12 @@ $utilities: (
 @each $key, $val in $grid-breakpoints {
   @if $val != 0 {
     @media screen and (min-width: #{$val}) {
-
       // Responsive columns and order start
       @for $i from 1 through $number-of-col {
         .col-#{$key}-#{$i} {
           width: generate-width($i, $number-of-col);
         }
-        .order-#{$key}-#{$i}{
+        .order-#{$key}-#{$i} {
           order: $i;
         }
         @if $i != $number-of-col {
@@ -211,58 +212,70 @@ $utilities: (
 
       // Responsive width height start
       @for $i from 0 through 4 {
-        .w-#{$key}-#{$i*25}{
+        .w-#{$key}-#{$i*25} {
           width: generate-width($i, 4);
         }
-        .h-#{$key}-#{$i*25}{
+        .h-#{$key}-#{$i*25} {
           height: generate-width($i, 4);
         }
       }
       // Responive width height end
-
-      // Responsive utilities start
-      @each $property, $map in $utilities{
-        @each $util-key, $util-val in map.get($map, values){
-          .#{$key}\:#{$util-key}{
-            #{$property}: $util-val;
+      @if $is-mobile-first == true {
+        // Responsive utilities start
+        @debug 'mobile first';
+        @each $property, $map in $utilities {
+          @each $util-key, $util-val in map.get($map, values) {
+            .#{$key}\:#{$util-key} {
+              #{$property}: $util-val;
+            }
+          }
+        }
+        // Responsive utilities end
+      }
+    }
+    @if $is-mobile-first == false {
+      $current-index: list.index($grid-breakpoints, ($key $val));
+      $previous-key: list.nth($grid-breakpoints, $current-index - 1);
+      @media screen and (max-width: #{$val - 1}) {
+        @each $property, $map in $utilities {
+          @each $util-key, $util-val in map.get($map, values) {
+            .#{list.nth($previous-key, 1)}\:#{$util-key} {
+              #{$property}: $util-val;
+            }
           }
         }
       }
-      // Responsive utilities end
-      
     }
-    
   } @else {
-
     // Columns and order start
     @for $i from 1 through $number-of-col {
       .col-#{$i} {
         width: generate-width($i, $number-of-col);
       }
-      .offset-#{$i}{
+      .offset-#{$i} {
         margin-left: generate-width($i, $number-of-col);
       }
-      .order-#{$i}{
-        order: $i
+      .order-#{$i} {
+        order: $i;
       }
     }
     // Columns and order end
 
     // Width height start
     @for $i from 0 through 4 {
-      .w-#{$key}-#{$i*25}{
+      .w-#{$key}-#{$i*25} {
         width: generate-width($i, 4);
       }
-      .h-#{$key}-#{$i*25}{
+      .h-#{$key}-#{$i*25} {
         height: generate-width($i, 4);
       }
     }
     // Width end
 
     // Utilities start
-    @each $property, $map in $utilities{
-      @each $util-key, $util-val in map.get($map, values){
-        .#{$util-key}{
+    @each $property, $map in $utilities {
+      @each $util-key, $util-val in map.get($map, values) {
+        .#{$util-key} {
           #{$property}: $util-val;
         }
       }
