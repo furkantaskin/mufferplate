@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@use 'sass:string';
+@use 'sass:list';
+
 @import 'abstracts/variables';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
@@ -21,3 +24,26 @@
 @import 'layout/footer';
 
 @import 'pages/index';
+
+
+@media (prefers-reduced-motion: no-preference) {
+    $transitions_property: ();
+  
+    @each $selector, $transition in $final_list {
+      #{$selector} {
+        $transition_properties: ();
+  
+        @each $prop, $dur in $transition {
+          $transition_properties: list.append(
+            $transition_properties,
+            #{$prop} #{$dur} ease,
+            comma
+          );
+        }
+  
+        -webkit-transition: $transition_properties;
+        -o-transition: $transition_properties;
+        transition: $transition_properties;
+      }
+    }
+  }

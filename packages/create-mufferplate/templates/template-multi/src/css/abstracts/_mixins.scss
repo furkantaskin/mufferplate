@@ -2,6 +2,7 @@
 @use 'sass:meta';
 @use 'sass:map';
 @use 'functions' as f;
+@use 'variables' as v;
 
 @mixin mask-parameters($size: contain, $position: center, $repeat: no-repeat, $image: null) {
   -webkit-mask-size: $size;
@@ -76,15 +77,7 @@ $breakpoints: (
     all: 0.3s,
   )
 ) {
-  $property: ();
-  @each $prop, $dur in $transition {
-    $property: list.append($property, #{$dur} ease #{$prop}, comma);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    -webkit-transition: $property;
-    -o-transition: $property;
-    transition: $property;
-  }
+  v.$final_list: map.merge(v.$final_list, (#{&}: $transition));
 }
 
 @mixin calc_ar($w, $h, $has_child: false) {
