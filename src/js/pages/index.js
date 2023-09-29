@@ -3,9 +3,10 @@ import {Navigation, Pagination} from 'swiper/modules';
 import BlazeSlider from "blaze-slider";
 import { Collapse } from 'bootstrap';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import { mobileMenu } from '../lib/common';
+import { mobileMenu, sendUrl } from '../lib/common';
 
 mobileMenu();
+sendUrl();
 
 const exampleBlaze = document.querySelector(".example-blaze");
 
