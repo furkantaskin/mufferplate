@@ -23,9 +23,9 @@
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "sass": "^1.68.0"
+    "sass": "^1.68.0",
     "tailwindcss": "^3.3.3"
-  }
+  },
   "scripts": {
     "esbuild": "node mufferplate.js",
     "tw": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
