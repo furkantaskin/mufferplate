@@ -2,7 +2,7 @@
 @use 'sass:math';
 @use 'sass:list';
 @use 'sass:meta';
-// Generated custom framework from mixture of Bootstrap and Tailwind
+/*! Generated custom framework from mixture of Bootstrap and Tailwind !*/
 
 // Variables
 $grid-breakpoints: (
@@ -12,6 +12,7 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px,
   xxl: 1400px,
+  de: 1600px
 );
 
 $container-max-widths: (
@@ -20,11 +21,13 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
+  de: 1410px
 );
 
 $grid-gutter: 15px;
 $number-of-col: 12;
 $is-mobile-first: false;
+$container-no-padding: true;
 
 $utilities: (
   'display': (
@@ -143,19 +146,15 @@ $utilities: (
   width: 100%;
 }
 
-%pseudo-absolute {
-  position: absolute;
-  content: '';
-}
-.after-absolute {
-  &::after {
-    @extend %pseudo-absolute;
+.pseudo-absolute{
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
   }
-}
-
-.before-absolute {
-  &::before {
-    @extend %pseudo-absolute;
+  &::after{
+    content: '';
+    position: absolute;
   }
 }
 
@@ -282,8 +281,8 @@ $utilities: (
 .container-fluid, .container{
   width: 100%;
   padding: {
-    left: $grid-gutter;
-    right: $grid-gutter;
+    left: if($container-no-padding, 0px, $grid-gutter);
+    right: if($container-no-padding, 0px, $grid-gutter);
   }
   margin: {
     left: auto;
