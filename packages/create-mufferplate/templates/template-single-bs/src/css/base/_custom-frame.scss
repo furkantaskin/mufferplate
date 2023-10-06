@@ -143,19 +143,6 @@ $utilities: (
   width: 100%;
 }
 
-.container,
-.container-fluid {
-  width: 100%;
-  padding: {
-    left: $grid-gutter;
-    right: $grid-gutter;
-  }
-  margin: {
-    left: auto;
-    right: auto;
-  }
-}
-
 %pseudo-absolute {
   position: absolute;
   content: '';
@@ -190,6 +177,15 @@ $utilities: (
   @return to-fixed(math.div($divider, $dividee)) * 100%;
 }
 
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
 // Column and Offset Generator
 @each $key, $val in $grid-breakpoints {
   @if $val != 0 {
@@ -222,7 +218,6 @@ $utilities: (
       // Responive width height end
       @if $is-mobile-first == true {
         // Responsive utilities start
-        @debug 'mobile first';
         @each $property, $map in $utilities {
           @each $util-key, $util-val in map.get($map, values) {
             .#{$key}\:#{$util-key} {
@@ -284,11 +279,43 @@ $utilities: (
   }
 }
 
+.container-fluid, .container{
+  width: 100%;
+  padding: {
+    left: $grid-gutter;
+    right: $grid-gutter;
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
 // Container Generator
+@mixin generate_container_up($get_key) {
+  @media screen and (min-width: map.get($grid-breakpoints, $get_key)) {
+    @content;
+  }
+}
+@import '../../../node_modules/pers-sign/css/module';
 @each $key, $val in $container-max-widths {
-  @media screen and (min-width: #{map.get($grid-breakpoints, $key)}) {
-    .container {
+  .container-#{$key}{
+    @extend .container-fluid;
+  }
+  @include generate_container_up($key) {
+    %get-container-#{$key} {
       max-width: $val;
+    }
+    $extend-container: true;
+    @each $break-key, $break-val in $grid-breakpoints {
+      @if ($extend-container) {
+        .container#{breakpoint-infix($break-key, $grid-breakpoints)} {
+          @extend %get-container-#{$key};
+        }
+        @if ($key == $break-key){
+          $extend-container: false;
+        }
+      }
     }
   }
 }
