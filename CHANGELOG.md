@@ -4,6 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.22.0
+
+### Değişenler
+
+- Özel yapı klasör haline getirildi. Renkler için arka plan ve metin rengi için sınıf oluşturucular eklendi.
+
 ## v1.21.0
 
 ### Eklenenler
