@@ -4,6 +4,13 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.24.0
+
+### Değişenler
+
+- JS içinde artık origin ne olursa olsun API isteği gitmekte.
+- Gereksiz sosyal medya ikonları ve main içinde tanımlamalar kaldırıldı.
+
 ## v1.23.0
 
 ### Eklenenler
