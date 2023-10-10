@@ -5,3 +5,5 @@ node_modules/
 theme/assets/css
 theme/assets/js
 mufferplate_backup.zip
+exclude-menulist.js
+exclude-menulist.json
