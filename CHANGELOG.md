@@ -2,6 +2,28 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+- Artık npm sürümüne göre sürümleme yapılacaktır.
+
+## v1.21.0
+
+### Eklenenler
+
+- Tekli CSS ve JS için yeni yapı eklendi. Yeni yapı içinde Bootstrap'ın grid yapısının yanı sıra Tailwind içinden belirli utility sınıfları kullanılmakta. Breakpoint ve container genişliği Bootstrap temelli hazırlandı. Kullanılan yapılar şu şekilde
+
+#### Bootstrap
+
+- Grid yapısı (container, row, col, offset sınıfları)
+
+#### Tailwind
+
+- display, position, align-items, justify-content, flex-direction, flex-wrap, text-align, font-weight, object-fit, object-position, z-index
+
+#### Özel
+
+- Order (order için bootstrap breakpoint yapısı `order-lg` vb. kullanılmakta)
+- Width (w-0 w-25, w-50, w-75, w-100 sınıfları bootstral breakpoint yapısı `w-lg-0` vb. kullanılmakta).
+- Mobile first durumu (Mobile first ise sınıflar min width olarak oluşturulacak)
+
 ## 2023.09.28
 
 ### Eklenenler

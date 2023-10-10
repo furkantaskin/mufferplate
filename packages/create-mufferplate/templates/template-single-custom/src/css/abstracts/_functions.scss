@@ -1,0 +1,9 @@
+@use "sass:math";
+
+@function strip-units($number){
+  @return math.div($number, ($number * 0 + 1));
+}
+@function calculate_padding($aw, $ah){
+  $result: math.div(strip-units($ah), strip-units($aw)) * 100%;
+  @return $result;
+}

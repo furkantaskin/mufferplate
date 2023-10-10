@@ -2,7 +2,7 @@
 @use 'sass:math';
 @use 'sass:list';
 @use 'sass:meta';
-/*! Generated custom framework from mixture of Bootstrap and Tailwind !*/
+// Generated custom framework from mixture of Bootstrap and Tailwind
 
 // Variables
 $grid-breakpoints: (
@@ -12,7 +12,6 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px,
   xxl: 1400px,
-  de: 1600px
 );
 
 $container-max-widths: (
@@ -21,13 +20,12 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
-  de: 1410px
 );
 
 $grid-gutter: 15px;
 $number-of-col: 12;
 $is-mobile-first: false;
-$container-no-padding: true;
+$container-no-padding: false;
 
 $utilities: (
   'display': (
@@ -146,16 +144,26 @@ $utilities: (
   width: 100%;
 }
 
-.pseudo-absolute{
+%pseudo-absolute {
+  position: absolute;
+  content: '';
+}
+.after-absolute {
   position: relative;
-  &::before{
-    content: '';
-    position: absolute;
+  &::after {
+    @extend %pseudo-absolute;
   }
-  &::after{
-    content: '';
-    position: absolute;
+}
+
+.before-absolute {
+  position: relative;
+  &::before {
+    @extend %pseudo-absolute;
   }
+}
+
+.rounded-corner{
+  border-radius: 999px;
 }
 
 // Functions
@@ -220,7 +228,7 @@ $utilities: (
         @each $property, $map in $utilities {
           @each $util-key, $util-val in map.get($map, values) {
             .#{$key}\:#{$util-key} {
-              #{$property}: $util-val;
+              #{map.get($map, property)}: $util-val;
             }
           }
         }
@@ -234,7 +242,7 @@ $utilities: (
         @each $property, $map in $utilities {
           @each $util-key, $util-val in map.get($map, values) {
             .#{list.nth($previous-key, 1)}\:#{$util-key} {
-              #{$property}: $util-val;
+              #{map.get($map, property)}: $util-val;
             }
           }
         }
@@ -257,10 +265,10 @@ $utilities: (
 
     // Width height start
     @for $i from 0 through 4 {
-      .w-#{$key}-#{$i*25} {
+      .w-#{$i*25} {
         width: generate-width($i, 4);
       }
-      .h-#{$key}-#{$i*25} {
+      .h-#{$i*25} {
         height: generate-width($i, 4);
       }
     }
@@ -270,7 +278,7 @@ $utilities: (
     @each $property, $map in $utilities {
       @each $util-key, $util-val in map.get($map, values) {
         .#{$util-key} {
-          #{$property}: $util-val;
+          #{map.get($map, property)}: $util-val;
         }
       }
     }

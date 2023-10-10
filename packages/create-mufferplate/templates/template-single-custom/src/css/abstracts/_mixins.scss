@@ -1,0 +1,157 @@
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:map';
+@use 'functions' as f;
+
+@mixin mask-parameters($size: contain, $position: center, $repeat: no-repeat, $image: null) {
+  -webkit-mask-size: $size;
+  mask-size: $size;
+  -webkit-mask-repeat: $repeat;
+  mask-repeat: $repeat;
+  -webkit-mask-position: $position;
+  mask-position: $position;
+  @if ($image) {
+    -webkit-mask-image: url($image);
+    mask-image: url($image);
+  }
+}
+
+@mixin background(
+  $repeat: no-repeat,
+  $position: center,
+  $size: contain,
+  $image: null
+) {
+  @if ($image) {
+    background: $repeat $position/$size url($image);
+  }
+  @else {
+    background: $repeat $position/$size;
+  }
+}
+
+$breakpoints: (
+  xs: 575,
+  sm: 767,
+  md: 991,
+  lg: 1199,
+  xl: 1399,
+  xxl: 1600,
+  wqhd: 2200,
+  uwqhd: 3440,
+);
+
+@mixin responsive($max-width, $min-width: -1) {
+  $max: map.get($breakpoints, $max-width);
+  $min: if($min-width == -1, -1, map.get($breakpoints, $min-width));
+  @if $max == null or ($min-width != -1 and $min == null) {
+    @warn "#{$max-width} or #{$min-width} does not exist. Please check your breakpoints";
+  } @else {
+    @if $max < $min {
+      @warn "Max width cannot be lower than min width. Did you mean @include responsive(#{$max-width}, #{$min-width})?";
+    } @else {
+      @media screen and (min-width: #{$min + 1}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin bs_responsive($min_width) {
+  @media screen and (min-width: #{$min-width + 1}px) {
+    @content;
+  }
+}
+
+@mixin no_hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin get_transition(
+  $transition: (
+    all: 0.3s,
+  )
+) {
+  $final_list: map.merge($final_list, (#{&}: $transition)) !global;
+}
+
+@mixin calc_ar($w, $h, $has_child: false) {
+  @supports (aspect-ratio: 1/1) {
+    aspect-ratio: list.slash(f.strip-units($w), f.strip-units($h));
+  }
+  @supports not (aspect-ratio: 1/1) {
+    padding-bottom: #{f.calculate_padding($w, $h)};
+    @content;
+  }
+  @if $has_child {
+    position: relative;
+    & > .ar-child {
+      @include pos_abs(0, 0, 0, 0);
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@mixin call_template($template) {
+  @if $template == 'noscroll' {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  } @else if $template == 'noarrow' {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+@mixin pos_abs($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  position: absolute;
+  @supports (inset: 0) {
+    inset: $top $right $bottom $left;
+  }
+  @supports not (inset: 0) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+}
+
+@mixin is_gap($row_gap: 0, $col_gap: 0) {
+  @supports (
+    gap: (
+      $row_gap * 1px,
+    )
+    (
+      $col_gap * 1px,
+    )
+  ) {
+    gap: ($row_gap * 1px) ($col_gap * 1px);
+  }
+  @supports not (
+    gap: (
+      $row_gap * 1px,
+    )
+    (
+      $col_gap * 1px,
+    )
+  ) {
+    @content;
+  }
+}
+
+@mixin get_font(
+  $font_weight: 500,
+  $font_size: 16px,
+  $line_height: 1
+) {
+  font-weight: #{$font_weight};
+  font-size: #{$font_size};
+  line-height: #{$line_height};
+}

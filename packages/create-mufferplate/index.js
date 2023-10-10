@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const kolorist = require('kolorist');
 
-const { magenta, lightCyan, green, blue, red, reset, cyan } =
+const { magenta, yellow, green, lightBlue, red, reset, cyan } =
   kolorist;
 
 function isEmpty(path) {
@@ -34,24 +34,29 @@ const templates = [
   {
     name: 'single',
     display: 'Single Output (Single CSS and Single JS Output)',
-    color: green,
+    color: lightBlue,
     variants: [
       {
         name: 'single-tw',
         display: 'Tailwind',
-        color: lightCyan,
+        color: cyan,
       },
       {
         name: 'single-bs',
         display: 'Bootstrap',
         color: magenta,
       },
+      {
+        name: 'single-custom',
+        display: "Custom Utilities (Mixture of Tailwind utilities and Bootstrap grid. Visit repo wiki for supported classes)",
+        color: green
+      }
     ],
   },
   {
     name: 'multi',
-    display: 'Multiple Output (Multiple CSS and Multiple JS Output)',
-    color: blue,
+    display: 'Multiple Output (Multiple CSS and Multiple JS Output. Using Bootstrap as default)',
+    color: yellow,
   },
 ];
 
