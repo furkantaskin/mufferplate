@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const kolorist = require('kolorist');
 
-const { magenta, yellow, green, lightBlue, red, reset, cyan } =
+const { magenta, lightGreen, green, lightBlue, red, reset, cyan } =
   kolorist;
 
 function isEmpty(path) {
@@ -56,7 +56,7 @@ const templates = [
   {
     name: 'multi',
     display: 'Multiple Output (Multiple CSS and Multiple JS Output. Using Bootstrap as default)',
-    color: yellow,
+    color: lightGreen,
   },
 ];
 

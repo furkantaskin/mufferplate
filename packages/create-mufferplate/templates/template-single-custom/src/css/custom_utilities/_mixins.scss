@@ -1,0 +1,5 @@
+@mixin generate_container_up($get_key) {
+    @media screen and (min-width: map.get($grid-breakpoints, $get_key)) {
+      @content;
+    }
+  }

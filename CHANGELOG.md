@@ -4,6 +4,16 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.23.0
+
+### Eklenenler
+
+- Özel yapı için `text-align` özelliğine `start` ve `end` değerleri de eklendi.
+
+### Değişenler
+
+- `flex-direction` özelliğindeki `col` ve `col-reverse` değerleri `column` ve `column-reverse` olarak güncellendi.
+
 ## v1.22.0
 
 ### Değişenler

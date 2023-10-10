@@ -21,6 +21,7 @@
     "esbuild": "^0.19.4",
     "eslint": "^8.50.0",
     "fs-extra": "^11.1.1",
+    "lightningcss": "^1.22.0",
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
@@ -31,7 +32,7 @@
     "sass": "sass --color --watch --embed-source-map src/css/main.scss:theme/assets/css/main.css --load-path=src/css",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
     "dev": "concurrently --names \"Sass,esbuild\" -c \"bgMagenta.bold,bgYellow.bold\" --kill-others \"npm run sass\" \"node mufferplate.js development\"",
-    "build": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/main.css && node mufferplate.js production",
+    "build": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/main.css && lightningcss --minify --bundle theme/assets/css/main.css -o theme/assets/css/main.css && node mufferplate.js production ",
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
@@ -53,11 +54,9 @@
     ">= 0.5%",
     "last 2 major versions",
     "not dead",
-    "Chrome >= 60",
-    "Firefox >= 60",
-    "Firefox ESR",
-    "iOS >= 12",
-    "Safari >= 12",
-    "not Explorer <= 11"
+    "Chrome >= 100",
+    "Firefox >= 100",
+    "iOS >= 15",
+    "Safari >= 15"
   ]
 }

@@ -1,0 +1,135 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:meta';
+
+@import 'normalizer';
+@import 'variables';
+@import 'initials';
+@import 'functions';
+@import 'mixins';
+
+@each $key, $val in $grid-breakpoints {
+  @if $val != 0 {
+    @media screen and (min-width: #{$val}) {
+      // Responsive columns and order start
+      @for $i from 1 through $number-of-col {
+        .col-#{$key}-#{$i} {
+          width: generate-width($i, $number-of-col);
+        }
+        .order-#{$key}-#{$i} {
+          order: $i;
+        }
+        @if $i != $number-of-col {
+          .offset-#{$key}-#{$i} {
+            margin-left: generate-width($i, $number-of-col);
+          }
+        }
+      }
+      // Responsive columns and order end
+
+      // Responsive width height start
+      @for $i from 0 through 4 {
+        .w-#{$key}-#{$i*25} {
+          width: generate-width($i, 4);
+        }
+        .h-#{$key}-#{$i*25} {
+          height: generate-width($i, 4);
+        }
+      }
+      // Responive width height end
+      @if $is-mobile-first == true {
+        // Responsive utilities start
+        @each $property, $map in $utilities {
+          @each $util-key, $util-val in map.get($map, values) {
+            .#{$key}\:#{$util-key} {
+              #{map.get($map, property)}: $util-val;
+            }
+          }
+        }
+        // Responsive utilities end
+      }
+    }
+    @if $is-mobile-first == false {
+      $current-index: list.index($grid-breakpoints, ($key $val));
+      $previous-key: list.nth($grid-breakpoints, $current-index - 1);
+      @media screen and (max-width: #{$val - 1}) {
+        @each $property, $map in $utilities {
+          @each $util-key, $util-val in map.get($map, values) {
+            .#{list.nth($previous-key, 1)}\:#{$util-key} {
+              #{map.get($map, property)}: $util-val;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Columns and order start
+@for $i from 1 through $number-of-col {
+  .col-#{$i} {
+    width: generate-width($i, $number-of-col);
+  }
+  .offset-#{$i} {
+    margin-left: generate-width($i, $number-of-col);
+  }
+  .order-#{$i} {
+    order: $i;
+  }
+}
+// Columns and order end
+
+// Width height start
+@for $i from 0 through 4 {
+  .w-#{$i*25} {
+    width: generate-width($i, 4);
+  }
+  .h-#{$i*25} {
+    height: generate-width($i, 4);
+  }
+}
+// Width end
+
+// Utilities start
+@each $property, $map in $utilities {
+  @each $util-key, $util-val in map.get($map, values) {
+    .#{$util-key} {
+      #{map.get($map, property)}: $util-val;
+    }
+  }
+}
+// Utilities end
+
+// Colors start
+@each $color_code, $color_value in $color_map{
+    .text-#{$color_code}{
+        color: #{$color_value}
+    }
+    .bg-#{$color_code}{
+        background-color: #{$color_value}
+    }
+}
+
+// Container Generator
+@each $key, $val in $container-max-widths {
+  .container-#{$key} {
+    @extend .container-fluid;
+  }
+  @include generate_container_up($key) {
+    %get-container-#{$key} {
+      max-width: $val;
+    }
+    $extend-container: true;
+    @each $break-key, $break-val in $grid-breakpoints {
+      @if ($extend-container) {
+        .container#{breakpoint-infix($break-key, $grid-breakpoints)} {
+          @extend %get-container-#{$key};
+        }
+        @if ($key == $break-key) {
+          $extend-container: false;
+        }
+      }
+    }
+  }
+}

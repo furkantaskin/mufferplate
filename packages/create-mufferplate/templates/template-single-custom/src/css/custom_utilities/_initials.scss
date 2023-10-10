@@ -1,0 +1,48 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 #{$grid-gutter * (-1)};
+}
+
+*[class^='col-'] {
+  flex: 0 0 auto;
+  padding: 0 $grid-gutter;
+  width: 100%;
+}
+
+%pseudo-absolute {
+  position: absolute;
+  content: '';
+}
+
+@import '../../../node_modules/pers-sign/css/module';
+.after-absolute {
+  position: relative;
+  &::after {
+    @extend %pseudo-absolute;
+  }
+}
+
+.before-absolute {
+  position: relative;
+  &::before {
+    @extend %pseudo-absolute;
+  }
+}
+
+.rounded-corner {
+  border-radius: 999px;
+}
+
+.container-fluid,
+.container {
+  width: 100%;
+  padding: {
+    left: if($container-no-padding, 0px, $grid-gutter);
+    right: if($container-no-padding, 0px, $grid-gutter);
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}

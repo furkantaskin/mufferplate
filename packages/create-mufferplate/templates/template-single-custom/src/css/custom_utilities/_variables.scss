@@ -1,0 +1,130 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+$grid-gutter: 15px;
+$number-of-col: 12;
+$is-mobile-first: false;
+$container-no-padding: false;
+
+
+
+
+$utilities: (
+  'display': (
+    property: display,
+    values: (
+      block: block,
+      flex: flex,
+      inline-block: inline-block,
+      inline-flex: inline-flex,
+      hidden: none,
+    ),
+  ),
+  'position': (
+    property: position,
+    values: (
+      relative: relative,
+      absolute: absolute,
+      fixed: fixed,
+    ),
+  ),
+  'align': (
+    property: align-items,
+    values: (
+      items-start: flex-start,
+      items-end: flex-end,
+      items-center: center,
+      items-baseline: baseline,
+      items-stretch: stretch,
+    ),
+  ),
+  'justify': (
+    property: justify-content,
+    values: (
+      justify-normal: normal,
+      justify-start: start,
+      justify-end: end,
+      justify-center: center,
+      justify-between: space-between,
+    ),
+  ),
+  'flex-direction': (
+    property: flex-direction,
+    values: (
+      flex-row: row,
+      flex-row-reverse: row-reverse,
+      flex-col: column,
+      flex-col-reverse: column-reverse,
+    ),
+  ),
+  'flex-wrap': (
+    property: flex-wrap,
+    values: (
+      flex-wrap: wrap,
+      flex-wrap-reverse: wrap-reverse,
+      flex-nowrap: nowrap,
+    ),
+  ),
+  'text-align': (
+    property: text-align,
+    values: (
+      text-left: left,
+      text-center: center,
+      text-right: right,
+      text-justify: justify,
+      text-start: start,
+      text-end: end
+    ),
+  ),
+  'font-weight': (
+    property: font-weight,
+    values: (
+      font-thin: 100,
+      font-extralight: 200,
+      font-light: 300,
+      font-regular: 400,
+      font-medium: 500,
+      font-semibold: 600,
+      font-bold: 700,
+      font-extrabold: 800,
+      font-black: 900,
+    ),
+  ),
+  'object-fit': (
+    property: object-fit,
+    values: (
+      object-contain: contain,
+      object-cover: cover,
+      object-fill: fill,
+      object-none: none,
+    ),
+  ),
+  'object-position': (
+    property: object-position,
+    values: (
+      object-center: center,
+      object-top: top,
+      object-bottom: bottom,
+      object-left: left,
+      object-right: right,
+      object-left-top: left top,
+      object-right-top: right top,
+      object-right-bottom: right bottom,
+      object-left-bottom: left bottom,
+    ),
+  ),
+);
