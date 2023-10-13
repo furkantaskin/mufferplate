@@ -4,6 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.25.1
+
+### Düzeltmeler
+
+- SCSS yapısı kullanan şablonlarda mobil görünümü sağlıklı çalıştırmak için `responsive` mixin yerine `max_responsive` kullanıldı ve mobil görünüm 991 piksele kadar görünecek şekilde güncellendi.
+
 ## v1.25.0
 
 ### Eklenenler
