@@ -4,6 +4,19 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.25.0
+
+### Eklenenler
+
+- Desktop-first mantığını sağlamak için yeni `max_responsive` mixini eklendi. Bu sayede masaüstünden mobile doğru ilerlenebilir. Buradaki breakpointler _mixins.scss içindeki `$breakpoints` değişkeninde tanımlı alanları baz almaktadır. Özel genişlik için genişliği piksel yazıdktan sonra `$custom:true` parametresi ile göndermek yeterlidir. (Örnek `@include max_responsive(1999px, $custom:true)`)
+
+
+### Değişenler
+
+- Responsive mixinlerden piksel ifadeleri kaldırılıp breakpointlere taşındı.
+- xxl breakpoint için genişlik 1600 pikselden 1599 piksele güncellendi
+- Mobil görünüm için gereken genişlik 991 piksel olacak şekilde güncellendi.
+
 ## v1.24.0
 
 ### Değişenler
