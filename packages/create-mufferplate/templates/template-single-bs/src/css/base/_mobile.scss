@@ -3,7 +3,7 @@
   display: none;
 }
 
-@include responsive(xs) {
+@include responsive(md) {
   .header_lg {
     display: none;
   }

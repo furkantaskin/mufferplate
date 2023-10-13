@@ -5,7 +5,7 @@
   display: none;
 }
 
-@include m.responsive(xs) {
+@include m.max_responsive(md) {
   .header_lg {
     display: none;
   }
