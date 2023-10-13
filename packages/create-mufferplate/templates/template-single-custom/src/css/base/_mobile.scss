@@ -3,7 +3,7 @@
   display: none;
 }
 
-@include responsive(md) {
+@include max_responsive(md) {
   .header_lg {
     display: none;
   }
