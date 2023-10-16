@@ -20,12 +20,10 @@ $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
 
-
-
-
 $utilities: (
   'display': (
     property: display,
+    isActive: true,
     values: (
       block: block,
       flex: flex,
@@ -36,6 +34,7 @@ $utilities: (
   ),
   'position': (
     property: position,
+    isActive: true,
     values: (
       relative: relative,
       absolute: absolute,
@@ -44,6 +43,7 @@ $utilities: (
   ),
   'align': (
     property: align-items,
+    isActive: true,
     values: (
       items-start: flex-start,
       items-end: flex-end,
@@ -54,6 +54,7 @@ $utilities: (
   ),
   'justify': (
     property: justify-content,
+    isActive: true,
     values: (
       justify-normal: normal,
       justify-start: start,
@@ -64,6 +65,7 @@ $utilities: (
   ),
   'flex-direction': (
     property: flex-direction,
+    isActive: true,
     values: (
       flex-row: row,
       flex-row-reverse: row-reverse,
@@ -73,6 +75,7 @@ $utilities: (
   ),
   'flex-wrap': (
     property: flex-wrap,
+    isActive: true,
     values: (
       flex-wrap: wrap,
       flex-wrap-reverse: wrap-reverse,
@@ -81,17 +84,19 @@ $utilities: (
   ),
   'text-align': (
     property: text-align,
+    isActive: true,
     values: (
       text-left: left,
       text-center: center,
       text-right: right,
       text-justify: justify,
       text-start: start,
-      text-end: end
+      text-end: end,
     ),
   ),
   'font-weight': (
     property: font-weight,
+    isActive: true,
     values: (
       font-thin: 100,
       font-extralight: 200,
@@ -106,6 +111,7 @@ $utilities: (
   ),
   'object-fit': (
     property: object-fit,
+    isActive: true,
     values: (
       object-contain: contain,
       object-cover: cover,
@@ -115,6 +121,7 @@ $utilities: (
   ),
   'object-position': (
     property: object-position,
+    isActive: true,
     values: (
       object-center: center,
       object-top: top,

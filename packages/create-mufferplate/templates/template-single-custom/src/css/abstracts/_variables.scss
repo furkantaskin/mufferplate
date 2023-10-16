@@ -8,9 +8,4 @@ $color_map: (
 );
 
 
-$primary: map.get($color_map, primary);
-$secondary: map.get($color_map, secondary);
-$light: map.get($color_map, light);
-$dark: map.get($color_map, dark);
-
 $final_list: ();

@@ -19,3 +19,9 @@ ul{
 *:focus {
   outline: none;
 }
+
+:root{
+  @each $key, $color in $color-map{
+    --color-#{$key}: #{$color};
+  }
+}

@@ -9,58 +9,134 @@
 @import 'functions';
 @import 'mixins';
 
-@each $key, $val in $grid-breakpoints {
-  @if $val != 0 {
+
+@each $property, $map in $utilities {
+  @each $util-key, $util-val in map.get($map, values) {
+    @if (map.get($map, isActive) == true) {
+      .#{$util-key} {
+        #{map.get($map, property)}: $util-val;
+      }
+    }
+  }
+}
+
+@if $is-mobile-first == true {
+  @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
       // Responsive columns and order start
       @for $i from 1 through $number-of-col {
         .col-#{$key}-#{$i} {
           width: generate-width($i, $number-of-col);
         }
-        .order-#{$key}-#{$i} {
-          order: $i;
-        }
         @if $i != $number-of-col {
           .offset-#{$key}-#{$i} {
             margin-left: generate-width($i, $number-of-col);
           }
         }
+        // Responsive Order and Z-Index Start
+        .#{$key}\:order-#{$i} {
+          order: $i;
+        }
+        .#{$key}\:z-#{$i} {
+          z-index: $i;
+        }
+        // Responsive Order and Z-Index End
       }
       // Responsive columns and order end
 
-      // Responsive width height start
-      @for $i from 0 through 4 {
-        .w-#{$key}-#{$i*25} {
-          width: generate-width($i, 4);
-        }
-        .h-#{$key}-#{$i*25} {
-          height: generate-width($i, 4);
-        }
-      }
-      // Responive width height end
-      @if $is-mobile-first == true {
-        // Responsive utilities start
-        @each $property, $map in $utilities {
+      // Responsive utilities start
+      @each $property, $map in $utilities {
+        @if (map.get($map, isActive) == true) {
           @each $util-key, $util-val in map.get($map, values) {
             .#{$key}\:#{$util-key} {
               #{map.get($map, property)}: $util-val;
             }
           }
         }
-        // Responsive utilities end
       }
+      // Responsive utilities end
+
+      // Responsive width height start
+      @for $i from 0 through 4 {
+        .#{$key}\:w-#{$i*25} {
+          width: generate-width($i, 4);
+        }
+        .#{$key}\:h-#{$i*25} {
+          height: generate-width($i, 4);
+        }
+      }
+      .#{$key}\:w-screen {
+        width: 100vw;
+      }
+      .#{$key}\:h-screen {
+        height: 100vh;
+      }
+      .#{$key}\:w-auto {
+        width: auto;
+      }
+      .#{$key}\:h-auto {
+        height: auto;
+      }
+      // Responive width height end
     }
-    @if $is-mobile-first == false {
-      $current-index: list.index($grid-breakpoints, ($key $val));
-      $previous-key: list.nth($grid-breakpoints, $current-index - 1);
-      @media screen and (max-width: #{$val - 1}) {
+  }
+} @else {
+  $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
+  @each $key, $val in $reverse-grid-breakpoints {
+    $current-index: list.index(
+      $reverse-grid-breakpoints,
+      ($key $val)
+    );
+    @if $current-index != 1 {
+      $previous-key: $key;
+      $previous-val: list.nth(
+        list.nth($reverse-grid-breakpoints, $current-index - 1),
+        2
+      );
+      @media screen and (max-width: #{$previous-val - 1}) {
         @each $property, $map in $utilities {
-          @each $util-key, $util-val in map.get($map, values) {
-            .#{list.nth($previous-key, 1)}\:#{$util-key} {
-              #{map.get($map, property)}: $util-val;
+          @if (map.get($map, isActive) == true) {
+            @each $util-key, $util-val in map.get($map, values) {
+              .#{list.nth($previous-key, 1)}\:#{$util-key} {
+                #{map.get($map, property)}: $util-val;
+              }
             }
           }
         }
+
+        // Responsive Order and Z-Index Start
+        @for $i from 0 through 12 {
+          .#{list.nth($previous-key, 1)}\:order-#{$i} {
+            order: $i;
+          }
+          .#{list.nth($previous-key, 1)}\:z-#{$i} {
+            z-index: $i;
+          }
+        }
+        // Responsive Order and Z-Index End
+
+        // Responsive width height start
+        @for $i from 0 through 4 {
+          .#{list.nth($previous-key, 1)}\:w-#{$i*25} {
+            width: generate-width($i, 4);
+          }
+          .#{list.nth($previous-key, 1)}\:h-#{$i*25} {
+            height: generate-width($i, 4);
+          }
+        }
+        .#{list.nth($previous-key, 1)}\:w-screen {
+          width: 100vw;
+        }
+        .#{list.nth($previous-key, 1)}\:h-screen {
+          height: 100vh;
+        }
+        .#{list.nth($previous-key, 1)}\:w-auto {
+          width: auto;
+        }
+        .#{list.nth($previous-key, 1)}\:h-auto {
+          height: auto;
+        }
+        // Responive width height end
       }
     }
   }
@@ -89,26 +165,33 @@
     height: generate-width($i, 4);
   }
 }
+
+.w-auto {
+  width: auto;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.h-screen {
+  height: 100vh;
+}
 // Width end
 
-// Utilities start
-@each $property, $map in $utilities {
-  @each $util-key, $util-val in map.get($map, values) {
-    .#{$util-key} {
-      #{map.get($map, property)}: $util-val;
-    }
-  }
-}
-// Utilities end
 
 // Colors start
-@each $color_code, $color_value in $color_map{
-    .text-#{$color_code}{
-        color: #{$color_value}
-    }
-    .bg-#{$color_code}{
-        background-color: #{$color_value}
-    }
+@each $color_code, $color_value in $color_map {
+  .text-#{$color_code} {
+    color: #{$color_value};
+  }
+  .bg-#{$color_code} {
+    background-color: #{$color_value};
+  }
 }
 
 // Container Generator

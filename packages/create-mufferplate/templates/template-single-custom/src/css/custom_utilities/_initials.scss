@@ -16,16 +16,18 @@
 }
 
 @import '../../../node_modules/pers-sign/css/module';
-.after-absolute {
+.has-absolute {
   position: relative;
-  &::after {
+}
+
+.after-absolute{
+  &::after{
     @extend %pseudo-absolute;
   }
 }
 
-.before-absolute {
-  position: relative;
-  &::before {
+.before-absolute{
+  &::before{
     @extend %pseudo-absolute;
   }
 }
