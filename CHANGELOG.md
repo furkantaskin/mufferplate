@@ -4,6 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.26.0
+
+### Eklenenler
+
+- SCSS şemaları için GLightbox kütüphanesi eklendi.
+
 ## v1.25.1
 
 ### Düzeltmeler
