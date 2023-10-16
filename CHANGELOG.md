@@ -4,7 +4,13 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
-## v.27.2
+## v1.28.0
+
+### Eklenenler
+
+- `user-select` ve `pointer-events` özellikleri eklendi
+
+## v1.27.2
 
 ### Düzeltmeler
 
