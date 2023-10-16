@@ -4,6 +4,25 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v1.27.1
+
+### Değişenler
+
+- Renkler artık CSS değişkeni olarak oluşturulmakta. Artık renkler tek tek elle `$primary, $secondary` yerine direkt olarak ana kaynağa eklenip `var(--color-primary)` şeklinde çağrılabilir.
+
+## v1.27.0
+
+### Eklenenler
+
+- Utility sınıfları için `isActive` opsiyonu eklendi. Bu sayede istenmeyen sınıflarda `isActive: false` yapılarak CSS üretilmesi engellenecektir.
+
+### Değişenler
+
+- Renkler için SCSS değişkeni oluşturucu sağlandı.
+- Utility sınıflarında yanlış dizimden kaynaklı override sorunu giderildi.
+- Utility sınıfları için mobile first veya desktop first durumları için breakpoint oluşturma sırası güncellendi.
+- Width, z-index ve order için oluşturma kısımları düzenlendi
+
 ## v1.26.0
 
 ### Eklenenler
@@ -20,8 +39,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Eklenenler
 
-- Desktop-first mantığını sağlamak için yeni `max_responsive` mixini eklendi. Bu sayede masaüstünden mobile doğru ilerlenebilir. Buradaki breakpointler _mixins.scss içindeki `$breakpoints` değişkeninde tanımlı alanları baz almaktadır. Özel genişlik için genişliği piksel yazıdktan sonra `$custom:true` parametresi ile göndermek yeterlidir. (Örnek `@include max_responsive(1999px, $custom:true)`)
-
+- Desktop-first mantığını sağlamak için yeni `max_responsive` mixini eklendi. Bu sayede masaüstünden mobile doğru ilerlenebilir. Buradaki breakpointler \_mixins.scss içindeki `$breakpoints` değişkeninde tanımlı alanları baz almaktadır. Özel genişlik için genişliği piksel yazıdktan sonra `$custom:true` parametresi ile göndermek yeterlidir. (Örnek `@include max_responsive(1999px, $custom:true)`)
 
 ### Değişenler
 
@@ -94,13 +112,13 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - **Yeni npm komutu!** Artık git reposu clone edilmek yerine npm kullanılarak proje çağrılabilir. Bu kısımda tek çıktılı veya çok çıktılı olma durumlarına göre kullanıcıya seçenekler sunulacaktır. Bootstrap için tek ve çok sayfalı çıktılar sunulurken Tailwind için tek sayfalı çıktıda çalışmakta. `npx create-mufferplate@latest` komutu ile istenilen yapı seçilebilir.
 
-- Bootstrap'ın kendi yapısındaki breakpointlere göre responsive hazırlanması için `bs_responsive()` şeklinde yeni mixin eklendi. 
+- Bootstrap'ın kendi yapısındaki breakpointlere göre responsive hazırlanması için `bs_responsive()` şeklinde yeni mixin eklendi.
 - Mobildeki hover sorununu çözmek için `no_hover()` mixin'i eklendi. Bu mixin içine hover durumundaki özellikler yazılırsa mobilde gösterilmeyecek.
 - Transition işleminde eğer kullaıcı `prefer-reduced-motion` altında siteyi geziyorsa transition tanımlanan işlemlerde animasyon oynatılmayacak.
 
 ### Değişenler
-- `call_template()` mixin'indeki transition işlemi artık yeni mixin içinde yapılıyor. `get_transition()` ile Ttransition işlemlerinde `$dur` ve `$prop` parametreleri ile hangi efektin hangi sürede uygulanacağı gösterilebilir. İleri dönemde çoklu prop için çalışmalar ypaılacak.
 
+- `call_template()` mixin'indeki transition işlemi artık yeni mixin içinde yapılıyor. `get_transition()` ile Ttransition işlemlerinde `$dur` ve `$prop` parametreleri ile hangi efektin hangi sürede uygulanacağı gösterilebilir. İleri dönemde çoklu prop için çalışmalar ypaılacak.
 
 ## 2023.08.01
 
@@ -139,7 +157,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Eklenenler
 
 - Blaze Slider eklendi. Bazı temel slide işlemleri için Swiper kullanmak kaynak dosyalarda yüke sebep oluyordu. Temel işlemlerde daha yüksek hız için artık Blaze kullanılabilir.
-- Otomatik SVG çağırma fonksiyonu için class argümanı eklendi. Bu  sayede çağırılan svg elemente isteğe göre class eklenebilecek.
+- Otomatik SVG çağırma fonksiyonu için class argümanı eklendi. Bu sayede çağırılan svg elemente isteğe göre class eklenebilecek.
 
 ### Değişenler
 
@@ -156,6 +174,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Değişenler
 
 - Sprite içindeki SVG'yi çağırmak için gereken `getViewBox` fonksiyonunun ismi `getSprite` olarak güncellendi.
+
 ## 2023.05.05
 
 ### Değişenler
@@ -167,13 +186,15 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ## 2023.04.27
 
 ### Eklenenler
-- Sprite içinden SVG çağırırken yaşanan karmaşıklık giderildi. Artık sisteme basit bir fonksiyon gönderilerek svg elementi html içinde viewBox değeri ile birlikte otomatik olarak oluşturulabilir. Sistem, argüman olarak gönderilen id değerini sprite içindeki symbol elementlerde arayacak ve bulması durumunda viewbox değeri ile birlikte otomatik olarak svg ile use elementi döndürülecektir. Bunun için tek satırlık bir kod yeterlidir. 
 
-```php 
+- Sprite içinden SVG çağırırken yaşanan karmaşıklık giderildi. Artık sisteme basit bir fonksiyon gönderilerek svg elementi html içinde viewBox değeri ile birlikte otomatik olarak oluşturulabilir. Sistem, argüman olarak gönderilen id değerini sprite içindeki symbol elementlerde arayacak ve bulması durumunda viewbox değeri ile birlikte otomatik olarak svg ile use elementi döndürülecektir. Bunun için tek satırlık bir kod yeterlidir.
+
+```php
 <?=getViewBox("angle_left")?>
 ```
 
 ### Değişenler
+
 - Projenin adresi çekilirken projenin adını manuel olarak boilerplate yerine proje adı olarak değiştirmek yerine projenin kurulu olduğu dizine yönlenecek şekilde güncellendi. Artık header içinde domain kısmının elle güncellenmesine gerek duyulmuyor.
 
 ## 2023.04.16
@@ -194,11 +215,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Otomatik olarak anchor elementlere title eklemek için fonksiyonu oluşturuldu. Bu fonksiyon direkt olarak anchor elementin içinde herhangi bir metin varsa bu içeriği title olarak ekleyecektir. Eğer yoksa title oluşturmayacaktır. Örnek olarak
 
 ```html
-<a href="#">Deneme içerik</a> <!-- Bu element için title değeri Deneme içerik olacaktır -->
+<a href="#">Deneme içerik</a>
+<!-- Bu element için title değeri Deneme içerik olacaktır -->
 
-<a href="#"><img src="https://www.foobar.com"> </a> <!-- Bu element için title değeri oluşturulmayacaktır -->
+<a href="#"><img src="https://www.foobar.com" /> </a>
+<!-- Bu element için title değeri oluşturulmayacaktır -->
 ```
-
 
 ## 2023.04.14
 
@@ -216,20 +238,20 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ```scss
 @include get_font(700, 18px, 1.2);
 ```
+
 şeklinde bir kullanım yapılabilir.
 
 ### Değişenler
 
-- esbuild için bilgilendirme renkleri güncellendi. Artık ilk başlangıçta sarı renk ile çalışma ortamını bilgilendirirken her bir derleme aşamasının başlangıcını turkuaz renk ile yazmakta. 
+- esbuild için bilgilendirme renkleri güncellendi. Artık ilk başlangıçta sarı renk ile çalışma ortamını bilgilendirirken her bir derleme aşamasının başlangıcını turkuaz renk ile yazmakta.
 - `ul` elementi için bullet markerlar kaldırıldı.
-
 
 ## 2023.04.12
 
 ### Eklenenler
 
 - Artık npm içinde iki ayrı komut çalıştırma yerine tek komut çalıştırma özelliği getirildi. `npm run dev` ve `npm run build` komutları ile esbuild ve sass işlemleri yapılabilir. dev ve build parametreleri ile sass ve esbuild'in sırasıyla dev ve production durumlarındaki çalışma durumları etknileştirilebilir.
-- esbuild için cli parametreleri eklendi. Artık `node esbuild.config.js production` şeklinde ikinci ortam durumu gönderilebilir. Eğer yoksa .env dosyası içinde bulunan `NODE_ENV` değişkeni kullanılacaktır.	Eğer o da yoksa varsayılan olarak development değeri atanacaktır. 
+- esbuild için cli parametreleri eklendi. Artık `node esbuild.config.js production` şeklinde ikinci ortam durumu gönderilebilir. Eğer yoksa .env dosyası içinde bulunan `NODE_ENV` değişkeni kullanılacaktır. Eğer o da yoksa varsayılan olarak development değeri atanacaktır.
 
 ### Düzeltmeler
 
@@ -251,9 +273,11 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ## 2023.04.06
 
 ### Eklenenler
+
 - Opsiyon olarak pnpm eklendi.
 
 ### Düzeltmeler
+
 - esbuild içinde kapanmayan ANSI code sorunu giderildi. Terminalde yaşanan renk taşma sorunu kaldırıldı.
 
 ## 2023.03.16
