@@ -88,7 +88,6 @@
       ($key $val)
     );
     @if $current-index != 1 {
-      $previous-key: $key;
       $previous-val: list.nth(
         list.nth($reverse-grid-breakpoints, $current-index - 1),
         2
@@ -97,19 +96,18 @@
         @each $property, $map in $utilities {
           @if (map.get($map, isActive) == true) {
             @each $util-key, $util-val in map.get($map, values) {
-              .#{list.nth($previous-key, 1)}\:#{$util-key} {
+              .#{list.nth($key, 1)}\:#{$util-key} {
                 #{map.get($map, property)}: $util-val;
               }
             }
           }
         }
-
         // Responsive Order and Z-Index Start
         @for $i from 0 through 12 {
-          .#{list.nth($previous-key, 1)}\:order-#{$i} {
+          .#{list.nth($key, 1)}\:order-#{$i} {
             order: $i;
           }
-          .#{list.nth($previous-key, 1)}\:z-#{$i} {
+          .#{list.nth($key, 1)}\:z-#{$i} {
             z-index: $i;
           }
         }
@@ -117,23 +115,23 @@
 
         // Responsive width height start
         @for $i from 0 through 4 {
-          .#{list.nth($previous-key, 1)}\:w-#{$i*25} {
+          .#{list.nth($key, 1)}\:w-#{$i*25} {
             width: generate-width($i, 4);
           }
-          .#{list.nth($previous-key, 1)}\:h-#{$i*25} {
+          .#{list.nth($key, 1)}\:h-#{$i*25} {
             height: generate-width($i, 4);
           }
         }
-        .#{list.nth($previous-key, 1)}\:w-screen {
+        .#{list.nth($key, 1)}\:w-screen {
           width: 100vw;
         }
-        .#{list.nth($previous-key, 1)}\:h-screen {
+        .#{list.nth($key, 1)}\:h-screen {
           height: 100vh;
         }
-        .#{list.nth($previous-key, 1)}\:w-auto {
+        .#{list.nth($key, 1)}\:w-auto {
           width: auto;
         }
-        .#{list.nth($previous-key, 1)}\:h-auto {
+        .#{list.nth($key, 1)}\:h-auto {
           height: auto;
         }
         // Responive width height end
@@ -192,6 +190,9 @@
   }
   .bg-#{$color_code} {
     background-color: var(--color-#{$color_code});
+  }
+  .fill-#{$color_code}{
+    fill: var(--color-#{$color_code});
   }
 }
 

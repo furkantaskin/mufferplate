@@ -35,7 +35,7 @@
     @each $selector, $transition in $final_list {
       #{$selector} {
         $transition_properties: ();
-  
+ 
         @each $prop, $dur in $transition {
           $transition_properties: list.append(
             $transition_properties,

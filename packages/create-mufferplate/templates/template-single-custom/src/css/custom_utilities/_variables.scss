@@ -134,4 +134,22 @@ $utilities: (
       object-left-bottom: left bottom,
     ),
   ),
+  'user-select': (
+    property: user-select,
+    isActive: true,
+    values: (
+      select-none: none,
+      select-text: text,
+      select-all: all,
+      select-auto: auto
+    ),
+  ),
+  'pointer-events': (
+    property: pointer-events,
+    isActive: true,
+    values: (
+      pointer-events-none: none,
+      pointer-events: auto
+    ),
+  ),
 );
