@@ -4,6 +4,13 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Artık npm sürümüne göre sürümleme yapılacaktır.
 
+## v.27.2
+
+### Düzeltmeler
+
+- CSS değişkenlerinde yaşanan isimlendirme hatası giderildi.
+
+
 ## v1.27.1
 
 ### Değişenler
