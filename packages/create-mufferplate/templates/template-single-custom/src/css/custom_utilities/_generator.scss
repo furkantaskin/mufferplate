@@ -187,12 +187,13 @@
 // Colors start
 @each $color_code, $color_value in $color_map {
   .text-#{$color_code} {
-    color: #{$color_value};
+    color: var(--color-#{$color_value});
   }
   .bg-#{$color_code} {
-    background-color: #{$color_value};
+    background-color: var(--color-#{$color_value});
   }
 }
+// Colors end
 
 // Container Generator
 @each $key, $val in $container-max-widths {
