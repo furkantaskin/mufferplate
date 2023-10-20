@@ -2,7 +2,10 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
-- Artık npm sürümüne göre sürümleme yapılacaktır.
+## 2023.10.20
+
+- Artık mufferplate bir npm script haline getirildi. Özel config dosyası ile çağrılabilir.
+- Create mufferplate içindeki templatelerde script güncellemesi yapıldı.
 
 ## v1.28.0
 
