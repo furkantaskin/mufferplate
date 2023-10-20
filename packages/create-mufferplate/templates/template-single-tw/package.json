@@ -9,7 +9,7 @@
   "dependencies": {
     "blaze-slider": "^1.9.3",
     "photoswipe": "^5.4.0",
-    "swiper": "^10.2.0"
+    "swiper": "^10.2.0",
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
@@ -24,13 +24,16 @@
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "sass": "^1.68.0",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "mufferplate": "^0.9.0"
   },
   "scripts": {
-    "esbuild": "node mufferplate.js",
-    "tw": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
-    "dev": "concurrently --names \"Tailwind,esbuild\" -c \"bgCyan.bold,bgYellow.bold\" --kill-others \"npm run tw\" \"node mufferplate.js development\"",
-    "build": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production && node mufferplate.js production",
+    "dev-js": "mufferplate dev",
+    "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development,
+    "build-js": "mufferplate build",
+    "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
+    "build": "npm run build-css && npm run build-js",
+    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {

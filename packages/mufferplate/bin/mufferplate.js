@@ -8,6 +8,22 @@ import path from "node:path"
 import {performance} from "node:perf_hooks"
 
 
+/**
+ * Configuration object for Mufferplate.
+ * @typedef {Object} MufferplateConfig
+ * @property {string[]} entryPoints - Array of entry points.
+ * @property {boolean} bundle - Whether to bundle the code.
+ * @property {boolean} color - Whether to use color.
+ * @property {('error' | 'warning' | 'info')} logLevel - The log level.
+ * @property {boolean} treeShaking - Whether to perform tree shaking.
+ * @property {(false | 'inline')} sourcemap - Whether to generate sourcemaps.
+ * @property {string} outdir - The output directory.
+ * @property {boolean} minify - Whether to minify the code.
+ * @property {boolean} splitting - Whether to perform code splitting.
+ * @property {string} chunkNames - The naming pattern for chunks.
+ * @property {Array} plugins - An array of plugins.
+ */
+
 
 /** @type {Array<string>} */
 const CONFIG_FILE_LIST = [

@@ -1,11 +1,12 @@
 {
   "name": "mufferplate",
-  "version": "0.6.0",
+  "version": "0.9.0",
   "type": "module",
   "description": "Custom PHP boilerplate with the power of esbuild",
   "bin": {
     "mufferplate": "bin/mufferplate.js"
   },
+  "types": "./bin/index.d.ts",
   "author": "Furkan Taşkın",
   "license": "MIT",
   "dependencies": {
