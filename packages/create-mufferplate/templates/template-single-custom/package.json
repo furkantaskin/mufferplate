@@ -35,7 +35,7 @@
     "dev-css": "sass --color --watch --embed-source-map src/css/main.scss:theme/assets/css/main.css --load-path=src/css",
     "build-js": "mufferplate build",
     "build-css": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/main.css",
-    "build": "npm run build-css && npm run build-js",
+    "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
     "bundle": "npm run build && node bundlephp.cjs"

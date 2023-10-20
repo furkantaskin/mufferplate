@@ -32,7 +32,7 @@
     "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development,
     "build-js": "mufferplate build",
     "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
-    "build": "npm run build-css && npm run build-js",
+    "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "bundle": "npm run build && node bundlephp.cjs"
   },
