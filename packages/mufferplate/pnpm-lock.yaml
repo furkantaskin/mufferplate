@@ -8,6 +8,9 @@ dependencies:
   esbuild:
     specifier: ^0.18.16
     version: 0.18.16
+  kolorist:
+    specifier: ^1.8.0
+    version: 1.8.0
 
 packages:
 
@@ -237,4 +240,8 @@ packages:
       '@esbuild/win32-arm64': 0.18.16
       '@esbuild/win32-ia32': 0.18.16
       '@esbuild/win32-x64': 0.18.16
+    dev: false
+
+  /kolorist@1.8.0:
+    resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
     dev: false

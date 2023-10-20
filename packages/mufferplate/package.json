@@ -1,6 +1,6 @@
 {
   "name": "mufferplate",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "type": "module",
   "description": "Custom PHP boilerplate with the power of esbuild",
   "bin": {
@@ -9,6 +9,7 @@
   "author": "Furkan Taşkın",
   "license": "MIT",
   "dependencies": {
-    "esbuild": "^0.18.16"
+    "esbuild": "^0.18.16",
+    "kolorist": "^1.8.0"
   }
 }
