@@ -143,7 +143,7 @@ function mergeFiles(filePaths = null) {
         console.log(lightYellow("[warning]    No entry points detected, it will read src/js directory"))
     }
 
-    if(!customConfig.outDir && !customConfig.dev?.outDir && !customConfig.build?.outDir){
+    if(!customConfig.outdir && !customConfig.dev?.outdir && !customConfig.build?.outdir){
         console.log(lightYellow("[warning]    No output directory detected, it will generate the output to theme/assets/js directory"))
     }
 
@@ -156,7 +156,7 @@ function mergeFiles(filePaths = null) {
         logLevel: 'warning',
         treeShaking: customConfig.dev?.treeShaking ?? customConfig.treeShaking ?? true,
         sourcemap: customConfig.dev?.sourcemap ?? customConfig.sourcemap ?? 'inline',
-        outdir: customConfig.dev?.outDir ?? customConfig.outDir ?? 'theme/assets/js',
+        outdir: customConfig.dev?.outdir ?? customConfig.outdir ?? 'theme/assets/js',
         minify: customConfig.dev?.minify ?? customConfig.minify ?? false,
         splitting: customConfig.dev?.splitting ? false : customConfig.splitting ?? false,
         chunkNames: `${customConfig.chunkDir ?? 'chunks'}/[name]-[hash]`,
@@ -170,7 +170,7 @@ function mergeFiles(filePaths = null) {
         logLevel: 'warning',
         treeShaking: customConfig.build?.treeShaking ?? customConfig.treeShaking ?? true,
         sourcemap: customConfig.build?.sourcemap ?? customConfig.sourcemap ?? false,
-        outdir: customConfig.build?.outDir ?? customConfig.dev?.outDir ?? customConfig.outDir ?? 'theme/assets/js',
+        outdir: customConfig.build?.outdir ?? customConfig.dev?.outdir ?? customConfig.outdir ?? 'theme/assets/js',
         minify: customConfig.build?.minify ?? customConfig.minify ?? true,
         splitting: customConfig.build?.splitting ? false : customConfig.splitting ?? false,
         chunkNames: `${customConfig.chunkDir ?? 'chunks'}/[name]-[hash]`,

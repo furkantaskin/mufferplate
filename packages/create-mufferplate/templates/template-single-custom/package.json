@@ -23,7 +23,7 @@
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "sass": "^1.68.0",
-    "mufferplate": "^0.11.1"
+    "mufferplate": "^0.11.2"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
