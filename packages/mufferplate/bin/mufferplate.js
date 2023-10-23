@@ -174,15 +174,15 @@ function mergeFiles(filePaths = null) {
         minify: customConfig.build?.minify ?? customConfig.minify ?? true,
         splitting: customConfig.build?.splitting ? false : customConfig.splitting ?? false,
         chunkNames: `${customConfig.chunkDir ?? 'chunks'}/[name]-[hash]`,
-        banner: {
-          js: customConfig.signed ?? `/*! Made with mufferplate !*/`
-        },
         plugins: [buildPlugin],
     }
 
     if (watchConfig.splitting) watchConfig.format = "esm"
     if (buildConfig.splitting) buildConfig.format = "esm"
-    if (customConfig.signed) buildConfig.inject = ['./node_modules/mufferplate/bin/signature.js']
+    if (customConfig.signed) {
+      buildConfig.inject = ['./node_modules/mufferplate/bin/signature.js']
+      buildConfig.banner.js = '/*! Made with mufferplate !*/'
+    }
 
     !isExist && console.log(lightYellow("No config file detected. Running under default configuration"));
 
