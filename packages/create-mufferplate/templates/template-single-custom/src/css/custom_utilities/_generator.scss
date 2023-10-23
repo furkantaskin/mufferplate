@@ -182,8 +182,15 @@
 // Width end
 
 
-
 // Colors start
+
+$default_colors: (
+  "white": #fff,
+  "transparent": transparent,
+  "black": #000
+);
+
+$color_map: map.merge($color_map, $default_colors);
 @each $color_code, $color_value in $color_map {
   .text-#{$color_code} {
     color: var(--color-#{$color_code});
