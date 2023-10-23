@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.23
+
+### Eklenenler
+
+- Signature fonksiyonu mufferplate içine eklendi.
+- Templateler içinden API fonksiyonu kaldırıldı.
+
 ## 2023.10.20
 
 - Artık mufferplate bir npm script haline getirildi. Özel config dosyası ile çağrılabilir.
