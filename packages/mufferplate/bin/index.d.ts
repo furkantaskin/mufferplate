@@ -3,13 +3,14 @@ interface configOptions{
     color: boolean,
     logLevel: 'error' | 'warning' | 'info',
     sourcemap: false | 'inline',
-    splitting: true,
+    splitting: boolean,
     minify: boolean,
     chunkNames: string,
     plugins: Array<any>,
     entryPoints: Array<string>,
     outdir: string,
     treeshaking: boolean,
+    signed: boolean,
 }
 export declare interface MufferConfig extends configOptions{
     dev: Partial<configOptions>,

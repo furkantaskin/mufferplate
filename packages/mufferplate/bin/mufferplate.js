@@ -8,22 +8,6 @@ import path from "node:path"
 import {performance} from "node:perf_hooks"
 
 
-/**
- * Configuration object for Mufferplate.
- * @typedef {Object} MufferplateConfig
- * @property {string[]} entryPoints - Array of entry points.
- * @property {boolean} bundle - Whether to bundle the code.
- * @property {boolean} color - Whether to use color.
- * @property {('error' | 'warning' | 'info')} logLevel - The log level.
- * @property {boolean} treeShaking - Whether to perform tree shaking.
- * @property {(false | 'inline')} sourcemap - Whether to generate sourcemaps.
- * @property {string} outdir - The output directory.
- * @property {boolean} minify - Whether to minify the code.
- * @property {boolean} splitting - Whether to perform code splitting.
- * @property {string} chunkNames - The naming pattern for chunks.
- * @property {Array} plugins - An array of plugins.
- */
-
 
 /** @type {Array<string>} */
 const CONFIG_FILE_LIST = [
@@ -38,8 +22,6 @@ const CONFIG_FILE_LIST = [
 /** @type {string} */
 const ROOT_DIR = process.cwd()
 
-const DEFAULT_SOURCE_DIR = "src/js";
-const DEFAULT_OUTPUT_DIR = "theme/assets/js"
 
 /** @type {string} */
 let getEnv = "";
@@ -52,7 +34,6 @@ let customConfig = {};
 let getPath = "";
 
 let startTime;
-let lastChangedFile = "";
 async function readConfig(){
     for(const filename of CONFIG_FILE_LIST){
         getPath = path.resolve(ROOT_DIR, filename);
@@ -148,7 +129,6 @@ function mergeFiles(filePaths = null) {
       return newMap;
 
         }
-      // let files = filePaths !== null && getDir !== "" ? filePaths : fs.readdirSync(path.resolve(ROOT_DIR, DEFAULT_SOURCE_DIR)).filter(file => path.extname(file) === ".js");
   
     } catch (err) {
       console.log(red(`[error]   Caught error on getting directory information. Error: ${err}`, err));
@@ -158,7 +138,6 @@ function mergeFiles(filePaths = null) {
 
 (async () => {
     await readConfig();
-    // console.log(customConfig, ROOT_DIR);
 
     if(!customConfig.entryPoints && !customConfig.dev?.entryPoints && !customConfig.build?.entryPoints){
         console.log(lightYellow("[warning]    No entry points detected, it will read src/js directory"))
@@ -195,11 +174,15 @@ function mergeFiles(filePaths = null) {
         minify: customConfig.build?.minify ?? customConfig.minify ?? true,
         splitting: customConfig.build?.splitting ? false : customConfig.splitting ?? false,
         chunkNames: `${customConfig.chunkDir ?? 'chunks'}/[name]-[hash]`,
+        banner: {
+          js: customConfig.signed ?? `/*! Made with mufferplate !*/`
+        },
         plugins: [buildPlugin],
     }
 
     if (watchConfig.splitting) watchConfig.format = "esm"
     if (buildConfig.splitting) buildConfig.format = "esm"
+    if (customConfig.signed) buildConfig.inject = ['./node_modules/mufferplate/bin/signature.js']
 
     !isExist && console.log(lightYellow("No config file detected. Running under default configuration"));
 
@@ -210,7 +193,6 @@ function mergeFiles(filePaths = null) {
       } else {
         buildConfig.entryPoints = mergeFiles(customConfig.build?.entryPoints ?? customConfig.dev?.entryPoints ?? customConfig.entryPoints ?? "src/js");
         await esbuild.build(buildConfig);
-
 
         let fileCounter = 0;
         let getFile = fs.readdirSync(path.join(ROOT_DIR, buildConfig.outdir));
