@@ -11,6 +11,7 @@ const postcssConfig = {
     purgecss({
       content: ['./theme/**/*.php', './theme/**/*.js'],
       safelist: [],
+      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     }),
   ],
 };
