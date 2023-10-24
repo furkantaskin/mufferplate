@@ -2,6 +2,18 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.24
+
+### Eklenenler
+
+- Custom utility için PostCSS konfigürasyonu güncellendi. Artık Tailwind benzeri responsive seçiciler son durumda silinmiyor.
+
+### Düzeltmeler 
+
+- mufferplate içindeki outdir tanımlama hatası giderildi.
+- mufferplate içindeki js içine yorum satırı ekleme konfigürasyonundaki hata giderildi
+- signature tanımlamasındaki konfigürasyon hatası giderildi. Kullanıcı signature seçeneğini açması durumunda otomatik olarak sabit yorum eklenecek
+
 ## 2023.10.23
 
 ### Eklenenler
