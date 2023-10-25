@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.25
+
+### Eklenenler
+
+- Custom utility için boşluk sınıfları eklendi. Tailwind takip edilerk margin, padding değerleri, pozisyon değerleri verilebilir. Ayrıca opacity ve font size için de sınıflar eklendi.
+
 ## 2023.10.24
 
 ### Eklenenler
