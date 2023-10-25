@@ -36,7 +36,7 @@
     "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "postcss": "postcss --no-map --verbose theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
-    "lightningcss": "lightningcss --minify --bundle --browserslist .\theme\assets\css\main.css -o .\theme\assets\css\main.css"
+    "lightningcss": "lightningcss --minify --bundle --browserslist ./theme/assets/css/main.css -o ./theme/assets/css/main.css",
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
