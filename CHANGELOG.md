@@ -7,6 +7,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Eklenenler
 
 - Custom utility için boşluk sınıfları eklendi. Tailwind takip edilerk margin, padding değerleri, pozisyon değerleri verilebilir. Ayrıca opacity, flex ve font size için de sınıflar eklendi.
+- Custom utiity içine CSS küçültme için LightningCSS eklendi. `npm run lightningcss` komutu ile çalıştırılabilir.
 
 ## 2023.10.24
 
