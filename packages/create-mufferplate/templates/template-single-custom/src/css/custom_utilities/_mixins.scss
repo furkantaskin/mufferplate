@@ -68,6 +68,9 @@
       .#{if($has-key, '#{$has-key}\\:p', 'p')}#{$key}-#{$i} {
         padding-#{$direction}: #{$i * $spacer};
       }
+      .#{if($has-key, '#{$has-key}\\:', '')}#{$direction}-#{$i} {
+        #{$direction}: #{$i * 4%};
+      }
     }
     .#{if($has-key, '#{$has-key}\\:', '')}gap-x-#{$i} {
       column-gap: #{$i * $spacer};
