@@ -26,13 +26,13 @@ include "components/svg-sprite.php";
 
 <body>
 
-    <header class="header_lg">
+    <header class="header_lg block md:hidden">
         <div class="container">
             <nav aria-label="Main menu" id="main-nav"></nav>
         </div>
     </header>
 
-    <header class="header_sm">
+    <header class="header_sm relative hidden md:block bg-primary z-5">
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -40,18 +40,18 @@ include "components/svg-sprite.php";
                         <img src="<?= domain ?>assets/img/svg/logo.svg" alt="">
                     </a>
                 </div>
-                <div class="col-6">
-                    <div class="menuButton d-flex a-c">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <div class="col-6 flex items-center">
+                    <div class="menuButton bg-primary relative flex flex-col items-center justify-between">
+                        <span class="block w-100"></span>
+                        <span class="block w-100 absolute"></span>
+                        <span class="block w-100"></span>
+                        <span class="block w-100"></span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="mobileMenu">
+    <div class="mobileMenu hidden md:block fixed w-screen h-screen z-4 bg-primary">
         <nav aria-label="Mobile menu" id="nav-mobile-1"></nav>
     </div>
