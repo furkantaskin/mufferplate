@@ -9,78 +9,31 @@
 @import 'functions';
 @import 'mixins';
 
-
-@each $property, $map in $utilities {
-  @each $util-key, $util-val in map.get($map, values) {
-    @if (map.get($map, isActive) == true) {
-      .#{$util-key} {
-        #{map.get($map, property)}: $util-val;
-      }
-    }
-  }
-}
+@include generate_utilities();
+@include generate_cols();
+@include generate_spacing();
+@include generate_font_size();
+@include generate_opacity();
 
 @if $is-mobile-first == true {
   @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
-      // Responsive columns and order start
-      @for $i from 1 through $number-of-col {
-        .col-#{$key}-#{$i} {
-          width: generate-width($i, $number-of-col);
-        }
-        @if $i != $number-of-col {
-          .offset-#{$key}-#{$i} {
-            margin-left: generate-width($i, $number-of-col);
-          }
-        }
-        // Responsive Order and Z-Index Start
-        .#{$key}\:order-#{$i} {
-          order: $i;
-        }
-        .#{$key}\:z-#{$i} {
-          z-index: $i;
-        }
-        // Responsive Order and Z-Index End
-      }
-      // Responsive columns and order end
-
-      // Responsive utilities start
-      @each $property, $map in $utilities {
-        @if (map.get($map, isActive) == true) {
-          @each $util-key, $util-val in map.get($map, values) {
-            .#{$key}\:#{$util-key} {
-              #{map.get($map, property)}: $util-val;
-            }
-          }
-        }
-      }
-      // Responsive utilities end
-
-      // Responsive width height start
-      @for $i from 0 through 4 {
-        .#{$key}\:w-#{$i*25} {
-          width: generate-width($i, 4);
-        }
-        .#{$key}\:h-#{$i*25} {
-          height: generate-width($i, 4);
-        }
-      }
-      .#{$key}\:w-screen {
-        width: 100vw;
-      }
-      .#{$key}\:h-screen {
-        height: 100vh;
-      }
-      .#{$key}\:w-auto {
-        width: auto;
-      }
-      .#{$key}\:h-auto {
-        height: auto;
-      }
-      // Responive width height end
+      
+      @include generate_cols($key);
+      @include generate_utilities($key);
+      @include generate_spacing($key);
+      @include generate_font_size($key);
+      @include generate_opacity($key);
     }
   }
 } @else {
+  @each $key, $val in $grid-breakpoints {
+    @if $val != 0 {
+      @media screen and (min-width: #{$val}) {
+        @include generate_cols($key);
+      }
+    }
+  }
   $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
   @each $key, $val in $reverse-grid-breakpoints {
     $current-index: list.index(
@@ -92,105 +45,25 @@
         list.nth($reverse-grid-breakpoints, $current-index - 1),
         2
       );
+      $cur-key: list.nth($key, 1);
       @media screen and (max-width: #{$previous-val - 1}) {
-        @each $property, $map in $utilities {
-          @if (map.get($map, isActive) == true) {
-            @each $util-key, $util-val in map.get($map, values) {
-              .#{list.nth($key, 1)}\:#{$util-key} {
-                #{map.get($map, property)}: $util-val;
-              }
-            }
-          }
-        }
-        // Responsive Order and Z-Index Start
-        @for $i from 0 through 12 {
-          .#{list.nth($key, 1)}\:order-#{$i} {
-            order: $i;
-          }
-          .#{list.nth($key, 1)}\:z-#{$i} {
-            z-index: $i;
-          }
-        }
-        // Responsive Order and Z-Index End
-
-        // Responsive width height start
-        @for $i from 0 through 4 {
-          .#{list.nth($key, 1)}\:w-#{$i*25} {
-            width: generate-width($i, 4);
-          }
-          .#{list.nth($key, 1)}\:h-#{$i*25} {
-            height: generate-width($i, 4);
-          }
-        }
-        .#{list.nth($key, 1)}\:w-screen {
-          width: 100vw;
-        }
-        .#{list.nth($key, 1)}\:h-screen {
-          height: 100vh;
-        }
-        .#{list.nth($key, 1)}\:w-auto {
-          width: auto;
-        }
-        .#{list.nth($key, 1)}\:h-auto {
-          height: auto;
-        }
-        // Responive width height end
+        @include generate_utilities($cur-key);
+        @include generate_spacing($cur-key);
+        @include generate_font_size($cur-key);
+        @include generate_opacity($cur-key);
       }
     }
   }
 }
 
-// Columns and order start
-@for $i from 1 through $number-of-col {
-  .col-#{$i} {
-    width: generate-width($i, $number-of-col);
-  }
-  .offset-#{$i} {
-    margin-left: generate-width($i, $number-of-col);
-  }
-  .order-#{$i} {
-    order: $i;
-  }
-}
-// Columns and order end
-
-// Width height start
-@for $i from 0 through 4 {
-  .w-#{$i*25} {
-    width: generate-width($i, 4);
-  }
-  .h-#{$i*25} {
-    height: generate-width($i, 4);
-  }
-}
-
-.w-auto {
-  width: auto;
-}
-
-.h-auto {
-  height: auto;
-}
-
-.w-screen {
-  width: 100vw;
-}
-
-.h-screen {
-  height: 100vh;
-}
-// Width end
-
-
-// Colors start
-
 $default_colors: (
-  "white": #fff,
-  "transparent": transparent,
-  "black": #000
+  'white': #fff,
+  'transparent': transparent,
+  'black': #000,
 );
 
 $color_map: map.merge($color_map, $default_colors);
+// Colors start
 @each $color_code, $color_value in $color_map {
   .text-#{$color_code} {
     color: var(--color-#{$color_code});
@@ -198,7 +71,7 @@ $color_map: map.merge($color_map, $default_colors);
   .bg-#{$color_code} {
     background-color: var(--color-#{$color_code});
   }
-  .fill-#{$color_code}{
+  .fill-#{$color_code} {
     fill: var(--color-#{$color_code});
   }
 }

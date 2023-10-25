@@ -15,10 +15,13 @@ $container-max-widths: (
   xxl: 1320px,
 );
 
-$grid-gutter: 15px;
+$grid-gutter: 12px;
 $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
+
+$spacer: 4px;
+$spacer-limit: 25;
 
 $utilities: (
   'display': (
@@ -141,7 +144,7 @@ $utilities: (
       select-none: none,
       select-text: text,
       select-all: all,
-      select-auto: auto
+      select-auto: auto,
     ),
   ),
   'pointer-events': (
@@ -149,7 +152,14 @@ $utilities: (
     isActive: true,
     values: (
       pointer-events-none: none,
-      pointer-events: auto
+      pointer-events-auto: auto,
     ),
   ),
+);
+
+$spacing-utilities: (
+  't': "top",
+  'r': "right",
+  "b": "bottom",
+  "l": "left",
 );
