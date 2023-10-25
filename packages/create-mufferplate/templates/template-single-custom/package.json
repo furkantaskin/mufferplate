@@ -21,6 +21,7 @@
     "cssnano": "^6.0.1",
     "postcss-sort-media-queries": "^5.2.0",
     "cssnano-preset-advanced": "^6.0.1",
+    "lightningcss-cli": "^1.22.0",
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
@@ -35,6 +36,7 @@
     "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "postcss": "postcss --no-map --verbose theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
+    "lightningcss": "lightningcss --minify --bundle --browserslist .\theme\assets\css\main.css -o .\theme\assets\css\main.css"
     "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
