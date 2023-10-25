@@ -1,4 +1,4 @@
-@function to-fixed($float, $digits: 4) {
+@function to-fixed($float, $digits: 5) {
     $sass-precision: 5;
   
     @if $digits > $sass-precision {
