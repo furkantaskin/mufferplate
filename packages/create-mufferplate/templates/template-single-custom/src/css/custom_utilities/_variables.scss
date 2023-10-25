@@ -19,6 +19,7 @@ $grid-gutter: 12px;
 $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
+$has-rtl: true;
 
 $spacer: 4px;
 $spacer-limit: 25;
@@ -172,4 +173,6 @@ $spacing-utilities: (
   'r': "right",
   "b": "bottom",
   "l": "left",
+  "s": "inline-start",
+  "e": "inline-end"
 );
