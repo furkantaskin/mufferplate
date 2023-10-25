@@ -10,11 +10,13 @@ const postcssConfig = {
       sort: 'desktop-first'
     }),
     cssnano({
-      preset: 'default',
+      preset: 'cssnano-preset-advanced',
     }),
     purgecss({
       content: ['./theme/**/*.php', './theme/**/*.js'],
       safelist: ['swiper-pagination-bullet'],
+      fontFace: true,
+      keyframes: true,
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     }),
   ],
