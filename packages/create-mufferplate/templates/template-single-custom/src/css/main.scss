@@ -8,14 +8,15 @@
 @import 'abstracts/mixins';
 @import 'abstracts/placeholders';
 
+/*! purgecss start ignore */
 // @import 'vendors/blaze-slider';
 // @import 'vendors/bootstrap';
 // @import 'vendors/photoswipe';
 // @import 'vendors/swiper';
 // @import 'vendors/glightbox';
+/*! purgecss end ignore */
 
 @import 'custom_utilities/generator';
-
 
 @import 'base/typography';
 @import 'base/base';
