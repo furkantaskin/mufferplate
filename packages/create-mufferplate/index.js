@@ -48,8 +48,8 @@ const templates = [
       },
       {
         name: 'single-custom',
-        display: "Custom Utilities (Mixture of Tailwind utilities and Bootstrap grid. Visit repo wiki for supported classes)",
-        color: green
+        display: "Mufferplate Utilities",
+        color: lightGreen
       }
     ],
   },
