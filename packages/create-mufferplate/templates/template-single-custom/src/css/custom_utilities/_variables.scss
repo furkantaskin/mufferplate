@@ -85,6 +85,16 @@ $utilities: (
       flex-nowrap: nowrap,
     ),
   ),
+  'flex-status': (
+    property: flex,
+    isActive: true,
+    values: (
+      flex-1: 1 1 0%,
+      flex-auto: 1 1 auto,
+      flex-initial: 0 1 auto,
+      flex-none: none
+    ),
+  ),
   'text-align': (
     property: text-align,
     isActive: true,
