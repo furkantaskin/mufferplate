@@ -14,16 +14,17 @@
 @include generate_spacing();
 @include generate_font_size();
 @include generate_opacity();
+@include generate_positions();
 
 @if $is-mobile-first == true {
   @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
-      
       @include generate_cols($key);
       @include generate_utilities($key);
       @include generate_spacing($key);
       @include generate_font_size($key);
       @include generate_opacity($key);
+      @include generate_positions($key);
     }
   }
 } @else {
@@ -51,6 +52,7 @@
         @include generate_spacing($cur-key);
         @include generate_font_size($cur-key);
         @include generate_opacity($cur-key);
+        @include generate_positions($cur-key);
       }
     }
   }

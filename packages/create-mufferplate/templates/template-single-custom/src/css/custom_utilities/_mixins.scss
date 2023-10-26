@@ -1,3 +1,7 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
 @mixin generate_container_up($get_key) {
   @media screen and (min-width: map.get($grid-breakpoints, $get_key)) {
     @content;
@@ -5,116 +9,155 @@
 }
 
 @mixin generate_utilities($has-key: false) {
+  $prefix: if($has-key, '#{$has-key}\\:', '');
   @each $property, $map in $utilities {
     @each $util-key, $util-val in map.get($map, values) {
       @if (map.get($map, isActive) == true) {
-        .#{if($has-key, '#{$has-key}\\:', '')}#{$util-key} {
+        .#{$prefix}#{$util-key} {
           #{map.get($map, property)}: $util-val;
         }
       }
     }
   }
   @for $i from 1 through $number-of-col {
-    .#{if($has-key, '#{$has-key}\\:', '')}z-#{$i} {
+    .#{$prefix}z-#{$i} {
       z-index: $i;
     }
-    .#{if($has-key, '#{$has-key}\\:', '')}order-#{$i} {
+    .#{$prefix}order-#{$i} {
       order: $i;
     }
   }
 
   @for $i from 0 through 4 {
-    .#{if($has-key, '#{$has-key}\\:', '')}w-#{$i * 25} {
+    .#{$prefix}w-#{$i * 25} {
       width: generate-width($i, 4);
     }
-    .#{if($has-key, '#{$has-key}\\:', '')}h-#{$i * 25} {
+    .#{$prefix}h-#{$i * 25} {
       height: generate-width($i, 4);
     }
   }
 
-  .#{if($has-key, '#{$has-key}\\:', '')}h-auto {
+  .#{$prefix}h-auto {
     height: auto;
   }
-  .#{if($has-key, '#{$has-key}\\:', '')}w-auto {
+  .#{$prefix}w-auto {
     width: auto;
   }
-  .#{if($has-key, '#{$has-key}\\:', '')}h-screen {
+  .#{$prefix}h-screen {
     height: 100vh;
   }
-  .#{if($has-key, '#{$has-key}\\:', '')}w-screen {
+  .#{$prefix}w-screen {
     width: 100vw;
   }
 }
 
 @mixin generate_cols($has-key: false) {
+  $prefix: if($has-key, '#{$has-key}-', '');
   @for $i from 1 through $number-of-col {
-    .col-#{if($has-key, '#{$has-key}-', '')}#{$i} {
+    .col-#{$prefix}#{$i} {
       width: generate-width($i, $number-of-col);
     }
     @if $i != $number-of-col {
-      .offset-#{if($has-key, '#{$has-key}-', '')}#{$i} {
+      .offset-#{$prefix}#{$i} {
         margin-left: generate-width($i, $number-of-col);
       }
     }
   }
 }
 
-@mixin generate_spacing($has-key: false) {
+@mixin generate_spacing($has-key: null) {
+  $prefix: if($has-key, '#{$has-key}\\:', '');
+
   @for $i from 0 through $spacer-limit {
+    .#{$prefix + 'm'}-#{$i}{
+      margin: #{$i * $spacer};
+    }
+    .#{$prefix + 'p'}-#{$i}{
+      padding: #{$i * $spacer};
+    }
     @each $key, $direction in $spacing-utilities {
-      .#{if($has-key, '#{$has-key}\\:m', 'm')}#{$key}-#{$i} {
+      .#{$prefix + 'm'}#{$key}-#{$i} {
         margin-#{$direction}: #{$i * $spacer};
       }
-      .#{if($has-key, '#{$has-key}\\:p', 'p')}#{$key}-#{$i} {
+      .#{$prefix + 'p'}#{$key}-#{$i} {
         padding-#{$direction}: #{$i * $spacer};
-      }
-      @if ($has-rtl == true) {
-        [dir=rtl] .#{if($has-key, '#{$has-key}\\:', '')}rtl\:m#{$key}-#{$i} {
-          margin-#{$direction}: #{$i * $spacer};
-        }
-        [dir=rtl] .#{if($has-key, '#{$has-key}\\:', '')}rtl\:p#{$key}-#{$i} {
-          padding-#{$direction}: #{$i * $spacer};
-        }
-      }
-      @if ($direction != 'inline-start' and $direction != 'inline-end') {
-        .#{if($has-key, '#{$has-key}\\:', '')}#{$direction}-#{$i} {
-          #{$direction}: #{$i * 4%};
-        }
       }
     }
 
     @each $axis in ('x', 'y') {
-      .#{if($has-key, '#{$has-key}\\:m', 'm')}#{$axis}-#{$i} {
-        margin: {
-          #{if($axis == 'x', 'left', 'top')}: #{$i * $spacer};
-          #{if($axis == 'x', 'right', 'bottom')}: #{$i * $spacer};
+      .#{$prefix + 'm'}#{$axis}-#{$i} {
+        @if ($has-rtl == true) {
+          margin: {
+            #{if($axis == 'x', 'inline-start', 'block-start')}: #{$i * $spacer};
+            #{if($axis == 'x', 'inline-end', 'block-end')}: #{$i * $spacer};
+          }
+        } @else {
+          margin: {
+            #{if($axis == 'x', 'left', 'top')}: #{$i * $spacer};
+            #{if($axis == 'x', 'right', 'bottom')}: #{$i * $spacer};
+          }
         }
       }
     }
-    .#{if($has-key, '#{$has-key}\\:', '')}gap-x-#{$i} {
+    .#{$prefix}gap-x-#{$i} {
       column-gap: #{$i * $spacer};
     }
-    .#{if($has-key, '#{$has-key}\\:', '')}gap-y-#{$i} {
+    .#{$prefix}gap-y-#{$i} {
       row-gap: #{$i * $spacer};
     }
-    .#{if($has-key, '#{$has-key}\\:', '')}gap-#{$i} {
+    .#{$prefix}gap-#{$i} {
       gap: #{$i * $spacer};
     }
   }
 }
 
+@mixin generate_positions($has-key: false){
+  $prefix: if($has-key, '#{$has-key}\\:', '');
+  @each $direction in $position-utilities{
+
+    @for $i from 0 through $spacer-limit{
+      .#{$prefix + $direction}-#{$i}{
+        #{$direction}: #{$i * 4%};
+      }
+      @if ($has-rtl == true){
+        @if ($direction == "right"){
+          #{'.' + $prefix + "rtl\\:" + $direction}-#{$i}{
+            #{$direction}: #{$i * 4%};
+          }
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $direction}-#{$i}{
+            right: unset;
+            left: #{$i * 4%};
+          }
+        }
+        @if ($direction == "left"){
+          #{'.' + $prefix + "rtl\\:" + $direction}-#{$i}{
+            #{$direction}: #{$i * 4%};
+          }
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $direction}-#{$i}{
+            left: unset;
+            right: #{$i * 4%};
+          }
+        }
+       
+      }
+    }
+  }
+}
+
 @mixin generate_font_size($has-key: false) {
+  $prefix: if($has-key, '#{$has-key}\\:', '');
   @for $i from 0 through $spacer-limit {
-    .#{if($has-key, '#{$has-key}\\:', '')}text-#{$i} {
+    .#{$prefix}text-#{$i} {
       font-size: #{$i * $spacer};
     }
   }
 }
 
 @mixin generate_opacity($has-key: false) {
+  $prefix: if($has-key, '#{$has-key}\\:', '');
   @for $i from 0 through 100 {
     @if $i % 10 == 0 {
-      .#{if($has-key, '#{$has-key}\\:', '')}opacity-#{$i} {
+      .#{$prefix}opacity-#{$i} {
         opacity: math.div($i, 100);
       }
     }

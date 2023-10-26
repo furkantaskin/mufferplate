@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -19,8 +21,9 @@ $grid-gutter: 12px;
 $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
-$has-rtl: true;
 
+$has-rtl: true;
+$spacing-utilities: ();
 $spacer: 4px;
 $spacer-limit: 25;
 
@@ -93,7 +96,7 @@ $utilities: (
       flex-1: 1 1 0%,
       flex-auto: 1 1 auto,
       flex-initial: 0 1 auto,
-      flex-none: none
+      flex-none: none,
     ),
   ),
   'text-align': (
@@ -168,11 +171,28 @@ $utilities: (
   ),
 );
 
-$spacing-utilities: (
-  't': "top",
-  'r': "right",
-  "b": "bottom",
-  "l": "left",
-  "s": "inline-start",
-  "e": "inline-end"
-);
+
+@if ($has-rtl) {
+  $spacing-utilities: map.merge(
+    $spacing-utilities, (
+      't': "block-start",
+      'b': "block-end",
+      'l': "inline-start",
+      'r': "inline-end"
+    )
+  );
+} @else {
+
+  $spacing-utilities: map.merge(
+    $spacing-utilities,
+    (
+      't': 'top',
+      'b': 'bottom',
+      'l': 'left',
+      'r': 'right',
+    )
+  );
+}
+
+$position-utilities: ('top', 'left', 'bottom', 'right');
+
