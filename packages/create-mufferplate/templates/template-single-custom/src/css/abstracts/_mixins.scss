@@ -1,17 +1,12 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use 'sass:map';
-@use 'functions' as f;
 
 @mixin mask-parameters($size: contain, $position: center, $repeat: no-repeat, $image: null) {
-  -webkit-mask-size: $size;
   mask-size: $size;
-  -webkit-mask-repeat: $repeat;
   mask-repeat: $repeat;
-  -webkit-mask-position: $position;
   mask-position: $position;
   @if ($image) {
-    -webkit-mask-image: url($image);
     mask-image: url($image);
   }
 }
@@ -31,34 +26,19 @@
 }
 
 $breakpoints: (
-  xs: 575px,
-  sm: 767px,
-  md: 991px,
-  lg: 1199px,
-  xl: 1399px,
-  xxl: 1599px,
+  xs: (0, 575px),
+  sm: (576px, 767px),
+  md: (768px, 991px),
+  lg: (992px, 1199px),
+  xl: (1200px, 1399px),
+  xxl: (1400px, 1599px),
   wqhd: 2200px,
   uwqhd: 3440px,
 );
 
-@mixin responsive($max-width, $min-width: -1) {
-  $max: map.get($breakpoints, $max-width);
-  $min: if($min-width == -1, -1, map.get($breakpoints, $min-width));
-  @if $max == null or ($min-width != -1 and $min == null) {
-    @warn "#{$max-width} or #{$min-width} does not exist. Please check your breakpoints";
-  } @else {
-    @if $max < $min {
-      @warn "Max width cannot be lower than min width. Did you mean @include responsive(#{$max-width}, #{$min-width})?";
-    } @else {
-      @media screen and (min-width: #{$min + 1}) and (max-width: #{$max}) {
-        @content;
-      }
-    }
-  }
-}
-
 @mixin max_responsive($max-width, $custom: false) {
   $max: map.get($breakpoints, $max-width);
+  $max-value: list.nth($max, -1);
 
   @if $max == null {
     @if $custom == false {
@@ -69,15 +49,28 @@ $breakpoints: (
       }
     }
   } @else {
-    @media screen and (max-width: #{$max}) {
+    @media screen and (max-width: #{$max-value}) {
       @content;
     }
   }
 }
 
-@mixin bs_responsive($min_width) {
-  @media screen and (min-width: #{$min-width + 1}px) {
-    @content;
+@mixin min_responsive($min-width, $custom: false){
+  $min: map.get($breakpoints, $min-width);
+  $min-value: list.nth($min, 1);
+
+  @if $min == null {
+    @if $custom == false {
+      @warn "#{$min-width} is not defined in breakpoints. Check your breakpoint or use it as @include min_responsive(#{$max-width}, $custom: true)";
+    } @else {
+      @media screen and (min-width: #{$min-width}) {
+        @content;
+      }
+    }
+  } @else {
+    @media screen and (min-width: #{$min-value}) {
+      @content;
+    }
   }
 }
 
@@ -97,24 +90,6 @@ $breakpoints: (
   $final_list: map.merge($final_list, (#{&}: $transition)) !global;
 }
 
-@mixin calc_ar($w, $h, $has_child: false) {
-  @supports (aspect-ratio: 1/1) {
-    aspect-ratio: list.slash(f.strip-units($w), f.strip-units($h));
-  }
-  @supports not (aspect-ratio: 1/1) {
-    padding-bottom: #{f.calculate_padding($w, $h)};
-    @content;
-  }
-  @if $has_child {
-    position: relative;
-    & > .ar-child {
-      @include pos_abs(0, 0, 0, 0);
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
 @mixin call_template($template) {
   @if $template == 'noscroll' {
     -ms-overflow-style: none;
@@ -125,42 +100,6 @@ $breakpoints: (
   } @else if $template == 'noarrow' {
     -webkit-appearance: none;
     -moz-appearance: none;
-  }
-}
-
-@mixin pos_abs($top: 0, $right: 0, $bottom: 0, $left: 0) {
-  position: absolute;
-  @supports (inset: 0) {
-    inset: $top $right $bottom $left;
-  }
-  @supports not (inset: 0) {
-    top: $top;
-    right: $right;
-    bottom: $bottom;
-    left: $left;
-  }
-}
-
-@mixin is_gap($row_gap: 0, $col_gap: 0) {
-  @supports (
-    gap: (
-      $row_gap * 1px,
-    )
-    (
-      $col_gap * 1px,
-    )
-  ) {
-    gap: ($row_gap * 1px) ($col_gap * 1px);
-  }
-  @supports not (
-    gap: (
-      $row_gap * 1px,
-    )
-    (
-      $col_gap * 1px,
-    )
-  ) {
-    @content;
   }
 }
 
