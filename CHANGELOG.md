@@ -2,6 +2,20 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.26
+
+### Eklenenler
+
+- Custom utility üzerinde aşağıdaki değişiklikler yapıldı.
+- top, right, bottom ve left değerleri için RTL desteği eklendi. Eğer `left-20` şeklinde değer gönderilirse yazım yönü fark etmeksizin element left kısımında %80 şeklinde konumlanacak. Ancak `ltr:left-20` şeklinde pozisyonlarda LTR modunda left için %80 ve RTL modunda ise right için %80 şeklinde konumlanacak.
+
+### Değişenler
+
+- `.has-absolute` sınıfı `relative` sınıfının varlığından dolayı kaldırıldı.
+- `base.scss` içindeki `box-sizing` tanımlaması kaldırıldı.
+- `body` elementi için `position` ve `font-family` tanımlamaları kaldırıldı.
+
+
 ## 2023.10.25
 
 ### Eklenenler
