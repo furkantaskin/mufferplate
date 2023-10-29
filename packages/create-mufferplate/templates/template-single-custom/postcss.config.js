@@ -17,7 +17,7 @@ const postcssConfig = {
       safelist: ['swiper-pagination-bullet'],
       fontFace: true,
       keyframes: true,
-      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+      defaultExtractor: (content) => content.match(/[\w-/:.-]+(?<!:)/g) || [],
     }),
   ],
 };
