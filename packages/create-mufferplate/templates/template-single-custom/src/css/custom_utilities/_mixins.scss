@@ -263,7 +263,7 @@
 @mixin generate_opacity($has-key: false) {
   $prefix: if($has-key, '#{$has-key}\\:', '');
   @for $i from 0 through 100 {
-    @if $i % 10 == 0 {
+    @if $i % 5 == 0 {
       .#{$prefix}opacity-#{$i} {
         opacity: math.div($i, 100);
       }
