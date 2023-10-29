@@ -175,7 +175,7 @@ function mergeFiles(filePaths = null) {
         splitting: customConfig.build?.splitting ? false : customConfig.splitting ?? false,
         chunkNames: `${customConfig.chunkDir ?? 'chunks'}/[name]-[hash]`,
         banner: {
-          js: customConfig.signed ? '/*! Made with mufferplate !*/' : ''
+          js: '/*!\n**********\nMade with mufferplate\nVisit: https://github.com/furkantaskin/mufferplate\n********** !*/'
         },
         plugins: [buildPlugin],
     }
