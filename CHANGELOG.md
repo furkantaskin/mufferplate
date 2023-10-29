@@ -4,10 +4,16 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.10.29
 
+☾⋆ CUMHURİYETİMİZİN 100. YILI KUTLU OLSUN. BU BAYRAĞIN ALTINDA VE VATAN TOPRAĞINDA BOL COMMITLI GÜNLERİ GÖRMEK UMUDUYLA ☾⋆
+
+### Eklenenler
+
+- `leading-none` sınıfı eklendi. Şu an için en sık kullanılan `line-height: 1` durumu için sınıf eklendi.
+
 ### Değişenler
 
 - Margin, padding ve gap sınıf hesaplamaları güncellendi. Artık `$spacer-limit` değeri ve `$spacer` değişkenlerine bağlı olarak Tailwind benzeri sınıflar oluşturmakta. Yani `mx-25` değeri left ve right için 100px değer verirken `-mt-3.5` değeri `margin-top: -14px` değerine karşılık gelmekte. Aynı durumlar padding için de geçerli. Gap için de `row-gap, column-gap` değerlerinde işlem yapılıyor.
-- Eski font yüksekliği oluşturma yapısı kaldırıldı. Artık Tailwind içindeki ile aynı sınıflar kullanılmakta.
+- Eski font yüksekliği oluşturma yapısı kaldırıldı. Artık Tailwind içindeki ile aynı sınıflar kullanılmakta. Burada `$font-rem` değerine göre rem veya piksel değeri almakta.
 - Pozisyonlar için negatif değerler eklendi. Artık her pozisyonun kendi negatif değeri ve piksel değeri var. Örneğin `top-25-px` değeri `top:100px` olarak gelirken `-bottom-10` değeri `bottom: -40px` olacak şekilde güncellendi. Bunlarda `$spacer` değerine göre güncelleme almakta.
 
 ### Düzeltmeler
