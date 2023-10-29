@@ -8,6 +8,153 @@
   }
 }
 
+/// @param {string} $spacing-prefix - Gets margin, padding or gap parameter
+/// @param {null|string} $get_prefix - Contains whether mixin will generate responsive selectors (md, xs etc) or not
+/// @param {number} $upper_boundary - Upper and lower limit to generate classes. The limit is $spacer-limit by default.  
+/// @return {null}
+
+// Generating padding and margin using tailwind-like spacing
+@mixin spacing_utility(
+  $spacing_prefix,
+  $get_prefix: null,
+  $upper_boundary: $spacer-limit
+) {
+  $prefix: if($get_prefix, '#{$get_prefix}\\:', '');
+  $spacing_map: ('m': 'margin', 'p': 'padding', 'g': 'gap');
+  $get_property: map.get($spacing_map, $spacing_prefix);
+
+  @if ($spacing_prefix == 'm' or '$spacing_prefx' == 'p'){
+    .#{$spacing-prefix}-auto{
+      #{$get-property}: auto;
+    }
+  }
+  
+  @for $i from ($spacer-limit * $spacer * -1) through ($spacer-limit * $spacer) {
+    $i: math.div($i, 1px);
+    $get_val: math.abs(math.div($i, math.div($spacer, 1px)));
+    $list_length: list.length(string.split(#{$get_val}, '.'));
+    $first_value: list.nth(string.split(#{$get_val}, '.'), 1);
+    $last_value: list.nth(string.split(#{$get_val}, '.'), -1);
+    $gen_selector: null;
+    $prop-prefix: if($i < 0, '-' + $spacing-prefix, $spacing-prefix);
+    $css_value: if(string.index($prop_prefix, '-') == 1 , $get_val * -1 * $spacer, $get_val * $spacer); 
+    
+      @if ($i % 2 == 0) {
+        @if ($spacing-prefix == 'm' or $spacing-prefix == 'p'){
+          @if ($i == 0){
+            .#{$prefix + $prop-prefix + '-' + $i} {
+              #{$get_property}: #{$css_value};
+            }
+            @each $key, $direction in $spacing-utilities{
+                .#{$prefix + $prop-prefix + $key + '-' + 'auto'} {
+                  #{$get_property + '-' + $direction}: auto;
+                }
+            }
+            @each $axis, $property in ('x': 'inline', 'y': 'block'){
+              .#{$prefix + $prop-prefix + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
+                @if ($has-rtl == true){
+                  #{$get_property}: {
+                    #{$property}: #{$css_value};
+                  }
+                } @else{
+                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: #{$css_value};
+                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: #{$css_value};
+                }
+              }
+              .#{$prefix + $prop-prefix + $axis + '-' + 'auto'} {
+                @if ($has-rtl == true){
+                  #{$get_property}: {
+                    #{$property}: auto;
+                  }
+                } @else{
+                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: auto;
+                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: auto;
+                }
+              }
+            }
+          } @else{
+            @each $key, $direction in $spacing-utilities{
+              .#{$prefix + $prop-prefix + $key + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
+                #{$get_property + '-' + $direction}: #{$css_value};
+              }
+            }
+            @each $axis, $property in ('x': 'inline', 'y': 'block'){
+              .#{$prefix + $prop-prefix + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
+                @if ($has-rtl == true){
+                  #{$get_property}: {
+                    #{$property}: #{$css_value};
+                  }
+                } @else{
+                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: #{$css_value};
+                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: #{$css_value};
+                }
+              }
+            }
+          }
+      } @if ($spacing_prefix == 'g') {
+          $prop-prefix: if($i < 0, '-' + $get_property, $get_property);
+        
+        .#{$prefix + $prop-prefix + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
+          #{$get_property}: #{$css_value};
+        }
+        @each $axis, $property in ('x': 'column', 'y': 'row'){
+          .#{$prefix + $prop-prefix + '-' + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
+            #{$property + '-' + $get_property}: #{$css_value}
+          }
+        }
+      } 
+    }
+    
+    
+  }
+}
+
+@mixin generate_margin($has-key: null){
+  @include spacing_utility('m', $get_prefix: $has-key);
+}
+
+@mixin generate_padding($has-key: null){
+  @include spacing_utility('p', $get_prefix: $has-key);
+}
+
+@mixin generate_gap($has-key:null){
+  @include spacing_utility('g', $get_prefix: $has-key);
+}
+
+@mixin generate_spacing($has-key: null) {
+  $prefix: if($has-key, '#{$has-key}\\:', '');
+
+  @for $i from 0 through $spacer-limit {
+    @each $axis in ('x', 'y') {
+      .#{$prefix + 'm'}#{$axis}-#{$i} {
+        @if ($has-rtl == true) {
+          margin: {
+            #{if($axis == 'x', 'inline-start', 'block-start')}: #{$i *
+              $spacer};
+            #{if($axis == 'x', 'inline-end', 'block-end')}: #{$i *
+              $spacer};
+          }
+        } @else {
+          margin: {
+            #{if($axis == 'x', 'left', 'top')}: #{$i * $spacer};
+            #{if($axis == 'x', 'right', 'bottom')}: #{$i * $spacer};
+          }
+        }
+      }
+    }
+    .#{$prefix}gap-x-#{$i} {
+      column-gap: #{$i * $spacer};
+    }
+    .#{$prefix}gap-y-#{$i} {
+      row-gap: #{$i * $spacer};
+    }
+    .#{$prefix}gap-#{$i} {
+      gap: #{$i * $spacer};
+    }
+  }
+}
+
+
 @mixin generate_utilities($has-key: false) {
   $prefix: if($has-key, '#{$has-key}\\:', '');
   @each $property, $map in $utilities {
@@ -19,7 +166,7 @@
       }
     }
   }
-  @for $i from 1 through $number-of-col {
+  @for $i from 0 through $number-of-col {
     .#{$prefix}z-#{$i} {
       z-index: $i;
     }
@@ -65,90 +212,50 @@
   }
 }
 
-@mixin generate_spacing($has-key: null) {
+
+
+@mixin generate_positions($has-key: false) {
   $prefix: if($has-key, '#{$has-key}\\:', '');
-
-  @for $i from 0 through $spacer-limit {
-    .#{$prefix + 'm'}-#{$i}{
-      margin: #{$i * $spacer};
-    }
-    .#{$prefix + 'p'}-#{$i}{
-      padding: #{$i * $spacer};
-    }
-    @each $key, $direction in $spacing-utilities {
-      .#{$prefix + 'm'}#{$key}-#{$i} {
-        margin-#{$direction}: #{$i * $spacer};
-      }
-      .#{$prefix + 'p'}#{$key}-#{$i} {
-        padding-#{$direction}: #{$i * $spacer};
-      }
-    }
-
-    @each $axis in ('x', 'y') {
-      .#{$prefix + 'm'}#{$axis}-#{$i} {
-        @if ($has-rtl == true) {
-          margin: {
-            #{if($axis == 'x', 'inline-start', 'block-start')}: #{$i * $spacer};
-            #{if($axis == 'x', 'inline-end', 'block-end')}: #{$i * $spacer};
-          }
-        } @else {
-          margin: {
-            #{if($axis == 'x', 'left', 'top')}: #{$i * $spacer};
-            #{if($axis == 'x', 'right', 'bottom')}: #{$i * $spacer};
-          }
-        }
-      }
-    }
-    .#{$prefix}gap-x-#{$i} {
-      column-gap: #{$i * $spacer};
-    }
-    .#{$prefix}gap-y-#{$i} {
-      row-gap: #{$i * $spacer};
-    }
-    .#{$prefix}gap-#{$i} {
-      gap: #{$i * $spacer};
-    }
-  }
-}
-
-@mixin generate_positions($has-key: false){
-  $prefix: if($has-key, '#{$has-key}\\:', '');
-  @each $direction in $position-utilities{
-
-    @for $i from 0 through $spacer-limit{
-      .#{$prefix + $direction}-#{$i}{
+  @each $direction in $position-utilities {
+    @for $i from ($spacer-limit * -1) through $spacer-limit {
+      $absolute_direction: if($i < 0, "-" + $direction, $direction);
+      $get_val: math.abs($i);
+      .#{$prefix + $absolute_direction}-#{$get_val} {
         #{$direction}: #{$i * 4%};
       }
-      @if ($has-rtl == true){
+      .#{$prefix + $absolute_direction}-#{$get_val}-px {
+        #{$direction}: #{$i * $spacer};
+      }
+      @if ($has-rtl == true) {
         @if ($direction == "right"){
-          #{'.' + $prefix + "rtl\\:" + $direction}-#{$i}{
+          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
             #{$direction}: #{$i * 4%};
           }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $direction}-#{$i}{
-            right: unset;
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
             left: #{$i * 4%};
+          }
+          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
+            #{$direction}: #{$i * $spacer};
+          }
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
+            left: #{$i * $spacer};
           }
         }
         @if ($direction == "left"){
-          #{'.' + $prefix + "rtl\\:" + $direction}-#{$i}{
+          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
             #{$direction}: #{$i * 4%};
           }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $direction}-#{$i}{
-            left: unset;
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
             right: #{$i * 4%};
           }
+          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
+            #{$direction}: #{$i * $spacer};
+          }
+          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
+            right: #{$i * $spacer};
+          }
         }
-       
       }
-    }
-  }
-}
-
-@mixin generate_font_size($has-key: false) {
-  $prefix: if($has-key, '#{$has-key}\\:', '');
-  @for $i from 0 through $spacer-limit {
-    .#{$prefix}text-#{$i} {
-      font-size: #{$i * $spacer};
     }
   }
 }

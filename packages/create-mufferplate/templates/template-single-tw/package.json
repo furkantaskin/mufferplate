@@ -9,7 +9,7 @@
   "dependencies": {
     "blaze-slider": "^1.9.3",
     "photoswipe": "^5.4.0",
-    "swiper": "^10.2.0",
+    "swiper": "^10.2.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "dev-js": "mufferplate dev",
-    "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development,
+    "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
     "build-js": "mufferplate build",
     "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
     "build": "npm run build-js && npm run build-css",

@@ -22,10 +22,12 @@ $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
 
-$has-rtl: true;
+$has-rtl: false;
 $spacing-utilities: ();
 $spacer: 4px;
 $spacer-limit: 25;
+
+$font-rem: false;
 
 $utilities: (
   'display': (
@@ -169,6 +171,32 @@ $utilities: (
       pointer-events-auto: auto,
     ),
   ),
+  'font-sizes': (
+    property: font-size,
+    isActive: true,
+    values: (
+      text-xs: if($font-rem, 0.75rem, 12px),
+      text-sm: if($font-rem, 0.875rem, 14px),
+      text-base: if($font-rem, 1rem, 16px),
+      text-lg: if($font-rem, 1.125rem, 18px),
+      text-xl: if($font-rem, 1.25rem, 20px),
+      text-2xl: if($font-rem, 1.5rem, 24px),
+      text-3xl: if($font-rem, 1.875rem, 30px),
+      text-4xl: if($font-rem, 2.25rem, 36px),
+      text-5xl: if($font-rem, 3rem, 48px),
+      text-6xl: if($font-rem, 3.75rem, 60px),
+      text-7xl: if($font-rem, 4.5rem, 72px),
+      text-8xl: if($font-rem, 6rem, 96px),
+      text-9xl: if($font-rem, 8rem, 128px),
+    )
+  ),
+  'line-heights': (
+    property: line-height,
+    isActive: true,
+    values: (
+      leading-none: 1,
+    )
+  )
 );
 
 
