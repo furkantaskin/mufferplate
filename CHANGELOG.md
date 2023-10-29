@@ -19,6 +19,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Düzeltmeler
 
 - Tailwind şablonundaki package.json'da yaşanan syntax hatası giderildi.
+- Custom utility için opacity değerleri 0.1'er artmak yerine 0.05'er olarak artacak şekilde güncellendi 
 
 ## 2023.10.26
 
