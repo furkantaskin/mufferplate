@@ -2,6 +2,18 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.29
+
+### Değişenler
+
+- Margin, padding ve gap sınıf hesaplamaları güncellendi. Artık `$spacer-limit` değeri ve `$spacer` değişkenlerine bağlı olarak Tailwind benzeri sınıflar oluşturmakta. Yani `mx-25` değeri left ve right için 100px değer verirken `-mt-3.5` değeri `margin-top: -14px` değerine karşılık gelmekte. Aynı durumlar padding için de geçerli. Gap için de `row-gap, column-gap` değerlerinde işlem yapılıyor.
+- Eski font yüksekliği oluşturma yapısı kaldırıldı. Artık Tailwind içindeki ile aynı sınıflar kullanılmakta.
+- Pozisyonlar için negatif değerler eklendi. Artık her pozisyonun kendi negatif değeri ve piksel değeri var. Örneğin `top-25-px` değeri `top:100px` olarak gelirken `-bottom-10` değeri `bottom: -40px` olacak şekilde güncellendi. Bunlarda `$spacer` değerine göre güncelleme almakta.
+
+### Düzeltmeler
+
+- Tailwind şablonundaki package.json'da yaşanan syntax hatası giderildi.
+
 ## 2023.10.26
 
 ### Eklenenler
