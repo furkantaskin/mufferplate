@@ -190,8 +190,15 @@
   .#{$prefix}w-auto {
     width: auto;
   }
-  .#{$prefix}h-screen {
-    height: 100vh;
+  @supports (height: 100dvh){
+    .#{$prefix}h-screen {
+      height: 100dvh;
+    }
+  }
+  @supports not (height: 100vh){
+    .#{$prefix}h-screen {
+      height: 100vh;
+    }
   }
   .#{$prefix}w-screen {
     width: 100vw;
