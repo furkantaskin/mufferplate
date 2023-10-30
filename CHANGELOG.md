@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.10.30
+
+### Değişenler
+
+- `.h-screen` classı için `dvh` desteği eklendi. Bu özelliği destekleyen tarayıcılarda `100dvh` alırken desteklemeyen tarayıcılarda `100vh` olarak yükseklik alacak.
+
 ## 2023.10.29
 
 ☾⋆ CUMHURİYETİMİZİN 100. YILI KUTLU OLSUN. BU BAYRAĞIN ALTINDA VE VATAN TOPRAĞINDA BOL COMMITLI GÜNLERİ GÖRMEK UMUDUYLA ☾⋆
