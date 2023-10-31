@@ -121,39 +121,6 @@
   @include spacing_utility('g', $get_prefix: $has-key);
 }
 
-@mixin generate_spacing($has-key: null) {
-  $prefix: if($has-key, '#{$has-key}\\:', '');
-
-  @for $i from 0 through $spacer-limit {
-    @each $axis in ('x', 'y') {
-      .#{$prefix + 'm'}#{$axis}-#{$i} {
-        @if ($has-rtl == true) {
-          margin: {
-            #{if($axis == 'x', 'inline-start', 'block-start')}: #{$i *
-              $spacer};
-            #{if($axis == 'x', 'inline-end', 'block-end')}: #{$i *
-              $spacer};
-          }
-        } @else {
-          margin: {
-            #{if($axis == 'x', 'left', 'top')}: #{$i * $spacer};
-            #{if($axis == 'x', 'right', 'bottom')}: #{$i * $spacer};
-          }
-        }
-      }
-    }
-    .#{$prefix}gap-x-#{$i} {
-      column-gap: #{$i * $spacer};
-    }
-    .#{$prefix}gap-y-#{$i} {
-      row-gap: #{$i * $spacer};
-    }
-    .#{$prefix}gap-#{$i} {
-      gap: #{$i * $spacer};
-    }
-  }
-}
-
 
 @mixin generate_utilities($has-key: false) {
   $prefix: if($has-key, '#{$has-key}\\:', '');

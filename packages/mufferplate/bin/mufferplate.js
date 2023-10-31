@@ -7,7 +7,13 @@ import fs from "node:fs";
 import path from "node:path"
 import {performance} from "node:perf_hooks"
 
-
+/** Returns string with space in the beginning
+ * @param {string} inputtext
+ *  @returns {string}
+ */
+function returnWithSpace(inputtext){
+  return `    ${inputtext}`
+}
 
 /** @type {Array<string>} */
 const CONFIG_FILE_LIST = [
@@ -34,6 +40,11 @@ let customConfig = {};
 let getPath = "";
 
 let startTime;
+
+/**
+ * Reads config from pre-defined diectories
+ * @returns {undefined}
+ */
 async function readConfig(){
     for(const filename of CONFIG_FILE_LIST){
         getPath = path.resolve(ROOT_DIR, filename);
@@ -58,7 +69,7 @@ if (process.argv.includes("build")){
     getEnv = "build"
 } else{
     if(!process.argv.includes("dev")){
-        console.log(lightYellow("[warning]    No mode detected. Working in dev mode as default"));
+        console.log(lightYellow("[warning]"), returnWithSpace("No mode detected. Working in dev mode as default"));
     }
     getEnv = "dev";
 }
@@ -75,40 +86,27 @@ const watchPlugin = {
             console.log(red(`[error]    Build failed. Error: ${result.error[0].text}`))
         } else {
             const currentTime = new Date().toLocaleTimeString('en-GB', {hour12: false})
-            console.log(cyan(`${lightGray(`[${currentTime}]`)}    Rebuilt (${getTime}ms)`))
+            console.log(lightGray(`[${currentTime}]`), returnWithSpace("Rebuilt"), cyan(`(${getTime}ms)`))
         }
       });
     },
   };
 
-  const buildPlugin = {
-    name: 'build-plugin',
-    setup(build) {
-      build.onStart(() => {
-        startTime = performance.now();
-        console.log(cyan("\nBuilding JS files for production."))
-      });
-      build.onEnd((result) => {
-        let getTime = performance.now() - startTime;
-        if (result.errors.length > 0) {
-            console.log(red(`[error]    Build failed. Error: ${result.error[0].text}`))
-        } else {
-            console.log(green(`\nAll JS files are built in ${getTime.toFixed(2)}ms.`))
-        }
-      });
-    },
-  };
-
+  /** 
+   * Returns the list of entry points with absolute path
+   * @param {string[] | null} [filePaths=null]
+   * @returns {string[]} 
+   */
 function mergeFiles(filePaths = null) {
     let getDir = "";
     let files;
     for(const filePath of filePaths){
         if(!fs.existsSync(path.join(ROOT_DIR, filePath))){
-            console.log(lightYellow(`[warning]    No file exists such: ${filePath}`))
+            console.log(lightYellow(`[warning]`), returnWithSpace(`No file exists such: ${filePath}`));
         } else{
             if(!fs.statSync(filePath).isFile()){
                 getDir = filePath;
-                console.log(cyan("[info]    Directory detected in entryPoints. Other file declarations will be ignored."))
+                console.log(cyan("[info]"), returnWithSpace("Directory detected in entryPoints. Other file declarations will be ignored."));
                 break;
             }
         }
@@ -127,28 +125,28 @@ function mergeFiles(filePaths = null) {
                 newMap = filePaths.map(file => path.join(ROOT_DIR, file));
             }
       return newMap;
-
         }
   
     } catch (err) {
-      console.log(red(`[error]   Caught error on getting directory information. Error: ${err}`, err));
+      console.log(red(`[error]`), returnWithSpace(`Caught error on getting directory information. Error: ${err}`, err));
       return null;
     }
   }
+
 
 (async () => {
     await readConfig();
 
     if(!customConfig.entryPoints && !customConfig.dev?.entryPoints && !customConfig.build?.entryPoints){
-        console.log(lightYellow("[warning]    No entry points detected, it will read src/js directory"))
+        console.log(lightYellow("[warning]"),returnWithSpace("No entry points detected, it will read src/js directory"));
     }
 
     if(!customConfig.outdir && !customConfig.dev?.outdir && !customConfig.build?.outdir){
-        console.log(lightYellow("[warning]    No output directory detected, it will generate the output to theme/assets/js directory"))
+        console.log(lightYellow("[warning]"),returnWithSpace("No output directory detected, it will generate the output to theme/assets/js directory"));
     }
 
-    if((customConfig.dev?.splitting || customConfig.build?.splitting) && !customConfig.chunkDir) console.log(lightYellow("[warning]    Splitting should be defined outside dev or build objects. It will be false as default"))
-    if((customConfig.dev?.chunkNames || customConfig.build?.chunkNames) && !customConfig.chunkDir) console.log(lightYellow("[warning]    Chunk directory should be defined outside dev or build objects. It will be 'chunks' directory as default"))
+    if((customConfig.dev?.splitting || customConfig.build?.splitting) && !customConfig.chunkDir) console.log(lightYellow("[warning]"), returnWithSpace("Splitting should be defined outside dev or build objects. It will be false as default"))
+    if((customConfig.dev?.chunkNames || customConfig.build?.chunkNames) && !customConfig.chunkDir) console.log(lightYellow("[warning]"), returnWithSpace("Chunk directory should be defined outside dev or build objects. It will be 'chunks' directory as default"))
 
     let watchConfig = {
         bundle: true,
@@ -167,7 +165,7 @@ function mergeFiles(filePaths = null) {
     let buildConfig = {
         bundle: true,
         color: true,
-        logLevel: 'warning',
+        logLevel: 'info',
         treeShaking: customConfig.build?.treeShaking ?? customConfig.treeShaking ?? true,
         sourcemap: customConfig.build?.sourcemap ?? customConfig.sourcemap ?? false,
         outdir: customConfig.build?.outdir ?? customConfig.dev?.outdir ?? customConfig.outdir ?? 'theme/assets/js',
@@ -177,14 +175,14 @@ function mergeFiles(filePaths = null) {
         banner: {
           js: '/*!\n**********\n\nMade with mufferplate\nVisit: https://github.com/furkantaskin/mufferplate\n\n**********\n!*/'
         },
-        plugins: [buildPlugin],
+        metafile: customConfig.build?.meta ?? customConfig.meta ?? false
     }
 
     if (watchConfig.splitting) watchConfig.format = "esm"
     if (buildConfig.splitting) buildConfig.format = "esm"
     if (customConfig.signed) buildConfig.inject = ['./node_modules/mufferplate/bin/signature.js']
 
-    !isExist && console.log(lightYellow("No config file detected. Running under default configuration"));
+    !isExist && console.log(lightYellow("[warning]"),returnWithSpace("No config file detected. Running under default configuration"));
 
     if (getEnv !== 'build') {
       watchConfig.entryPoints = mergeFiles(customConfig.dev?.entryPoints ?? customConfig.entryPoints ?? "src/js");
@@ -192,24 +190,9 @@ function mergeFiles(filePaths = null) {
         ctx.watch();
       } else {
         buildConfig.entryPoints = mergeFiles(customConfig.build?.entryPoints ?? customConfig.dev?.entryPoints ?? customConfig.entryPoints ?? "src/js");
-        await esbuild.build(buildConfig);
+        let result = await esbuild.build(buildConfig);
 
-        let fileCounter = 0;
-        let getFile = fs.readdirSync(path.join(ROOT_DIR, buildConfig.outdir));
-        for(let i = 0; i<getFile.length; i++){
-          fs.statSync(path.join(ROOT_DIR, buildConfig.outdir, getFile[i])).isFile() && fileCounter++;
-        }
-        console.log(`\nTotal ${fileCounter} files generated`)
-        for(const outputFile of getFile){
-           fs.statSync(path.join(ROOT_DIR, buildConfig.outdir, outputFile)).isFile() && console.log(`${dim(lightGray(buildConfig.outdir+"/"))}${green(outputFile)}    ${dim(lightGray((fs.statSync(path.join(ROOT_DIR,buildConfig.outdir,outputFile)).size / 1024).toFixed(2) +" kB"))}`)
-        }
-        if(buildConfig.splitting){
-          console.log("\nChunk files are generated");
-            let chunkDir = path.join(ROOT_DIR, buildConfig.outdir, buildConfig.chunkNames.split("/")[0]);
-            for (const chunkFiles of fs.readdirSync(chunkDir)){
-              console.log(`${dim(lightGray(buildConfig.outdir + "/" + buildConfig.chunkNames.split("/")[0]))+"/"}${magenta(chunkFiles)}    ${dim(lightGray((fs.statSync(path.join(chunkDir, chunkFiles)).size / 1024).toFixed(2) +" kB"))}`);
-            }
-        }
+        buildConfig.metafile && console.log(await esbuild.analyzeMetafile(result.metafile));
       }
       
 })();
