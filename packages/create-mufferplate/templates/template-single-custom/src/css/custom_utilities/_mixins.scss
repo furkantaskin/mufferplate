@@ -2,125 +2,87 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:string';
+@use 'sass:meta';
+
+
+@mixin generate_spacing_range(
+  $limit: $spacer-limit,
+  $spacing: $spacer
+) {
+  @for $i from($limit * $spacing * -1) through ($limit * $spacing) {
+    $unit: math.unit($spacer);
+    $i: strip-unit($i);
+    $spacing: strip-unit($spacing);
+    @if ($i % 2 == 0) {
+      //Get quotient
+      $quotient: math.abs(math.div($i, $spacing));
+
+      // Split quotient to detect if it has decimal or not
+      $get_value: string.split(#{$quotient}, '.');
+
+      // Default suffix (exmaple: mt-25 or mt-10.5
+      $get_suffix: '-';
+
+      $step_map: ();
+
+      @if (list.length($get_value) > 1) {
+        $get_suffix: $get_suffix +
+          list.nth($get_value, 1) +
+          '\\.'+
+          list.nth($get_value, -1);
+        $step_map: map.set(
+          $step_map,
+          $i,
+          (
+            'selector': $get_suffix,
+            'prefix': if($i < 0, '-', ''),
+            'value': #{$i} + $unit,
+          )
+        );
+      } @else {
+        $get_suffix: $get_suffix + list.nth($get_value, 1);
+        $step_map: map.set(
+          $step_map,
+          $i,
+          (
+            'selector': $get_suffix,
+            'prefix': if($i < 0, '-', ''),
+            'value': #{$i} + $unit,
+          )
+        );
+      }
+      $spacing-range: map.merge($spacing-range, $step_map) !global;
+    }
+  }
+}
+@include generate_spacing_range();
+
+@mixin generate_width_range($max_limit: 12) {
+  $index: 0;
+  @for $i from 2 through $max_limit {
+    @for $j from 1 to $i {
+      $step_map: ();
+      $quotient: generate-width($j, $i);
+      $step_map: map.set(
+        $step_map,
+        $index,
+        (
+          'selector': '-' + #{$j} + '\\/'+ #{$i},
+          'value': $quotient,
+        )
+      );
+      $width-range: map.merge($width-range, $step_map) !global;
+      $index: $index + 1;
+    }
+  }
+}
+@include generate_width_range();
+
 @mixin generate_container_up($get_key) {
   @media screen and (min-width: map.get($grid-breakpoints, $get_key)) {
     @content;
   }
 }
-
-/// @param {string} $spacing-prefix - Gets margin, padding or gap parameter
-/// @param {null|string} $get_prefix - Contains whether mixin will generate responsive selectors (md, xs etc) or not
-/// @param {number} $upper_boundary - Upper and lower limit to generate classes. The limit is $spacer-limit by default.  
-/// @return {null}
-
-// Generating padding and margin using tailwind-like spacing
-@mixin spacing_utility(
-  $spacing_prefix,
-  $get_prefix: null,
-  $upper_boundary: $spacer-limit
-) {
-  $prefix: if($get_prefix, '#{$get_prefix}\\:', '');
-  $spacing_map: ('m': 'margin', 'p': 'padding', 'g': 'gap');
-  $get_property: map.get($spacing_map, $spacing_prefix);
-
-  @if ($spacing_prefix == 'm' or '$spacing_prefx' == 'p'){
-    .#{$spacing-prefix}-auto{
-      #{$get-property}: auto;
-    }
-  }
-  
-  @for $i from ($spacer-limit * $spacer * -1) through ($spacer-limit * $spacer) {
-    $i: math.div($i, 1px);
-    $get_val: math.abs(math.div($i, math.div($spacer, 1px)));
-    $list_length: list.length(string.split(#{$get_val}, '.'));
-    $first_value: list.nth(string.split(#{$get_val}, '.'), 1);
-    $last_value: list.nth(string.split(#{$get_val}, '.'), -1);
-    $gen_selector: null;
-    $prop-prefix: if($i < 0, '-' + $spacing-prefix, $spacing-prefix);
-    $css_value: if(string.index($prop_prefix, '-') == 1 , $get_val * -1 * $spacer, $get_val * $spacer); 
-    
-      @if ($i % 2 == 0) {
-        @if ($spacing-prefix == 'm' or $spacing-prefix == 'p'){
-          @if ($i == 0){
-            .#{$prefix + $prop-prefix + '-' + $i} {
-              #{$get_property}: #{$css_value};
-            }
-            @each $key, $direction in $spacing-utilities{
-                .#{$prefix + $prop-prefix + $key + '-' + 'auto'} {
-                  #{$get_property + '-' + $direction}: auto;
-                }
-            }
-            @each $axis, $property in ('x': 'inline', 'y': 'block'){
-              .#{$prefix + $prop-prefix + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
-                @if ($has-rtl == true){
-                  #{$get_property}: {
-                    #{$property}: #{$css_value};
-                  }
-                } @else{
-                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: #{$css_value};
-                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: #{$css_value};
-                }
-              }
-              .#{$prefix + $prop-prefix + $axis + '-' + 'auto'} {
-                @if ($has-rtl == true){
-                  #{$get_property}: {
-                    #{$property}: auto;
-                  }
-                } @else{
-                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: auto;
-                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: auto;
-                }
-              }
-            }
-          } @else{
-            @each $key, $direction in $spacing-utilities{
-              .#{$prefix + $prop-prefix + $key + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
-                #{$get_property + '-' + $direction}: #{$css_value};
-              }
-            }
-            @each $axis, $property in ('x': 'inline', 'y': 'block'){
-              .#{$prefix + $prop-prefix + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
-                @if ($has-rtl == true){
-                  #{$get_property}: {
-                    #{$property}: #{$css_value};
-                  }
-                } @else{
-                  #{$get_property}-#{if($property == 'block', 'top', 'left')}: #{$css_value};
-                  #{$get_property}-#{if($property == 'block', 'bottom', 'right')}: #{$css_value};
-                }
-              }
-            }
-          }
-      } @if ($spacing_prefix == 'g') {
-          $prop-prefix: if($i < 0, '-' + $get_property, $get_property);
-        
-        .#{$prefix + $prop-prefix + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
-          #{$get_property}: #{$css_value};
-        }
-        @each $axis, $property in ('x': 'column', 'y': 'row'){
-          .#{$prefix + $prop-prefix + '-' + $axis + '-' + if($list_length != 2, $get_val, $first_value + '\\.' + $last_value)} {
-            #{$property + '-' + $get_property}: #{$css_value}
-          }
-        }
-      } 
-    }
-    
-    
-  }
-}
-
-@mixin generate_margin($has-key: null){
-  @include spacing_utility('m', $get_prefix: $has-key);
-}
-
-@mixin generate_padding($has-key: null){
-  @include spacing_utility('p', $get_prefix: $has-key);
-}
-
-@mixin generate_gap($has-key:null){
-  @include spacing_utility('g', $get_prefix: $has-key);
-}
-
 
 @mixin generate_utilities($has-key: false) {
   $prefix: if($has-key, '#{$has-key}\\:', '');
@@ -141,39 +103,172 @@
       order: $i;
     }
   }
+}
 
-  @for $i from 0 through 4 {
-    .#{$prefix}w-#{$i * 25} {
-      width: generate-width($i, 4);
-    }
-    .#{$prefix}h-#{$i * 25} {
-      height: generate-width($i, 4);
-    }
-  }
+@mixin generate_margin($responsive_key: '.') {
+  //.mt-10 or .-mb-10\.5
+  $class_prefix: 'm';
+  $class_property: 'margin';
+  $responsive_key: if(
+    $responsive_key != '.',
+    '.#{$responsive-key}\\:',
+    $responsive_key
+  );
+  @each $key, $space_map in $spacing-range {
+    $selector: map.get($space_map, 'selector');
+    $prefix: map.get($space_map, 'prefix');
+    $value: map.get($space_map, 'value');
 
-  .#{$prefix}h-auto {
-    height: auto;
-  }
-  .#{$prefix}w-auto {
-    width: auto;
-  }
-  @supports (height: 100dvh){
-    .#{$prefix}h-screen {
-      height: 100dvh;
+    // To generate -> .m-20{margin: 80px}
+    #{$responsive_key + $prefix + $class_prefix + $selector} {
+      #{$class_property}: #{$value};
     }
-  }
-  @supports not (height: 100vh){
-    .#{$prefix}h-screen {
-      height: 100vh;
+
+    // Generate classes with directions
+    @each $direction_key, $direction_val in $space-directions {
+      #{$responsive_key
+        + $prefix
+        + $class_prefix
+        + $direction_key
+        + $selector} {
+        @if (meta.type-of($direction_val) == list) {
+          @each $direction in $direction_val {
+            #{$class_property + '-' + $direction}: #{$value};
+          }
+        } @else {
+          #{$class_property + '-' + $direction_val}: #{$value};
+        }
+      }
+
+      // Generate margin auto values
+      @if ($key == 0) {
+        #{$responsive_key
+          + $prefix
+          + $class_prefix
+          + $direction_key
+          + '-auto'} {
+          @if (meta.type-of($direction_val) == list) {
+            @each $direction in $direction_val {
+              #{$class_property + '-' + $direction}: auto;
+            }
+          } @else {
+            #{$class_property + '-' + $direction_val}: auto;
+          }
+        }
+      }
     }
-  }
-  .#{$prefix}w-screen {
-    width: 100vw;
   }
 }
 
-@mixin generate_cols($has-key: false) {
-  $prefix: if($has-key, '#{$has-key}-', '');
+@mixin generate_padding($responsive_key: '.') {
+  $class_prefix: 'p';
+  $class_property: 'padding';
+  $responsive_key: if(
+    $responsive_key != '.',
+    '.#{$responsive-key}\\:',
+    $responsive_key
+  );
+  @each $key, $space_map in $spacing-range {
+    @if ($key >= 0) {
+      $selector: map.get($space_map, 'selector');
+      $prefix: map.get($space_map, 'prefix');
+      $value: map.get($space_map, 'value');
+
+      // To generate -> .m-20{margin: 80px}
+      #{$responsive_key + $prefix + $class_prefix + $selector} {
+        #{$class_property}: #{$value};
+      }
+
+      // Generate classes with directions
+      @each $direction_key, $direction_val in $space-directions {
+        #{$responsive_key
+          + $prefix
+          + $class_prefix
+          + $direction_key
+          + $selector} {
+          @if (meta.type-of($direction_val) == list) {
+            @each $direction in $direction_val {
+              #{$class_property + '-' + $direction}: #{$value};
+            }
+          } @else {
+            #{$class_property + '-' + $direction_val}: #{$value};
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin generate_position($responsive_key: '.') {
+  $responsive_key: if(
+    $responsive_key != '.',
+    '.#{$responsive-key}\\:',
+    $responsive_key
+  );
+
+  @each $position_key, $position-val in $position-directions {
+    @each $key, $space_map in $spacing-range {
+      $selector: map.get($space_map, 'selector');
+      $prefix: map.get($space_map, 'prefix');
+      $value: map.get($space_map, 'value');
+
+      #{$responsive_key + $prefix + $position_key + $selector} {
+        #{$position_val}: #{$value};
+      }
+    }
+    @each $index, $width_map in $width-range{
+      $css_value: map.get($width_map, 'value');
+      $selector: map.get($width_map, 'selector');
+
+      #{$responsive_key + $position_key + $selector}{
+        #{$position_val}: #{$css_value};
+      }
+    }
+  }
+  
+
+  
+}
+
+@mixin generate_width_height($responsive_key: '', $upper_limit: $spacer_limit, $spacing: $spacer){
+  $prefix: if($responsive_key != '', '#{$responsive_key}\\:', $responsive_key);
+  @each $key, $value in ('w': 'width', 'h': 'height'){
+    @for $i from 0 through ($upper_limit * $spacing) {
+      $unit: math.unit($spacer);
+      $i: strip-unit($i);
+      $spacing: strip-unit($spacing);
+      @if ($i % $spacing == 0){
+        .#{$prefix + $key + '-' + #{math.div($i, $spacing)}}{
+          #{$value}: #{$i}#{$unit};
+        }
+      }
+    }
+
+    @each $index, $width_map in $width-range{
+      $css_value: map.get($width_map, 'value');
+      $selector: map.get($width_map, 'selector');
+      .#{$prefix + $key + $selector}{
+        #{$value}: #{$css_value};
+      }
+    }
+
+    .#{$prefix + $key + '-full'}{
+      #{$value}: 100%
+    }
+
+    .#{$prefix + $key + '-auto'}{
+      #{$value}: auto;
+    }
+
+    .#{$prefix + $key + '-screen'}{
+      #{$value}: #{if($key == 'w', '100vw', '100vh')}
+    }
+
+  }
+}
+
+@mixin generate_cols($responsive_key: '') {
+  $prefix: if($responsive_key != '', '#{$responsive_key}-', $responsive_key);
   @for $i from 1 through $number-of-col {
     .col-#{$prefix}#{$i} {
       width: generate-width($i, $number-of-col);
@@ -186,59 +281,11 @@
   }
 }
 
-
-
-@mixin generate_positions($has-key: false) {
-  $prefix: if($has-key, '#{$has-key}\\:', '');
-  @each $direction in $position-utilities {
-    @for $i from ($spacer-limit * -1) through $spacer-limit {
-      $absolute_direction: if($i < 0, "-" + $direction, $direction);
-      $get_val: math.abs($i);
-      .#{$prefix + $absolute_direction}-#{$get_val} {
-        #{$direction}: #{$i * 4%};
-      }
-      .#{$prefix + $absolute_direction}-#{$get_val}-px {
-        #{$direction}: #{$i * $spacer};
-      }
-      @if ($has-rtl == true) {
-        @if ($direction == "right"){
-          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
-            #{$direction}: #{$i * 4%};
-          }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
-            left: #{$i * 4%};
-          }
-          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
-            #{$direction}: #{$i * $spacer};
-          }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
-            left: #{$i * $spacer};
-          }
-        }
-        @if ($direction == "left"){
-          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
-            #{$direction}: #{$i * 4%};
-          }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}{
-            right: #{$i * 4%};
-          }
-          #{'[dir=ltr] ' + '.' + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
-            #{$direction}: #{$i * $spacer};
-          }
-          #{"[dir=rtl] ." + $prefix + "rtl\\:" + $absolute_direction}-#{$get_val}-px{
-            right: #{$i * $spacer};
-          }
-        }
-      }
-    }
-  }
-}
-
-@mixin generate_opacity($has-key: false) {
-  $prefix: if($has-key, '#{$has-key}\\:', '');
+@mixin generate_opacity($responsive_key: '') {
+  $prefix: if($responsive_key, '#{$responsive_key}\\:', $responsive_key);
   @for $i from 0 through 100 {
     @if $i % 5 == 0 {
-      .#{$prefix}opacity-#{$i} {
+      .#{$responsive_key}opacity-#{$i} {
         opacity: math.div($i, 100);
       }
     }

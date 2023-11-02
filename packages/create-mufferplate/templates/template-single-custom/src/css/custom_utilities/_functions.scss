@@ -1,52 +1,61 @@
 @function to-fixed($float, $digits: 5) {
-    $sass-precision: 5;
-  
-    @if $digits > $sass-precision {
-      @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
-        + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
-        + "See https://github.com/sass/sass/issues/1122 for further informations.";
-    }
-  
-    $pow: math.pow(10, $digits);
-    @return math.div(math.round($float * $pow), $pow);
-  }
-  
-  @function generate-width($divider, $dividee) {
-    @return to-fixed(math.div($divider, $dividee)) * 100%;
-  }
-  
-  @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-    $min: map-get($breakpoints, $name);
-    @return if($min != 0, $min, null);
-  }
-  
-  @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
-    @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+  $sass-precision: 5;
+
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+      + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+      + "See https://github.com/sass/sass/issues/1122 for further informations.";
   }
 
+  $pow: math.pow(10, $digits);
+  @return math.div(math.round($float * $pow), $pow);
+}
 
-  @function mapReverse ($map) {
-    $result: null;
+@function generate-width($divider, $dividee) {
+  @return to-fixed(math.div($divider, $dividee)) * 100%;
+}
 
-    @if type-of($map) == "map" {
-        $keys: map-keys($map);
-        $map-reversed: ();
-        
-        @for $i from length($keys) through 1 {
-            $map-reversed: map-merge(
-                $map-reversed,
-                (nth($keys, $i): map-get($map, nth($keys, $i)))
-            );
-        }
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
 
-        @if type-of($map-reversed) == "map" {
-            $result: $map-reversed;
-        } @else {
-            @warn 'There was an error reversing the order of "#{$map}"';
-        }
-    } @else {
-        @warn '"#{$map}" is not a valid map';
-    }
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
 
-    @return $result;
+
+@function mapReverse ($map) {
+  $result: null;
+
+  @if type-of($map) == "map" {
+      $keys: map-keys($map);
+      $map-reversed: ();
+      
+      @for $i from length($keys) through 1 {
+          $map-reversed: map-merge(
+              $map-reversed,
+              (nth($keys, $i): map-get($map, nth($keys, $i)))
+          );
+      }
+
+      @if type-of($map-reversed) == "map" {
+          $result: $map-reversed;
+      } @else {
+          @warn 'There was an error reversing the order of "#{$map}"';
+      }
+  } @else {
+      @warn '"#{$map}" is not a valid map';
+  }
+
+  @return $result;
+}
+
+
+@function strip-unit($number) {
+@if type-of($number) == 'number' and not math.is-unitless($number) {
+  @return math.div($number, $number * 0 + 1);
+}
+
+@return $number;
 }

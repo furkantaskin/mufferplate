@@ -1,12 +1,14 @@
+@use 'sass:math';
+
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 #{$grid-gutter * (-1)};
+  margin: 0 #{math.div($grid-gutter, 2)};
 }
 
 *[class^='col-'] {
   flex: 0 0 auto;
-  padding: 0 $grid-gutter;
+  padding: 0 (math.div($grid-gutter, 2));
   width: 100%;
 }
 
@@ -37,8 +39,8 @@
 .container {
   width: 100%;
   padding: {
-    left: if($container-no-padding, 0px, $grid-gutter);
-    right: if($container-no-padding, 0px, $grid-gutter);
+    left: if($container-no-padding, 0px, math.div($grid-gutter, 2));
+    right: if($container-no-padding, 0px, math.div($grid-gutter, 2));
   }
   margin: {
     left: auto;

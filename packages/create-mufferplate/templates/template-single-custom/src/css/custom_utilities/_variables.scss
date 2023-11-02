@@ -1,4 +1,8 @@
 @use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:meta';
 
 $grid-breakpoints: (
   xs: 0,
@@ -17,16 +21,18 @@ $container-max-widths: (
   xxl: 1320px,
 );
 
-$grid-gutter: 12px;
+$grid-gutter: 24px;
 $number-of-col: 12;
 $is-mobile-first: false;
 $container-no-padding: false;
 
-$has-rtl: false;
 $spacing-utilities: ();
 $spacer: 4px;
 $spacer-limit: 25;
+$spacing-range: ();
+$width-range: ();
 
+$has-rtl: true;
 $font-rem: false;
 
 $utilities: (
@@ -188,39 +194,97 @@ $utilities: (
       text-7xl: if($font-rem, 4.5rem, 72px),
       text-8xl: if($font-rem, 6rem, 96px),
       text-9xl: if($font-rem, 8rem, 128px),
-    )
+    ),
   ),
   'line-heights': (
     property: line-height,
     isActive: true,
     values: (
       leading-none: 1,
+    ),
+  ),
+  'overflows': (
+    property: overflow,
+    isActive: true,
+    values: (
+      overflow-hidden: hidden,
+      overflow-auto: auto,
+      overflow-scroll: scroll,
+      overflow-visible: visible,
+    ),
+  ),
+  'ratios': (
+    property: aspect-ratio,
+    isActive: true,
+    values: (
+      aspect-auto: auto,
+      aspect-square: string.unquote('1/1'),
+      aspect-video: string.unquote('16/9'),
+    ),
+  ),
+  'bg-positions':(
+    property: background-position,
+    isActive: true,
+    values: (
+      bg-bottom: bottom,
+      bg-center: center,
+      bg-left: left,
+      bg-left-bottom: left bottom,
+      bg-left-top: left top,
+      bg-right: right,
+      bg-right-bottom: right bottom,
+      bg-right-top: right top,
+      bg-top: top,
+    ),
+    'bg-repeat': (
+      property: background-repeat,
+      isActive: true,
+      values: (
+        bg-repeat: repeat,
+        bg-no-repeat: no-repeat,
+      )
+    ),
+    'bg-size': (
+      property: background-size,
+      isActive: true,
+      values: (
+        bg-auto: auto,
+        bg-cover: cover,
+        bg-contain: contain
+      )
+    ),
+    'cursor': (
+      property: cursor,
+      isActive: true,
+      values: (
+        cursor-pointer: pointer
+      ) 
     )
   )
 );
 
+$space-directions: (
+  't': if($has-rtl, 'block-start', 'top'),
+  'b': if($has-rtl, 'block-end', 'bottom'),
+  'l': if($has-rtl, 'inline-start', 'left'),
+  'r': if($has-rtl, 'inline-end', 'right'),
+  'x': if($has-rtl, 'inline', ('left', 'right')),
+  'y': if($has-rtl, 'block', ('top', 'bottom')),
+);
 
-@if ($has-rtl) {
-  $spacing-utilities: map.merge(
-    $spacing-utilities, (
-      't': "block-start",
-      'b': "block-end",
-      'l': "inline-start",
-      'r': "inline-end"
-    )
-  );
-} @else {
+$position-directions: (
+  'top': if($has-rtl, 'inset-block-start', 'top'),
+  'bottom': if($has-rtl, 'inset-block-end', 'bottom'),
+  'left': 'left',
+  'right': 'right',
+);
 
-  $spacing-utilities: map.merge(
-    $spacing-utilities,
+@if ($has-rtl == true) {
+  $position-directions: map.merge(
+    $position-directions,
     (
-      't': 'top',
-      'b': 'bottom',
-      'l': 'left',
-      'r': 'right',
+      'start': 'inset-inline-start',
+      'end': 'inset-inline-end',
     )
   );
 }
-
-$position-utilities: ('top', 'left', 'bottom', 'right');
-

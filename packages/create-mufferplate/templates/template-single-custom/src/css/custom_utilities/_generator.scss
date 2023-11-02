@@ -11,22 +11,22 @@
 
 @include generate_utilities();
 @include generate_cols();
+@include generate_opacity();
 @include generate_margin();
 @include generate_padding();
-@include generate_gap();
-@include generate_opacity();
-@include generate_positions();
+@include generate_position();
+@include generate_width_height();
 
 @if $is-mobile-first == true {
   @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
       @include generate_cols($key);
       @include generate_utilities($key);
+      @include generate_opacity($key);
       @include generate_margin($key);
       @include generate_padding($key);
-      @include generate_gap($key);
-      @include generate_opacity($key);
-      @include generate_positions($key);
+      @include generate_position($key);
+      @include generate_width_height($key);
     }
   }
 } @else {
@@ -51,11 +51,11 @@
       $cur-key: list.nth($key, 1);
       @media screen and (max-width: #{$previous-val - 1}) {
         @include generate_utilities($cur-key);
-        @include generate_margin($cur-key);
-        @include generate_padding($cur-key);
-        @include generate_gap($cur-key);
         @include generate_opacity($cur-key);
-        @include generate_positions($cur-key);
+        @include generate_margin($key);
+        @include generate_padding($key);
+        @include generate_position($key);
+        @include generate_width_height($key);
       }
     }
   }

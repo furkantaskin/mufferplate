@@ -103,6 +103,15 @@ $breakpoints: (
   }
 }
 
+@mixin edit_placeholder(){
+  $placeholderList: ('::-webkit-input-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', ':-moz-placeholder');
+  @each $placeholder in $placeholderList{
+    &#{$placeholder}{
+      @content;
+    }
+  }
+}
+
 @mixin get_font(
   $font_weight: 500,
   $font_size: 16px,
