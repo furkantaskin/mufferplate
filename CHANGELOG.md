@@ -2,6 +2,25 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.02
+
+### Eklenenler 
+
+- Mufferplate için metafile oluşturma eklendi. `meta: true` özelliği ile oluşan son JS dosyasında hangi dosyaların kullanıldığı listelenebilir.
+- Tailwind sınıflarından bazıları eklendi. Liste şu şekilde
+  - `overflow` için hidden, auto, scroll ve visible sınıfları
+  - tüm `aspect-ratio` sınıfları
+  - tüm `background-position` sınıfları
+  - `background-repeat` için bg-repeat ve bg-no-repeat sınıfları
+  - `background-size` için bg-auto, bg-cover ve bg-contain sınıfları
+  - `cursor-pointer` sınıfı eklendi
+
+### Değişenler
+
+- width ve height hesaplaması artık 100px'e kadar dördün katları şeklinde 100px'e kadar ve sonrasında 1/2'den 11/12'ye kadar olacak şekilde yüzdelik vermekte. w-25, w-50, w-75 ve w-100 sınıfları kaldırıldı. w-100 yerine ve w-full sınıfı eklendi.
+- Position için RTL desteği güncellendi. Ayrıca start ve end sınıfları eklendi. Aynı şekilde width ve height'teki gibi 1/2'den 11/12'ye kadar olan değerlere göre yüzdelik alma eklendi.
+- Margin ve paddin hesaplamasındaki mixin'ler güncellendi ve kod kalabalığı giderildi.
+
 ## 2023.10.30
 
 ### Değişenler
