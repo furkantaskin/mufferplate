@@ -4,6 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.11.02
 
+### Eklenenler
+
+- `appearance-none` ve `border-none` sınıfları eklendi.
+- Renk değişkenlerini hızlıca ekleyebilmek için `get-color` fonksiyonu eklendi. `get-color(primary)` şeklindeki kullanımda eğer `primary` keyi renk listesinde vars otomatik olarak `var(--color-primary)` değeri döndürülecek.
+- Son eklenen sınıflarda yanlış ekleme sonucu oluşan seçici oluşturmama hatası giderildi.
+
 ### Düzeltmeler
 
 - PurgeCSS için ana dizindeki inc klasörü ve theme klasörü içindeki template klasöründe bulunan dosyaları es geçmesinden dolayı yaşanan sınıf silme sorunu giderildi. Artık PurgeCSS, theme klasörü, theme klasörünün altındaki templates klasörü ve ana dizindeki inc klasöründe bulunan PHP dosyalarını baz alacak. 
