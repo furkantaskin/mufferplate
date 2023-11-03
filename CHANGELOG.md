@@ -4,6 +4,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.11.02
 
+### Düzeltmeler
+
+- PurgeCSS için ana dizindeki inc klasörü ve theme klasörü içindeki template klasöründe bulunan dosyaları es geçmesinden dolayı yaşanan sınıf silme sorunu giderildi. Artık PurgeCSS, theme klasörü, theme klasörünün altındaki templates klasörü ve ana dizindeki inc klasöründe bulunan PHP dosyalarını baz alacak. 
+
+## 2023.11.02
+
 ### Eklenenler 
 
 - Mufferplate için metafile oluşturma eklendi. `meta: true` özelliği ile oluşan son JS dosyasında hangi dosyaların kullanıldığı listelenebilir.
