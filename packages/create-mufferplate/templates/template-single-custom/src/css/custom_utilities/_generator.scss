@@ -87,6 +87,21 @@ $color_map: map.merge($color_map, $default_colors);
     @extend .container-fluid;
   }
   @include generate_container_up($key) {
+
+    $container-width: map.get($container-max-widths, $key);
+    $gutter-total: (($number-of-col - 1) * $grid-gutter);
+    $col-width: math.div(
+      $container-width - $gutter-total,
+      $number-of-col
+    );
+    :root {
+      --column-width: #{$col-width};
+      --gutter-total: #{$gutter-total};
+      --container-width: #{$container-width};
+      --container-margin: calc(100vw - #{$container-width});
+      --gutter-width: #{$grid-gutter};
+    }
+
     %get-container-#{$key} {
       max-width: $val;
     }

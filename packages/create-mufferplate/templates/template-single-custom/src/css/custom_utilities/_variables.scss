@@ -222,7 +222,7 @@ $utilities: (
       aspect-video: string.unquote('16/9'),
     ),
   ),
-  'bg-positions':(
+  'bg-positions': (
     property: background-position,
     isActive: true,
     values: (
@@ -236,29 +236,43 @@ $utilities: (
       bg-right-top: right top,
       bg-top: top,
     ),
-    'bg-repeat': (
-      property: background-repeat,
-      isActive: true,
-      values: (
-        bg-repeat: repeat,
-        bg-no-repeat: no-repeat,
-      )
+  ),
+  'bg-repeat': (
+    property: background-repeat,
+    isActive: true,
+    values: (
+      bg-repeat: repeat,
+      bg-no-repeat: no-repeat,
     ),
-    'bg-size': (
-      property: background-size,
-      isActive: true,
-      values: (
-        bg-auto: auto,
-        bg-cover: cover,
-        bg-contain: contain
-      )
+  ),
+  'bg-size': (
+    property: background-size,
+    isActive: true,
+    values: (
+      bg-auto: auto,
+      bg-cover: cover,
+      bg-contain: contain,
     ),
-    'cursor': (
-      property: cursor,
-      isActive: true,
-      values: (
-        cursor-pointer: pointer
-      ) 
+  ),
+  'cursor': (
+    property: cursor,
+    isActive: true,
+    values: (
+      cursor-pointer: pointer,
+    ),
+  ),
+  'borders': (
+    property: border,
+    isActive: true,
+    values: (
+      border-none: unset,
+    ),
+  ),
+  'appearance': (
+    property: appearance,
+    isActive: true,
+    values: (
+      appearance-none: none
     )
   )
 );
