@@ -13,11 +13,12 @@ const postcssConfig = {
       preset: 'cssnano-preset-advanced',
     }),
     purgecss({
-      content: ['./theme/**/*.php', './theme/**/*.js'],
+      content: ['./theme/*.php', './theme/template/*.php', './theme/assets/js/*.js', './inc/*.php'],
       safelist: ['swiper-pagination-bullet'],
-      fontFace: true,
-      keyframes: true,
-      defaultExtractor: (content) => content.match(/[\w-/:.-]+(?<!:)/g) || [],
+      fontFace: false,
+      keyframes: false,
+      defaultExtractor: (content) =>
+        content.match(/[\w-/:.-]+/g) || [],
     }),
   ],
 };
