@@ -2,6 +2,14 @@ body {
   position: relative;
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
+  &.show{
+    overflow: hidden;
+  }
+}
+html{
+  &.show{
+    overflow: hidden;
+  }
 }
 a {
   text-decoration: none;

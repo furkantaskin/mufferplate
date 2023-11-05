@@ -269,9 +269,11 @@
 
 @mixin generate_cols($responsive_key: '') {
   $prefix: if($responsive_key != '', '#{$responsive_key}-', $responsive_key);
-  @for $i from 1 through $number-of-col {
-    .col-#{$prefix}#{$i} {
-      width: generate-width($i, $number-of-col);
+  @for $i from 0 through $number-of-col {
+    @if ($i != 0){
+      .col-#{$prefix}#{$i} {
+        width: generate-width($i, $number-of-col);
+      }
     }
     @if $i != $number-of-col {
       .offset-#{$prefix}#{$i} {

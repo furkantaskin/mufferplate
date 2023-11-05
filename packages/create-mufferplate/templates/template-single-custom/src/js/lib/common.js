@@ -6,13 +6,13 @@ export function mobileMenu() {
   function toggleMenu(isActive) {
     if (isActive) {
       document
-        .querySelectorAll('body, .mobileMenu, .menuButton')
+        .querySelectorAll('body, .mobileMenu, .menuButton, html')
         .forEach((e) => {
           e.classList.add('show');
         });
     } else {
       document
-        .querySelectorAll('body, .mobileMenu, .menuButton')
+        .querySelectorAll('body, .mobileMenu, .menuButton, html')
         .forEach((e) => {
           e.classList.remove('show');
         });

@@ -6,13 +6,13 @@ export function mobileMenu() {
   function toggleMenu(isActive) {
     if (isActive) {
       document
-        .querySelectorAll('body, .mobileMenu, .menuButton')
+        .querySelectorAll('body, .mobileMenu, .menuButton, html')
         .forEach((e) => {
           e.classList.add('show');
         });
     } else {
       document
-        .querySelectorAll('body, .mobileMenu, .menuButton')
+        .querySelectorAll('body, .mobileMenu, .menuButton, html')
         .forEach((e) => {
           e.classList.remove('show');
         });
@@ -31,4 +31,3 @@ export function mobileMenu() {
   mobileMenu.style.paddingTop =
     document.querySelector('.header_sm').clientHeight * 1.5 + 'px';
 }
-
