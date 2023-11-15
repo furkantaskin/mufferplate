@@ -8,7 +8,7 @@
 
 To prevent repetition of generating project from scratch and missing the development cycle, mufferplate has been created.
 
-For more information visit wiki page.
+For more information visit [wiki](https://github.com/furkantaskin/mufferplate/wiki) page.
 
 To install generator, run the command
 
