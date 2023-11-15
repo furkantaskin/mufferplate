@@ -15,6 +15,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Değişenler
 
 - `offset` sınıfı için boşluk değeri RTL ile uyumlu hale getirildi. Artık RTL mode etkinse `margin-block-start` olarak, değilse `margin-left` olarak değer gelecek.
+- Templateler için dependency sürümleri güncellendi.
 
 ### Düzeltmeler
 
