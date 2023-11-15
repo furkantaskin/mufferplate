@@ -8,6 +8,12 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Cache busting için local kontrolü getirildi. Yayına alınan sitelerde cache busting durumunun önüne geçebilmek için kontrol yapılmakta. Eğer geliştirme ortamı localhost değilse sistem rastgele sürüm vermeyecek.
 
+### Düzeltmeler
+
+- Multiple template için eksik mufferplate konfigürasyon hatası giderildi.
+- Multiple template için özel css yapısı kaldırıldı.
+- Multiple template için Sass komutundaki hata giderildi.
+
 ## 2023.11.05
 
 ### Düzeltmeler
