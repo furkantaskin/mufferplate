@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.15
+
+### Eklenenler
+
+- Cache busting için local kontrolü getirildi. Yayına alınan sitelerde cache busting durumunun önüne geçebilmek için kontrol yapılmakta. Eğer geliştirme ortamı localhost değilse sistem rastgele sürüm vermeyecek.
+
 ## 2023.11.05
 
 ### Düzeltmeler
