@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import esbuild from 'esbuild';
-import {red, cyan, green, lightYellow, lightGreen, magenta, lightGray,dim} from "kolorist";
+import {red, cyan, lightYellow, lightGreen, lightGray} from "kolorist";
 import process from "node:process";
 import fs from "node:fs";
 import path from "node:path"
@@ -115,7 +115,7 @@ function mergeFiles(filePaths = null) {
         if(filePaths !== null){
             let newMap;
             if (getDir !== ""){
-                files = fs.readdirSync(path.join(ROOT_DIR, getDir)).filter(file => path.extname(file) === ".js");
+                files = fs.readdirSync(path.join(ROOT_DIR, getDir)).filter(file => path.extname(file) === ".js" || path.extname(file) === ".ts");
                 newMap = files.map((filePath) =>
         path.join(ROOT_DIR, getDir, filePath)
       );
