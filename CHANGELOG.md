@@ -11,6 +11,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Line height için diğer Tailwind classları eklendi
 - Border radius genel sınıflar eklendi. `rounded-corner` sınıfı yerine `rounded-full` sınıfı eklendi.
 - Column generator varsayılan hale getirildi.
+- Yeni sınıflar eklendi. Eklenen sınıflar: `align-content, align-self, place-items, place-content, place-slef, justify-items, justify-self, flex-grow, white-space`
 
 ### Değişenler
 
