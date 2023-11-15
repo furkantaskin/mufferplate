@@ -25,6 +25,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Multiple template için eksik mufferplate konfigürasyon hatası giderildi.
 - Multiple template için özel css yapısı kaldırıldı.
 - Multiple template için Sass komutundaki hata giderildi.
+- `min_responsive` mixin'i içerisindeki uyarı metninde yaşanan `max_responsive` değişkenini çağırma hatası düzenlendi. 
 
 ## 2023.11.05
 
