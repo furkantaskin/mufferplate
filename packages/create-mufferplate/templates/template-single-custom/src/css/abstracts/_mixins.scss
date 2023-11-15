@@ -61,7 +61,7 @@ $breakpoints: (
 
   @if $min == null {
     @if $custom == false {
-      @warn "#{$min-width} is not defined in breakpoints. Check your breakpoint or use it as @include min_responsive(#{$max-width}, $custom: true)";
+      @warn "#{$min-width} is not defined in breakpoints. Check your breakpoint or use it as @include min_responsive(#{$min-width}, $custom: true)";
     } @else {
       @media screen and (min-width: #{$min-width}) {
         @content;
