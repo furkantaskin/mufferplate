@@ -7,6 +7,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Eklenenler
 
 - Cache busting için local kontrolü getirildi. Yayına alınan sitelerde cache busting durumunun önüne geçebilmek için kontrol yapılmakta. Eğer geliştirme ortamı localhost değilse sistem rastgele sürüm vermeyecek.
+- Artık JS çıktısına build alınan tarih ekleniyor.
 
 ### Düzeltmeler
 
