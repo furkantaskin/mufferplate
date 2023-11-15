@@ -9,12 +9,28 @@
 @import 'functions';
 @import 'mixins';
 
-@include generate_utilities();
-@include generate_opacity();
-@include generate_margin();
-@include generate_padding();
-@include generate_position();
-@include generate_width_height();
+$mixin_list: (
+  'generate_utilities',
+  'generate_opacity',
+  'generate_margin',
+  'generate_padding',
+  'generate_position',
+  'generate_width_height'
+);
+
+@mixin generate_mixins($responsive_key: false, $hover_key: false) {
+  $arg: null;
+  @if ($responsive_key == false and $hover_key == false) {
+    $arg: '';
+  } @else {
+    $arg: if($responsive-key, #{$responsive-key + '\\:'}, '') +
+      if($hover_key, 'hover\\:', '');
+  }
+  @each $element in $mixin_list {
+    @include meta.apply(meta.get-mixin($element), $arg);
+  }
+}
+@include generate_mixins();
 
 @each $key, $val in $grid-breakpoints {
   @if $val != 0 {
@@ -29,12 +45,7 @@
 @if $is-mobile-first == true {
   @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
-      @include generate_utilities($key);
-      @include generate_opacity($key);
-      @include generate_margin($key);
-      @include generate_padding($key);
-      @include generate_position($key);
-      @include generate_width_height($key);
+      @include generate_mixins($key);
     }
   }
 } @else {
@@ -51,17 +62,11 @@
       );
       $cur-key: list.nth($key, 1);
       @media screen and (max-width: #{$previous-val - 1}) {
-        @include generate_utilities($cur-key);
-        @include generate_opacity($cur-key);
-        @include generate_margin($key);
-        @include generate_padding($key);
-        @include generate_position($key);
-        @include generate_width_height($key);
+        @include generate_mixins($key);
       }
     }
   }
 }
-
 
 // Colors start
 @each $color_code, $color_value in $color_map {
@@ -71,7 +76,7 @@
   .bg-#{$color_code} {
     background-color: var(--color-#{$color_code});
   }
-  .border-#{$color_code}{
+  .border-#{$color_code} {
     border-color: var(--color-#{$color_code});
   }
   .fill-#{$color_code} {

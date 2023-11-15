@@ -84,8 +84,8 @@
   }
 }
 
-@mixin generate_utilities($has-key: false) {
-  $prefix: if($has-key, '#{$has-key}\\:', '');
+@mixin generate_utilities($has-key: '') {
+  $prefix: $has-key;
   @each $property, $map in $utilities {
     @each $util-key, $util-val in map.get($map, values) {
       @if (map.get($map, isActive) == true) {
@@ -105,14 +105,14 @@
   }
 }
 
-@mixin generate_margin($responsive_key: '.') {
+@mixin generate_margin($responsive_key: '') {
   //.mt-10 or .-mb-10\.5
   $class_prefix: 'm';
   $class_property: 'margin';
   $responsive_key: if(
-    $responsive_key != '.',
-    '.#{$responsive-key}\\:',
-    $responsive_key
+    $responsive_key != '',
+    '.#{$responsive-key}',
+    '.'
   );
   @each $key, $space_map in $spacing-range {
     $selector: map.get($space_map, 'selector');
@@ -160,13 +160,13 @@
   }
 }
 
-@mixin generate_padding($responsive_key: '.') {
+@mixin generate_padding($responsive_key: '') {
   $class_prefix: 'p';
   $class_property: 'padding';
   $responsive_key: if(
-    $responsive_key != '.',
+    $responsive_key != '',
     '.#{$responsive-key}\\:',
-    $responsive_key
+    '.'
   );
   @each $key, $space_map in $spacing-range {
     @if ($key >= 0) {
@@ -199,11 +199,11 @@
   }
 }
 
-@mixin generate_position($responsive_key: '.') {
+@mixin generate_position($responsive_key: '') {
   $responsive_key: if(
-    $responsive_key != '.',
+    $responsive_key != '',
     '.#{$responsive-key}\\:',
-    $responsive_key
+    '.'
   );
 
   @each $position_key, $position-val in $position-directions {
@@ -284,7 +284,7 @@
 }
 
 @mixin generate_opacity($responsive_key: '') {
-  $prefix: if($responsive_key, '#{$responsive_key}\\:', $responsive_key);
+  $prefix: if($responsive_key != '', '#{$responsive_key}\\:', $responsive_key);
   @for $i from 0 through 100 {
     @if $i % 5 == 0 {
       .#{$responsive_key}opacity-#{$i} {
