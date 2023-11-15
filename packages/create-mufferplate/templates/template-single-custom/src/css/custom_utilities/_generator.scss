@@ -71,6 +71,9 @@
   .bg-#{$color_code} {
     background-color: var(--color-#{$color_code});
   }
+  .border-#{$color_code}{
+    border-color: var(--color-#{$color_code});
+  }
   .fill-#{$color_code} {
     fill: var(--color-#{$color_code});
   }

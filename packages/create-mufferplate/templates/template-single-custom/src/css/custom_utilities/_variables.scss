@@ -23,7 +23,7 @@ $container-max-widths: (
 
 $grid-gutter: 24px;
 $number-of-col: 12;
-$is-mobile-first: true;
+$is-mobile-first: false;
 $container-no-padding: false;
 
 $spacing-utilities: ();
@@ -267,11 +267,29 @@ $utilities: (
     ),
   ),
   'borders': (
-    property: border,
+    property: border-style,
     isActive: true,
     values: (
-      border-none: unset,
+      border-none: none,
+      border-solid: solid,
+      border-dashed: dashed,
+      border-dotted: dotted,
     ),
+  ),
+  'border-radiuses': (
+    property: border-radius,
+    isActive: true,
+    values: (
+      rounded-none: 0,
+      rounded-sm: 2px,
+      rounded: 4px,
+      rounded-md: 6px,
+      rounded-lg: 8px,
+      rounded-xl: 12px,
+      rounded-2xl: 16px,
+      rounded-3xl: 24px,
+      rounded-full: 9999px,
+    )
   ),
   'appearance': (
     property: appearance,
