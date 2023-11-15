@@ -9,6 +9,8 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Cache busting için local kontrolü getirildi. Yayına alınan sitelerde cache busting durumunun önüne geçebilmek için kontrol yapılmakta. Eğer geliştirme ortamı localhost değilse sistem rastgele sürüm vermeyecek.
 - Artık JS çıktısına build alınan tarih ekleniyor.
 - Line height için diğer Tailwind classları eklendi
+- Border radius genel sınıflar eklendi. `rounded-corner` sınıfı yerine `rounded-full` sınıfı eklendi.
+- Column generator varsayılan hale getirildi.
 
 ### Değişenler
 
