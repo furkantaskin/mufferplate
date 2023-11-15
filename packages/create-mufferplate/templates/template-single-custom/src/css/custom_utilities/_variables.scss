@@ -32,7 +32,7 @@ $spacer-limit: 25;
 $spacing-range: ();
 $width-range: ();
 
-$has-rtl: true;
+$has-rtl: false;
 $font-rem: false;
 
 $utilities: (
@@ -314,6 +314,11 @@ $position-directions: (
   'bottom': if($has-rtl, 'inset-block-end', 'bottom'),
   'left': 'left',
   'right': 'right',
+);
+
+$gap-directions: (
+  'x': 'column-gap',
+  'y': 'row-gap',
 );
 
 @if ($has-rtl == true) {

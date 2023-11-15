@@ -15,19 +15,13 @@ $mixin_list: (
   'generate_margin',
   'generate_padding',
   'generate_position',
-  'generate_width_height'
+  'generate_width_height',
+  'generate_gap'
 );
 
-@mixin generate_mixins($responsive_key: false, $hover_key: false) {
-  $arg: null;
-  @if ($responsive_key == false and $hover_key == false) {
-    $arg: '';
-  } @else {
-    $arg: if($responsive-key, #{$responsive-key + '\\:'}, '') +
-      if($hover_key, 'hover\\:', '');
-  }
+@mixin generate_mixins($responsive_key: false) {
   @each $element in $mixin_list {
-    @include meta.apply(meta.get-mixin($element), $arg);
+    @include meta.apply(meta.get-mixin($element), if($responsive_key, #{$responsive_key + '\\:'}, ''));
   }
 }
 @include generate_mixins();
@@ -62,7 +56,7 @@ $mixin_list: (
       );
       $cur-key: list.nth($key, 1);
       @media screen and (max-width: #{$previous-val - 1}) {
-        @include generate_mixins($key);
+        @include generate_mixins($responsive_key: $cur-key);
       }
     }
   }

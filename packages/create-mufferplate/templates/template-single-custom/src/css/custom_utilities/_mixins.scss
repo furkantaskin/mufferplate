@@ -84,8 +84,8 @@
   }
 }
 
-@mixin generate_utilities($has-key: '') {
-  $prefix: $has-key;
+@mixin generate_utilities($responsive_key: '') {
+  $prefix: $responsive_key;
   @each $property, $map in $utilities {
     @each $util-key, $util-val in map.get($map, values) {
       @if (map.get($map, isActive) == true) {
@@ -165,7 +165,7 @@
   $class_property: 'padding';
   $responsive_key: if(
     $responsive_key != '',
-    '.#{$responsive-key}\\:',
+    '.#{$responsive-key}',
     '.'
   );
   @each $key, $space_map in $spacing-range {
@@ -199,10 +199,49 @@
   }
 }
 
+@mixin generate_gap($responsive_key: ''){
+  $class_prefix: 'gap';
+  $responsive_key: if(
+    $responsive_key != '',
+    '.#{$responsive-key}',
+    '.'
+  );
+  @each $key, $space_map in $spacing-range {
+    @if ($key >= 0) {
+      $selector: map.get($space_map, 'selector');
+      $prefix: map.get($space_map, 'prefix');
+      $value: map.get($space_map, 'value');
+
+      // To generate -> .m-20{margin: 80px}
+      #{$responsive_key + $prefix + $class_prefix + $selector} {
+        gap: #{$value};
+      }
+
+      // Generate classes with directions
+      @each $direction_key, $direction_val in $gap-directions {
+        #{$responsive_key
+          + $prefix
+          + $class_prefix
+          + '-'
+          + $direction_key
+          + $selector} {
+          @if (meta.type-of($direction_val) == list) {
+            @each $direction in $direction_val {
+              #{$direction_val}: #{$value};
+            }
+          } @else {
+            #{$direction_val}: #{$value};
+          }
+        }
+      }
+    }
+  }
+}
+
 @mixin generate_position($responsive_key: '') {
   $responsive_key: if(
     $responsive_key != '',
-    '.#{$responsive-key}\\:',
+    '.#{$responsive-key}',
     '.'
   );
 
@@ -225,20 +264,21 @@
       }
     }
   }
-  
-
-  
 }
 
 @mixin generate_width_height($responsive_key: '', $upper_limit: $spacer_limit, $spacing: $spacer){
-  $prefix: if($responsive_key != '', '#{$responsive_key}\\:', $responsive_key);
+  $responsive_key: if(
+    $responsive_key != '',
+    '.#{$responsive-key}',
+    '.'
+  );
   @each $key, $value in ('w': 'width', 'h': 'height'){
     @for $i from 0 through ($upper_limit * $spacing) {
       $unit: math.unit($spacer);
       $i: strip-unit($i);
       $spacing: strip-unit($spacing);
       @if ($i % $spacing == 0){
-        .#{$prefix + $key + '-' + #{math.div($i, $spacing)}}{
+        #{$responsive_key + $key + '-' + #{math.div($i, $spacing)}}{
           #{$value}: #{$i}#{$unit};
         }
       }
@@ -247,20 +287,20 @@
     @each $index, $width_map in $width-range{
       $css_value: map.get($width_map, 'value');
       $selector: map.get($width_map, 'selector');
-      .#{$prefix + $key + $selector}{
+      #{$responsive_key + $key + $selector}{
         #{$value}: #{$css_value};
       }
     }
 
-    .#{$prefix + $key + '-full'}{
+    #{$responsive_key + $key + '-full'}{
       #{$value}: 100%
     }
 
-    .#{$prefix + $key + '-auto'}{
+    #{$responsive_key + $key + '-auto'}{
       #{$value}: auto;
     }
 
-    .#{$prefix + $key + '-screen'}{
+    #{$responsive_key + $key + '-screen'}{
       #{$value}: #{if($key == 'w', '100vw', '100vh')}
     }
 
