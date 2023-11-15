@@ -10,17 +10,25 @@
 @import 'mixins';
 
 @include generate_utilities();
-@include generate_cols();
 @include generate_opacity();
 @include generate_margin();
 @include generate_padding();
 @include generate_position();
 @include generate_width_height();
 
+@each $key, $val in $grid-breakpoints {
+  @if $val != 0 {
+    @media screen and (min-width: #{$val}) {
+      @include generate_cols($key);
+    }
+  } @else {
+    @include generate_cols();
+  }
+}
+
 @if $is-mobile-first == true {
   @each $key, $val in $grid-breakpoints {
     @media screen and (min-width: #{$val}) {
-      @include generate_cols($key);
       @include generate_utilities($key);
       @include generate_opacity($key);
       @include generate_margin($key);
@@ -30,13 +38,6 @@
     }
   }
 } @else {
-  @each $key, $val in $grid-breakpoints {
-    @if $val != 0 {
-      @media screen and (min-width: #{$val}) {
-        @include generate_cols($key);
-      }
-    }
-  }
   $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
   @each $key, $val in $reverse-grid-breakpoints {
     $current-index: list.index(
@@ -61,13 +62,7 @@
   }
 }
 
-$default_colors: (
-  'white': #fff,
-  'transparent': transparent,
-  'black': #000,
-);
 
-$color_map: map.merge($color_map, $default_colors);
 // Colors start
 @each $color_code, $color_value in $color_map {
   .text-#{$color_code} {
@@ -87,7 +82,6 @@ $color_map: map.merge($color_map, $default_colors);
     @extend .container-fluid;
   }
   @include generate_container_up($key) {
-
     $container-width: map.get($container-max-widths, $key);
     $gutter-total: (($number-of-col - 1) * $grid-gutter);
     $col-width: math.div(

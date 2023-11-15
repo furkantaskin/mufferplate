@@ -23,7 +23,7 @@ $container-max-widths: (
 
 $grid-gutter: 24px;
 $number-of-col: 12;
-$is-mobile-first: false;
+$is-mobile-first: true;
 $container-no-padding: false;
 
 $spacing-utilities: ();
@@ -201,6 +201,11 @@ $utilities: (
     isActive: true,
     values: (
       leading-none: 1,
+      leading-tight: 1.25,
+      leading-snug: 1.375,
+      leading-normal: 1.5,
+      leading-relaxes: 1.625,
+      leading-loose: 2
     ),
   ),
   'overflows': (
@@ -302,3 +307,12 @@ $position-directions: (
     )
   );
 }
+
+
+$default_colors: (
+  'white': #fff,
+  'transparent': transparent,
+  'black': #000,
+);
+
+$color_map: map.merge($color_map, $default_colors);
