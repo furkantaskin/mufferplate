@@ -42,6 +42,7 @@ $utilities: (
     values: (
       block: block,
       flex: flex,
+      grid: grid,
       inline-block: inline-block,
       inline-flex: inline-flex,
       hidden: none,
@@ -56,7 +57,7 @@ $utilities: (
       fixed: fixed,
     ),
   ),
-  'align': (
+  'align-items': (
     property: align-items,
     isActive: true,
     values: (
@@ -67,7 +68,68 @@ $utilities: (
       items-stretch: stretch,
     ),
   ),
-  'justify': (
+  'align-content': (
+    property: align-content,
+    isActive: true,
+    values: (
+      content-normal: normal,
+      content-start: flex-start,
+      content-end: flex-end,
+      content-center: center,
+      content-between: space-between,
+      content-around: space-around,
+      content-evenly: space-evenly,
+    ),
+  ),
+  'align-self': (
+    property: align-self,
+    isActive: true,
+    values: (
+      self-auto: auto,
+      self-start: flex-start,
+      self-end: flex-end,
+      self-center: center,
+      self-stretch: stretch,
+      self-baseline: baseline,
+    ),
+  ),
+  'place-items': (
+    property: place-items,
+    isActive: true,
+    values: (
+      place-items-start: start,
+      place-items-end: end,
+      place-items-center: center,
+      place-items-stretch: stretch,
+      place-items-baseline: baseline,
+    ),
+  ),
+  'place-content': (
+    property: place-content,
+    isActive: true,
+    values: (
+      place-content-center: center,
+      place-content-start: start,
+      place-content-end: end,
+      place-content-between: space-between,
+      place-content-around: space-around,
+      place-content-evenly: space-evenly,
+      place-content-stretch: stretch,
+      place-content-baseline: baseline,
+    ),
+  ),
+  'place-self': (
+    property: place-self,
+    isActive: true,
+    values: (
+      place-self-auto: auto,
+      place-self-start: start,
+      place-self-end: end,
+      place-self-center: center,
+      place-self-stretch: stretch,
+    ),
+  ),
+  'justify-content': (
     property: justify-content,
     isActive: true,
     values: (
@@ -76,6 +138,27 @@ $utilities: (
       justify-end: end,
       justify-center: center,
       justify-between: space-between,
+    ),
+  ),
+  'justify-items': (
+    property: justify-items,
+    isActive: true,
+    values: (
+      justify-items-start: start,
+      justify-items-end: end,
+      justify-items-center: center,
+      justify-items-stretch: stretch,
+    ),
+  ),
+  'justify-self': (
+    property: justify-self,
+    isActive: true,
+    values: (
+      justify-self-auto: auto,
+      justify-self-start: start,
+      justify-self-end: end,
+      justify-self-center: center,
+      justify-self-stretch: stretch,
     ),
   ),
   'flex-direction': (
@@ -105,6 +188,22 @@ $utilities: (
       flex-auto: 1 1 auto,
       flex-initial: 0 1 auto,
       flex-none: none,
+    ),
+  ),
+  'flex-grow': (
+    property: flex-grow,
+    isActive: true,
+    values: (
+      grow: 1,
+      grow-0: 0,
+    ),
+  ),
+  'flex-shrink': (
+    property: flex-shrink,
+    isActive: true,
+    values: (
+      shrink: 1,
+      shrink-0: 0,
     ),
   ),
   'text-align': (
@@ -177,6 +276,17 @@ $utilities: (
       pointer-events-auto: auto,
     ),
   ),
+  'whitespaces': (
+    property: white-space,
+    isActive: true,
+    values: (
+      whitespace-normal: normal,
+      whitespace-nowrap: nowrap,
+      whitespace-pre: pre,
+      whitespace-pre-line: pre-line,
+      whitespace-pre-wrap: pre-wrap,
+    ),
+  ),
   'font-sizes': (
     property: font-size,
     isActive: true,
@@ -205,7 +315,7 @@ $utilities: (
       leading-snug: 1.375,
       leading-normal: 1.5,
       leading-relaxes: 1.625,
-      leading-loose: 2
+      leading-loose: 2,
     ),
   ),
   'overflows': (
@@ -289,15 +399,15 @@ $utilities: (
       rounded-2xl: 16px,
       rounded-3xl: 24px,
       rounded-full: 9999px,
-    )
+    ),
   ),
   'appearance': (
     property: appearance,
     isActive: true,
     values: (
-      appearance-none: none
-    )
-  )
+      appearance-none: none,
+    ),
+  ),
 );
 
 $space-directions: (
@@ -330,7 +440,6 @@ $gap-directions: (
     )
   );
 }
-
 
 $default_colors: (
   'white': #fff,
