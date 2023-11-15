@@ -10,6 +10,10 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Artık JS çıktısına build alınan tarih ekleniyor.
 - Line height için diğer Tailwind classları eklendi
 
+### Değişenler
+
+- `offset` sınıfı için boşluk değeri RTL ile uyumlu hale getirildi. Artık RTL mode etkinse `margin-block-start` olarak, değilse `margin-left` olarak değer gelecek.
+
 ### Düzeltmeler
 
 - Multiple template için eksik mufferplate konfigürasyon hatası giderildi.
