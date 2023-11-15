@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.05
+
+### Düzeltmeler
+
+- Mobil menü açılması durumunda sitede yaşanan kayma sorunu giderildi.
+
 ## 2023.11.02
 
 ### Eklenenler
