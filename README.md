@@ -1,6 +1,10 @@
-# Personal Boilerplate
+# Mufferplate
 
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/furkantaskin/mufferplate)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/furkantaskin/mufferplate)
+
+
+
 
 To prevent repetition of generating project from scratch and missing the development cycle, mufferplate has been created.
 
