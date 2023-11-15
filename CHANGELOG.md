@@ -12,6 +12,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Border radius genel sınıflar eklendi. `rounded-corner` sınıfı yerine `rounded-full` sınıfı eklendi.
 - Column generator varsayılan hale getirildi.
 - Yeni sınıflar eklendi. Eklenen sınıflar: `align-content, align-self, place-items, place-content, place-slef, justify-items, justify-self, flex-grow, white-space`
+- Mufferplate için TypeScript desteği eklendi. Artık sadece dizin içindeki js dosyalarını değil, ts dosyalarını da işleyebilecek.
 
 ### Değişenler
 
