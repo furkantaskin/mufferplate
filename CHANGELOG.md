@@ -11,6 +11,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Düzeltmeler
 
 - Container dışında kalan alanın genişliğini hesaplamada yapılan hata giderildi.
+- `row` için margin hesaplamasındaki hata giderildi.
 
 ## 2023.11.15
 
