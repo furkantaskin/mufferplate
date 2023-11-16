@@ -8,6 +8,9 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Ağdaki diğer cihazlardan erişimi kesmek için PHP koşulu eklendi. Deploy anında bu kodun kaldırılması iyi olacaktır.
 
+### Düzeltmeler
+
+- Container dışında kalan alanın genişliğini hesaplamada yapılan hata giderildi.
 
 ## 2023.11.15
 
