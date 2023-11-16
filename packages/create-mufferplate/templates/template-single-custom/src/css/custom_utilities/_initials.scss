@@ -3,7 +3,7 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 #{math.div($grid-gutter, 2)};
+  margin: 0 #{math.div($grid-gutter, -2)};
 }
 
 *[class^='col-'] {
