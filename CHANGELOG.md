@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.16
+
+### Eklenenler
+
+- Ağdaki diğer cihazlardan erişimi kesmek için PHP koşulu eklendi. Deploy anında bu kodun kaldırılması iyi olacaktır.
+
+
 ## 2023.11.15
 
 ### Eklenenler
