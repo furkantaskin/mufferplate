@@ -2,6 +2,12 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.18
+
+### Düzeltmeler
+
+- PurgeCSS için Swiper içinde tanımlanan ignore flaglarından kaynaklı GLightbox'ın es geçilmesi hatası giderildi.
+
 ## 2023.11.16
 
 ### Eklenenler
