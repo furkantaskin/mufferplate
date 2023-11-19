@@ -9,56 +9,23 @@
 @import 'functions';
 @import 'mixins';
 
-$mixin_list: (
-  'generate_utilities',
-  'generate_opacity',
-  'generate_margin',
-  'generate_padding',
-  'generate_position',
-  'generate_width_height',
-  'generate_gap'
-);
-
-@mixin generate_mixins($responsive_key: false) {
-  @each $element in $mixin_list {
-    @include meta.apply(meta.get-mixin($element), if($responsive_key, #{$responsive_key + '\\:'}, ''));
-  }
-}
 @include generate_mixins();
 
 @each $key, $val in $grid-breakpoints {
+  $key: if($val == 0, '', $key + '-');
   @if $val != 0 {
     @media screen and (min-width: #{$val}) {
       @include generate_cols($key);
     }
   } @else {
-    @include generate_cols();
+    @include generate_cols($key);
   }
 }
 
-@if $is-mobile-first == true {
-  @each $key, $val in $grid-breakpoints {
-    @media screen and (min-width: #{$val}) {
-      @include generate_mixins($key);
-    }
-  }
-} @else {
-  $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
-  @each $key, $val in $reverse-grid-breakpoints {
-    $current-index: list.index(
-      $reverse-grid-breakpoints,
-      ($key $val)
-    );
-    @if $current-index != 1 {
-      $previous-val: list.nth(
-        list.nth($reverse-grid-breakpoints, $current-index - 1),
-        2
-      );
-      $cur-key: list.nth($key, 1);
-      @media screen and (max-width: #{$previous-val - 1}) {
-        @include generate_mixins($responsive_key: $cur-key);
-      }
-    }
+
+@each $key, $val in if($is-mobile-first==true, $grid-breakpoints, reverseBreakPoints($grid-breakpoints)){
+  @media screen and (#{if($is-mobile-first==true, 'min-width', 'max-width')}: #{$val}){
+    @include generate_mixins($key);
   }
 }
 

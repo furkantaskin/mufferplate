@@ -4,7 +4,6 @@
 @use 'sass:string';
 @use 'sass:meta';
 
-
 @mixin generate_spacing_range(
   $limit: $spacer-limit,
   $spacing: $spacer
@@ -84,36 +83,30 @@
   }
 }
 
-@mixin generate_utilities($responsive_key: '') {
-  $prefix: $responsive_key;
+@mixin generate_utilities($responsive_key) {
   @each $property, $map in $utilities {
     @each $util-key, $util-val in map.get($map, values) {
       @if (map.get($map, isActive) == true) {
-        .#{$prefix}#{$util-key} {
+        #{$responsive_key}#{$util-key} {
           #{map.get($map, property)}: $util-val;
         }
       }
     }
   }
   @for $i from 0 through $number-of-col {
-    .#{$prefix}z-#{$i} {
+    #{$responsive_key}z-#{$i} {
       z-index: $i;
     }
-    .#{$prefix}order-#{$i} {
+    #{$responsive_key}order-#{$i} {
       order: $i;
     }
   }
 }
 
-@mixin generate_margin($responsive_key: '') {
+@mixin generate_margin($responsive_key) {
   //.mt-10 or .-mb-10\.5
   $class_prefix: 'm';
   $class_property: 'margin';
-  $responsive_key: if(
-    $responsive_key != '',
-    '.#{$responsive-key}',
-    '.'
-  );
   @each $key, $space_map in $spacing-range {
     $selector: map.get($space_map, 'selector');
     $prefix: map.get($space_map, 'prefix');
@@ -160,14 +153,9 @@
   }
 }
 
-@mixin generate_padding($responsive_key: '') {
+@mixin generate_padding($responsive_key) {
   $class_prefix: 'p';
   $class_property: 'padding';
-  $responsive_key: if(
-    $responsive_key != '',
-    '.#{$responsive-key}',
-    '.'
-  );
   @each $key, $space_map in $spacing-range {
     @if ($key >= 0) {
       $selector: map.get($space_map, 'selector');
@@ -199,13 +187,8 @@
   }
 }
 
-@mixin generate_gap($responsive_key: ''){
+@mixin generate_gap($responsive_key) {
   $class_prefix: 'gap';
-  $responsive_key: if(
-    $responsive_key != '',
-    '.#{$responsive-key}',
-    '.'
-  );
   @each $key, $space_map in $spacing-range {
     @if ($key >= 0) {
       $selector: map.get($space_map, 'selector');
@@ -238,13 +221,7 @@
   }
 }
 
-@mixin generate_position($responsive_key: '') {
-  $responsive_key: if(
-    $responsive_key != '',
-    '.#{$responsive-key}',
-    '.'
-  );
-
+@mixin generate_position($responsive_key) {
   @each $position_key, $position-val in $position-directions {
     @each $key, $space_map in $spacing-range {
       $selector: map.get($space_map, 'selector');
@@ -255,81 +232,127 @@
         #{$position_val}: #{$value};
       }
     }
-    @each $index, $width_map in $width-range{
+    @each $index, $width_map in $width-range {
       $css_value: map.get($width_map, 'value');
       $selector: map.get($width_map, 'selector');
 
-      #{$responsive_key + $position_key + $selector}{
+      #{$responsive_key + $position_key + $selector} {
         #{$position_val}: #{$css_value};
       }
     }
   }
 }
 
-@mixin generate_width_height($responsive_key: '', $upper_limit: $spacer_limit, $spacing: $spacer){
-  $responsive_key: if(
-    $responsive_key != '',
-    '.#{$responsive-key}',
-    '.'
-  );
-  @each $key, $value in ('w': 'width', 'h': 'height'){
-    @for $i from 0 through ($upper_limit * $spacing) {
-      $unit: math.unit($spacer);
-      $i: strip-unit($i);
-      $spacing: strip-unit($spacing);
-      @if ($i % $spacing == 0){
-        #{$responsive_key + $key + '-' + #{math.div($i, $spacing)}}{
-          #{$value}: #{$i}#{$unit};
+@mixin generate_width_height(
+  $responsive_key,
+  $upper_limit: $spacer_limit,
+  $spacing: $spacer
+) {
+  @each $elem in ('', 'min-', 'max-') {
+    @each $key, $value in ('w': 'width', 'h': 'height') {
+      $key: $elem + $key;
+      $value: $elem+ $value;
+      @for $i from 0 through ($upper_limit * $spacing) {
+        $unit: math.unit($spacer);
+        $i: strip-unit($i);
+        $spacing: strip-unit($spacing);
+        @if ($i % $spacing == 0) {
+          #{$responsive_key
+            + $key
+            + '-'
+            + #{math.div($i, $spacing)}} {
+            #{$value}: #{$i}#{$unit};
+          }
         }
       }
-    }
 
-    @each $index, $width_map in $width-range{
-      $css_value: map.get($width_map, 'value');
-      $selector: map.get($width_map, 'selector');
-      #{$responsive_key + $key + $selector}{
-        #{$value}: #{$css_value};
+      @each $index, $width_map in $width-range {
+        $css_value: map.get($width_map, 'value');
+        $selector: map.get($width_map, 'selector');
+        #{$responsive_key + $key + $selector} {
+          #{$value}: #{$css_value};
+        }
+      }
+
+      #{$responsive_key + $key + '-full'} {
+        #{$value}: 100%;
+      }
+
+      #{$responsive_key + $key + '-auto'} {
+        #{$value}: auto;
+      }
+
+      #{$responsive_key + $key + '-min'} {
+        #{$value}: min-content;
+      }
+      #{$responsive_key + $key + '-max'} {
+        #{$value}: max-content;
+      }
+      #{$responsive_key + $key + '-fit'} {
+        #{$value}: fit-content;
+      }
+
+      #{$responsive_key + $key + '-screen'} {
+        #{$value}: #{if($key == 'w', '100vw', '100vh')};
       }
     }
-
-    #{$responsive_key + $key + '-full'}{
-      #{$value}: 100%
-    }
-
-    #{$responsive_key + $key + '-auto'}{
-      #{$value}: auto;
-    }
-
-    #{$responsive_key + $key + '-screen'}{
-      #{$value}: #{if($key == 'w', '100vw', '100vh')}
-    }
-
   }
 }
 
-@mixin generate_cols($responsive_key: '') {
-  $prefix: if($responsive_key != '', '#{$responsive_key}-', $responsive_key);
+@mixin generate_cols($responsive_key) {
   @for $i from 0 through $number-of-col {
-    @if ($i != 0){
-      .col-#{$prefix}#{$i} {
+    @if ($i != 0) {
+      .col-#{$responsive_key}#{$i} {
         width: generate-width($i, $number-of-col);
       }
     }
     @if $i != $number-of-col {
-      .offset-#{$prefix}#{$i} {
-        #{if($has-rtl, 'margin-inline-start', 'margin-left')}: generate-width($i, $number-of-col);
+      .offset-#{$responsive_key}#{$i} {
+        #{if($has-rtl, 'margin-inline-start', 'margin-left')}: generate-width(
+          $i,
+          $number-of-col
+        );
       }
     }
   }
 }
 
-@mixin generate_opacity($responsive_key: '') {
-  $prefix: if($responsive_key != '', '#{$responsive_key}\\:', $responsive_key);
+@mixin generate_opacity($responsive_key) {
   @for $i from 0 through 100 {
     @if $i % 5 == 0 {
-      .#{$responsive_key}opacity-#{$i} {
+      #{$responsive_key}opacity-#{$i} {
         opacity: math.div($i, 100);
       }
     }
+  }
+}
+
+@mixin generate_transition_duration($responsive_key) {
+  @for $i from 0 through 100 {
+    @if $i % 5 == 0 {
+      #{$responsive_key}transition-#{$i*10} {
+        transition-duration: #{$i * 10}ms;
+      }
+    }
+  }
+}
+
+$mixin_list: (
+  'generate_utilities',
+  'generate_opacity',
+  'generate_margin',
+  'generate_padding',
+  'generate_position',
+  'generate_width_height',
+  'generate_gap',
+  'generate_transition_duration'
+);
+
+@mixin generate_mixins($responsive_key: false) {
+  @each $element in $mixin_list {
+    @include meta.apply(
+      meta.get-mixin($element),
+      if($responsive_key, #{'.' + $responsive_key + '\\:'}, '.')
+    );
   }
 }

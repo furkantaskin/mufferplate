@@ -408,6 +408,21 @@ $utilities: (
       appearance-none: none,
     ),
   ),
+  'transition-property': (
+    property: transition-property,
+    isActive: true,
+    values: (
+      transition-none: none,
+      transition-all: string.unquote('all'),
+      transition-colors:
+        string.unquote('color, background-color, border-color, text-decoration-color, fill, stroke'),
+      transition-margin: string.unquote('margin'),
+      transition-padding: string.unquote('padding'),
+      transition-opacity: string.unquote('opacity'),
+      transition-shadow: string.unquote('box-shadow'),
+      transition-transform: string.unquote('transform'),
+    ),
+  ),
 );
 
 $space-directions: (
@@ -433,18 +448,10 @@ $gap-directions: (
 
 @if ($has-rtl == true) {
   $position-directions: map.merge(
-    $position-directions,
+    s $position-directions,
     (
       'start': 'inset-inline-start',
       'end': 'inset-inline-end',
     )
   );
 }
-
-$default_colors: (
-  'white': #fff,
-  'transparent': transparent,
-  'black': #000,
-);
-
-$color_map: map.merge($color_map, $default_colors);

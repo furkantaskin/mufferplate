@@ -8,7 +8,7 @@
       height: 20px;
       margin-left: auto;
       span {
-        @include get_transition();
+        transition: .3s all;
         height: 3px;
         background-color: #fff;
         border-radius: 2px;
@@ -37,12 +37,7 @@
   }
 
   .mobileMenu {
-    @include get_transition(
-      (
-        left: 0.4s,
-        opacity: 0.4s,
-      )
-    );
+    transition: .4s left, .4s opacity;
     left: 100vw;
     top: 0;
     opacity: 0;
@@ -69,11 +64,7 @@ nav[id^='nav-mobile']:not(#nav-mobile-1) {
   height: 100vh;
   transform: translateX(100%);
   background-color: var(--color-primary);
-  @include get_transition(
-    (
-      transform: 0.4s,
-    )
-  );
+  transition: .4s transform;
 }
 
 nav[id^='nav-mobile']:not(#nav-mobile-1).show {

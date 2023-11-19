@@ -82,13 +82,6 @@ $breakpoints: (
   }
 }
 
-@mixin get_transition(
-  $transition: (
-    all: 0.3s,
-  )
-) {
-  $final_list: map.merge($final_list, (#{&}: $transition)) !global;
-}
 
 @mixin call_template($template) {
   @if $template == 'noscroll' {

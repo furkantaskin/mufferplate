@@ -59,3 +59,26 @@
 
 @return $number;
 }
+
+
+@function reverseBreakPoints($grid-breakpoints){
+  $breakpoint-map: ();
+  $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
+  @each $key, $val in $reverse-grid-breakpoints{
+    $current-index: list.index(
+      $reverse-grid-breakpoints,
+      ($key $val)
+    );
+
+
+    @if $current-index != 1 {
+      $previous-val: list.nth(
+        list.nth($reverse-grid-breakpoints, $current-index - 1),
+        2
+      );
+      $cur-key: list.nth($key, 1);
+      $breakpoint-map: map.merge($breakpoint-map, ($cur-key: $previous-val - 1));
+    }
+  }
+  @return $breakpoint-map;
+}
