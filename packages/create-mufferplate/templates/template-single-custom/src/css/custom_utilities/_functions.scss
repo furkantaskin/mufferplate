@@ -1,3 +1,8 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+
 @function to-fixed($float, $digits: 5) {
   $sass-precision: 5;
 
@@ -16,60 +21,62 @@
 }
 
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-  $min: map-get($breakpoints, $name);
+  $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
-  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+  @return if(
+    breakpoint-min($name, $breakpoints) == null,
+    '',
+    '-#{$name}'
+  );
 }
 
-
-@function mapReverse ($map) {
+@function mapReverse($map) {
   $result: null;
 
-  @if type-of($map) == "map" {
-      $keys: map-keys($map);
-      $map-reversed: ();
-      
-      @for $i from length($keys) through 1 {
-          $map-reversed: map-merge(
-              $map-reversed,
-              (nth($keys, $i): map-get($map, nth($keys, $i)))
-          );
-      }
+  @if type-of($map) == 'map' {
+    $keys: map.keys($map);
+    $map-reversed: ();
 
-      @if type-of($map-reversed) == "map" {
-          $result: $map-reversed;
-      } @else {
-          @warn 'There was an error reversing the order of "#{$map}"';
-      }
+    @for $i from length($keys) through 1 {
+      $map-reversed: map.merge(
+        $map-reversed,
+        (
+          list.nth($keys, $i): map.get($map, list.nth($keys, $i)),
+        )
+      );
+    }
+
+    @if meta.type-of($map-reversed) == 'map' {
+      $result: $map-reversed;
+    } @else {
+      @warn 'There was an error reversing the order of "#{$map}"';
+    }
   } @else {
-      @warn '"#{$map}" is not a valid map';
+    @warn '"#{$map}" is not a valid map';
   }
 
   @return $result;
 }
 
-
 @function strip-unit($number) {
-@if type-of($number) == 'number' and not math.is-unitless($number) {
-  @return math.div($number, $number * 0 + 1);
+  @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
 }
 
-@return $number;
-}
-
-
-@function reverseBreakPoints($grid-breakpoints){
+@function reverseBreakPoints($grid-breakpoints) {
   $breakpoint-map: ();
   $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
-  @each $key, $val in $reverse-grid-breakpoints{
+  @each $key, $val in $reverse-grid-breakpoints {
     $current-index: list.index(
       $reverse-grid-breakpoints,
       ($key $val)
     );
-
 
     @if $current-index != 1 {
       $previous-val: list.nth(
@@ -77,7 +84,12 @@
         2
       );
       $cur-key: list.nth($key, 1);
-      $breakpoint-map: map.merge($breakpoint-map, ($cur-key: $previous-val - 1));
+      $breakpoint-map: map.merge(
+        $breakpoint-map,
+        (
+          $cur-key: $previous-val - 1,
+        )
+      );
     }
   }
   @return $breakpoint-map;
