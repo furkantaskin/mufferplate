@@ -2,6 +2,23 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.19
+
+### Eklenenler
+
+- Yeni utility sınıfları eklendi: `transition-duration, transition-property, {min|max}-{width|height}, {fit|min|max}-content`
+
+### Değişenler
+
+- `get_transition` mixin'i yeni eklenen sınıflardan dolayı kaldırıldı.
+- Mobile-first ve desktop-first için grid noktalarına göre mixin çağırma fonksiyonu güncellendi.
+- Responsive key'e göre gelen prefix yapısı güncellendi. Artık prefix tek bir mixin içinde düzenlenip diğer mixin'lere dağılmakta.
+
+### Düzeltmeler
+
+- `offset` sınıfı için RTL modda verilen yanlış yöndeki margin hatası giderildi.
+
+
 ## 2023.11.18
 
 ### Düzeltmeler
