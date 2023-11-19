@@ -317,7 +317,7 @@
     }
     @if $i != $number-of-col {
       .offset-#{$prefix}#{$i} {
-        #{if($has-rtl, 'margin-block-start', 'margin-left')}: generate-width($i, $number-of-col);
+        #{if($has-rtl, 'margin-inline-start', 'margin-left')}: generate-width($i, $number-of-col);
       }
     }
   }
