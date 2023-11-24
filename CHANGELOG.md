@@ -51,7 +51,7 @@ const defaultConf = {
 ```
 Stilleri `src/css/layout/_fade-slide.scss` içinden düzenlenebilir.
 
-> [!WARNING] Önemli
+> [!WARNING]
 > Bu kısımda `fade-slide-container` sınıfına sahip elementin id değeri alması gerekmektedir.
 
 ## 2023.11.19
