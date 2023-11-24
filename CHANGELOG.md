@@ -2,6 +2,58 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.24
+
+### Eklenenler
+
+- Yeni fade slide eklendi. Artık basit fade özelliğine sahip slide yapıları için Swiper eklemesine gerek kalmayacak. Kullanım şu şekilde:
+
+```html
+<div class="fade-slide-container" id="fade-slide">
+  <div class="slide-wrapper">
+    <div class="slide-item"></div>
+    <div class="slide-item"></div>
+  </div>
+  <div class="slide-nav">
+    <div class="prev">Prev</div>
+    <div class="next">Next</div>
+  </div>
+  <div class="slide-pag"></div>
+</div>
+```
+
+```js 
+import {fadeSlide} from './lib/fadeslide.js';
+
+// Customise config inside function
+/** @type {import('./lib/fadeslide.js').FadeSlideConf} */
+fadeSlide('fade-slide', {nav: true, pag: true});
+
+// Use default parameters
+fadeSlide('fade-slide');
+```
+
+varsayılan değerler
+
+```js
+const defaultConf = {
+  autoplay: true,
+  delay: 2000,
+  disableOnInteraction: false,
+  nav: false,
+  nextEl: '.slide-nav .next',
+  prevEl: '.slide-nav .prev',
+  pag: false,
+  pagEl: '.slide-pag',
+  startIndex: 0,
+  clickablePagination: false,
+};
+```
+Stilleri `src/css/layout/_fade-slide.scss` içinden düzenlenebilir.
+
+> [!WARNING] Önemli
+> Bu kısımda `fade-slide-container` sınıfına sahip elementin id değeri alması gerekmektedir.
+
 ## 2023.11.19
 
 ### Eklenenler
@@ -17,7 +69,6 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Düzeltmeler
 
 - `offset` sınıfı için RTL modda verilen yanlış yöndeki margin hatası giderildi.
-
 
 ## 2023.11.18
 
@@ -59,7 +110,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - Multiple template için eksik mufferplate konfigürasyon hatası giderildi.
 - Multiple template için özel css yapısı kaldırıldı.
 - Multiple template için Sass komutundaki hata giderildi.
-- `min_responsive` mixin'i içerisindeki uyarı metninde yaşanan `max_responsive` değişkenini çağırma hatası düzenlendi. 
+- `min_responsive` mixin'i içerisindeki uyarı metninde yaşanan `max_responsive` değişkenini çağırma hatası düzenlendi.
 
 ## 2023.11.05
 
@@ -77,11 +128,11 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ### Düzeltmeler
 
-- PurgeCSS için ana dizindeki inc klasörü ve theme klasörü içindeki template klasöründe bulunan dosyaları es geçmesinden dolayı yaşanan sınıf silme sorunu giderildi. Artık PurgeCSS, theme klasörü, theme klasörünün altındaki templates klasörü ve ana dizindeki inc klasöründe bulunan PHP dosyalarını baz alacak. 
+- PurgeCSS için ana dizindeki inc klasörü ve theme klasörü içindeki template klasöründe bulunan dosyaları es geçmesinden dolayı yaşanan sınıf silme sorunu giderildi. Artık PurgeCSS, theme klasörü, theme klasörünün altındaki templates klasörü ve ana dizindeki inc klasöründe bulunan PHP dosyalarını baz alacak.
 
 ## 2023.11.02
 
-### Eklenenler 
+### Eklenenler
 
 - Mufferplate için metafile oluşturma eklendi. `meta: true` özelliği ile oluşan son JS dosyasında hangi dosyaların kullanıldığı listelenebilir.
 - Tailwind sınıflarından bazıları eklendi. Liste şu şekilde
@@ -121,7 +172,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Düzeltmeler
 
 - Tailwind şablonundaki package.json'da yaşanan syntax hatası giderildi.
-- Custom utility için opacity değerleri 0.1'er artmak yerine 0.05'er olarak artacak şekilde güncellendi 
+- Custom utility için opacity değerleri 0.1'er artmak yerine 0.05'er olarak artacak şekilde güncellendi
 
 ## 2023.10.26
 
@@ -135,7 +186,6 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 - `.has-absolute` sınıfı `relative` sınıfının varlığından dolayı kaldırıldı.
 - `base.scss` içindeki `box-sizing` tanımlaması kaldırıldı.
 - `body` elementi için `position` ve `font-family` tanımlamaları kaldırıldı.
-
 
 ## 2023.10.25
 
@@ -151,7 +201,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Custom utility için PostCSS konfigürasyonu güncellendi. Artık Tailwind benzeri responsive seçiciler son durumda silinmiyor.
 
-### Düzeltmeler 
+### Düzeltmeler
 
 - mufferplate içindeki outdir tanımlama hatası giderildi.
 - mufferplate içindeki js içine yorum satırı ekleme konfigürasyonundaki hata giderildi
@@ -180,7 +230,6 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 ### Düzeltmeler
 
 - CSS değişkenlerinde yaşanan isimlendirme hatası giderildi.
-
 
 ## v1.27.1
 
