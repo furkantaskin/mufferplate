@@ -32,9 +32,12 @@ const initialConf = {
 export function fadeSlide(parentElem, conf = {}) {
   const mergedConf = { ...initialConf, ...conf };
   const slideParent = document.getElementById(parentElem);
+  if(!slideParent){
+    console.error("No element with id: " + parentElem);
+    return false;
+  }
   const itemList = slideParent.querySelectorAll('.slide-item');
 
-  /** @type {number} */
   let startX;
   let isSlideActive = false;
   let activeIndex = 0;
@@ -189,6 +192,10 @@ export function fadeSlide(parentElem, conf = {}) {
 
   if (mergedConf.pag) {
     const pagEl = slideParent.querySelector(mergedConf.pagEl);
+    if (!pagEl) {
+      console.error('No pagination element found for slide:', parentElem);
+      return false;
+    }
     for (let i = 0; i < itemList.length; i++) {
       const pagItem = document.createElement('div');
       pagItem.classList.add('pag-item');
