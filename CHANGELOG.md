@@ -8,6 +8,7 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 - Fade slide için mobil desteği eklendi
 - `border-width` için sınıflar eklendi. Tailwind'den farklı olarak 10px kalınlık eklendi.
+- Pozisyon sınıfları için '{top|left|bottom|right|start|end}-full' sınıfları eklendi.
 
 ### Düzeltmeler
 
