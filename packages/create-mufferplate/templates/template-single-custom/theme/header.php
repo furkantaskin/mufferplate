@@ -42,10 +42,10 @@ include "components/svg-sprite.php";
                 </div>
                 <div class="col-6 flex items-center">
                     <div class="menuButton bg-primary relative flex flex-col items-center justify-between">
-                        <span class="block w-100"></span>
-                        <span class="block w-100 absolute"></span>
-                        <span class="block w-100"></span>
-                        <span class="block w-100"></span>
+                        <span class="block w-full"></span>
+                        <span class="block w-full absolute"></span>
+                        <span class="block w-full"></span>
+                        <span class="block w-full"></span>
                     </div>
                 </div>
             </div>
