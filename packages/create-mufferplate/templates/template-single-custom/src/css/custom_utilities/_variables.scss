@@ -448,7 +448,7 @@ $gap-directions: (
 
 @if ($has-rtl == true) {
   $position-directions: map.merge(
-    s $position-directions,
+    $position-directions,
     (
       'start': 'inset-inline-start',
       'end': 'inset-inline-end',
