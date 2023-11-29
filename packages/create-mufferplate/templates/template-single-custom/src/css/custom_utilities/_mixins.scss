@@ -299,6 +299,64 @@
   }
 }
 
+
+@mixin generate_border_width($responsive_key) {
+  $class_prefix: 'border';
+  $class_property: 'border';
+  @each $key, $space_map in $spacing-range {
+    @if ($key >= 0 and $key <= 10) {
+      $selector: map.get($space_map, 'selector');
+      $prefix: map.get($space_map, 'prefix');
+      $value: map.get($space_map, 'value');
+
+      // To generate -> .m-20{margin: 80px}
+      #{$responsive_key + $prefix + $class_prefix + '-' + #{$key}} {
+        #{$class_property}-width: #{$value};
+      }
+
+      // Generate classes with directions
+      @each $direction_key, $direction_val in $space-directions {
+        #{$responsive_key
+          + $prefix
+          + $class_prefix
+          + '-'
+          + $direction_key
+          + '-'
+          + #{$key}} {
+          @if (meta.type-of($direction_val) == list) {
+            @each $direction in $direction_val {
+              #{$class_property + '-' + $direction}-width: #{$value};
+            }
+          } @else {
+            #{$class_property + '-' + $direction_val}-width: #{$value};
+          }
+        }
+      }
+      @if ($key == 0){
+        #{$responsive_key + $prefix + $class_prefix} {
+          #{$class_property}-width: #{$value};
+        }
+
+        @each $direction_key, $direction_val in $space-directions {
+          #{$responsive_key
+            + $prefix
+            + $class_prefix
+            + '-'
+            + $direction_key} {
+            @if (meta.type-of($direction_val) == list) {
+              @each $direction in $direction_val {
+                #{$class_property + '-' + $direction}-width: 1px;
+              }
+            } @else {
+              #{$class_property + '-' + $direction_val}-width: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @mixin generate_cols($responsive_key) {
   @for $i from 0 through $number-of-col {
     @if ($i != 0) {
@@ -345,7 +403,8 @@ $mixin_list: (
   'generate_position',
   'generate_width_height',
   'generate_gap',
-  'generate_transition_duration'
+  'generate_transition_duration',
+  'generate_border_width'
 );
 
 @mixin generate_mixins($responsive_key: false) {
