@@ -73,6 +73,9 @@
       $width-range: map.merge($width-range, $step_map) !global;
       $index: $index + 1;
     }
+    @if $i == $max_limit{
+      $width-range: map.merge($width-range, $index, ("selector": "-full", "value": "100%")) !global;
+    }
   }
 }
 @include generate_width_range();
@@ -272,10 +275,6 @@
         #{$responsive_key + $key + $selector} {
           #{$value}: #{$css_value};
         }
-      }
-
-      #{$responsive_key + $key + '-full'} {
-        #{$value}: 100%;
       }
 
       #{$responsive_key + $key + '-auto'} {
