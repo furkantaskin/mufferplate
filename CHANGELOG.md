@@ -2,6 +2,16 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.11.29
+
+### Eklenenler 
+
+- Fade slide için mobil desteği eklendi
+
+### Düzeltmeler
+
+- Slayt değişimi sonrasında slaytın autoplay özelliğinin tekrar devreye girmesinde yaşanan zaman aşımı süresi sorunu giderildi.
+
 ## 2023.11.24
 
 ### Eklenenler
