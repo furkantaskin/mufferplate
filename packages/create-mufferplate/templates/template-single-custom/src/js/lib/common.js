@@ -1,8 +1,8 @@
 export function mobileMenu() {
   let showMenu = false;
   const mobileMenu = document.querySelector('.mobileMenu');
-  const mainNav = document.querySelector('.header_lg nav')
-  const mobileNav = mobileMenu.querySelector('.mobileMenu nav')
+  const mainNav = document.querySelector('.header_lg nav');
+  const mobileNav = mobileMenu.querySelector('.mobileMenu nav');
   function toggleMenu(isActive) {
     if (isActive) {
       document
@@ -19,6 +19,11 @@ export function mobileMenu() {
     }
   }
 
+  function resizeMenu() {
+    mobileMenu.style.paddingTop =
+      document.querySelector('.header_sm').clientHeight * 1.5 + 'px';
+  }
+
   document
     .querySelector('.menuButton')
     .addEventListener('click', () => {
@@ -28,6 +33,6 @@ export function mobileMenu() {
 
   mobileNav.innerHTML = mainNav.innerHTML;
 
-  mobileMenu.style.paddingTop =
-    document.querySelector('.header_sm').clientHeight * 1.5 + 'px';
+  window.addEventListener('resize', resizeMenu);
+  resizeMenu();
 }
