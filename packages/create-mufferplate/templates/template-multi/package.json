@@ -22,13 +22,13 @@
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "swiper": "^1.69.0",
-    "mufferplate": "^0.17.0"
+    "mufferplate": "^0.18.0"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
     "dev-css": "sass --color --watch --embed-source-map src/css/pages:theme/assets/css --load-path=src/css",
     "build-js": "mufferplate build",
-    "build-css": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/main.css",
+    "build-css": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css",
     "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
     "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",

@@ -133,6 +133,20 @@ function mergeFiles(filePaths = null) {
     }
   }
 
+  function emptyDir(dir) {
+    if (!fs.existsSync(dir)) {
+      return;
+    }
+    for (const file of fs.readdirSync(dir)) {
+      if (file === '.git') {
+        continue;
+      }
+      fs.rmSync(path.resolve(dir, file), {
+        recursive: true,
+        force: true,
+      });
+    }
+  }
 
 (async () => {
     await readConfig();
@@ -179,7 +193,7 @@ function mergeFiles(filePaths = null) {
     }
 
     if (watchConfig.splitting) watchConfig.format = "esm"
-    if (buildConfig.splitting) buildConfig.format = "esm"
+    if (buildConfig.splitting) buildConfig.format = "esm";
     if (customConfig.signed) buildConfig.inject = ['./node_modules/mufferplate/bin/signature.js']
 
     !isExist && console.log(lightYellow("[warning]"),returnWithSpace("No config file detected. Running under default configuration"));
@@ -190,6 +204,10 @@ function mergeFiles(filePaths = null) {
         ctx.watch();
       } else {
         buildConfig.entryPoints = mergeFiles(customConfig.build?.entryPoints ?? customConfig.dev?.entryPoints ?? customConfig.entryPoints ?? "src/js");
+        if (buildConfig.splitting) {
+          console.log(cyan("[info]"), returnWithSpace("Splitting is enabled. Clearing the old chunk files..."));
+          emptyDir(buildConfig.outdir);
+        }
         let result = await esbuild.build(buildConfig);
 
         buildConfig.metafile && console.log(await esbuild.analyzeMetafile(result.metafile));
