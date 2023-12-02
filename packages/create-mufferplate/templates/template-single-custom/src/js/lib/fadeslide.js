@@ -22,6 +22,7 @@ const initialConf = {
   pagEl: '.slide-pag',
   startIndex: 0,
   clickablePagination: false,
+  loop: false,
 };
 
 /**
@@ -32,8 +33,8 @@ const initialConf = {
 export function fadeSlide(parentElem, conf = {}) {
   const mergedConf = { ...initialConf, ...conf };
   const slideParent = document.getElementById(parentElem);
-  if(!slideParent){
-    console.error("No element with id: " + parentElem);
+  if (!slideParent) {
+    console.error('No element with id: ' + parentElem);
     return false;
   }
   const itemList = slideParent.querySelectorAll('.slide-item');
@@ -145,12 +146,17 @@ export function fadeSlide(parentElem, conf = {}) {
     }
 
     intervId = setInterval(() => {
-      activeIndex += 1;
-      handleSlideChange(activeIndex);
       if (activeIndex === itemList.length - 1) {
-        clearInterval(intervId);
-        intervId = null;
+        if (!mergedConf.loop) {
+          clearInterval(intervId);
+          intervId = null;
+        } else {
+          activeIndex = 0;
+        }
+      } else {
+        activeIndex += 1;
       }
+      handleSlideChange(activeIndex);
     }, mergedConf.delay);
   }
 
@@ -193,7 +199,10 @@ export function fadeSlide(parentElem, conf = {}) {
   if (mergedConf.pag) {
     const pagEl = slideParent.querySelector(mergedConf.pagEl);
     if (!pagEl) {
-      console.error('No pagination element found for slide:', parentElem);
+      console.error(
+        'No pagination element found for slide:',
+        parentElem
+      );
       return false;
     }
     for (let i = 0; i < itemList.length; i++) {

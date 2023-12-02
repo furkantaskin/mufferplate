@@ -333,7 +333,7 @@
       }
       @if ($key == 0){
         #{$responsive_key + $prefix + $class_prefix} {
-          #{$class_property}-width: #{$value};
+          #{$class_property}-width: 1px;
         }
 
         @each $direction_key, $direction_val in $space-directions {
