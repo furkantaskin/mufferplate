@@ -2,6 +2,16 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.12.02
+
+### Eklenenler
+
+- Fade slide için loop özelliği eklendi.
+
+### Düzeltmeler
+
+- `border-width` için 1px genişliğini oluşturmama sorunu giderildi.
+
 ## 2023.11.29
 
 ### Eklenenler 
