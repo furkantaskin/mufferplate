@@ -53,10 +53,7 @@
   @include generate_container_up($key) {
     $container-width: map.get($container-max-widths, $key);
     $gutter-total: (($number-of-col - 1) * $grid-gutter);
-    $col-width: math.div(
-      $container-width - $gutter-total,
-      $number-of-col
-    );
+    $col-width: math.div($container-width, $number-of-col);
     :root {
       --column-width: #{$col-width};
       --gutter-total: #{$gutter-total};
