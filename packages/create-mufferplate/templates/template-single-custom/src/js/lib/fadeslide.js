@@ -116,7 +116,7 @@ export function fadeSlide(parentElem, conf = {}) {
   function handleTouchStart(e) {
     isSlideActive = true;
     startX = e.touches[0].clientX;
-    slideParent.addEventListener('touchmove', handleTouchMove);
+    slideParent.addEventListener('touchmove', handleTouchMove, {passive: true});
   }
 
   function handleTouchMove(e) {
@@ -125,12 +125,12 @@ export function fadeSlide(parentElem, conf = {}) {
       if (moveX > 50) {
         activeIndex -= 1;
         handleSlideChange(activeIndex, e);
-        slideParent.removeEventListener('touchmove', handleTouchMove);
+        slideParent.removeEventListener('touchmove', handleTouchMove, {passive: true});
       }
       if (moveX < -50) {
         activeIndex += 1;
         handleSlideChange(activeIndex, e);
-        slideParent.removeEventListener('touchmove', handleTouchMove);
+        slideParent.removeEventListener('touchmove', handle, {passive: true});
       }
     }
   }
