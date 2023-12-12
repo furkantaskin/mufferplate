@@ -6,6 +6,8 @@ import process from "node:process";
 import fs from "node:fs";
 import path from "node:path";
 import { performance } from "node:perf_hooks";
+import JavaScriptObfuscator from 'javascript-obfuscator';
+
 
 /** Returns string with space in the beginning
  * @param {string} inputtext
