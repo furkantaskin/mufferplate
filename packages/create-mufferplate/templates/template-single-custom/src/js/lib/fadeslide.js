@@ -38,6 +38,7 @@ export function fadeSlide(parentElem, conf = {}) {
     return false;
   }
   const itemList = slideParent.querySelectorAll('.slide-item');
+  const totalLength = itemList.length;
 
   let startX;
   let isSlideActive = false;
@@ -45,7 +46,7 @@ export function fadeSlide(parentElem, conf = {}) {
   let intervId = null;
 
   function handleSlideChange(index, getEvent = undefined) {
-    if (index <= itemList.length - 1 && index >= 0) {
+    if (index <= totalLength - 1 && index >= 0) {
       itemList.forEach((elem, i) => {
         if (i === index) {
           elem.classList.add('active');
@@ -59,7 +60,7 @@ export function fadeSlide(parentElem, conf = {}) {
       } else {
         clearInterval(intervId);
         intervId = null;
-        activeIndex = itemList.length - 1;
+        activeIndex = totalLength - 1;
       }
     }
     if (getEvent && !mergedConf.disableOnInteraction) {
@@ -103,11 +104,27 @@ export function fadeSlide(parentElem, conf = {}) {
     if (isSlideActive) {
       let moveX = e.clientX - startX;
       if (moveX > 50) {
-        activeIndex -= 1;
+        if (activeIndex === 0) {
+          if (!mergedConf.loop) {
+            return false;
+          } else {
+            activeIndex = totalLength - 1;
+          }
+        } else {
+          activeIndex -= 1;
+        }
         handleSlideChange(activeIndex, e);
       }
       if (moveX < -50) {
-        activeIndex += 1;
+        if (activeIndex === totalLength - 1) {
+          if (!mergedConf.loop) {
+            return false;
+          } else {
+            activeIndex = 0;
+          }
+        } else{
+          activeIndex += 1;
+        }
         handleSlideChange(activeIndex, e);
       }
     }
@@ -125,12 +142,12 @@ export function fadeSlide(parentElem, conf = {}) {
       if (moveX > 50) {
         activeIndex -= 1;
         handleSlideChange(activeIndex, e);
-        slideParent.removeEventListener('touchmove', handleTouchMove, {passive: true});
+        slideParent.removeEventListener('touchmove', handleTouchMove);
       }
       if (moveX < -50) {
         activeIndex += 1;
         handleSlideChange(activeIndex, e);
-        slideParent.removeEventListener('touchmove', handle, {passive: true});
+        slideParent.removeEventListener('touchmove', handleTouchMove);
       }
     }
   }
@@ -146,7 +163,7 @@ export function fadeSlide(parentElem, conf = {}) {
     }
 
     intervId = setInterval(() => {
-      if (activeIndex === itemList.length - 1) {
+      if (activeIndex === totalLength - 1) {
         if (!mergedConf.loop) {
           clearInterval(intervId);
           intervId = null;
@@ -176,7 +193,7 @@ export function fadeSlide(parentElem, conf = {}) {
   });
   slideParent.addEventListener('mousemove', handleMouseMove);
 
-  slideParent.addEventListener('touchstart', handleTouchStart);
+  slideParent.addEventListener('touchstart', handleTouchStart, {passive: true});
   slideParent.addEventListener('touchend', handleTouchEnd);
   slideParent.addEventListener('touchcancel', handleTouchEnd);
 
@@ -186,12 +203,28 @@ export function fadeSlide(parentElem, conf = {}) {
 
     navNext.addEventListener('click', (e) => {
       e.stopPropagation();
-      activeIndex += 1;
+      if (activeIndex === totalLength - 1) {
+        if (!mergedConf.loop) {
+          return false;
+        } else {
+          activeIndex = 0;
+        }
+      } else {
+        activeIndex += 1;
+      }
       handleSlideChange(activeIndex, true);
     });
     navPrev.addEventListener('click', (e) => {
       e.stopPropagation();
-      activeIndex -= 1;
+      if (activeIndex === 0) {
+        if (!mergedConf.loop) {
+          return false;
+        } else {
+          activeIndex = totalLength - 1;
+        }
+      } else {
+        activeIndex -= 1;
+      }
       handleSlideChange(activeIndex, true);
     });
   }
@@ -205,7 +238,7 @@ export function fadeSlide(parentElem, conf = {}) {
       );
       return false;
     }
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < totalLength; i++) {
       const pagItem = document.createElement('div');
       pagItem.classList.add('pag-item');
       pagEl.appendChild(pagItem);
