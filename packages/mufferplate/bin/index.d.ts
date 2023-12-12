@@ -11,7 +11,8 @@ interface configOptions{
     outdir: string,
     treeshaking: boolean,
     signed: boolean,
-    meta: boolean
+    meta: boolean,
+    obfuscate: boolean,
 }
 export declare interface MufferConfig extends configOptions{
     dev: Partial<configOptions>,
