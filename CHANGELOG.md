@@ -4,10 +4,13 @@ Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https
 
 ## 2023.12.12
 
+### Eklenenler
+
+- Mufferplate için obfuscate seçeneği eklendi. Artık `mufferplate.config.js` içinde `obfuscate: true` şeklinde kullanımla son çıkan JS dosyaları değiştirilebilir.
+
 ### Düzeltmeler
 
 - Fade slide içinde loop'un navigasyon veya fare ile çalışmama sorunu giderildi.
-
 
 ## 2023.12.02
 
