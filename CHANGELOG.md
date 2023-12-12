@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.12.12
+
+### Düzeltmeler
+
+- Fade slide içinde loop'un navigasyon veya fare ile çalışmama sorunu giderildi.
+
+
 ## 2023.12.02
 
 ### Eklenenler
