@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.12.13
+
+### Eklenenler
+
+- Slayt değişimi ve slaytın çalıştırıldığı anlar için özel eventlar oluşturuldu. Artık `slideInit` ve `slideChange` eventleri dinlenerek kaçıncı slaytın aktif olduğu 0 bazlı indeks ve DOM element olarak tespit edilebilir. Buradaki tek sorun, `slideInit` eventinin fonksiyondan önce dinlenmeye başlanması gerekiyor.
+
+
 ## 2023.12.12
 
 ### Eklenenler
