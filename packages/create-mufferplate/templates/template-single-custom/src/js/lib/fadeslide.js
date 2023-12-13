@@ -42,7 +42,7 @@ export function fadeSlide(parentElem, conf = {}) {
 
   let startX;
   let isSlideActive = false;
-  let activeIndex = 0;
+  let activeIndex = mergedConf.startIndex;
   let intervId = null;
 
   function handleSlideChange(index, getEvent = undefined) {
@@ -82,9 +82,25 @@ export function fadeSlide(parentElem, conf = {}) {
         }
       });
     }
+    const slideChangeEvent = new CustomEvent('slideChange', {
+      detail: {
+        index: index,
+        activeElem: itemList[index],
+      },
+    });
+    slideParent.dispatchEvent(slideChangeEvent);
   }
 
   handleSlideChange(activeIndex);
+
+  const slideInitEvent = new CustomEvent('slideInit', {
+    detail: {
+      index: activeIndex,
+      activeElem: itemList[activeIndex],
+    },
+  });
+
+  slideParent.dispatchEvent(slideInitEvent);
 
   function handleMouseDown(e) {
     isSlideActive = true;
@@ -122,7 +138,7 @@ export function fadeSlide(parentElem, conf = {}) {
           } else {
             activeIndex = 0;
           }
-        } else{
+        } else {
           activeIndex += 1;
         }
         handleSlideChange(activeIndex, e);
@@ -133,7 +149,9 @@ export function fadeSlide(parentElem, conf = {}) {
   function handleTouchStart(e) {
     isSlideActive = true;
     startX = e.touches[0].clientX;
-    slideParent.addEventListener('touchmove', handleTouchMove, {passive: true});
+    slideParent.addEventListener('touchmove', handleTouchMove, {
+      passive: true,
+    });
   }
 
   function handleTouchMove(e) {
@@ -193,7 +211,9 @@ export function fadeSlide(parentElem, conf = {}) {
   });
   slideParent.addEventListener('mousemove', handleMouseMove);
 
-  slideParent.addEventListener('touchstart', handleTouchStart, {passive: true});
+  slideParent.addEventListener('touchstart', handleTouchStart, {
+    passive: true,
+  });
   slideParent.addEventListener('touchend', handleTouchEnd);
   slideParent.addEventListener('touchcancel', handleTouchEnd);
 
