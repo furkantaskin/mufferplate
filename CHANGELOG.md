@@ -2,6 +2,13 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+## 2023.12.16
+
+### Eklenenler
+
+- Obfuscate işleminden geçen dosyanın son boyutu gösterilecek şekilde güncellendi.
+
+
 ## 2023.12.13
 
 ### Eklenenler
