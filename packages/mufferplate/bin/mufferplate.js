@@ -328,8 +328,8 @@ function emptyDir(dir) {
               // Write the obfuscated content back to the file
               await fs.promises.writeFile(filePath, obfuscatedCode, "utf8");
               console.log(
-                lightGreen("[success]"),
-                returnWithSpace(`File ${file} obfuscated successfully`)
+                lightGreen("\n[success]"),
+                returnWithSpace(`${lightGray(file)} obfuscated successfully. Total size is ${cyan((fs.statSync(filePath).size / 1024).toFixed(1) + ' kB')}`)
               );
             } catch (err) {
               console.log(
