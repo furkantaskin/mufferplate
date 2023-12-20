@@ -2,6 +2,8 @@
 
 Projeye dair tüm güncellemeler burada bulunmaktadır. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) baz alınarak hazırlanmıştır.
 
+Yeni sürümleme mantığından dolayı artık bu dosya rafa kaldırıldı. Yeni CHANGELOG.md üzerinden güncellemeler takip edilebilir.
+
 ## 2023.12.16
 
 ### Eklenenler
