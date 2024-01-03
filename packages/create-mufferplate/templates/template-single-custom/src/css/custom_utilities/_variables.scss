@@ -14,6 +14,7 @@ $grid-breakpoints: (
 );
 
 $container-max-widths: (
+  base: 0,
   sm: 540px,
   md: 720px,
   lg: 960px,
@@ -425,11 +426,20 @@ $utilities: (
   ),
 );
 
+$color-parameters: (
+  'fill': 'fill',
+  'text': 'color',
+  'bg': 'background-color',
+  'border': 'border-color',
+);
+
 $space-directions: (
   't': if($has-rtl, 'block-start', 'top'),
   'b': if($has-rtl, 'block-end', 'bottom'),
-  'l': if($has-rtl, 'inline-start', 'left'),
-  'r': if($has-rtl, 'inline-end', 'right'),
+  'l': 'left',
+  'r': 'right',
+  's': 'inline-start',
+  'e': 'inline-end',
   'x': if($has-rtl, 'inline', ('left', 'right')),
   'y': if($has-rtl, 'block', ('top', 'bottom')),
 );
