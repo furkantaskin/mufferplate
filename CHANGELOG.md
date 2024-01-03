@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.87.0
+
+- feat: Yüzdelik hesaplamalardaki ondalık kısmın daha hassas olması için ondalık miktarı artırıldı. Artık ondalık ifade 3 yerine 5 hane içermekte.
+
 ## create-mufferplate@1.86.0
 
 - feat: Yeni `hover` sınıfları eklendi. Artık Tailwind benzeri mantıkta `hover` kullanılabilir. Örneğin `mt-10 hover:mt-20` şeklindeki kullanımda hover çalışması durumunda `margin-top` değeri 40px'den 80px'e yükselecek. Aynı mantık responsive yapıda da kullanılabilir.
