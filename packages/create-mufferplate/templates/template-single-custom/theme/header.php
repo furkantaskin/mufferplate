@@ -43,15 +43,15 @@ $inline_css = false;
     </header>
 
     <header class="header_sm relative hidden md:block bg-primary z-5">
-        <div class="container">
+        <div class="container-lg">
             <div class="row">
-                <div class="col-6">
-                    <a href="" class="logo">
-                        <img src="<?= domain ?>assets/img/svg/logo.svg" alt="">
+                <div class="col-md-4 col-6">
+                    <a href="" class="logo block">
+                        <img src="<?= domain ?>assets/img/svg/logo.svg" alt="" class="block w-full">
                     </a>
                 </div>
-                <div class="col-6 flex items-center">
-                    <div class="menuButton bg-primary relative flex flex-col items-center justify-between">
+                <div class="col-md-8 col-6 flex items-center">
+                    <div class="menuButton relative flex flex-col items-center justify-between">
                         <span class="block w-full"></span>
                         <span class="block w-full absolute"></span>
                         <span class="block w-full"></span>

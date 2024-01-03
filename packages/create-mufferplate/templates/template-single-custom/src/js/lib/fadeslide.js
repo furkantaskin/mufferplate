@@ -86,6 +86,7 @@ export function fadeSlide(parentElem, conf = {}) {
       detail: {
         index: index,
         activeElem: itemList[index],
+        totalLength: totalLength,
       },
     });
     slideParent.dispatchEvent(slideChangeEvent);
@@ -97,6 +98,7 @@ export function fadeSlide(parentElem, conf = {}) {
     detail: {
       index: activeIndex,
       activeElem: itemList[activeIndex],
+      totalLength: totalLength,
     },
   });
 
