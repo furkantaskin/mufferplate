@@ -3,8 +3,8 @@
 @use 'sass:list';
 @use 'sass:map';
 
-@function to-fixed($float, $digits: 5) {
-  $sass-precision: 5;
+@function to-fixed($float, $digits: 8) {
+  $sass-precision: 8;
 
   @if $digits > $sass-precision {
     @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
