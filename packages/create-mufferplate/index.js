@@ -37,9 +37,14 @@ const templates = [
     color: lightBlue,
     variants: [
       {
-        name: 'single-tw',
-        display: 'Tailwind',
+        name: 'single-tw-css',
+        display: 'Tailwind (Plain CSS)',
         color: cyan,
+      },
+      {
+        name: 'single-tw-scss',
+        display: 'Tailwind (With Sass)',
+        color: blue,
       },
       {
         name: 'single-bs',

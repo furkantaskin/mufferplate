@@ -1,0 +1,60 @@
+{
+  "name": "mufferplate",
+  "description": "Personal template for projects",
+  "version": "1.0.0",
+  "author": "Furkan Taşkın",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "blaze-slider": "^1.9.3",
+    "photoswipe": "^5.4.0",
+    "swiper": "^10.2.0"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.1",
+    "cssnano": "^6.0.1",
+    "pers-sign": "^0.5.0",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.3",
+    "mufferplate": "^0.20.0"
+  },
+  "scripts": {
+    "dev-js": "mufferplate dev",
+    "dev-css": "postcss src/css/main.scss --output theme/assets/css/style.css --watch --verbose --env development",
+    "build-js": "mufferplate build",
+    "build-css": "postcss src/css/main.scss --output theme/assets/css/style.css --verbose --env production",
+    "build": "npm run build-js && npm run build-css",
+    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
+    "bundle": "npm run build && node bundlephp.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furkantaskin/mufferplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/furkantaskin/mufferplate/issues"
+  },
+  "homepage": "https://github.com/furkantaskin/mufferplate#readme",
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "printWidth": 70
+  },
+  "browserslist": [
+    ">= 0.5%",
+    "last 2 major versions",
+    "not dead",
+    "Chrome >= 60",
+    "Firefox >= 60",
+    "Firefox ESR",
+    "iOS >= 12",
+    "Safari >= 12",
+    "not Explorer <= 11"
+  ]
+}

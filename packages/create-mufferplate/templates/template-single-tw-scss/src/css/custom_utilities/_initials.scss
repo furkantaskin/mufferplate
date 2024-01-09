@@ -1,0 +1,46 @@
+@use 'sass:math';
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 #{math.div($grid-gutter, -2)};
+}
+
+*[class^='col-'] {
+  flex: 0 0 auto;
+  padding: 0 (math.div($grid-gutter, 2));
+  width: 100%;
+}
+
+%pseudo-absolute {
+  position: absolute;
+  content: '';
+}
+
+@import '../../../node_modules/pers-sign/css/module';
+
+.after-absolute{
+  &::after{
+    @extend %pseudo-absolute;
+  }
+}
+
+.before-absolute{
+  &::before{
+    @extend %pseudo-absolute;
+  }
+}
+
+
+.container-fluid,
+.container {
+  width: 100%;
+  padding: {
+    left: if($container-no-padding, 0px, math.div($grid-gutter, 2));
+    right: if($container-no-padding, 0px, math.div($grid-gutter, 2));
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}

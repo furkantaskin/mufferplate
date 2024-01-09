@@ -1,0 +1,74 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:meta';
+
+@import 'normalizer';
+@import 'variables';
+@import 'initials';
+@import 'functions';
+@import 'mixins';
+
+@include generate_mixins();
+
+@each $key, $val in $grid-breakpoints {
+  $key: if($val == 0, '', $key + '-');
+  @if $val != 0 {
+    @media screen and (min-width: #{$val}) {
+      @include generate_cols($key);
+    }
+  } @else {
+    @include generate_cols($key);
+  }
+}
+
+
+@each $key, $val in if($is-mobile-first==true, $grid-breakpoints, reverseBreakPoints($grid-breakpoints)){
+  @media screen and (#{if($is-mobile-first==true, 'min-width', 'max-width')}: #{$val}){
+    @include generate_mixins($key);
+  }
+}
+
+
+// Container Generator
+@each $key, $val in $container-max-widths {
+  .container-#{$key} {
+    @extend .container-fluid;
+  }
+  $container-width: if($val == 0, 100vw, $val);
+  $gutter-total: (($number-of-col - 1) * $grid-gutter);
+  $col-width: math.div($container-width, $number-of-col);
+  @if $val != 0{
+    @include generate_container_up($key) {
+      :root {
+        --column-width: #{$col-width};
+        --gutter-total: #{$gutter-total};
+        --container-width: #{$container-width};
+        --container-margin: calc((100vw - #{$container-width}) / 2);
+        --gutter-width: #{$grid-gutter};
+      }
+      %get-container-#{$key} {
+        max-width: $val;
+      }
+      $extend-container: true;
+      @each $break-key, $break-val in $grid-breakpoints {
+        @if ($extend-container) {
+          .container#{breakpoint-infix($break-key, $grid-breakpoints)} {
+            @extend %get-container-#{$key};
+          }
+          @if ($key == $break-key) {
+            $extend-container: false;
+          }
+        }
+      }
+    }
+  } @else{
+    :root {
+      --column-width: #{$col-width};
+      --gutter-total: #{$gutter-total};
+      --container-width: #{$container-width};
+      --container-margin: 0;
+      --gutter-width: #{$grid-gutter};
+    }
+  }
+}

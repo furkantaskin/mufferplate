@@ -1,0 +1,116 @@
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:map';
+
+@mixin mask-parameters($size: contain, $position: center, $repeat: no-repeat, $image: null) {
+  mask-size: $size;
+  mask-repeat: $repeat;
+  mask-position: $position;
+  @if ($image) {
+    mask-image: url($image);
+  }
+}
+
+@mixin background(
+  $repeat: no-repeat,
+  $position: center,
+  $size: contain,
+  $image: null
+) {
+  @if ($image) {
+    background: $repeat $position/$size url($image);
+  }
+  @else {
+    background: $repeat $position/$size;
+  }
+}
+
+$breakpoints: (
+  xs: (0, 575px),
+  sm: (576px, 767px),
+  md: (768px, 991px),
+  lg: (992px, 1199px),
+  xl: (1200px, 1399px),
+  xxl: (1400px, 1599px),
+  wqhd: 2200px,
+  uwqhd: 3440px,
+);
+
+@mixin max_responsive($max-width, $custom: false) {
+  $max: map.get($breakpoints, $max-width);
+  $max-value: list.nth($max, -1);
+
+  @if $max == null {
+    @if $custom == false {
+      @warn "#{$max-width} is not defined in breakpoints. Check your breakpoint or use it as @include max_responsive(#{$max-width}, $custom: true)";
+    } @else {
+      @media screen and (max-width: #{$max-width}) {
+        @content;
+      }
+    }
+  } @else {
+    @media screen and (max-width: #{$max-value}) {
+      @content;
+    }
+  }
+}
+
+@mixin min_responsive($min-width, $custom: false){
+  $min: map.get($breakpoints, $min-width);
+  $min-value: list.nth($min, 1);
+
+  @if $min == null {
+    @if $custom == false {
+      @warn "#{$min-width} is not defined in breakpoints. Check your breakpoint or use it as @include min_responsive(#{$min-width}, $custom: true)";
+    } @else {
+      @media screen and (min-width: #{$min-width}) {
+        @content;
+      }
+    }
+  } @else {
+    @media screen and (min-width: #{$min-value}) {
+      @content;
+    }
+  }
+}
+
+@mixin no_hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+
+@mixin call_template($template) {
+  @if $template == 'noscroll' {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  } @else if $template == 'noarrow' {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+@mixin edit_placeholder(){
+  $placeholderList: ('::-webkit-input-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', ':-moz-placeholder');
+  @each $placeholder in $placeholderList{
+    &#{$placeholder}{
+      @content;
+    }
+  }
+}
+
+@mixin get_font(
+  $font_weight: 500,
+  $font_size: 16px,
+  $line_height: 1
+) {
+  font-weight: #{$font_weight};
+  font-size: #{$font_size};
+  line-height: #{$line_height};
+}
