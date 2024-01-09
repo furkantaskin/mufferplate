@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const kolorist = require('kolorist');
 
-const { magenta, lightGreen, green, lightBlue, red, reset, cyan } =
+const { magenta, lightGreen, green, blue lightBlue, red, reset, cyan } =
   kolorist;
 
 function isEmpty(path) {
