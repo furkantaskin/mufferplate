@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.95.0
+
+- style: SCSS Tailwind için sprite dosyasına data attribute temizlemede kullanılan regex kodları eklendi
+
 ## create-mufferplate@1.94.0
 
 - feat: SCSS Tailwind için inline CSS özelliği eklendi.
