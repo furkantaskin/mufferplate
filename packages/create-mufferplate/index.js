@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const kolorist = require('kolorist');
 
-const { magenta, lightGreen, green, blue, lightBlue, red, reset, cyan } =
+const { magenta, lightGreen, green, blue, lightCyan, lightBlue, red, reset, cyan } =
   kolorist;
 
 function isEmpty(path) {
@@ -39,7 +39,7 @@ const templates = [
       {
         name: 'single-tw-css',
         display: 'Tailwind (Plain CSS)',
-        color: cyan,
+        color: lightCyan,
       },
       {
         name: 'single-tw-scss',
