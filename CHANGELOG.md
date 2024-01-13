@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.96.0
+
+- feat: CSS işlemleri için scriptler düzenlendi. PNPM için PostCSS ve Sass'ın beraber kullanılması gereken veya kullanılmaması gereken durumlar için scriptler ayrıldı. 
+
 ## create-mufferplate@1.95.1
 
 - style: Tailwind ayrımını netleştirmek için Tailwind opsiyonlarının rengi güncellendi.
