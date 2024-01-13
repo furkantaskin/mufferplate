@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.92.0
+
+- feat: Container için CSS değişkenleri eklendi. Örnek olarak `--container-margin` değeri o ekrandaki container değerine göre sağ ve sol boşlukları alacak.
+
 ## crate-mufferplate@1.91.0
 
 - feat: Tailwind için rem değerinden px değerine çevirici eklendi. `postcss.config.js` içindeki `'@thedutchcoder/postcss-rem-to-px': {},` satırı bu işlemi yapmaktadır.
