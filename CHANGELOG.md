@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## crate-mufferplate@1.91.0
+
+- feat: Tailwind için rem değerinden px değerine çevirici eklendi. `postcss.config.js` içindeki `'@thedutchcoder/postcss-rem-to-px': {},` satırı bu işlemi yapmaktadır.
+
 ## create-mufferplate@1.90.0
 
 - deps: Tailwind SCSS için bağımlı paketler son sürüme güncellendi.
