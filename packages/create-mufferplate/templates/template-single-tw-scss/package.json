@@ -26,9 +26,9 @@
     "tailwindcss": "^3.4.1"
   },
   "scripts": {
-    "dev-js": "mufferplate dev",
-    "dev-css": "postcss src/css/app.css --output theme/assets/css/app.css --watch --verbose --env development",
-    "dev-sass": "sass --color --watch --embed-source-map src/css/main.scss:src/css/libs.css --load-path=src/css",
+    "dev-main-js": "mufferplate dev",
+    "dev-main-css": "postcss src/css/app.css --output theme/assets/css/app.css --watch --verbose --env development",
+    "dev-sub-css": "sass --color --watch --embed-source-map src/css/main.scss:src/css/libs.css --load-path=src/css",
     "build-js": "mufferplate build",
     "build-css": "postcss src/css/app.css --output theme/assets/css/app.css --verbose --env production",
     "build-sass": "sass --no-source-map --style=compressed src/css/main.scss:src/css/libs.css",
