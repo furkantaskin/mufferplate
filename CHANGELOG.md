@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.93.0
+
+- style: `row` ve `col-*` sınıfları için padding ve margin değerleri RTL ile uyumlu olacak şekilde güncellendi. `row` için margin `0 -12px` yerine RTL olmaddan `margin-left: -12px; margin-right:-12px`, RTL varsa `margin-inline-start: -12px; margin-inline-end:-12px` olarak gelmekte. Aynı durum `col-*` sınıfları için de geçerli 
+
 ## create-mufferplate@1.92.0
 
 - feat: Container için CSS değişkenleri eklendi. Örnek olarak `--container-margin` değeri o ekrandaki container değerine göre sağ ve sol boşlukları alacak.
