@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## create-mufferplate@1.94.0
+
+- feat: SCSS Tailwind için inline CSS özelliği eklendi.
+- feat: Google fontları kaldırıldı. Kullanıcı dilerse inline olarak ekleyebilir.
+- chore: Viewport meta için maximum-scale değeri ve minimum-scale değerleri kaldırıldı.
+
 ## create-mufferplate@1.93.0
 
 - style: `row` ve `col-*` sınıfları için padding ve margin değerleri RTL ile uyumlu olacak şekilde güncellendi. `row` için margin `0 -12px` yerine RTL olmaddan `margin-left: -12px; margin-right:-12px`, RTL varsa `margin-inline-start: -12px; margin-inline-end:-12px` olarak gelmekte. Aynı durum `col-*` sınıfları için de geçerli 
