@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.89.0
+
+- feat: Artık Tailwind SCSS ile birlikte kullanılabilir. Bu kısımda SCSS kullanan kütüphaneler için SCSS üzerinden bundle alınarak Tailwind içinde oluşturulan CSS içine eklenebilir. Ayrıca Bootstrap içindeki Modal, Tab gibi elementler de kullanılabilir.
+
 ## create-mufferplate@1.87.0
 
 - feat: Yüzdelik hesaplamalardaki ondalık kısmın daha hassas olması için ondalık miktarı artırıldı. Artık ondalık ifade 3 yerine 5 hane içermekte.
