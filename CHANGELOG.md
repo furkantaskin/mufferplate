@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## create-mufferplate@1.95.1
+
+- style: Tailwind ayrımını netleştirmek için Tailwind opsiyonlarının rengi güncellendi.
+
 ## create-mufferplate@1.95.0
 
 - style: SCSS Tailwind için sprite dosyasına data attribute temizlemede kullanılan regex kodları eklendi
