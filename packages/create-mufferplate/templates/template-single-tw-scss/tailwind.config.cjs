@@ -45,7 +45,8 @@ const customContainer = {
 }
 
 customConfig.container.padding = `${customConfig.gridGutter / 2}px`;
-customConfig.customSelectors[".row"].margin = `0 -${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors[".row"][`${customConfig.hasRtl ? 'marginInlineStart': 'marginLeft'}`] = `-${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors[".row"][`${customConfig.hasRtl ? 'marginInlineEnd': 'marginRight'}`] = `-${customConfig.gridGutter / 2}px`;
 
 Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach((key) => {
   let currKey = containerName.join(",");
@@ -72,7 +73,8 @@ function createBsGrid() {
       width: `${
         value.toFixed(PRECISION) % 1 === 0 ? Math.trunc(value) : value.toFixed(PRECISION)
       }%`,
-      padding: `0 ${GRID_GUTTER / 2}px`,
+      [`${customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'}`]: `${GRID_GUTTER / 2}px`,
+      [`${customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'}`]: `${GRID_GUTTER / 2}px`,
     };
   }
   return obj;
@@ -115,11 +117,12 @@ const twConfig = {
       ...customConfig.screens.bsBreakpoints,
     },
     colors: {
-      transparent: "transparent",
-      current: "currentColor",
+      'transparent': "transparent",
+      'current': "currentColor",
       'black': "#000",
       'white': "#fff",
-      'primary': '#e256c5'
+      'primary': '#e256c5',
+      'blue': '#007bff',
     },
     extend: {
       spacing: {
