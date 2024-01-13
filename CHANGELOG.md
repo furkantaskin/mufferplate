@@ -2,7 +2,7 @@
 
 ## create-mufferplate@1.89.0
 
-- feat: Artık Tailwind SCSS ile birlikte kullanılabilir. Bu kısımda SCSS kullanan kütüphaneler için SCSS üzerinden bundle alınarak Tailwind içinde oluşturulan CSS içine eklenebilir. Ayrıca Bootstrap içindeki Modal, Tab gibi elementler de kullanılabilir.
+- feat: Artık Tailwind SCSS ile birlikte kullanılabilir. Bu kısımda SCSS kullanan kütüphaneler için SCSS üzerinden bundle alınarak Tailwind içinde oluşturulan CSS içine eklenebilir. Ayrıca Bootstrap içindeki Modal, Tab gibi elementler de kullanılabilir. Bootstrap içindeki container ve col yapısı da mevcuttur. Bu kısımda `col-lg-6` gibi kullanım yerine `bg-lg:col-6` şeklinde kullanım gerekmektedir.
 
 ## create-mufferplate@1.87.0
 
