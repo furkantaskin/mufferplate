@@ -1,6 +1,8 @@
 const plugin = require('tailwindcss/plugin');
 
+
 const IS_MOBILE_FIRST = false;
+let containerName = [".container"];
 const customConfig = {
   colNumber: 12,
   gridGutter: 24,
@@ -21,28 +23,40 @@ const customConfig = {
       'sm': {'max': '767px'},
       'xs': {'max': '575px'},
     },
-    bsBreakpoints: {
-      'bs-sm': '576px',
-      'bs-md': '768px',
-      'bs-lg': '992px',
-      'bs-xl': '1200px',
-      'bs-xxl': '1400px',
-    }
+    bsBreakpoints: {},
   },
   container: {
-    center: true,
-    screens: {
-      xs: "100%",
-      sm: "100%",
-      md: "720px",
-      lg: "960px",
-      xl: "1140px",
-      default: "1320px"
-    }
+    'sm': '540px',
+    'md': '720px',
+    'lg': '960px',
+    'xl': '1140px',
+    'xxl': '1320px',
   },
+  customSelectors: {
+    ".row": {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+  }
+};
+
+const customContainer = {
 }
 
 customConfig.container.padding = `${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors[".row"].margin = `0 -${customConfig.gridGutter / 2}px`;
+
+Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach((key) => {
+  let currKey = containerName.join(",");
+  customConfig.screens.bsBreakpoints[`bs-${key}`] = customConfig.screens.mobileFirstBreakpoints[key];
+  customContainer[currKey] = {}
+  customContainer[currKey][`@media (min-width: ${customConfig.screens.mobileFirstBreakpoints[key]})`] = {
+    maxWidth: customConfig.container[key],
+  };
+  containerName.push(`.container-${key}`);
+});
+
+
 
 function createBsGrid() {
   const COL_NUMBER = customConfig.colNumber;
@@ -86,30 +100,45 @@ function createBsOffset() {
 
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const twConfig = {
   experimental:{
     optimizeUniversalDefaults: true
   },
-  content: ["index.html", "./theme/**/*.{html,js,php}"],
+  corePlugins: {
+    container: false
+  },
+  content: ["index.php", "./src/js/**/*.js", "./theme/**/*.{html,js,php}", "./inc/*.{html,js,php}"],
   theme: {
     screens: {
       ...customConfig.screens[IS_MOBILE_FIRST ? 'mobileFirstBreakpoints' : 'desktopFirstBreakpoints'],
       ...customConfig.screens.bsBreakpoints,
     },
-    container: customConfig.container,
     extend: {},
   },
   plugins: [
-    plugin(function ({ addUtilities }) {
+    plugin(function ({ addUtilities, addComponents}) {
       addUtilities(createBsGrid());
       addUtilities(createBsOffset());
       addUtilities({
         ".row": {
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "0 -0.5rem",
-        },
+          ...customConfig.customSelectors[".row"]
+        }
       });
+      addComponents({
+        ".container": {
+          width: "100%",
+          [`${customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'}`]: customConfig.container.padding,
+          [`${customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'}`]: customConfig.container.padding,
+          [`${customConfig.hasRtl ? 'marginInlineStart' : 'marginLeft'}`]: "auto",
+          [`${customConfig.hasRtl ? 'marginInlineEnd' : 'marginRight'}`]: "auto",
+        }
+      })
+      addComponents({
+        ...customContainer
+      })
     })
-  ],
-}
+  ]
+};
+
+
+module.exports = twConfig;

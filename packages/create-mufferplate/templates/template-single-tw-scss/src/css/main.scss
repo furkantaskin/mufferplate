@@ -5,13 +5,11 @@
 @import 'abstracts/mixins';
 @import 'abstracts/placeholders';
 
-/*! purgecss start ignore */
 // @import 'vendors/blaze-slider';
 // @import 'vendors/bootstrap';
 // @import 'vendors/photoswipe';
 // @import 'vendors/swiper';
 // @import 'vendors/glightbox';
-/*! purgecss end ignore */
 
 
 @import 'base/typography';
@@ -24,8 +22,3 @@
 @import 'layout/footer';
 
 @import 'pages/index';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
