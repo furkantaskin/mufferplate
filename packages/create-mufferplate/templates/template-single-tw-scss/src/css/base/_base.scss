@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use 'sass:math';
+
 body {
   overflow-x: hidden;
   &.show{
@@ -16,4 +19,52 @@ ul{
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$container-max-widths: (
+  base: 0,
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+$number-of-col: 12;
+$grid-gutter: 24px;
+
+@each $key, $value in $grid-breakpoints {
+  $container-width: if($value == 0, 100vw, map.get($container-max-widths, $key));
+  $gutter-total: (($number-of-col - 1) * $grid-gutter);
+  $col-width: math.div($container-width, $number-of-col);
+  @if $value == 0 {
+    :root {
+      --column-width: #{$col-width};
+      --gutter-total: #{$gutter-total};
+      --container-width: #{$container-width};
+      --container-margin: 0;
+      --gutter-width: #{$grid-gutter};
+    }
+  }
+  @else {
+    @media (min-width: $value) {
+      :root {
+        --column-width: #{$col-width};
+        --gutter-total: #{$gutter-total};
+        --container-width: #{$container-width};
+        --container-margin: calc((100vw - #{$container-width}) / 2);
+        --gutter-width: #{$grid-gutter};
+      }
+    }
+  }
 }

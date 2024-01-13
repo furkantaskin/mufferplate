@@ -37,6 +37,7 @@ const customConfig = {
       display: "flex",
       flexWrap: "wrap",
     },
+
   }
 };
 
@@ -113,7 +114,19 @@ const twConfig = {
       ...customConfig.screens[IS_MOBILE_FIRST ? 'mobileFirstBreakpoints' : 'desktopFirstBreakpoints'],
       ...customConfig.screens.bsBreakpoints,
     },
-    extend: {},
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      'black': "#000",
+      'white': "#fff",
+      'primary': '#e256c5'
+    },
+    extend: {
+      spacing: {
+        'container-margin': 'var(--container-margin)',
+        'container-width': 'var(--container-width)',
+      }
+    }
   },
   plugins: [
     plugin(function ({ addUtilities, addComponents}) {
