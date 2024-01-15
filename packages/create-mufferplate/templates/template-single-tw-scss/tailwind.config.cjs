@@ -1,64 +1,73 @@
 const plugin = require('tailwindcss/plugin');
-
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const IS_MOBILE_FIRST = false;
-let containerName = [".container"];
+let containerName = ['.container'];
 const customConfig = {
   colNumber: 12,
   gridGutter: 24,
   percentPrecision: 5,
+  containerPadding: false,
   hasRtl: false,
   screens: {
     mobileFirstBreakpoints: {
-      'sm': '576px',
-      'md': '768px',
-      'lg': '992px',
-      'xl': '1200px',
-      'xxl': '1400px',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+      xxl: '1400px',
     },
     desktopFirstBreakpoints: {
-      'xl': {'max': '1399px'},
-      'lg': {'max': '1199px'},
-      'md': {'max': '991px'},
-      'sm': {'max': '767px'},
-      'xs': {'max': '575px'},
+      xl: { max: '1399px' },
+      lg: { max: '1199px' },
+      md: { max: '991px' },
+      sm: { max: '767px' },
+      xs: { max: '575px' },
     },
     bsBreakpoints: {},
   },
   container: {
-    'sm': '540px',
-    'md': '720px',
-    'lg': '960px',
-    'xl': '1140px',
-    'xxl': '1320px',
+    sm: '540px',
+    md: '720px',
+    lg: '960px',
+    xl: '1140px',
+    xxl: '1320px',
   },
   customSelectors: {
-    ".row": {
-      display: "flex",
-      flexWrap: "wrap",
+    '.row': {
+      display: 'flex',
+      flexWrap: 'wrap',
     },
-
-  }
+  },
 };
 
-const customContainer = {
+const customContainer = {};
+
+if (customConfig.containerPadding) {
+  customConfig.container.padding = `${customConfig.gridGutter / 2}px`;
 }
 
-customConfig.container.padding = `${customConfig.gridGutter / 2}px`;
-customConfig.customSelectors[".row"][`${customConfig.hasRtl ? 'marginInlineStart': 'marginLeft'}`] = `-${customConfig.gridGutter / 2}px`;
-customConfig.customSelectors[".row"][`${customConfig.hasRtl ? 'marginInlineEnd': 'marginRight'}`] = `-${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors['.row'][
+  `${customConfig.hasRtl ? 'marginInlineStart' : 'marginLeft'}`
+] = `-${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors['.row'][
+  `${customConfig.hasRtl ? 'marginInlineEnd' : 'marginRight'}`
+] = `-${customConfig.gridGutter / 2}px`;
 
-Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach((key) => {
-  let currKey = containerName.join(",");
-  customConfig.screens.bsBreakpoints[`bs-${key}`] = customConfig.screens.mobileFirstBreakpoints[key];
-  customContainer[currKey] = {}
-  customContainer[currKey][`@media (min-width: ${customConfig.screens.mobileFirstBreakpoints[key]})`] = {
-    maxWidth: customConfig.container[key],
-  };
-  containerName.push(`.container-${key}`);
-});
-
-
+Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach(
+  (key) => {
+    let currKey = containerName.join(',');
+    customConfig.screens.bsBreakpoints[`bs-${key}`] =
+      customConfig.screens.mobileFirstBreakpoints[key];
+    customContainer[currKey] = {};
+    customContainer[currKey][
+      `@media (min-width: ${customConfig.screens.mobileFirstBreakpoints[key]})`
+    ] = {
+      maxWidth: customConfig.container[key],
+    };
+    containerName.push(`.container-${key}`);
+  }
+);
 
 function createBsGrid() {
   const COL_NUMBER = customConfig.colNumber;
@@ -69,12 +78,18 @@ function createBsGrid() {
     const key = `.col-${i}`;
     const value = (i / COL_NUMBER) * 100;
     obj[key] = {
-      flex: "0 0 auto",
+      flex: '0 0 auto',
       width: `${
-        value.toFixed(PRECISION) % 1 === 0 ? Math.trunc(value) : value.toFixed(PRECISION)
+        value.toFixed(PRECISION) % 1 === 0
+          ? Math.trunc(value)
+          : value.toFixed(PRECISION)
       }%`,
-      [`${customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'}`]: `${GRID_GUTTER / 2}px`,
-      [`${customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'}`]: `${GRID_GUTTER / 2}px`,
+      [`${
+        customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'
+      }`]: `${GRID_GUTTER / 2}px`,
+      [`${
+        customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'
+      }`]: `${GRID_GUTTER / 2}px`,
     };
   }
   return obj;
@@ -87,74 +102,105 @@ function createBsOffset() {
   for (let i = 0; i < COL_NUMBER; i++) {
     const key = `.offset-${i}`;
     const value = (i / COL_NUMBER) * 100;
-    obj[key] = !customConfig.hasRtl ? {
-      "margin-left": `${
-        value.toFixed(PRECISION) % 1 === 0 ? Math.trunc(value) : value.toFixed(PRECISION)
-      }%`,
-    } : 
-    {
-      "margin-inline-start": `${
-        value.toFixed(PRECISION) % 1 === 0 ? Math.trunc(value) : value.toFixed(PRECISION)
-      }%`,
-    };
+    obj[key] = !customConfig.hasRtl
+      ? {
+          'margin-left': `${
+            value.toFixed(PRECISION) % 1 === 0
+              ? Math.trunc(value)
+              : value.toFixed(PRECISION)
+          }%`,
+        }
+      : {
+          'margin-inline-start': `${
+            value.toFixed(PRECISION) % 1 === 0
+              ? Math.trunc(value)
+              : value.toFixed(PRECISION)
+          }%`,
+        };
   }
   return obj;
 }
 
+function generateZIndex(){
+  let zIndexObj = {
+    zIndex: {}
+  };
+  for (let i = 1; i<=12; i++){
+    zIndexObj.zIndex[i.toString()] = i.toString();
+  }
+  return zIndexObj.zIndex;
+}
 
 /** @type {import('tailwindcss').Config} */
 const twConfig = {
-  experimental:{
-    optimizeUniversalDefaults: true
+  experimental: {
+    optimizeUniversalDefaults: true,
   },
   corePlugins: {
-    container: false
+    container: false,
   },
-  content: ["index.php", "./src/js/**/*.js", "./theme/**/*.{html,js,php}", "./inc/*.{html,js,php}"],
+  content: [
+    'index.php',
+    './src/js/**/*.js',
+    './theme/**/*.{html,js,php}',
+    './inc/*.{html,js,php}',
+  ],
   theme: {
     screens: {
-      ...customConfig.screens[IS_MOBILE_FIRST ? 'mobileFirstBreakpoints' : 'desktopFirstBreakpoints'],
+      ...customConfig.screens[
+        IS_MOBILE_FIRST
+          ? 'mobileFirstBreakpoints'
+          : 'desktopFirstBreakpoints'
+      ],
       ...customConfig.screens.bsBreakpoints,
     },
     colors: {
-      'transparent': "transparent",
-      'current': "currentColor",
-      'black': "#000",
-      'white': "#fff",
-      'primary': '#e256c5',
-      'blue': '#007bff',
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: '#000',
+      white: '#fff',
+      primary: '#e256c5',
+      blue: '#007bff',
     },
     extend: {
+    zIndex: generateZIndex(),
       spacing: {
         'container-margin': 'var(--container-margin)',
         'container-width': 'var(--container-width)',
-      }
-    }
+      },
+    },
   },
   plugins: [
-    plugin(function ({ addUtilities, addComponents}) {
+    plugin(function ({ addUtilities, addComponents }) {
       addUtilities(createBsGrid());
       addUtilities(createBsOffset());
       addUtilities({
-        ".row": {
-          ...customConfig.customSelectors[".row"]
-        }
+        '.row': {
+          ...customConfig.customSelectors['.row'],
+        },
       });
       addComponents({
-        ".container": {
-          width: "100%",
-          [`${customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'}`]: customConfig.container.padding,
-          [`${customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'}`]: customConfig.container.padding,
-          [`${customConfig.hasRtl ? 'marginInlineStart' : 'marginLeft'}`]: "auto",
-          [`${customConfig.hasRtl ? 'marginInlineEnd' : 'marginRight'}`]: "auto",
-        }
-      })
+        '.container': {
+          width: '100%',
+          [`${
+            customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'
+          }`]: customConfig.container.padding,
+          [`${
+            customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'
+          }`]: customConfig.container.padding,
+          [`${
+            customConfig.hasRtl ? 'marginInlineStart' : 'marginLeft'
+          }`]: 'auto',
+          [`${
+            customConfig.hasRtl ? 'marginInlineEnd' : 'marginRight'
+          }`]: 'auto',
+        },
+      });
       addComponents({
-        ...customContainer
-      })
-    })
-  ]
+        ...customContainer,
+      });
+    }),
+  ],
 };
-
 
 module.exports = twConfig;
