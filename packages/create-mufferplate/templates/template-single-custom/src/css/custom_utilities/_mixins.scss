@@ -693,6 +693,7 @@
   @for $i from 0 through $number-of-col {
     @if ($i != 0) {
       .col-#{$responsive_key}#{$i} {
+        flex: 0 0 auto;
         width: generate-width($i, $number-of-col);
       }
     }
