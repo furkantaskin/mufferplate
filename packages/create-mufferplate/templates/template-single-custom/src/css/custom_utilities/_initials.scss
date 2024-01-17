@@ -3,19 +3,24 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 #{math.div($grid-gutter, -2)};
-}
-
-row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  @if ($has-rl == true) {
-    padding-inline-start: #{math.div($grid-gutter, 2)};
-    padding-inline-end: #{math.div($grid-gutter, 2)};
+  @if ($has-rtl == true) {
+    margin-inline-start: #{math.div($grid-gutter, -2)};
+    margin-inline-end: #{math.div($grid-gutter, -2)};
   } @else {
-    padding-left: (math.div($grid-gutter, 2));
-    padding-right: (math.div($grid-gutter, 2));
+    margin-left: (math.div($grid-gutter, -2));
+    margin-right: (math.div($grid-gutter, -2));
+  }
+  & > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    @if ($has-rtl == true) {
+      padding-inline-start: #{math.div($grid-gutter, 2)};
+      padding-inline-end: #{math.div($grid-gutter, 2)};
+    } @else {
+      padding-left: (math.div($grid-gutter, 2));
+      padding-right: (math.div($grid-gutter, 2));
+    }
   }
 }
 

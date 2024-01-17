@@ -1,6 +1,17 @@
 # CHANGELOG
 
-## create-mufferplate@1.97.0 
+Muffilities = Custom Utilities
+
+## create-mufferplate@1.100.0
+
+- fix: `.row` tanımlamasında yaşanan hata giderildi.
+- feat: Paketler içindeki `.gitattributes` ve `robots.txt` dosyaları kaldırıldı.
+
+## create-mufferplate@1.99.0
+
+- feat: Muffilities içindeki grid sütunlarında Bootstrap benzeri padding değerleri atandı.
+
+## create-mufferplate@1.98.0 
 
 ### SCSS Tailwind
 
