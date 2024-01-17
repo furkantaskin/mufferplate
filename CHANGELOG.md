@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## create-mufferplate@1.97.0 
+
+### SCSS Tailwind
+
+- fix: SCSS Tailwind içindeki container seçme sorunu giderildi. Önceden `md` noktası için sadece `container` ve `container-sm` sınıfları kapsanırken artık Bootstrap'taki gibi `container, container-sm, container-md` sınıfları kapsanmakta.
+- fix: Bootstrap sütunlarındaki padding ve width sorunu giderildi. Artık Bootstrap'taki gibi genişlik değeri almayan sütunlar 100% olarak `.row` içini kapsayacak.
+- fix: Container içinde padding olmaması ya da olması durumuna göre padding hatası yaşanması durumu giderildi. 
+- feat: `.col-0` sınıfı eklendi. Dilenirse sütun genişliği artık 0% olarak ayarlanabilir.
+- feat: Spacing için özel fonksiyon eklendi. Artık Tailwind içinde spacing olayına bağlı olarak oluşturulan sınıflar 100'e kadar gidebilir (`m-100` veya `h-100` gibi).
+- feat: Varsayılan transition süresi 300ms ve transition fonksiyonu ise ease olarak güncellendi.
+- feat: `--gutter-width` ve `--column-width` değişkenleri eklendi. Bu değişkenler `_base.scss` içinden güncellenebilir.
+- feat: Mobil header ve mobil menü için Tailwind sınıfları tanımlandı.
+- refactor: Kullanılmayan `--gutter-total` CSS değişkeni kaldırıldı.
+
+### Muffilities
+
+- fix: PostCSS işleminde GLightbox için media query seçicilerinin silinmesine sebep olan işlem sıralama hatası giderildi. Artık purge işleminden sonra media query seçicileri sıralanmakta.
+
 ## create-mufferplate@1.96.0
 
 - feat: CSS işlemleri için scriptler düzenlendi. PNPM için PostCSS ve Sass'ın beraber kullanılması gereken veya kullanılmaması gereken durumlar için scriptler ayrıldı. 
