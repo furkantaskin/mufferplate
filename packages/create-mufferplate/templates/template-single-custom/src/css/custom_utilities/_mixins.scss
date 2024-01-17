@@ -461,14 +461,6 @@
             + #{math.div($i, $spacing)}} {
             #{$value}: #{$i}#{$unit};
           }
-
-          #{$responsive_key
-            + 'sizing'
-            + '-'
-            + #{math.div($i, $spacing)}} {
-            width: #{$i}#{$unit};
-            height: #{$i}#{$unit};
-          }
           @if $hover_key != '' {
             #{$responsive_key
               + $hover_key
@@ -477,17 +469,6 @@
               + #{math.div($i, $spacing)}} {
               &:hover {
                 #{$value}: #{$i}#{$unit};
-              }
-            }
-
-            #{$responsive_key
-              + $hover_key
-              + 'sizing'
-              + '-'
-              + #{math.div($i, $spacing)}} {
-              &:hover {
-                width: #{$i}#{$unit};
-                height: #{$i}#{$unit};
               }
             }
           }
@@ -499,11 +480,6 @@
         $selector: map.get($width_map, 'selector');
         #{$responsive_key + $key + $selector} {
           #{$value}: #{$css_value};
-        }
-
-        #{$responsive_key + 'sizing' + $selector} {
-          width: #{$css_value};
-          height: #{$css_value};
         }
 
         @if $hover_key != '' {
@@ -531,6 +507,16 @@
 
       #{$responsive_key + $key + '-screen'} {
         #{$value}: #{if($key == 'w', '100vw', '100vh')};
+      }
+
+      @if ($key == 'h'){
+        @each $elem in ('', 'min-', 'max-'){
+          @each $unit, $unit_value in $dynamic-viewports{
+            #{$responsive_key + $elem + $key + '-' + $unit} {
+              #{$elem + $value}: $unit_value;
+            }
+          }
+        }
       }
 
       @if $hover_key != '' {
@@ -563,6 +549,123 @@
         }
       }
     }
+  }
+}
+
+
+@mixin generate_width_height_sizing(
+  $args,
+  $upper_limit: $spacer_limit,
+  $spacing: $spacer
+) {
+  $responsive_key: list.nth($args, 1);
+  $hover_key: list.nth($args, 2);
+  @each $elem in ('', 'min-', 'max-') {
+      $key: $elem + 'size';
+      @for $i from 0 through ($upper_limit * $spacing) {
+        $unit: math.unit($spacer);
+        $i: strip-unit($i);
+        $spacing: strip-unit($spacing);
+        @if ($i % $spacing == 0) {
+          #{$responsive_key
+            + $key
+            + '-'
+            + #{math.div($i, $spacing)}} {
+            width: #{$i}#{$unit};
+            height: #{$i}#{$unit};
+          }
+
+          @if $hover_key != '' {
+            #{$responsive_key
+              + $hover_key
+              + $key
+              + '-'
+              + #{math.div($i, $spacing)}} {
+              &:hover {
+                width: #{$i}#{$unit};
+                height: #{$i}#{$unit};
+              }
+            }
+
+          }
+        }
+      }
+
+      @each $index, $width_map in $width-range {
+        $css_value: map.get($width_map, 'value');
+        $selector: map.get($width_map, 'selector');
+        #{$responsive_key + $key + $selector} {
+          width: #{$css_value};
+          height: #{$css_value};
+        }
+
+        @if $hover_key != '' {
+          #{$responsive_key + $hover_key  + $key + $selector} {
+            &:hover {
+              width: #{$css_value};
+              height: #{$css_value};
+            }
+          }
+        }
+      }
+
+      #{$responsive_key + $key + '-auto'} {
+        width: auto;
+        height: auto;
+      }
+
+      #{$responsive_key + $key + '-min'} {
+        width: min-content;
+        height: min-content;
+      }
+      #{$responsive_key + $key + '-max'} {
+        width: max-content;
+        height: max-content;
+      }
+      #{$responsive_key + $key + '-fit'} {
+        width: fit-content;
+        height: fit-content;
+      }
+
+      #{$responsive_key + $key + '-screen'} {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      @if $hover_key != '' {
+        #{$responsive_key + $hover_key + $key + '-auto'} {
+          &:hover {
+            width: auto;
+            height: auto;
+          }
+        }
+
+        #{$responsive_key + $hover_key + $key + '-min'} {
+          &:hover {
+            width: min-content;
+            height: min-content;
+          }
+        }
+        #{$responsive_key + $hover_key + $key + '-max'} {
+          &:hover {
+            width: max-content;
+            height: max-content;
+          }
+        }
+        #{$responsive_key + $hover_key + $key + '-fit'} {
+          &:hover {
+            width: fit-content;
+            height: fit-content;
+          }
+        }
+
+        #{$responsive_key + $hover_key + $key + '-screen'} {
+          &:hover {
+            width: 100vw;
+            height: 100vh;
+          }
+        }
+      }
   }
 }
 
@@ -747,6 +850,7 @@ $mixin_list: (
   'generate_padding',
   'generate_position',
   'generate_width_height',
+  'generate_width_height_sizing',
   'generate_gap',
   'generate_transition_duration',
   'generate_border_width',

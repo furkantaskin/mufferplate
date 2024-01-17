@@ -1,5 +1,13 @@
 @use 'sass:math';
 
+:host, html{
+  -webkit-tap-highlight-color: transparent;
+}
+
+*, *::before, *::after {
+  border: 0 solid;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;

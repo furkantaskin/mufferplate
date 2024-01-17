@@ -53,6 +53,8 @@ $utilities: (
     property: position,
     isActive: true,
     values: (
+      static: static,
+      sticky: sticky,
       relative: relative,
       absolute: absolute,
       fixed: fixed,
@@ -465,3 +467,5 @@ $gap-directions: (
     )
   );
 }
+
+$dynamic-viewports: ('svh': 100svh, 'lvh': 100lvh, 'dvh': 100dvh);
