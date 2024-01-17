@@ -6,9 +6,7 @@ import sortMediaQueries from "postcss-sort-media-queries";
 const postcssConfig = {
   plugins: [
     autoprefixer,
-    sortMediaQueries({
-      sort: 'desktop-first'
-    }),
+
     cssnano({
       preset: 'cssnano-preset-advanced',
     }),
@@ -19,6 +17,9 @@ const postcssConfig = {
       keyframes: false,
       defaultExtractor: (content) =>
         content.match(/[\w-/:.-]+/g) || [],
+    }),
+    sortMediaQueries({
+      sort: 'desktop-first'
     }),
   ],
 };

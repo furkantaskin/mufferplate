@@ -30,32 +30,32 @@ $inline_css = false;
 
 <body>
 
-    <header class="header_lg">
+    <header class="header_lg md:hidden block">
         <div class="container">
             <nav aria-label="Main menu"></nav>
         </div>
     </header>
 
-    <header class="header_sm">
+    <header class="header_sm relative z-5 bg-primary/100 hidden md:block">
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="bs-sm:col-4 col-6">
                     <a href="" class="logo">
                         <img src="<?= domain ?>assets/img/svg/logo.svg" alt="">
                     </a>
                 </div>
-                <div class="col-6">
-                    <div class="menuButton d-flex a-c">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <div class="bs-sm:col-8 col-6 flex items-center">
+                    <div class="menuButton relative flex flex-col items-end ml-auto">
+                        <span class="block w-full relative"></span>
+                        <span class="block w-full absolute"></span>
+                        <span class="block w-full relative"></span>
+                        <span class="block w-full relative"></span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="mobileMenu">
+    <div class="mobileMenu hidden md:block fixed w-screen h-screen z-4 bg-primary/100">
         <nav aria-label="Mobile menu"></nav>
     </div>

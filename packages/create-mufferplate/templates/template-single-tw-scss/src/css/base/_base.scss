@@ -50,7 +50,6 @@ $grid-gutter: 24px;
   @if $value == 0 {
     :root {
       --column-width: #{$col-width};
-      --gutter-total: #{$gutter-total};
       --container-width: #{$container-width};
       --container-margin: 0;
       --gutter-width: #{$grid-gutter};
@@ -60,7 +59,6 @@ $grid-gutter: 24px;
     @media (min-width: $value) {
       :root {
         --column-width: #{$col-width};
-        --gutter-total: #{$gutter-total};
         --container-width: #{$container-width};
         --container-margin: calc((100vw - #{$container-width}) / 2);
         --gutter-width: #{$grid-gutter};

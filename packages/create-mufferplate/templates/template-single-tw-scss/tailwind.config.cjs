@@ -7,7 +7,7 @@ const customConfig = {
   colNumber: 12,
   gridGutter: 24,
   percentPrecision: 5,
-  containerPadding: false,
+  containerPadding: true,
   hasRtl: false,
   screens: {
     mobileFirstBreakpoints: {
@@ -38,8 +38,15 @@ const customConfig = {
       display: 'flex',
       flexWrap: 'wrap',
     },
+    '.row > *': {
+      width: '100%',
+      flex: 'none',
+    }
   },
 };
+
+customConfig.customSelectors['.row > *'][customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'] = `${customConfig.gridGutter / 2}px`;
+customConfig.customSelectors['.row > *'][customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'] = `${customConfig.gridGutter / 2}px`;
 
 const customContainer = {};
 
@@ -56,6 +63,7 @@ customConfig.customSelectors['.row'][
 
 Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach(
   (key) => {
+    containerName.push(`.container-${key}`);
     let currKey = containerName.join(',');
     customConfig.screens.bsBreakpoints[`bs-${key}`] =
       customConfig.screens.mobileFirstBreakpoints[key];
@@ -64,8 +72,9 @@ Object.keys(customConfig.screens.mobileFirstBreakpoints).forEach(
       `@media (min-width: ${customConfig.screens.mobileFirstBreakpoints[key]})`
     ] = {
       maxWidth: customConfig.container[key],
+      [customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft']: customConfig.containerPadding ? customConfig.container.padding : 0,
+      [customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight']: customConfig.containerPadding ? customConfig.container.padding : 0,
     };
-    containerName.push(`.container-${key}`);
   }
 );
 
@@ -74,7 +83,7 @@ function createBsGrid() {
   const GRID_GUTTER = customConfig.gridGutter;
   const PRECISION = customConfig.percentPrecision;
   const obj = {};
-  for (let i = 1; i <= COL_NUMBER; i++) {
+  for (let i = 0; i <= COL_NUMBER; i++) {
     const key = `.col-${i}`;
     const value = (i / COL_NUMBER) * 100;
     obj[key] = {
@@ -121,14 +130,25 @@ function createBsOffset() {
   return obj;
 }
 
-function generateZIndex(){
+function generateZIndex() {
   let zIndexObj = {
-    zIndex: {}
+    zIndex: {},
   };
-  for (let i = 1; i<=12; i++){
+  for (let i = 1; i <= 12; i++) {
     zIndexObj.zIndex[i.toString()] = i.toString();
   }
   return zIndexObj.zIndex;
+}
+
+function generateSpacing() {
+  const SPACER = 2;
+  const SPACER_LIMIT = 200;
+  let spacing = {};
+  spacing['px'] = '1';
+  for (let i = 0; i <= SPACER_LIMIT; i++) {
+    spacing[(i / 2).toString()] = `${i * SPACER}px`;
+  }
+  return spacing;
 }
 
 /** @type {import('tailwindcss').Config} */
@@ -159,35 +179,48 @@ const twConfig = {
       current: 'currentColor',
       black: '#000',
       white: '#fff',
-      primary: '#e256c5',
-      blue: '#007bff',
     },
+    fontFamily: {
+    },
+    transitionDuration: {
+      DEFAULT: '300ms',
+    },
+    transitionTimingFunction: {
+      DEFAULT: 'ease',
+    },
+    spacing: generateSpacing(),
     extend: {
-    zIndex: generateZIndex(),
+      zIndex: generateZIndex(),
       spacing: {
         'container-margin': 'var(--container-margin)',
         'container-width': 'var(--container-width)',
+        'gutter-width': 'var(--gutter-width)',
+        'column-width': 'var(--column-width)',
       },
     },
   },
   plugins: [
     plugin(function ({ addUtilities, addComponents }) {
-      addUtilities(createBsGrid());
-      addUtilities(createBsOffset());
+      
       addUtilities({
         '.row': {
           ...customConfig.customSelectors['.row'],
         },
+        '.row > *': {
+          ...customConfig.customSelectors['.row > *'],
+        },
       });
+      addUtilities(createBsGrid());
+      addUtilities(createBsOffset());
       addComponents({
         '.container': {
           width: '100%',
           [`${
             customConfig.hasRtl ? 'paddingInlineStart' : 'paddingLeft'
-          }`]: customConfig.container.padding,
+          }`]: customConfig.gridGutter / 2,
           [`${
             customConfig.hasRtl ? 'paddingInlineEnd' : 'paddingRight'
-          }`]: customConfig.container.padding,
+          }`]: customConfig.gridGutter / 2,
           [`${
             customConfig.hasRtl ? 'marginInlineStart' : 'marginLeft'
           }`]: 'auto',
