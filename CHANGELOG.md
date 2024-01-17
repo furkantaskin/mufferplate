@@ -2,6 +2,14 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@1.101.0
+
+- feat: Muffilities için yeni seçiciler eklendi.
+    - `dvh`, `svh`, ve `lvh` sınıfları `{min- | max- | }-h-{dvh | lvh | svg}` şeklinde kullanılabilir. [Tailwind 3.4](https://tailwindcss.com/blog/tailwindcss-v3-4#dynamic-viewport-units) güncellemesi baz alındı.
+    - `sticky` ve `static` seçicileri eklendi.
+    - Mobildeki mavi parlama efekti kaldırması için `-webkit-tap-highlight-color: transparent;` eklendi.
+- fix: Border kalınlığı verilmesi durumunda tüm kutuya border verilmesi sorunu giderildi.
+
 ## create-mufferplate@1.100.0
 
 - fix: `.row` tanımlamasında yaşanan hata giderildi.
