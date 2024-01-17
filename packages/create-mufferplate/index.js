@@ -131,11 +131,6 @@ async function main() {
       path.join(currentDir, '.gitignore')
     );
 
-    fs.renameSync(
-      path.join(currentDir, '_gitattributes'),
-      path.join(currentDir, '.gitattributes')
-    );
-
     console.log(green('Files installed successfully.'));
     console.log(
       cyan('Run install and dev commands for whether npm or pnpm')
