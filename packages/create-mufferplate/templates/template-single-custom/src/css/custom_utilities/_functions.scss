@@ -2,6 +2,7 @@
 @use 'sass:meta';
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:string';
 
 @function to-fixed($float, $digits: 8) {
   $sass-precision: 8;
@@ -96,4 +97,12 @@
     }
   }
   @return $breakpoint-map;
+}
+
+@function get-color($color, $opacity: 1){
+  $color_var: map.get($color_map, $color);
+  @if ($color_var == null){
+    @warn "The color key '#{$color}' does not exist in defined colors. Please add your color to the color map";
+  }
+  @return rgba($color_var, $opacity);
 }

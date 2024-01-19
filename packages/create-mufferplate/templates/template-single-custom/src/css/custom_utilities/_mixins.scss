@@ -141,13 +141,34 @@
   $hover_key: list.nth($args, 2);
   @each $key, $property in $color-parameters {
     @each $color_code, $color_value in $color_map {
-      #{$responsive_key}#{$key}-#{$color_code} {
-        #{$property}: var(--color-#{$color_code});
-      }
-      @if $hover_key != '' {
-        #{$responsive_key}#{$hover_key}#{$key}-#{$color_code} {
-          &:hover {
-            #{$property}: var(--color-#{$color_code});
+      @for $i from 0 through 100 {
+        @if ($i % 5 == 0 and $i != 100) {
+          #{$responsive_key}#{$key}-#{$color_code}\/#{$i} {
+            #{$property}: get-color($color_code, math.div($i, 100));
+          }
+          @if $hover_key != '' {
+            #{$responsive_key}#{$hover_key}#{$key}-#{$color_code}\/#{$i} {
+              &:hover {
+                #{$property}: get-color(
+                  $color_code,
+                  math.div($i, 100)
+                );
+              }
+            }
+          }
+        } @if($i == 100) {
+          #{$responsive_key}#{$key}-#{$color_code} {
+            #{$property}: get-color($color_code);
+          }
+          @if $hover_key != '' {
+            #{$responsive_key}#{$hover_key}#{$key}-#{$color_code} {
+              &:hover {
+                #{$property}: get-color(
+                  $color_code,
+                  math.div($i, 100)
+                );
+              }
+            }
           }
         }
       }
@@ -351,7 +372,6 @@
         }
       }
 
-
       // Generate classes with directions
       @each $direction_key, $direction_val in $gap-directions {
         #{$responsive_key
@@ -417,8 +437,6 @@
           }
         }
       }
-
-
     }
     @each $index, $width_map in $width-range {
       $css_value: map.get($width_map, 'value');
@@ -483,7 +501,7 @@
         }
 
         @if $hover_key != '' {
-          #{$responsive_key + $hover_key  + $key + $selector} {
+          #{$responsive_key + $hover_key + $key + $selector} {
             &:hover {
               #{$value}: #{$css_value};
             }
@@ -509,9 +527,9 @@
         #{$value}: #{if($key == 'w', '100vw', '100vh')};
       }
 
-      @if ($key == 'h'){
-        @each $elem in ('', 'min-', 'max-'){
-          @each $unit, $unit_value in $dynamic-viewports{
+      @if ($key == 'h') {
+        @each $elem in ('', 'min-', 'max-') {
+          @each $unit, $unit_value in $dynamic-viewports {
             #{$responsive_key + $elem + $key + '-' + $unit} {
               #{$elem + $value}: $unit_value;
             }
@@ -552,7 +570,6 @@
   }
 }
 
-
 @mixin generate_width_height_sizing(
   $args,
   $upper_limit: $spacer_limit,
@@ -561,111 +578,107 @@
   $responsive_key: list.nth($args, 1);
   $hover_key: list.nth($args, 2);
   @each $elem in ('', 'min-', 'max-') {
-      $key: $elem + 'size';
-      @for $i from 0 through ($upper_limit * $spacing) {
-        $unit: math.unit($spacer);
-        $i: strip-unit($i);
-        $spacing: strip-unit($spacing);
-        @if ($i % $spacing == 0) {
-          #{$responsive_key
-            + $key
-            + '-'
-            + #{math.div($i, $spacing)}} {
-            width: #{$i}#{$unit};
-            height: #{$i}#{$unit};
-          }
-
-          @if $hover_key != '' {
-            #{$responsive_key
-              + $hover_key
-              + $key
-              + '-'
-              + #{math.div($i, $spacing)}} {
-              &:hover {
-                width: #{$i}#{$unit};
-                height: #{$i}#{$unit};
-              }
-            }
-
-          }
-        }
-      }
-
-      @each $index, $width_map in $width-range {
-        $css_value: map.get($width_map, 'value');
-        $selector: map.get($width_map, 'selector');
-        #{$responsive_key + $key + $selector} {
-          width: #{$css_value};
-          height: #{$css_value};
+    $key: $elem + 'size';
+    @for $i from 0 through ($upper_limit * $spacing) {
+      $unit: math.unit($spacer);
+      $i: strip-unit($i);
+      $spacing: strip-unit($spacing);
+      @if ($i % $spacing == 0) {
+        #{$responsive_key + $key + '-' + #{math.div($i, $spacing)}} {
+          width: #{$i}#{$unit};
+          height: #{$i}#{$unit};
         }
 
         @if $hover_key != '' {
-          #{$responsive_key + $hover_key  + $key + $selector} {
+          #{$responsive_key
+            + $hover_key
+            + $key
+            + '-'
+            + #{math.div($i, $spacing)}} {
             &:hover {
-              width: #{$css_value};
-              height: #{$css_value};
+              width: #{$i}#{$unit};
+              height: #{$i}#{$unit};
             }
           }
         }
       }
+    }
 
-      #{$responsive_key + $key + '-auto'} {
-        width: auto;
-        height: auto;
-      }
-
-      #{$responsive_key + $key + '-min'} {
-        width: min-content;
-        height: min-content;
-      }
-      #{$responsive_key + $key + '-max'} {
-        width: max-content;
-        height: max-content;
-      }
-      #{$responsive_key + $key + '-fit'} {
-        width: fit-content;
-        height: fit-content;
-      }
-
-      #{$responsive_key + $key + '-screen'} {
-        width: 100vw;
-        height: 100vh;
+    @each $index, $width_map in $width-range {
+      $css_value: map.get($width_map, 'value');
+      $selector: map.get($width_map, 'selector');
+      #{$responsive_key + $key + $selector} {
+        width: #{$css_value};
+        height: #{$css_value};
       }
 
       @if $hover_key != '' {
-        #{$responsive_key + $hover_key + $key + '-auto'} {
+        #{$responsive_key + $hover_key + $key + $selector} {
           &:hover {
-            width: auto;
-            height: auto;
-          }
-        }
-
-        #{$responsive_key + $hover_key + $key + '-min'} {
-          &:hover {
-            width: min-content;
-            height: min-content;
-          }
-        }
-        #{$responsive_key + $hover_key + $key + '-max'} {
-          &:hover {
-            width: max-content;
-            height: max-content;
-          }
-        }
-        #{$responsive_key + $hover_key + $key + '-fit'} {
-          &:hover {
-            width: fit-content;
-            height: fit-content;
-          }
-        }
-
-        #{$responsive_key + $hover_key + $key + '-screen'} {
-          &:hover {
-            width: 100vw;
-            height: 100vh;
+            width: #{$css_value};
+            height: #{$css_value};
           }
         }
       }
+    }
+
+    #{$responsive_key + $key + '-auto'} {
+      width: auto;
+      height: auto;
+    }
+
+    #{$responsive_key + $key + '-min'} {
+      width: min-content;
+      height: min-content;
+    }
+    #{$responsive_key + $key + '-max'} {
+      width: max-content;
+      height: max-content;
+    }
+    #{$responsive_key + $key + '-fit'} {
+      width: fit-content;
+      height: fit-content;
+    }
+
+    #{$responsive_key + $key + '-screen'} {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    @if $hover_key != '' {
+      #{$responsive_key + $hover_key + $key + '-auto'} {
+        &:hover {
+          width: auto;
+          height: auto;
+        }
+      }
+
+      #{$responsive_key + $hover_key + $key + '-min'} {
+        &:hover {
+          width: min-content;
+          height: min-content;
+        }
+      }
+      #{$responsive_key + $hover_key + $key + '-max'} {
+        &:hover {
+          width: max-content;
+          height: max-content;
+        }
+      }
+      #{$responsive_key + $hover_key + $key + '-fit'} {
+        &:hover {
+          width: fit-content;
+          height: fit-content;
+        }
+      }
+
+      #{$responsive_key + $hover_key + $key + '-screen'} {
+        &:hover {
+          width: 100vw;
+          height: 100vh;
+        }
+      }
+    }
   }
 }
 
@@ -743,10 +756,7 @@
         }
 
         @if $hover_key != '' {
-          #{$responsive_key
-            + $hover_key
-            + $prefix
-            + $class_prefix} {
+          #{$responsive_key + $hover_key + $prefix + $class_prefix} {
             &:hover {
               #{$class_property}-width: 1px;
             }
@@ -866,15 +876,5 @@ $mixin_list: (
         if($hover_key, 'hover\\:', '')
       )
     );
-  }
-}
-
-@mixin deneme($args) {
-  @for $i from 1 through 4 {
-    @if ($i > list.length($args)) {
-      @debug 'hata';
-    } @else {
-      @debug list.nth($args, $i);
-    }
   }
 }

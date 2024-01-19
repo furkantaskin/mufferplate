@@ -36,6 +36,21 @@ $width-range: ();
 $has-rtl: false;
 $font-rem: false;
 
+$color_map: (
+  'primary': #dfac32,
+  'secondary': #00f,
+  'dark': #000,
+  'light': #fff,
+);
+
+$default_colors: (
+  'white': #fff,
+  'transparent': transparent,
+  'black': #000,
+);
+
+$color_map: map.merge($color_map, $default_colors);
+
 $utilities: (
   'display': (
     property: display,
@@ -418,7 +433,9 @@ $utilities: (
       transition-none: none,
       transition-all: string.unquote('all'),
       transition-colors:
-        string.unquote('color, background-color, border-color, text-decoration-color, fill, stroke'),
+        string.unquote(
+          'color, background-color, border-color, text-decoration-color, fill, stroke'
+        ),
       transition-margin: string.unquote('margin'),
       transition-padding: string.unquote('padding'),
       transition-opacity: string.unquote('opacity'),
@@ -433,6 +450,7 @@ $color-parameters: (
   'text': 'color',
   'bg': 'background-color',
   'border': 'border-color',
+  'stroke': 'stroke',
 );
 
 $space-directions: (
@@ -468,4 +486,8 @@ $gap-directions: (
   );
 }
 
-$dynamic-viewports: ('svh': 100svh, 'lvh': 100lvh, 'dvh': 100dvh);
+$dynamic-viewports: (
+  'svh': 100svh,
+  'lvh': 100lvh,
+  'dvh': 100dvh,
+);
