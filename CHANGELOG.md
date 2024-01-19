@@ -2,6 +2,15 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@1.102.0
+
+- feat: Renklerin çalışma mantığı güncellendi
+    - Renklerde artık sınıflar CSS değişkeni yerine tanımlı rengin rgba değerini çağırmakta.
+    - Renklerde opacity özelliği eklendi. Şu an için opacity değeri beşin katlarına göre ilerlemekte. (Örn: `text-black/50` değeri `rgba(0,0,0, .5)` olarak çıktı verecek). Tam opaklık için yüzdelik ifade olmadan kullanımı yeterli (Örn: `text-black`).
+    - Artık renk değişkenleri `base/_variables.scss` yerine `custom_utilities/_variables.scss` içinde tanımlanmakta.
+- refactor: base klasörü içindeki gereksiz fonksiyon ve değişkenler kaldırıldı.
+- refactor: Muffilities içindeki gereksiz mixin'ler kaldırıldı.
+
 ## create-mufferplate@1.101.0
 
 - feat: Muffilities için yeni seçiciler eklendi.
