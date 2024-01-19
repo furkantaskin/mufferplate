@@ -2,6 +2,9 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@1.102.1
+- refactor: Base içindeki gereksiz renk değişkeni oluşturma işlemi kaldırıldı.
+
 ## create-mufferplate@1.102.0
 
 - feat: Renklerin çalışma mantığı güncellendi
