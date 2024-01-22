@@ -2,6 +2,23 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@1.103.0
+
+- feat: Yeni paket eklendi: muffmass... Yeni paket sayesinde sass derlemesi cli üzerinden yapmak yerine artık daha yüksek performans sağlayan `sass-embedded` alt yapısını kullanmakta. Bu sayede Muffilities için gereken hız bir nebze de olsa artırıldı.
+- feat: Yeni klasör eklendi. Artık ana dizindeki kalabalığı azaltmak için PostCSS, Mufferplate ve Muffmass için ana dizindeki mf_config klasörü baz alınabilecek.
+- refactor: Margin, padding ve gap oluşturmak için ayrı ayrı mixin'ler yerine artık tek bir map üzerinden kontrol etme imkanı sağlayan yeni bir mixin hazırlandı. Bu sayede yeni margin ve padding yönleri gibi durumlar bir noktadan kontrol edilebilecek.
+- feat: Muffilities için basamak yapısı eklendi. Artık bu kısımda kullanıcılar 0'dan 100'e kadar olan kısımların kaçar adım gideceğini `$spacing-steps` içinden ayarlayabilecek.
+
+## mufferplate@0.21.0
+
+- feat: Klasör yapısı güncellendi. Artık kullanıcılar dilerse ana dizine mf_config klasörü açarak konfigürasyon dosyasını burada da tutabilir.
+
+## muffmass@0.2.0
+
+- feat: Yeni pakete merhaba
+
+
+
 ## create-mufferplate@1.102.1
 - refactor: Base içindeki gereksiz renk değişkeni oluşturma işlemi kaldırıldı.
 
