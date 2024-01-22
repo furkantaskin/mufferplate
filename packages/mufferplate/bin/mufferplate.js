@@ -49,7 +49,12 @@ let startTime;
 async function readConfig() {
   for (const filename of CONFIG_FILE_LIST) {
     getPath = path.resolve(ROOT_DIR, filename);
-    if (!fs.existsSync(getPath)) continue;
+    if (!fs.existsSync(getPath)){
+      getPath = path.resolve(ROOT_DIR, "mf_config", filename);
+      if(!fs.existsSync(getPath)){
+        continue;
+      }
+    }
     isExist = true;
     break;
   }

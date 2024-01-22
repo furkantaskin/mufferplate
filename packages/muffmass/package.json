@@ -1,0 +1,23 @@
+{
+  "name": "muffmass",
+  "version": "0.2.3",
+  "type": "module",
+  "description": "Mufferplate Sass Compiler",
+  "main": "index.js",
+  "types": "./bin/index.d.ts",
+  "bin": {
+    "muffmass": "bin/muffmass.js"
+  },
+  "dependencies": {
+    "picocolors": "^1.0.0",
+    "sass-embedded": "^1.70.0",
+    "chokidar": "^3.5.3"
+  },
+  "keywords": [
+    "sass",
+    "compiler",
+    "sass-embedded"
+  ],
+  "author": "Furkan Taşkın",
+  "license": "MIT"
+}

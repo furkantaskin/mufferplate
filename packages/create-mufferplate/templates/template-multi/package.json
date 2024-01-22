@@ -22,7 +22,7 @@
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "swiper": "^1.69.0",
-    "mufferplate": "^0.20.0"
+    "mufferplate": "^0.21.0"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
@@ -31,8 +31,7 @@
     "build-css": "sass --no-source-map --style=compressed src/css/pages:theme/assets/css",
     "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
-    "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js",
-    "bundle": "npm run build && node bundlephp.cjs"
+    "postcss": "postcss --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js"
   },
   "repository": {
     "type": "git",

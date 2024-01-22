@@ -30,6 +30,7 @@ $container-no-padding: false;
 $spacing-utilities: ();
 $spacer: 4px;
 $spacer-limit: 25;
+$spacing-steps: 2;
 $spacing-range: ();
 $width-range: ();
 
@@ -441,6 +442,57 @@ $utilities: (
       transition-opacity: string.unquote('opacity'),
       transition-shadow: string.unquote('box-shadow'),
       transition-transform: string.unquote('transform'),
+    ),
+  ),
+);
+
+$spacing-utilities: (
+  'margin': (
+    'has-negative': true,
+    'properties': (
+      'm': 'margin',
+      'mx':
+        if($has-rtl, 'margin-inline', ('margin-left', 'margin-right')),
+      'my':
+        if($has-rtl, 'margin-block', ('margin-top', 'margin-bottom')),
+      'mt': 'margin-top',
+      'mb': 'margin-bottom',
+      'ml': 'margin-left',
+      'mr': 'margin-right',
+      'ms': 'margin-inline-start',
+      'me': 'margin-inline-end',
+    ),
+  ),
+  'padding': (
+    'has-negative': false,
+    'properties': (
+      'p': 'padding',
+      'px':
+        if(
+          $has-rtl,
+          'padding-inline',
+          ('padding-left', 'padding-right')
+        ),
+      'py':
+        if(
+          $has-rtl,
+          'padding-block',
+          ('padding-top', 'padding-bottom')
+        ),
+      'pt': 'padding-top',
+      'pb': 'padding-bottom',
+      'pl': 'padding-left',
+      'pr': 'padding-right',
+      'ps': 'padding-inline-start',
+      'pe': 'padding-inline-end',
+    ),
+  ),
+  'gap': (
+    'has-negative': false,
+    'properties': (
+      'gap': 'gap',
+      'gap-x': 'col-gap',
+      'gap-y': 'row-gap',
     ),
   ),
 );

@@ -20,7 +20,7 @@
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.3.3",
-    "mufferplate": "^0.20.0"
+    "mufferplate": "^0.21.0"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
@@ -29,7 +29,6 @@
     "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
     "build": "npm run build-js && npm run build-css",
     "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
-    "bundle": "npm run build && node bundlephp.cjs"
   },
   "repository": {
     "type": "git",

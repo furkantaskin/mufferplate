@@ -12,7 +12,7 @@
     $unit: math.unit($spacer);
     $i: strip-unit($i);
     $spacing: strip-unit($spacing);
-    @if ($i % 2 == 0) {
+    @if ($i % $spacing-steps == 0) {
       //Get quotient
       $quotient: math.abs(math.div($i, $spacing));
 
@@ -156,7 +156,8 @@
               }
             }
           }
-        } @if($i == 100) {
+        }
+        @if ($i == 100) {
           #{$responsive_key}#{$key}-#{$color_code} {
             #{$property}: get-color($color_code);
           }
@@ -167,243 +168,6 @@
                   $color_code,
                   math.div($i, 100)
                 );
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@mixin generate_margin($args) {
-  $responsive_key: list.nth($args, 1);
-  $hover_key: list.nth($args, 2);
-  //.mt-10 or .-mb-10\.5
-  $class_prefix: 'm';
-  $class_property: 'margin';
-  @each $key, $space_map in $spacing-range {
-    $selector: map.get($space_map, 'selector');
-    $prefix: map.get($space_map, 'prefix');
-    $value: map.get($space_map, 'value');
-
-    // To generate -> .m-20{margin: 80px}
-    #{$responsive_key + $prefix + $class_prefix + $selector} {
-      #{$class_property}: #{$value};
-    }
-
-    @if $hover_key != '' {
-      #{$responsive_key
-        + $hover_key
-        + $prefix
-        + $class_prefix
-        + $selector} {
-        &:hover {
-          #{$class_property}: #{$value};
-        }
-      }
-    }
-
-    // Generate classes with directions
-    @each $direction_key, $direction_val in $space-directions {
-      #{$responsive_key
-        + $prefix
-        + $class_prefix
-        + $direction_key
-        + $selector} {
-        @if (meta.type-of($direction_val) == list) {
-          @each $direction in $direction_val {
-            #{$class_property + '-' + $direction}: #{$value};
-          }
-        } @else {
-          #{$class_property + '-' + $direction_val}: #{$value};
-        }
-      }
-
-      @if $hover_key != '' {
-        #{$responsive_key
-          + $hover_key
-          + $prefix
-          + $class_prefix
-          + $direction_key
-          + $selector} {
-          &:hover {
-            @if (meta.type-of($direction_val) == list) {
-              @each $direction in $direction_val {
-                #{$class_property + '-' + $direction}: #{$value};
-              }
-            } @else {
-              #{$class_property + '-' + $direction_val}: #{$value};
-            }
-          }
-        }
-      }
-
-      // Generate margin auto values
-      @if ($key == 0) {
-        #{$responsive_key
-          + $prefix
-          + $class_prefix
-          + $direction_key
-          + '-auto'} {
-          @if (meta.type-of($direction_val) == list) {
-            @each $direction in $direction_val {
-              #{$class_property + '-' + $direction}: auto;
-            }
-          } @else {
-            #{$class_property + '-' + $direction_val}: auto;
-          }
-        }
-
-        @if $hover_key != '' {
-          #{$responsive_key
-            + $hover_key
-            + $prefix
-            + $class_prefix
-            + $direction_key
-            + '-auto'} {
-            &:hover {
-              @if (meta.type-of($direction_val) == list) {
-                @each $direction in $direction_val {
-                  #{$class_property + '-' + $direction}: auto;
-                }
-              } @else {
-                #{$class_property + '-' + $direction_val}: auto;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@mixin generate_padding($args) {
-  $responsive_key: list.nth($args, 1);
-  $hover_key: list.nth($args, 2);
-  $class_prefix: 'p';
-  $class_property: 'padding';
-  @each $key, $space_map in $spacing-range {
-    @if ($key >= 0) {
-      $selector: map.get($space_map, 'selector');
-      $prefix: map.get($space_map, 'prefix');
-      $value: map.get($space_map, 'value');
-
-      // To generate -> .m-20{margin: 80px}
-      #{$responsive_key + $prefix + $class_prefix + $selector} {
-        #{$class_property}: #{$value};
-      }
-
-      @if $hover_key != '' {
-        #{$responsive_key
-          + $hover_key
-          + $prefix
-          + $class_prefix
-          + $selector} {
-          &:hover {
-            #{$class_property}: #{$value};
-          }
-        }
-      }
-
-      // Generate classes with directions
-      @each $direction_key, $direction_val in $space-directions {
-        #{$responsive_key
-          + $prefix
-          + $class_prefix
-          + $direction_key
-          + $selector} {
-          @if (meta.type-of($direction_val) == list) {
-            @each $direction in $direction_val {
-              #{$class_property + '-' + $direction}: #{$value};
-            }
-          } @else {
-            #{$class_property + '-' + $direction_val}: #{$value};
-          }
-        }
-
-        @if $hover_key != '' {
-          #{$responsive_key
-            + $hover_key
-            + $prefix
-            + $class_prefix
-            + $direction_key
-            + $selector} {
-            &:hover {
-              @if (meta.type-of($direction_val) == list) {
-                @each $direction in $direction_val {
-                  #{$class_property + '-' + $direction}: #{$value};
-                }
-              } @else {
-                #{$class_property + '-' + $direction_val}: #{$value};
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@mixin generate_gap($args) {
-  $responsive_key: list.nth($args, 1);
-  $hover_key: list.nth($args, 2);
-  $class_prefix: 'gap';
-  @each $key, $space_map in $spacing-range {
-    @if ($key >= 0) {
-      $selector: map.get($space_map, 'selector');
-      $prefix: map.get($space_map, 'prefix');
-      $value: map.get($space_map, 'value');
-
-      // To generate -> .m-20{margin: 80px}
-      #{$responsive_key + $prefix + $class_prefix + $selector} {
-        gap: #{$value};
-      }
-
-      @if $hover_key != '' {
-        #{$responsive_key
-          + $hover_key
-          + $prefix
-          + $class_prefix
-          + $selector} {
-          &:hover {
-            gap: #{$value};
-          }
-        }
-      }
-
-      // Generate classes with directions
-      @each $direction_key, $direction_val in $gap-directions {
-        #{$responsive_key
-          + $prefix
-          + $class_prefix
-          + '-'
-          + $direction_key
-          + $selector} {
-          @if (meta.type-of($direction_val) == list) {
-            @each $direction in $direction_val {
-              #{$direction_val}: #{$value};
-            }
-          } @else {
-            #{$direction_val}: #{$value};
-          }
-        }
-
-        @if $hover_key != '' {
-          #{$responsive_key
-            + $hover_key
-            + $prefix
-            + $class_prefix
-            + '-'
-            + $direction_key
-            + $selector} {
-            &:hover {
-              @if (meta.type-of($direction_val) == list) {
-                @each $direction in $direction_val {
-                  #{$direction_val}: #{$value};
-                }
-              } @else {
-                #{$direction_val}: #{$value};
               }
             }
           }
@@ -693,7 +457,6 @@
       $prefix: map.get($space_map, 'prefix');
       $value: map.get($space_map, 'value');
 
-      // To generate -> .m-20{margin: 80px}
       #{$responsive_key + $prefix + $class_prefix + '-' + #{$key}} {
         #{$class_property}-width: #{$value};
       }
@@ -853,18 +616,84 @@
   }
 }
 
+@mixin generate_spacing($args) {
+  $responsive_key: list.nth($args, 1);
+  $hover_key: list.nth($args, 2);
+
+  @each $key, $property-map in $spacing-utilities {
+    @each $selector, $property in map.get($property-map, 'properties')
+    {
+      @if (map.get($property-map, 'has-negative') == false) {
+        @each $spacing-key, $spacing-map in $spacing-range {
+          @if ($spacing-key >= 0) {
+            $spacing-selector: map.get($spacing-map, 'selector');
+            $spacing-prefix: map.get($spacing-map, 'prefix');
+            $spacing-value: map.get($spacing-map, 'value');
+            #{$responsive_key + $spacing-prefix + $selector + $spacing-selector} {
+              @if meta.type-of($property) == 'list' {
+                @each $prop in $property {
+                  #{$prop}: $spacing-value;
+                }
+              } @else {
+                #{$property}: $spacing-value;
+              }
+            }
+
+            @if ($hover_key != ''){
+              #{$responsive_key + $hover_key + $spacing-prefix + $selector + $spacing-selector}:hover {
+                @if meta.type-of($property) == 'list' {
+                  @each $prop in $property {
+                    #{$prop}: $spacing-value;
+                  }
+                } @else {
+                  #{$property}: $spacing-value;
+                }
+              }
+            }
+          }
+        }
+      } @else {
+        @each $spacing-key, $spacing-map in $spacing-range {
+          $spacing-selector: map.get($spacing-map, 'selector');
+          $spacing-prefix: map.get($spacing-map, 'prefix');
+          $spacing-value: map.get($spacing-map, 'value');
+          #{$responsive_key + $spacing-prefix + $selector + $spacing-selector} {
+            @if meta.type-of($property) == 'list' {
+              @each $prop in $property {
+                #{$prop}: $spacing-value;
+              }
+            } @else {
+              #{$property}: $spacing-value;
+            }
+          }
+
+          @if ($hover_key != ''){
+            #{$responsive_key + $hover_key + $spacing-prefix + $selector + $spacing-selector}:hover {
+              @if meta.type-of($property) == 'list' {
+                @each $prop in $property {
+                  #{$prop}: $spacing-value;
+                }
+              } @else {
+                #{$property}: $spacing-value;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 $mixin_list: (
   'generate_utilities',
   'generate_opacity',
-  'generate_margin',
-  'generate_padding',
   'generate_position',
   'generate_width_height',
   'generate_width_height_sizing',
-  'generate_gap',
   'generate_transition_duration',
   'generate_border_width',
-  'generate_colors'
+  'generate_colors',
+  'generate_spacing'
 );
 
 @mixin generate_mixins($responsive_key: false, $hover_key: true) {
