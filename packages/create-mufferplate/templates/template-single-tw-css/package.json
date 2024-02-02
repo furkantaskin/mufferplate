@@ -12,23 +12,14 @@
     "swiper": "^10.2.0"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "autoprefixer": "^10.4.16",
-    "concurrently": "^8.2.1",
-    "cssnano": "^6.0.1",
-    "pers-sign": "^0.5.0",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0",
-    "tailwindcss": "^3.3.3",
-    "mufferplate": "^0.21.0"
+    "mufferplate":"^1.1.0"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
     "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
     "build-js": "mufferplate build",
     "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
-    "build": "npm run build-js && npm run build-css",
-    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
+    "build": "npm run build-js && npm run build-css"
   },
   "repository": {
     "type": "git",

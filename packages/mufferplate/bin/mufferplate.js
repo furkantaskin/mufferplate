@@ -1,352 +1,40 @@
-#!/usr/bin/env node
+import S from"node:process";import q from"node:fs";import J from"node:path";import v from"picocolors";import{cac as fe}from"cac";import b from"picocolors";function r(s,e){switch(e){case"info":console.log(`${b.cyan("[INFO]")} ${s}`);break;case"success":console.log(`${b.green("[SUCCESS]")} ${s}`);break;case"warning":console.log(`${b.yellow("[WARNING]")} ${s}`);break;case"error":console.log(`${b.red("[ERROR]")} ${s}`);break;default:console.log(b.white(s));break}return!0}import Z from"node:process";var N=["mufferplate.config.js","mufferplate.config.mjs","mufferplate.config.cjs","mf.config.js","mf.config.mjs","mf.config.cjs"],P=`/*!
+**********
 
-import esbuild from "esbuild";
-import { red, cyan, lightYellow, lightGreen, lightGray } from "kolorist";
-import process from "node:process";
-import fs from "node:fs";
-import path from "node:path";
-import { performance } from "node:perf_hooks";
-import JavaScriptObfuscator from 'javascript-obfuscator';
+${new Date().toLocaleDateString()}
+Made with mufferplate
+Visit: https://github.com/furkantaskin/mufferplate
 
+**********
+!*/`,_=`/*!
+**********
 
-/** Returns string with space in the beginning
- * @param {string} inputtext
- *  @returns {string}
- */
-function returnWithSpace(inputtext) {
-  return `    ${inputtext}`;
-}
+${new Date().toLocaleDateString()}
+Made with mufferplate
+Visit: https://github.com/furkantaskin/mufferplate
 
-/** @type {Array<string>} */
-const CONFIG_FILE_LIST = [
-  "mufferplate.config.js",
-  "mufferplate.config.mjs",
-  "mufferplate.config.cjs",
-  "mf.config.js",
-  "mf.config.mjs",
-  "mf.config.cjs",
-];
-
-/** @type {string} */
-const ROOT_DIR = process.cwd();
-
-/** @type {string} */
-let getEnv = "";
-
-/** @type {boolean} */
-let isExist = false;
-
-let customConfig = {};
-
-let getPath = "";
-
-let startTime;
-
-/**
- * Reads config from pre-defined diectories
- * @returns {undefined}
- */
-async function readConfig() {
-  for (const filename of CONFIG_FILE_LIST) {
-    getPath = path.resolve(ROOT_DIR, filename);
-    if (!fs.existsSync(getPath)){
-      getPath = path.resolve(ROOT_DIR, "mf_config", filename);
-      if(!fs.existsSync(getPath)){
-        continue;
-      }
-    }
-    isExist = true;
-    break;
-  }
-  if (isExist) {
-    const userConfig = await import(`file://${getPath}`);
-    customConfig = await userConfig.default;
-  }
-}
-
-// Starter
-console.clear();
-console.log(lightGreen("🗲    MUFFERPLATE    🗲\n\n"));
-
-// Get mode
-if (process.argv.includes("build")) {
-  getEnv = "build";
-} else {
-  if (!process.argv.includes("dev")) {
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace("No mode detected. Working in dev mode as default")
-    );
-  }
-  getEnv = "dev";
-}
-
-const watchPlugin = {
-  name: "watch-plugin",
-  setup(build) {
-    build.onStart(() => {
-      startTime = performance.now();
-    });
-    build.onEnd((result) => {
-      const getTime = (performance.now() - startTime).toFixed(2);
-      if (result.errors.length > 0) {
-        console.log(
-          red(`[error]    Build failed. Error: ${result.error[0].text}`)
-        );
-      } else {
-        const currentTime = new Date().toLocaleTimeString("en-GB", {
-          hour12: false,
-        });
-        console.log(
-          lightGray(`[${currentTime}]`),
-          returnWithSpace("Rebuilt"),
-          cyan(`(${getTime}ms)`)
-        );
-      }
-    });
-  },
-};
-
-/**
- * Returns the list of entry points with absolute path
- * @param {string[] | null} [filePaths=null]
- * @returns {string[]}
- */
-function mergeFiles(filePaths = null) {
-  let getDir = "";
-  let files;
-  for (const filePath of filePaths) {
-    if (!fs.existsSync(path.join(ROOT_DIR, filePath))) {
-      console.log(
-        lightYellow(`[warning]`),
-        returnWithSpace(`No file exists such: ${filePath}`)
-      );
-    } else {
-      if (!fs.statSync(filePath).isFile()) {
-        getDir = filePath;
-        console.log(
-          cyan("[info]"),
-          returnWithSpace(
-            "Directory detected in entryPoints. Other file declarations will be ignored."
-          )
-        );
-        break;
-      }
-    }
-  }
-  try {
-    if (filePaths !== null) {
-      let newMap;
-      if (getDir !== "") {
-        files = fs
-          .readdirSync(path.join(ROOT_DIR, getDir))
-          .filter(
-            (file) =>
-              path.extname(file) === ".js" || path.extname(file) === ".ts"
-          );
-        newMap = files.map((filePath) => path.join(ROOT_DIR, getDir, filePath));
-      } else {
-        newMap = filePaths.map((file) => path.join(ROOT_DIR, file));
-      }
-      return newMap;
-    }
-  } catch (err) {
-    console.log(
-      red(`[error]`),
-      returnWithSpace(
-        `Caught error on getting directory information. Error: ${err}`,
-        err
-      )
-    );
-    return null;
-  }
-}
-
-function emptyDir(dir) {
-  if (!fs.existsSync(dir)) {
-    return;
-  }
-  for (const file of fs.readdirSync(dir)) {
-    if (file === ".git") {
-      continue;
-    }
-    fs.rmSync(path.resolve(dir, file), {
-      recursive: true,
-      force: true,
-    });
-  }
-}
-
-(async () => {
-  await readConfig();
-
-  if (
-    !customConfig.entryPoints &&
-    !customConfig.dev?.entryPoints &&
-    !customConfig.build?.entryPoints
-  ) {
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace("No entry points detected, it will read src/js directory")
-    );
-  }
-
-  if (
-    !customConfig.outdir &&
-    !customConfig.dev?.outdir &&
-    !customConfig.build?.outdir
-  ) {
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace(
-        "No output directory detected, it will generate the output to theme/assets/js directory"
-      )
-    );
-  }
-
-  if (
-    (customConfig.dev?.splitting || customConfig.build?.splitting) &&
-    !customConfig.chunkDir
-  )
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace(
-        "Splitting should be defined outside dev or build objects. It will be false as default"
-      )
-    );
-  if (
-    (customConfig.dev?.chunkNames || customConfig.build?.chunkNames) &&
-    !customConfig.chunkDir
-  )
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace(
-        "Chunk directory should be defined outside dev or build objects. It will be 'chunks' directory as default"
-      )
-    );
-
-  let watchConfig = {
-    bundle: true,
-    color: true,
-    logLevel: "warning",
-    treeShaking:
-      customConfig.dev?.treeShaking ?? customConfig.treeShaking ?? true,
-    sourcemap:
-      customConfig.dev?.sourcemap ?? customConfig.sourcemap ?? "inline",
-    outdir:
-      customConfig.dev?.outdir ?? customConfig.outdir ?? "theme/assets/js",
-    minify: customConfig.dev?.minify ?? customConfig.minify ?? false,
-    splitting: customConfig.dev?.splitting
-      ? false
-      : customConfig.splitting ?? false,
-    chunkNames: `${customConfig.chunkDir ?? "chunks"}/[name]-[hash]`,
-    plugins: [watchPlugin],
-  };
-
-  let buildConfig = {
-    bundle: true,
-    color: true,
-    logLevel: "info",
-    treeShaking:
-      customConfig.build?.treeShaking ?? customConfig.treeShaking ?? true,
-    sourcemap: customConfig.build?.sourcemap ?? customConfig.sourcemap ?? false,
-    outdir:
-      customConfig.build?.outdir ??
-      customConfig.dev?.outdir ??
-      customConfig.outdir ??
-      "theme/assets/js",
-    minify: customConfig.build?.minify ?? customConfig.minify ?? true,
-    splitting: customConfig.build?.splitting
-      ? false
-      : customConfig.splitting ?? false,
-    chunkNames: `${customConfig.chunkDir ?? "chunks"}/[name]-[hash]`,
-    banner: {
-      js: `/*!\n**********\n\n${new Date().toLocaleDateString()}\nMade with mufferplate\nVisit: https://github.com/furkantaskin/mufferplate\n\n**********\n!*/`,
-    },
-    metafile: customConfig.build?.meta ?? customConfig.meta ?? false,
-  };
-
-  if (watchConfig.splitting) watchConfig.format = "esm";
-  if (buildConfig.splitting) buildConfig.format = "esm";
-  if (customConfig.signed)
-    buildConfig.inject = ["./node_modules/mufferplate/bin/signature.js"];
-
-  !isExist &&
-    console.log(
-      lightYellow("[warning]"),
-      returnWithSpace(
-        "No config file detected. Running under default configuration"
-      )
-    );
-
-  if (getEnv !== "build") {
-    watchConfig.entryPoints = mergeFiles(
-      customConfig.dev?.entryPoints ?? customConfig.entryPoints ?? "src/js"
-    );
-    let ctx = await esbuild.context(watchConfig);
-    ctx.watch();
-  } else {
-    buildConfig.entryPoints = mergeFiles(
-      customConfig.build?.entryPoints ??
-        customConfig.dev?.entryPoints ??
-        customConfig.entryPoints ??
-        "src/js"
-    );
-    if (buildConfig.splitting) {
-      console.log(
-        cyan("[info]"),
-        returnWithSpace("Splitting is enabled. Clearing the old chunk files...")
-      );
-      emptyDir(buildConfig.outdir);
-    }
-    let result = await esbuild.build(buildConfig);
-
-    buildConfig.metafile &&
-      console.log(await esbuild.analyzeMetafile(result.metafile));
-
-    if (customConfig.obfuscate) {
-      const directoryPath = path.join(ROOT_DIR, buildConfig.outdir);
-      fs.promises
-        .readdir(directoryPath)
-        .then((files) => {
-          files.forEach(async (file) => {
-            const filePath = path.join(directoryPath, file);
-
-            try {
-              const fileContent = await fs.promises.readFile(filePath, "utf8");
-
-              // Obfuscate the content
-              const obfuscatedCode = JavaScriptObfuscator.obfuscate(
-                fileContent,
-                {
-                  compact: true,
-                  controlFlowFlattening: true,
-                  controlFlowFlatteningThreshold: 1,
-                  numbersToExpressions: true,
-                  simplify: true,
-                  shuffleStringArray: true,
-                  splitStrings: true,
-                  stringArrayThreshold: 1,
-                }
-              ).getObfuscatedCode();
-
-              // Write the obfuscated content back to the file
-              await fs.promises.writeFile(filePath, obfuscatedCode, "utf8");
-              console.log(
-                lightGreen("\n[success]"),
-                returnWithSpace(`${lightGray(file)} obfuscated successfully. Total size is ${cyan((fs.statSync(filePath).size / 1024).toFixed(1) + ' kB')}`)
-              );
-            } catch (err) {
-              console.log(
-                red("[error]"),
-                returnWithSpace(`Error obfuscating file ${file}:`, err)
-              );
-            }
-          });
-        })
-        .catch((err) => {
-          console.error("Unable to scan directory:", err);
-        });
-    }
-  }
-})();
+**********
+!*/`,c=Z.cwd();import{performance as z}from"node:perf_hooks";import B from"node:fs";import u from"picocolors";import*as I from"sass-embedded";import te from"chokidar";var R=new Set(["js","sass","tailwind","purge"]),p={js:{enable:!0,dev:{bundle:!0,logLevel:"warning",outdir:"theme/assets/js",entryPoints:["src/js"],splitting:!1,format:"iife",chunkNames:"chunks/[name]-[hash]",treeShaking:!1,metafile:!1,sourcemap:"inline",minify:!1,legalComments:"none"},build:{bundle:!0,logLevel:"info",outdir:"theme/assets/js",entryPoints:["src/js"],splitting:!1,format:"iife",chunkNames:"chunks/[name]-[hash]",treeShaking:!0,metafile:!1,sourcemap:!1,minify:!0,legalComments:"eof",signed:!0,obfuscate:!1}},sass:{enable:!0,dev:{inputFile:"src/css/scss/main.scss",outputFile:"theme/assets/css/main.css",depsDir:["src/css/scss/**/*.scss"],polling:10,watchDeps:!0,sourcemap:!0,style:"expanded",charset:!1,verbose:!1,signed:!1},build:{inputFile:"src/css/scss/main.scss",outputFile:"theme/assets/css/main.css",depsDir:["src/css/scss/**/*.scss"],polling:10,watchDeps:!0,sourcemap:!1,style:"compressed",charset:!1,verbose:!1,signed:!0}},tailwind:{enable:!1,postConfigPath:"mf_config/postcss.config.js",twInputFile:"src/css/app.css",twOutputFile:"theme/assets/css/app.css",useScss:!1,sass:{outputFile:"src/css/libs.css"}}};import ee from"node:fs";import{transform as se}from"lightningcss";function $(s,e){try{let{code:t}=se({filename:"",code:Buffer.from(s),minify:!0,sourceMap:!1,inputSourceMap:void 0}),i=`${_+`
+`+t.toString()}`;ee.writeFileSync(e,i,"utf-8")}catch(t){r("Error while bundling: "+t,"error")}return!0}import y from"node:path";import h from"node:fs";function U(s){let e="",t;for(let i of s)if(!h.existsSync(y.join(c,i)))r(`File not found: ${i}`,"error");else if(!h.statSync(i).isFile()){e=i,r(`Directory detected: ${e}. Other file declarations will be ignored
+`,"info");break}try{if(s!==null){let i=[];return e!==""?(t=h.readdirSync(y.join(c,e)).filter(n=>y.extname(n)===".js"||y.extname(n)===".ts"),i=t.map(n=>y.join(c,e,n))):i=s.map(n=>y.join(c,n)),i}}catch(i){return r(`Caught error on gettting directory information. Error: ${i}`,"error"),null}}function L(s,e=[]){if(h.existsSync(s))for(let t of h.readdirSync(s))t===".git"||e.includes(t)||h.rmSync(y.resolve(s,t),{recursive:!0,force:!0})}function x(s){let e=h.statSync(s).size,t;return e<1024*1024?t=(e/1024).toFixed(2)+" KB":t=(e/(1024*1024)).toFixed(2)+" MB",t}async function C(s,e,t=!1){let i=null,n=z.now();console.log(u.magenta(`${t?`
+Precompiling SCSS. `:""}Processing ${u.bold(s.inputFile)}`));try{let o="";if(e?(i=await I.compileAsync(s.inputFile,{charset:s.charset,style:"compressed",sourceMap:s.sourcemap}),!t&&$(i.css,s.outputFile)):(i=await I.compileAsync(s.inputFile,{charset:s.charset,style:"expanded",sourceMap:s.sourcemap,sourceMapIncludeSources:!1}),o=s.sourcemap?`
+/*# sourceMappingURL=data:application/json;utf-8,`+encodeURIComponent(JSON.stringify(i.sourceMap))+` */
+`:"",B.writeFileSync(s.outputFile,`${i.css.toString()+o}`,"utf-8")),t)return e&&B.writeFileSync(s.outputFile,`${i.css.toString()+o}`,"utf-8"),{code:i.css.toString(),map:i.sourceMap};let a=z.now()-n;return a=a<1e3?`${a.toFixed(2)} ms`:`${(a/1e3).toFixed(2)}1 s`,console.log(u.green(`${u.bold(s.inputFile)} compiled in ${u.bold(a)}    ${!t&&u.cyan("("+x(s.outputFile)+")")}`)),!0}catch(o){o?.sassMessage?r(`Error while compiling ${u.bold(s.inputFile)}: 
+${u.red(o.sassMessage)}
+ ${u.red(o.sassStack)}`,"error"):r(`Error while compiling ${u.bold(s.inputFile)}: 
+${o}`,"error")}}async function W(s={}){let e={...p.sass.dev,...s?.dev};await C(e,!1),console.log(u.dim(`
+Watching SCSS files for changes...`)),te.watch(e?.depsDir,{awaitWriteFinish:{stabilityThreshold:50,pollInterval:e?.polling??100}}).on("change",async()=>{await C(e,!1),console.log(u.dim(`
+Waiting for file changes...
+`))})}async function K(s={}){let e={...p.sass.build,...s?.build};await C(e,!0)}import ie from"node:fs";import G from"node:path";import oe from"postcss";import ne from"tailwindcss";import{bundle as re}from"lightningcss";import ae from"chokidar";import m from"picocolors";var T;async function E(s,e,t){let i=performance.now(),n=s.twInputFile,o=s.twOutputFile;if(console.log(m.cyan(`Processing ${m.bold(s.twInputFile)}`)),e){let f=performance.now();T=await C(s.sass,t,e),T&&console.log(m.magenta(`SCSS precompiled in ${(performance.now()-f).toFixed(2)}ms
+`))}let a=re({filename:n,minify:t,sourceMap:!t,inputSourceMap:T?.map?T.map.toString():void 0,analyzeDependencies:!0,projectRoot:G.join(c,G.dirname(n))}),d=[],g=a.code.toString(),l=a.map?.toString();l!==void 0&&(l=JSON.parse(l),typeof l=="object"&&(l.sources=l.sources.map((f,X)=>(d.push(f),X===0?f.replace(/^.*[\\\/]/,""):f)),l=JSON.stringify(l)));try{await oe([ne]).process(g,{from:n,to:o,map:l?{prev:l,inline:!0,sourcesContent:!1}:!1}).then(f=>{t?$(f.css,o):ie.writeFileSync(o,f.css,"utf-8")}).catch(f=>{r(`Error while compiling ${m.bold(n)}: 
+${f}`,"error")})}catch(f){r(`Error while reading ${m.bold(n)}: 
+${f}`,"error"),process.exit(1)}let w=performance.now()-i;w=w<1e3?`${w.toFixed(2)} ms`:`${(w/1e3).toFixed(2)}1 s`,console.log(m.green(`${m.bold(n)} compiled in ${m.bold(w)}    ${m.cyan("("+x(o)+")")}`))}async function k(s={},e){let t={...p.tailwind,...s},i=await import(`file://${c}/tailwind.config.cjs`),n=[];t.sass={...p.sass.dev,...t.sass},await E(t,e,!1),console.log(m.dim(`
+Waiting for file changes...`)),n=e?[...i.default.content,t.twInputFile,t?.sass?.inputFile,...t?.sass?.depsDir]:[...i.default.content,t.twInputFile],ae.watch(n,{awaitWriteFinish:{stabilityThreshold:50}}).on("change",async a=>{await E(t,a.split(".").pop()==="scss",!1),console.log(m.dim(`
+Waiting for file changes...
+`))})}async function D(s={},e){let t={...p.tailwind,...s};t.sass={...p.sass.build,...t.sass},await E(t,e,!0)}import j from"node:path";import{fileURLToPath as le}from"node:url";import O from"node:fs";import ce from"javascript-obfuscator";import M from"esbuild";import A from"picocolors";async function V(s){let e=0,t={...p.js?.dev,...s.dev},i=0,n={name:"watch-plugin",setup(a){a.onStart(()=>{console.log(A.yellow(`
+Processing JS files...`)),i=performance.now()}),a.onEnd(d=>{let g=(performance.now()-i).toFixed(2);d.errors.length>0?r(`Build failed. Error: ${d.errors[0].text}`,"error"):(console.log(e===0?"Built":"Rebuilt",A.cyan(`(${g}ms)
+`)),e+=1)})}};t.entryPoints=U(t.entryPoints),(await M.context({...t,plugins:[n]})).watch()}async function Y(s){let e={...p.js?.build,...s.build},t=j.dirname(le(import.meta.url)),i=!1;e.entryPoints=U(e.entryPoints),e.splitting&&(r("Splitting is enabled. Module is converted to esm.","info"),r("Clearing old chunk files...","info"),L(e.outdir,["chunks"]),e.format="esm"),e.signed&&(e.inject=[j.join(t,"signature.js")]),e.obfuscate&&(i=!0),e.banner={js:P},delete e.signed,delete e.obfuscate;let n=await M.build(e);if(e.metafile&&console.log(await M.analyzeMetafile(n.metafile)),i){let o=j.join(c,e.outdir);await O.promises.readdir(o).then(a=>{a.forEach(async d=>{let g=j.join(o,d);try{console.log(`
+Obfuscating`,d,`
+`);let l=await O.promises.readFile(g,"utf8"),w=await ce.obfuscate(l,{compact:!0,controlFlowFlattening:!0,controlFlowFlatteningThreshold:1,numbersToExpressions:!0,simplify:!0,shuffleStringArray:!0,splitStrings:!0,stringArrayThreshold:1}).getObfuscatedCode();await O.promises.writeFile(g,w,"utf8"),r(`${A.yellow(d)} obfuscated successfully. Total size is ${(O.statSync(g).size/1024).toFixed(3)} kB`,"success")}catch(l){r(`Error obfuscating file ${d}: ${l}`,"error")}})}).catch(a=>{r(`Error reading directory ${o}: ${a}`,"error")})}}var F=fe("mufferplate");var H={};console.clear();console.log(v.green(`🗲    MUFFERPLATE    🗲
+`));async function Q(s=""){let e=s||"";e&&(e=J.resolve(c,e));let t=s&&!1;if(!e){for(let i of N)if(e=J.resolve(c,i),!(!q.existsSync(e)&&(e=J.resolve(c,"mf_config",i),!q.existsSync(e)))){t=!0;break}}return console.log("Using config file: ",v.yellow(e)),t?H=await(await import(`file://${e}`)).default:r("No config file found. Using default config","info"),H}F.command("[...root]","Run mufferplate in development mode. You can use 'tailwind' 'js' and 'sass' as main arguments").alias("dev").option("--use-scss","Use SCSS precompile with tailwind").option("--config <path>","Custom config file location").action(async(s,e)=>{let t=await Q(e.config);console.log("Running under development mode.");let i={js:async()=>V({...t.js}),sass:async()=>W({...t.sass}),tailwind:{plain:async()=>k({...t.tailwind},!1),sass:async()=>{k({useScss:!0,...t.tailwind},!0)}}};s.length?(s.forEach(n=>{R.has(n)||(r(`Invalid argument: ${v.yellow(n)}`,"error"),S.exit(1))}),s.includes("tailwind")&&s.includes("sass")?(r("Cannot use Sass and Tailwind together. If you want to use Tailwind as default with Sass, please use --use-scss flag","error"),S.exit(1)):s.forEach(async n=>{let o=n;o==="tailwind"?e.useScss?await i[o].sass():await i[o].plain():await i[o]()})):(t.tailwind?.enable&&t.sass?.enable&&(r("Cannot use Sass and Tailwind together. If you want to use Tailwind as default with Sass, please change useCss to true in tailwind and disable sass in config file","error"),S.exit(1)),Object.keys(t).forEach(async n=>{let o=n;t[o].enable&&(o==="tailwind"?e.useScss?await i[o].sass():await i[o].plain():await i[o]())}))});F.command("build [...root]","Build your project").option("--config <path>","Custom config file location").option("--use-scss","Use scss with tailwind").action(async(s,e)=>{let t=await Q(e.config),i=Object.keys(t);console.log(`Running under production mode
+`);let n={js:async()=>await Y({...t.js}),sass:async()=>await K({...t.sass}),tailwind:{plain:async()=>await D({...t.tailwind},!1),sass:async()=>{await D({...t.tailwind},!0)}}};if(s.length)if(s.forEach(o=>{R.has(o)||(r(`Invalid argument: ${v.yellow(o)}`,"error"),S.exit(1))}),s.includes("tailwind")&&s.includes("sass"))r("Cannot use Sass and Tailwind together. If you want to use Tailwind as default with Sass, please use --use-scss flag","error"),S.exit(1);else for(let o of s)o==="tailwind"?e.useScss?await n[o].sass():await n[o].plain():await n[o]();else{t.tailwind?.enable&&t.sass?.enable&&(r("Cannot use Sass and Tailwind together. If you want to use Tailwind as default with Sass, please change useCss to true in tailwind and disable sass in config file","error"),S.exit(1));for(let o of i)t[o].enable&&(o==="tailwind"?e.useScss?await n[o].sass():await n[o].plain():await n[o]())}s.includes("tailwind")&&s.includes("sass")&&(r("Cannot use Sass and Tailwind together. If you want to use Tailwind as default with Sass, please use --use-scss flag","error"),S.exit(1))});F.command("purge [root]","Purge unused css").action(async s=>{});F.help();F.parse();

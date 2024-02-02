@@ -14,16 +14,7 @@
     "bootstrap": "5.3.2"
   },
   "devDependencies": {
-    "@thedutchcoder/postcss-rem-to-px": "^0.0.2",
-    "autoprefixer": "^10.4.16",
-    "concurrently": "^8.2.2",
-    "cssnano": "^6.0.3",
-    "mufferplate": "^0.21.0",
-    "postcss": "^8.4.33",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.0.0",
-    "sass": "^1.70.0",
-    "tailwindcss": "^3.4.1"
+    "mufferplate":"^1.1.0"
   },
   "scripts": {
     "dev-main-js": "mufferplate dev",
@@ -32,8 +23,7 @@
     "build-js": "mufferplate build",
     "build-css": "postcss src/css/app.css --output theme/assets/css/app.css --verbose --env production",
     "build-sass": "sass --no-source-map --style=compressed src/css/main.scss:src/css/libs.css",
-    "build": "pnpm run build-js && pnpm run build-sass && pnpm run build-css",
-    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*"
+    "build": "pnpm run build-js && pnpm run build-sass && pnpm run build-css"
   },
   "repository": {
     "type": "git",

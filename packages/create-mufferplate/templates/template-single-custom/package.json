@@ -15,17 +15,11 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "autoprefixer": "^10.4.16",
     "concurrently": "^8.2.2",
-    "cssnano": "^6.0.1",
-    "cssnano-preset-advanced": "^6.0.1",
-    "lightningcss-cli": "^1.22.1",
-    "mufferplate": "^0.21.0",
-    "pers-sign": "^0.5.0",
+    "mufferplate":"^1.1.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "postcss-sort-media-queries": "^5.2.0",
-    "muffmass": "0.2.3"
+    "postcss-sort-media-queries": "^5.2.0"
   },
   "scripts": {
     "dev-js": "mufferplate dev",
