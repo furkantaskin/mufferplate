@@ -17,12 +17,12 @@
     "mufferplate":"^1.1.1"
   },
   "scripts": {
-    "dev": "mufferplate",
+    "dev": "mufferplate js tailwind --use-scss",
     "dev-js": "mufferplate js",
     "dev-css": "mufferplate tailwind --use-scss",
     "build-js": "mufferplate build js",
     "build-css": "mufferplate build tailwind --use-scss",
-    "build": "mufferplate build"
+    "build": "mufferplate build js tailwind --use-scss"
   },
   "repository": {
     "type": "git",
