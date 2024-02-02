@@ -1,7 +1,15 @@
 
-/** @type {import('mufferplate').MufferConfig} */
+/** @type {import('mufferplate').UserConfig} */
 export default {
-    entryPoints: ["src/js"],
-    outdir: "theme/assets/js"
+    js:{
+      enable: true
+    }, 
+    tailwind:{
+      enable: true,
+      useScss: false
+    },
+    sass:{
+      enable: false
+    }
   };
   

@@ -2,7 +2,7 @@
 
 include "components/define-domain.php";
 include "components/svg-sprite.php";
-
+$inline_css = false;
 ?>
 <!doctype html>
 <html lang="tr" dir="ltr">
@@ -15,13 +15,17 @@ include "components/svg-sprite.php";
     <title>Starter Kit</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link media="print" onload="this.onload=null;this.removeAttribute('media');"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="<?= domain ?>assets/css/style.css<?=$_SERVER['REMOTE_ADDR'] == '::1' ? '?v='.rand() : ''?>">
+    <?php if ($inline_css == true): ?>
+        <style>
+            <?php
+            $css_file = file_get_contents(domain . 'assets/css/app.css');
+            echo str_replace('../', domain . 'assets/', $css_file);
+            ?>
+        </style>
+    <?php else: ?>
+        <link rel="stylesheet"
+            href="<?= domain ?>assets/css/app.css<?= $_SERVER['REMOTE_ADDR'] == '::1' ? '?v=' . rand() : '' ?>">
+    <?php endif; ?>
 </head>
 
 <body>

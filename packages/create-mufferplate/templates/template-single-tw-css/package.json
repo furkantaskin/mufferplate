@@ -12,14 +12,15 @@
     "swiper": "^10.2.0"
   },
   "devDependencies": {
-    "mufferplate":"^1.1.0"
+    "mufferplate":"^1.1.1"
   },
   "scripts": {
-    "dev-js": "mufferplate dev",
-    "dev-css": "postcss src/css/app.css --output theme/assets/css/style.css --watch --verbose --env development",
-    "build-js": "mufferplate build",
-    "build-css": "postcss src/css/app.css --output theme/assets/css/style.css --verbose --env production",
-    "build": "npm run build-js && npm run build-css"
+    "dev-js": "mufferplate js",
+    "dev-css": "mufferplate tailwind",
+    "dev": "mufferplate",
+    "build-js": "mufferplate build js",
+    "build-css": "mufferplate build tailwind",
+    "build": "mufferplate build"
   },
   "repository": {
     "type": "git",

@@ -16,20 +16,19 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "concurrently": "^8.2.2",
-    "mufferplate":"^1.1.0",
+    "mufferplate":"^1.1.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-sort-media-queries": "^5.2.0"
   },
   "scripts": {
-    "dev-js": "mufferplate dev",
-    "dev-css": "muffmass dev",
-    "build-js": "mufferplate build",
-    "build-css": "muffmass build",
-    "build": "mufferplate build && muffmass build",
-    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
-    "postcss": "postcss --no-map --verbose theme/assets/css/*.css --dir theme/assets/css --config ./mf_config/postcss.config.js",
-    "lightningcss": "lightningcss --minify --bundle --browserslist ./theme/assets/css/main.css -o ./theme/assets/css/main.css"
+    "dev-js": "mufferplate js",
+    "dev-css": "mufferplate sass",
+    "build-js": "mufferplate build js",
+    "build-css": "mufferplate build sass",
+    "build": "mufferplate build",
+    "dev": "mufferplate",
+    "postcss": "postcss --no-map --verbose theme/assets/css/*.css --dir theme/assets/css --config ./mf_config/postcss.config.js"
   },
   "repository": {
     "type": "git",
