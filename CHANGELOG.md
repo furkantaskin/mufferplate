@@ -2,6 +2,17 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@2.0.0
+
+### BREAKING CHANGE
+- feat: Mufferplate yeniden yapılandırıldı.
+    - Artık mufferplate içinde Tailwind, Sass ve JS birlikte çalışmakta
+    - Tailwind ile Sass kullanımı artık beraber sorunsuz bir şekilde yapılabilmekte
+    - Tüm işlemler için tek bir global konfigürasyon dosyası kullanılabilir
+    - Mufferplate için konfigürasyon dosyası artık CLI üzerinden gönderilebilir
+    - Dev ve build modları ayrı ayrı çalıştırılabilmekte
+    - Artık Mufferplate için özel bir CLI komutu bulunmakta
+
 ## create-mufferplate@1.103.0
 
 - feat: Yeni paket eklendi: muffmass... Yeni paket sayesinde sass derlemesi cli üzerinden yapmak yerine artık daha yüksek performans sağlayan `sass-embedded` alt yapısını kullanmakta. Bu sayede Muffilities için gereken hız bir nebze de olsa artırıldı.
