@@ -14,12 +14,7 @@
     "swiper": "^11.0.4"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "concurrently": "^8.2.2",
-    "mufferplate":"^1.1.1",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0",
-    "postcss-sort-media-queries": "^5.2.0"
+    "mufferplate":"^1.3.0"
   },
   "scripts": {
     "dev-js": "mufferplate js",
@@ -28,7 +23,7 @@
     "build-css": "mufferplate build sass",
     "build": "mufferplate build",
     "dev": "mufferplate",
-    "postcss": "postcss --no-map --verbose theme/assets/css/*.css --dir theme/assets/css --config ./mf_config/postcss.config.js"
+    "purge": "mufferplate purge"
   },
   "repository": {
     "type": "git",

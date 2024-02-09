@@ -1,5 +1,14 @@
+
+
 type baseLogs = "info" | "error" | "warning" | "success" | "default";
 
+type ComplexSafelist = {
+    standard?: StringRegExpArray;
+    deep?: RegExp[];
+    greedy?: RegExp[];
+    variables?: StringRegExpArray;
+    keyframes?: StringRegExpArray;
+}
 
 export interface UserJsBaseConfig {
   bundle?: boolean,
@@ -42,6 +51,9 @@ export interface UserSassBaseConfig{
 
 export interface UserSassOptions extends UserSassBaseConfig{
     enable?: boolean,
+    inputFile?: string,
+    outputFile?: string,
+    depsDir?: string[],
     dev?: Partial<UserSassBaseConfig>,
     build?: Partial<UserSassBaseConfig>
 }
@@ -58,7 +70,16 @@ export interface UserTwConfig {
 
 export interface UserPurgeConfig {
     postConfigPath?: string,
-    [key: string]: any
+    file?: string,
+    output?: string | false,
+    purgeCss?: {
+        content: string[],
+        fontFace: boolean,
+        keyframes: boolean,
+        safelist: Array<RegExp | string> | ComplexSafelist,
+        [key: string]: any,
+    }
+    desktopFirst?: boolean
 }
 
 
