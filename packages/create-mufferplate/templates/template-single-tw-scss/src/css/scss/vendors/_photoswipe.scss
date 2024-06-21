@@ -1,1 +1,3 @@
-@import '../../../../node_modules/photoswipe/src/photoswipe';
+/*! purgecss start ignore */
+@use 'pkg:photoswipe/src/photoswipe';
+/*! purgecss end ignore */

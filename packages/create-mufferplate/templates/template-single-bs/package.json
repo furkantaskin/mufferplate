@@ -21,17 +21,16 @@
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "swiper": "^1.69.0",
-    "mufferplate":"^1.3.1"
+    "mufferplate":"^1.5.0"
   },
   "scripts": {
-    "dev-js": "mufferplate dev",
-    "dev-css": "sass --color --watch --embed-source-map src/css/main.scss:theme/assets/css/main.css --load-path=src/css",
-    "build-js": "mufferplate build",
-    "build-css": "sass --no-source-map --style=compressed src/css/main.scss:theme/assets/css/main.css",
-    "build": "npm run build-js && npm run build-css",
-    "dev": "concurrently -c \"bgYellow.bold,bgMagenta.bold\" --kill-others npm:dev-*",
-    "postcss": "postcss --verbose --no-map theme/assets/css/*.css --dir theme/assets/css --config postcss.config.js"
+    "dev-js": "mufferplate js",
+    "dev-css": "mufferplate sass",
+    "build-js": "mufferplate build js",
+    "build-css": "mufferplate build sass",
+    "build": "mufferplate build",
+    "dev": "mufferplate",
+    "purge": "mufferplate purge"
   },
   "repository": {
     "type": "git",

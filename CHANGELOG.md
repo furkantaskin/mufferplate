@@ -2,7 +2,29 @@
 
 Muffilities = Custom Utilities
 
-## mufferplate@2.0.0
+## create-mufferplate@2.8.0
+
+- refactor: Bootstrap, Swiper ve Photoswipe için SCSS tanımlamaları yeni Sass package importer ile uyumlu olacak şekilde güncellendi.
+
+## create-mufferplate@2.6.0
+
+- fix: Single Bootstrap template içindeki hatalı deps sorunu giderildi.
+- build(deps): mufferplate sürümü 1.5.0'a güncellendi
+
+## mufferplate@1.5.0
+
+- feat: Sass için pkg import özelliği eklendi. Artık Bootstrap gibi aktif kullanılan kütüphane ve frameworkler için node_modules içine relative import yerine `pkg:library` kullanılabilir.
+
+## create-mufferplate@2.5.0
+
+- build(deps): mufferplate sürümü 1.4.0'a güncellendi
+
+## mufferplate@1.4.0
+
+- build(deps): Dependency güncellemesi
+
+
+## create-mufferplate@2.0.0
 
 ### BREAKING CHANGE
 - feat: Mufferplate yeniden yapılandırıldı.
