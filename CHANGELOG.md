@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.6.0
+
+- feat: Yeni `init` komutu eklendi. `mufferplate init` komutu ile ana dizinde temel konfigürasyon dosyası oluşturularak projenin yönlendirilmesi kolaylaştırıldı.
+
 ## create-mufferplate@2.8.0
 
 - refactor: Bootstrap, Swiper ve Photoswipe için SCSS tanımlamaları yeni Sass package importer ile uyumlu olacak şekilde güncellendi.
@@ -22,7 +26,6 @@ Muffilities = Custom Utilities
 ## mufferplate@1.4.0
 
 - build(deps): Dependency güncellemesi
-
 
 ## create-mufferplate@2.0.0
 
