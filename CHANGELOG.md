@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.6.1
+
+- fix: Sass için dev ve build modunda özel konfigürasyondaki input ve ouput dosyalarını gözardı edip varsayılan konfigürasyondaki dosyalara göre işlem yapması sorunu giderildi. Artık özel konfigürasyondaki yolları öncelikli olarak baz alacak.
+
 ## mufferplate@1.6.0
 
 - feat: Yeni `init` komutu eklendi. `mufferplate init` komutu ile ana dizinde temel konfigürasyon dosyası oluşturularak projenin yönlendirilmesi kolaylaştırıldı.
