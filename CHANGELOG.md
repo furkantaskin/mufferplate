@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.6.2
+
+- fix: JS için build modunda özel konfigürasyon input ve output dosyalarını gözardı edip varsayılan konfigürasyondaki dosyalara göre işlem yapması sorunu giderildi.
+
 ## mufferplate@1.6.1
 
 - fix: Sass için dev ve build modunda özel konfigürasyondaki input ve ouput dosyalarını gözardı edip varsayılan konfigürasyondaki dosyalara göre işlem yapması sorunu giderildi. Artık özel konfigürasyondaki yolları öncelikli olarak baz alacak.
