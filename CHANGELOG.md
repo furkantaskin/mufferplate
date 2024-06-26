@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.7.2
+
+- fix: Purge işleminde svg elementleri silme sorunu giderildi
+
 ## create-mufferplate@2.10.2
 
 - fix: Margin için eksik olan auto seçicileri eklendi (`ml-auto mx-auto` etc)

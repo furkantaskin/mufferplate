@@ -12,7 +12,7 @@
     "swiper": "^10.2.0"
   },
   "devDependencies": {
-    "mufferplate":"^1.7.1"
+    "mufferplate":"^1.7.2"
   },
   "scripts": {
     "dev-js": "mufferplate js",
@@ -20,7 +20,8 @@
     "dev": "mufferplate",
     "build-js": "mufferplate build js",
     "build-css": "mufferplate build tailwind",
-    "build": "mufferplate build"
+    "build": "mufferplate build",
+    "init": "mufferplate init"
   },
   "repository": {
     "type": "git",

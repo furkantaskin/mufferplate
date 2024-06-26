@@ -21,7 +21,7 @@
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "mufferplate":"^1.7.1"
+    "mufferplate":"^1.7.2"
   },
   "scripts": {
     "dev-js": "mufferplate js",
@@ -30,7 +30,8 @@
     "build-css": "mufferplate build sass",
     "build": "mufferplate build",
     "dev": "mufferplate",
-    "purge": "mufferplate purge"
+    "purge": "mufferplate purge",
+    "init": "mufferplate init"
   },
   "repository": {
     "type": "git",
