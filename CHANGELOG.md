@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.6.3
+
+- fix: JS için konfigürasyonları okumama sorunu giderildi.
+
 ## mufferplate@1.6.2
 
 - fix: JS için build modunda özel konfigürasyon input ve output dosyalarını gözardı edip varsayılan konfigürasyondaki dosyalara göre işlem yapması sorunu giderildi.
