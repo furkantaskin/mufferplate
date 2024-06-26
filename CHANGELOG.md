@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@2.10.2
+
+- fix: Margin için eksik olan auto seçicileri eklendi (`ml-auto mx-auto` etc)
+
 ## mufferplate@1.7.1
 
 - fix: JavaScript konfigürasyonunun konsolda görünmesi sorunu giderildi.

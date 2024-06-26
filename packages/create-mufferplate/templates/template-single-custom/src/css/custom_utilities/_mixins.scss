@@ -667,6 +667,19 @@
             }
           }
 
+          @if ($spacing-key == 0){
+            #{$responsive_key + $spacing-prefix + $selector + '-auto'}{
+              /* Deneme */
+              @if meta.type-of($property) == 'list' {
+                @each $prop in $property {
+                  #{$prop}: auto;
+                }
+              } @else {
+                #{$property}: auto;
+              }
+            }
+          }
+
           @if ($hover_key != ''){
             #{$responsive_key + $hover_key + $spacing-prefix + $selector + $spacing-selector}:hover {
               @if meta.type-of($property) == 'list' {
