@@ -2,9 +2,13 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.7.1
+
+- fix: JavaScript konfigürasyonunun konsolda görünmesi sorunu giderildi.
+
 ## mufferplate@1.7.0
 
-- JavaScript içinde dev mode kullanımnda meta görüntüleme özelliği getirildi.
+- feat: JavaScript içinde dev mode kullanımnda meta görüntüleme özelliği getirildi.
 
 ## mufferplate@1.6.3
 
