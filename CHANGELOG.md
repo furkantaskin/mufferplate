@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.7.3
+
+- fix: Purge işlemi için eksik olan `defaultExtractor` seçeneği eklendi
+
 ## mufferplate@1.7.2
 
 - fix: Purge işleminde svg elementleri silme sorunu giderildi
