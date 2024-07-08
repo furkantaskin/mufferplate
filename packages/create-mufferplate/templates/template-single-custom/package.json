@@ -14,7 +14,7 @@
     "swiper": "^11.0.4"
   },
   "devDependencies": {
-    "mufferplate":"^1.7.3"
+    "mufferplate":"^1.8.0"
   },
   "scripts": {
     "dev-js": "mufferplate js",

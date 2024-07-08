@@ -14,7 +14,7 @@
     "bootstrap": "5.3.2"
   },
   "devDependencies": {
-    "mufferplate":"^1.7.3"
+    "mufferplate":"^1.8.0"
   },
   "scripts": {
     "dev": "mufferplate js tailwind --use-scss",
