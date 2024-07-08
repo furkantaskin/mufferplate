@@ -2,6 +2,7 @@
 .idea/
 node_modules/
 .env
+sandbox/target
 theme/assets/css
 theme/assets/js
 mufferplate_backup.zip
