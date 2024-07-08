@@ -2,10 +2,10 @@
 export default {
   js: {
     enable: true,
-    entryPoints: [ 'src/js' ],
-    outdir: 'theme/assets/js',
+    entryPoints: [ 'target/src/js' ],
+    outdir: 'target/theme/assets/js',
     dev: {
-      entryPoints: [ 'src/js' ],
+      entryPoints: [ 'target/src/js' ],
       bundle: true,
       logLevel: 'warning',
       splitting: false,
@@ -18,7 +18,7 @@ export default {
       legalComments: 'none'
     },
     build: {
-      entryPoints: [ 'src/js' ],
+      entryPoints: [ 'target/src/js' ],
       bundle: true,
       logLevel: 'info',
       splitting: false,
@@ -35,13 +35,13 @@ export default {
   },
   sass: {
     enable: true,
-    inputFile: 'src/css/scss/main.scss',
-    outputFile: 'theme/assets/css/main.css',
-    depsDir: [ 'src/css/scss/**/*.scss' ],
+    inputFile: 'target/src/css/main.scss',
+    outputFile: 'target/theme/assets/css/main.css',
+    depsDir: [ 'target/src/css/**/*.scss' ],
     dev: {
-      inputFile: 'src/css/scss/main.scss',
-      outputFile: 'theme/assets/css/main.css',
-      depsDir: [ 'src/css/scss/**/*.scss' ],
+      inputFile: 'target/src/css/main.scss',
+      outputFile: 'target/theme/assets/css/main.css',
+      depsDir: [ 'target/src/css/**/*.scss' ],
       polling: 10,
       watchDeps: true,
       sourcemap: true,
@@ -51,9 +51,9 @@ export default {
       signed: false
     },
     build: {
-      inputFile: 'src/css/scss/main.scss',
-      outputFile: 'theme/assets/css/main.css',
-      depsDir: [ 'src/css/scss/**/*.scss' ],
+      inputFile: 'target/src/css/main.scss',
+      outputFile: 'target/theme/assets/css/main.css',
+      depsDir: [ 'target/src/css/**/*.scss' ],
       polling: 10,
       watchDeps: true,
       sourcemap: false,
@@ -66,23 +66,23 @@ export default {
   tailwind: {
     enable: false,
     postConfigPath: 'mf_config/postcss.config.js',
-    twInputFile: 'src/css/app.css',
-    twOutputFile: 'theme/assets/css/app.css',
+    twInputFile: 'target/src/css/app.css',
+    twOutputFile: 'target/theme/assets/css/app.css',
     useScss: false,
     sass: {
-      inputFile: 'src/css/scss/main.scss',
-      outputFile: 'src/css/libs.css',
-      depsDir: [ 'src/css/scss/**/*.scss' ]
+      inputFile: 'target/src/css/main.scss',
+      outputFile: 'target/src/css/libs.css',
+      depsDir: [ 'target/src/css/**/*.scss' ]
     }
   },
   purge: {
-    file: 'theme/assets/css/main.css',
+    file: 'target/theme/assets/css/main.css',
     output: false,
     purgeCss: {
       content: [
-        './theme/*.php',
-        './theme/template/*.php',
-        './theme/assets/js/*.js',
+        './target/theme/*.php',
+        './target/theme/template/*.php',
+        './target/theme/assets/js/*.js',
         './inc/*.php'
       ],
       safelist: {
