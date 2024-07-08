@@ -2,6 +2,11 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.8.0
+
+- fix: Purge işleminde `defaultExtractor` için gelen fonksiyonun içerik hatası giderildi. Artık fonksiyonun adı yerine fonksiyonun kendisi gelmekte.
+- feat: PurgeCSS için `purgeignore` sınıfı eklendi. Bu sayede `purgeignore` sınıfına sahip elementler ve bunun altında bulunan tüm elementler temizleme işleminde korunacak.
+
 ## mufferplate@1.7.3
 
 - fix: Purge işlemi için eksik olan `defaultExtractor` seçeneği eklendi
