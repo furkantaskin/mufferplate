@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.9.0
+
+- build(deps): Mufferplate için `@types/node`, `postcss`, `esbuild` ve `typescript` kütüphaneleri güncellendi.
+
 ## create-mufferplate@2.14.0
 
 - chore: Flex-center seçicisine ekstra `flex` seçicisi eklemenin önüne geçmek için `display: flex` özelliği eklendi.
