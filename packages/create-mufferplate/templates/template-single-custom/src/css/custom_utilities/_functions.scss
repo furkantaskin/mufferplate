@@ -1,0 +1,108 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+
+@function to-fixed($float, $digits: 8) {
+  $sass-precision: 8;
+
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+      + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+      + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+
+  $pow: math.pow(10, $digits);
+  @return math.div(math.round($float * $pow), $pow);
+}
+
+@function generate-width($divider, $dividee) {
+  @return to-fixed(math.div($divider, $dividee)) * 100%;
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map.get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(
+    breakpoint-min($name, $breakpoints) == null,
+    '',
+    '-#{$name}'
+  );
+}
+
+@function mapReverse($map) {
+  $result: null;
+
+  @if type-of($map) == 'map' {
+    $keys: map.keys($map);
+    $map-reversed: ();
+
+    @for $i from length($keys) through 1 {
+      $map-reversed: map.merge(
+        $map-reversed,
+        (
+          list.nth($keys, $i): map.get($map, list.nth($keys, $i)),
+        )
+      );
+    }
+
+    @if meta.type-of($map-reversed) == 'map' {
+      $result: $map-reversed;
+    } @else {
+      @warn 'There was an error reversing the order of "#{$map}"';
+    }
+  } @else {
+    @warn '"#{$map}" is not a valid map';
+  }
+
+  @return $result;
+}
+
+@function strip-unit($number) {
+  @if meta.type-of($number) ==
+    'number' and not
+    math.is-unitless($number)
+  {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function reverseBreakPoints($grid-breakpoints) {
+  $breakpoint-map: ();
+  $reverse-grid-breakpoints: mapReverse($grid-breakpoints);
+  @each $key, $val in $reverse-grid-breakpoints {
+    $current-index: list.index(
+      $reverse-grid-breakpoints,
+      ($key $val)
+    );
+
+    @if $current-index != 1 {
+      $previous-val: list.nth(
+        list.nth($reverse-grid-breakpoints, $current-index - 1),
+        2
+      );
+      $cur-key: list.nth($key, 1);
+      $breakpoint-map: map.merge(
+        $breakpoint-map,
+        (
+          $cur-key: $previous-val - 1,
+        )
+      );
+    }
+  }
+  @return $breakpoint-map;
+}
+
+@function get-color($color, $opacity: 1){
+  $color_var: map.get($color_map, $color);
+  @if ($color_var == null){
+    @warn "The color key '#{$color}' does not exist in defined colors. Please add your color to the color map";
+  }
+  @return rgba($color_var, $opacity);
+}

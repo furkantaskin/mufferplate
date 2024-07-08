@@ -1,0 +1,76 @@
+@use 'sass:math';
+
+:host, html{
+  -webkit-tap-highlight-color: transparent;
+}
+
+*, *::before, *::after {
+  border: 0 solid;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  @if ($has-rtl == true) {
+    margin-inline-start: #{math.div($grid-gutter, -2)};
+    margin-inline-end: #{math.div($grid-gutter, -2)};
+  } @else {
+    margin-left: (math.div($grid-gutter, -2));
+    margin-right: (math.div($grid-gutter, -2));
+  }
+  & > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    @if ($has-rtl == true) {
+      padding-inline-start: #{math.div($grid-gutter, 2)};
+      padding-inline-end: #{math.div($grid-gutter, 2)};
+    } @else {
+      padding-left: (math.div($grid-gutter, 2));
+      padding-right: (math.div($grid-gutter, 2));
+    }
+  }
+}
+
+%pseudo-absolute {
+  position: absolute;
+  content: '';
+}
+
+
+.after-absolute {
+  &::after {
+    @extend %pseudo-absolute;
+  }
+}
+
+.before-absolute {
+  &::before {
+    @extend %pseudo-absolute;
+  }
+}
+
+.container-fluid,
+.container {
+  width: 100%;
+  padding: {
+    left: if($container-no-padding, 0px, math.div($grid-gutter, 2));
+    right: if($container-no-padding, 0px, math.div($grid-gutter, 2));
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+.flex-center{
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
