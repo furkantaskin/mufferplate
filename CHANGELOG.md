@@ -2,6 +2,11 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@2.13.0
+
+- feat: Yeni `flex-center` ve `absolute-center` sınıfları eklendi. Artık flexbox elementlerde ortalama için iki sınıf yerine tek sınıf kullanılabilecek. Ayrıca absolute elementler için de yapılan ekleme ile üç seçici yerine tek seçici kullanılabilecek.
+
+
 ## mufferplate@1.8.1
 
 - fix: `defaultExtractor` içindeki backslash kaynaklı RegEx sorunu giderildi.
