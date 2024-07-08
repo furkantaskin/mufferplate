@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@2.14.0
+
+- chore: Flex-center seçicisine ekstra `flex` seçicisi eklemenin önüne geçmek için `display: flex` özelliği eklendi.
+
 ## create-mufferplate@2.13.0
 
 - feat: Yeni `flex-center` ve `absolute-center` sınıfları eklendi. Artık flexbox elementlerde ortalama için iki sınıf yerine tek sınıf kullanılabilecek. Ayrıca absolute elementler için de yapılan ekleme ile üç seçici yerine tek seçici kullanılabilecek.
