@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@2.11.0
+
+- feat: İlk kurulum esnasında proje dizininin dolu olması halinde temizleme işlemi varsayılan işlemden opsiyonlu işlem haline getirildi. Artık direkt olarak proje dizinini temizlemek yerine kullanıcıya danışacak.
+
 ## mufferplate@1.8.0
 
 - fix: Purge işleminde `defaultExtractor` için gelen fonksiyonun içerik hatası giderildi. Artık fonksiyonun adı yerine fonksiyonun kendisi gelmekte.
