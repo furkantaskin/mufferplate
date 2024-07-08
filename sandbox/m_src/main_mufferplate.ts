@@ -242,7 +242,7 @@ cli
   .command("init", "Initialize the configuration file")
   .action(async (options) => {
     let tempConfig = userConfig;
-    let configResult = util.inspect(tempConfig, {showHidden: false, depth: null}).replace("[Function: defaultExtractor]", "(content) => content.match(/[\w-/:.-]+/g) || []");
+    let configResult = util.inspect(tempConfig, {showHidden: false, depth: null}).replace("[Function: defaultExtractor]", "(content) => content.match(/[\\w-/:.-]+/g) || []");
     console.log(pc.magenta("Generating config file"));
     try {
       fs.writeFileSync(

@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.8.1
+
+- fix: `defaultExtractor` içindeki backslash kaynaklı RegEx sorunu giderildi.
+
 ## create-mufferplate@2.12.0
 
 - build(deps): mufferplate sürümü 1.8.0'a güncellendi

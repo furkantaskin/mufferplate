@@ -85,10 +85,13 @@ export default {
         './theme/assets/js/*.js',
         './inc/*.php'
       ],
-      safelist: [ 'swiper-pagination-bullet', /svg$/ ],
+      safelist: {
+        standard: [ 'swiper-pagination-bullet', /svg$/ ],
+        deep: [ /purgeignore$/ ]
+      },
       fontFace: false,
       keyframes: false,
-      defaultExtractor: (content) => content.match(/[w-/:.-]+/g) || []
+      defaultExtractor: (content) => content.match(/[\w-/:.-]+/g) || []
     },
     desktopFirst: true
   }
