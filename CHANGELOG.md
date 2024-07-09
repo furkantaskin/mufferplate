@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@2.16.0
+
+- feat: Tüm elementler için 300ms transition süresi varsayılan hale getirildi.
+
 ## mufferplate@1.10.0
 
 - fix: Unix sistemler için shebang eklendi.
