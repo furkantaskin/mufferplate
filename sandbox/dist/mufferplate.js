@@ -1,3 +1,4 @@
+#!/usr/bin/env -S node
 import S from"node:process";import A from"node:fs";import k from"node:path";import we from"util";import T from"picocolors";import{cac as ye}from"cac";import x from"picocolors";function r(t,e){switch(e){case"info":console.log(`${x.cyan("[INFO]")} ${t}`);break;case"success":console.log(`${x.green("[SUCCESS]")} ${t}`);break;case"warning":console.log(`${x.yellow("[WARNING]")} ${t}`);break;case"error":console.log(`${x.red("[ERROR]")} ${t}`);break;default:console.log(x.white(t));break}return!0}import se from"node:process";var L=["mufferplate.config.js","mufferplate.config.mjs","mufferplate.config.cjs","mf.config.js","mf.config.mjs","mf.config.cjs"],z=`/*!
 **********
 

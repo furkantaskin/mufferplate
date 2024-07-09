@@ -1,3 +1,5 @@
+#!/usr/bin/env -S node
+
 /* Node Modules */
 import process from "node:process";
 import fs from "node:fs";

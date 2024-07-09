@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.10.0
+
+- fix: Unix sistemler için shebang eklendi.
+
 ## mufferplate@1.9.0
 
 - build(deps): Mufferplate için `@types/node`, `postcss`, `esbuild` ve `typescript` kütüphaneleri güncellendi.
