@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.10.1
+
+- fix: Windows için node shebang sorunu giderildi.
+
 ## create-mufferplate@2.16.0
 
 - feat: Tüm elementler için 300ms transition süresi varsayılan hale getirildi.
