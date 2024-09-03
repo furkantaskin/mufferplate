@@ -26,8 +26,6 @@ export async function purgeCss(getConfig: UserPurgeConfig = {}) {
 
   const prevSize = calculateSize(inputFile);
 
-  console.log(purgeConfig, "\n============\n", userConfig.purge, "\n============\n", getConfig);
-
   const purgeCssConfig = purgeConfig.purgeCss;
 
   const sortConfig = {
