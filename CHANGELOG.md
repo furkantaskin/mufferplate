@@ -2,7 +2,7 @@
 
 Muffilities = Custom Utilities
 
-## create-mufferplate@2.17.1
+## create-mufferplate@2.17.2
 - chore: Gereksiz `--mf-` CSS değişkeni kaldırıldı
 
 ## mufferplate@1.11.0
