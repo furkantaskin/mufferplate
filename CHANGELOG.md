@@ -2,10 +2,17 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.12.0
+
+- build(deps): Mufferplate için dependency güncellemesi yapıldı.
+
+
 ## create-mufferplate@2.17.2
+
 - chore: Gereksiz `--mf-` CSS değişkeni kaldırıldı
 
 ## mufferplate@1.11.0
+
 - fix: PurgeCSS için debug kayıtları kaldırıldı
 - feat: JS imza işlemi varsayılan olarak false durumuna getirildi
 - feat: Varsayılan SCSS dosya yolları güncellendi.
