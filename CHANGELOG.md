@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## mufferplate@1.12.1
+
+- fix: Mufferplate kurulumunda atlanan bağımlılıklar eklendi. (devDependencies -> dependencies)
+
 ## mufferplate@1.12.0
 
 - build(deps): Mufferplate için dependency güncellemesi yapıldı.
