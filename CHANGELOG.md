@@ -2,6 +2,15 @@
 
 Muffilities = Custom Utilities
 
+## craete-mufferplate@3.2.0
+
+- feat: Input maskeleme için imask eklendi.
+
+## create-mufferplate@3.1.0
+
+- fix: .gitignore dosyasındaki yanlış yazım giderildi (.gitignore => _gitignore)
+- build(deps): `@types/node` 22.8.4 ve `sass-embedded` 1.80.5 sürümlerine yükseltildi 
+
 ## create-mufferplate@3.0.0
 
 BREAKING CHANGES

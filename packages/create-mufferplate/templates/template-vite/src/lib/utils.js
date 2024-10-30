@@ -1,3 +1,5 @@
+import IMask from "imask";
+
 export const DOMAIN = document.body.dataset.url;
 
 
@@ -45,3 +47,10 @@ export function mobileMenu() {
     });
     resizeMenu(mobileMenu);
 }
+
+export function applyMask(selector) {
+    IMask($(selector), {
+      mask: "0 (000) 000 00 00",
+    });
+  }
+  

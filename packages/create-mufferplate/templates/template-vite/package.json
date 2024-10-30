@@ -1,18 +1,19 @@
 {
-  "name": "temp_vite",
+  "name": "mufferplate",
+  "description": "Boilerplate for Vite + PHP",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/node": "^22.8.4",
     "bootstrap": "^5.3.3",
     "fast-glob": "^3.3.2",
     "flowbite": "^2.5.2",
+    "imask": "^7.6.1",
     "lightningcss": "^1.27.0",
     "postcss": "^8.4.47",
     "sass-embedded": "^1.80.5",
