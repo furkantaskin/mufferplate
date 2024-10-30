@@ -10,6 +10,7 @@ const {
   lightGreen,
   green,
   blue,
+  yellow,
   lightCyan,
   lightBlue,
   red,
@@ -39,8 +40,13 @@ function emptyDir(dir) {
 
 const templates = [
   {
+    name: "vite",
+    display: "Use mufferplate with Vite ⚡",
+    color: yellow,
+  },
+  {
     name: "single",
-    display: "Single Output (Single CSS and Single JS Output)",
+    display: "Single Output (Deprecated)",
     color: lightBlue,
     variants: [
       {
@@ -68,7 +74,7 @@ const templates = [
   {
     name: "multi",
     display:
-      "Multiple Output (Multiple CSS and Multiple JS Output. Using Bootstrap as default)",
+      "Multiple Output (Deprecated)",
     color: lightGreen,
   },
 ];
@@ -149,7 +155,7 @@ async function main() {
     );
 
     console.log(green("Files installed successfully."));
-    console.log(cyan("Run install and dev commands for whether npm or pnpm"));
+    console.log(cyan("Run install and dev commands for your runtime or package manager"));
   } catch (error) {
     console.log(red("There is an error: ", error));
   }

@@ -1,0 +1,53 @@
+@import 'pkg:bootstrap/scss/mixins/banner';
+@include bsBanner('');
+
+$enable-important-utilities: false;
+
+// scss-docs-start import-stack
+// Configuration
+@import 'pkg:bootstrap/scss/functions';
+@import 'pkg:bootstrap/scss/variables';
+@import 'pkg:bootstrap/scss/variables-dark';
+@import 'pkg:bootstrap/scss/maps';
+@import 'pkg:bootstrap/scss/mixins';
+@import 'pkg:bootstrap/scss/utilities';
+
+// Layout & components
+@import 'pkg:bootstrap/scss/root';
+@import 'pkg:bootstrap/scss/reboot';
+@import 'pkg:bootstrap/scss/type';
+@import 'pkg:bootstrap/scss/images';
+@import 'pkg:bootstrap/scss/containers';
+@import 'pkg:bootstrap/scss/grid';
+@import 'pkg:bootstrap/scss/tables';
+@import 'pkg:bootstrap/scss/forms';
+@import 'pkg:bootstrap/scss/buttons';
+@import 'pkg:bootstrap/scss/transitions';
+@import 'pkg:bootstrap/scss/dropdown';
+@import 'pkg:bootstrap/scss/button-group';
+@import 'pkg:bootstrap/scss/nav';
+@import 'pkg:bootstrap/scss/navbar';
+@import 'pkg:bootstrap/scss/card';
+@import 'pkg:bootstrap/scss/accordion';
+@import 'pkg:bootstrap/scss/breadcrumb';
+@import 'pkg:bootstrap/scss/pagination';
+@import 'pkg:bootstrap/scss/badge';
+@import 'pkg:bootstrap/scss/alert';
+@import 'pkg:bootstrap/scss/progress';
+@import 'pkg:bootstrap/scss/list-group';
+@import 'pkg:bootstrap/scss/close';
+@import 'pkg:bootstrap/scss/toasts';
+@import 'pkg:bootstrap/scss/modal';
+@import 'pkg:bootstrap/scss/tooltip';
+@import 'pkg:bootstrap/scss/popover';
+@import 'pkg:bootstrap/scss/carousel';
+@import 'pkg:bootstrap/scss/spinners';
+@import 'pkg:bootstrap/scss/offcanvas';
+@import 'pkg:bootstrap/scss/placeholders';
+
+// Helpers
+@import 'pkg:bootstrap/scss/helpers';
+
+// Utilities
+@import 'pkg:bootstrap/scss/utilities/api';
+// scss-docs-end import-stack

@@ -1,0 +1,27 @@
+.menuButton {
+
+    &.show {
+        span {
+            &:nth-child(1),
+            &:nth-child(4) {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            &:nth-child(2) {
+                transform: rotate(45deg);
+            }
+
+            &:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}
+
+.mobileMenu{
+    &.show{
+        left: 0;
+        opacity: 1;
+    }
+}

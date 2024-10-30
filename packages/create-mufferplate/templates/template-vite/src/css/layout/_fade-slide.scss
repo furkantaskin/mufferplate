@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+
+
+
+.fade-slide-container {
+  .slide-wrapper {
+    position: relative;
+  }
+
+  .slide-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s ease opacity;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    &.active {
+      pointer-events: auto;
+      user-select: auto;
+      opacity: 1;
+    }
+    @for $i from 1 through 100 {
+      &:nth-child(#{$i}) {
+        z-index: #{100 - $i};
+      }
+    }
+  }
+  .slide-nav {
+    z-index: 100;
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    transform: translateX(-50%);
+    left: 50%;
+    & > div {
+      user-select: none;
+      cursor: pointer;
+    }
+  }
+  .slide-pag{
+    display: flex;
+    position: absolute;
+    z-index: 100;
+    gap: 5px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    .pag-item{
+      width: 10px;
+      height: 10px;
+      background-color: cyan;
+      border-radius: 50%;
+      transition: .3s filter;
+      filter: grayscale(1);
+      &.active{
+        filter: grayscale(0);
+      }
+    }
+  }
+}

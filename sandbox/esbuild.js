@@ -21,7 +21,7 @@ if (process.argv[2] === "publish") {
 } else {
   esbuild
     .build({
-      entryPoints: ["./m_src/main_mufferplate.ts"],
+      entryPoints: ["./v2/mufferplate.ts"],
       outfile: "./dist/mufferplate.js",
       logLevel: "info",
       bundle: true,

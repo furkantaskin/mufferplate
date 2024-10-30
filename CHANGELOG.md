@@ -2,6 +2,16 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@3.0.0
+
+BREAKING CHANGES
+
+- Mufferplate için özel bundler geliştirmesi durduruldu. Artık mufferplate [Vite](https://vite.dev) altyapısını kullanmakta.
+- Muffilities iptal edildi. Yerine native Tailwind desteği eklendi.
+- Photoswipe kullanılmadığı için kaldırıldı.
+- PHP dosya yapısı güncellendi. Yeni form fonksiyonu eklendi.
+- Sweetalert varsayılan olarak eklendi.
+
 ## mufferplate@1.12.1
 
 - fix: Mufferplate kurulumunda atlanan bağımlılıklar eklendi. (devDependencies -> dependencies)
