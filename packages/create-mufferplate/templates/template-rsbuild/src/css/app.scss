@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+
+// @use 'vendors/blaze-slider';
+// @use 'vendors/bootstrap';
+// @use 'vendors/swiper';
+// @use 'vendors/glightbox';
+
+
+
+@use 'base/typography';
+@use 'base/initial';
+@use 'base/animations';
+
+@use 'layout/header';
+@use 'layout/footer';
+
+@use 'pages/index';
+
+
+@config '../tw/tailwind.config.ts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

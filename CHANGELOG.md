@@ -2,6 +2,10 @@
 
 Muffilities = Custom Utilities
 
+## create-mufferplate@3.3.0
+
+- feat: Vite'ın yanı sıra yeni altyapı olarak [Rsbuild](https://rsbuild.dev/) eklendi. Artık Rsbuild veya Vite ile geliştirme yapılabilir.
+
 ## craete-mufferplate@3.2.0
 
 - feat: Input maskeleme için imask eklendi.

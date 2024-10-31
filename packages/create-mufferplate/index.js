@@ -45,9 +45,14 @@ const templates = [
     color: yellow,
   },
   {
+    name: "rsbuild",
+    display: "Use mufferplate with Rsbuild 🦀",
+    color: lightCyan,
+  },
+  {
     name: "single",
     display: "Single Output (Deprecated)",
-    color: lightBlue,
+    color: magenta,
     variants: [
       {
         name: "single-tw-css",
@@ -75,7 +80,7 @@ const templates = [
     name: "multi",
     display:
       "Multiple Output (Deprecated)",
-    color: lightGreen,
+    color: lightBlue,
   },
 ];
 

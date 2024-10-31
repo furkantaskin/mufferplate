@@ -1,0 +1,19 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:string";
+
+@function strip-units($number){
+  @return math.div($number, ($number * 0 + 1));
+}
+@function calculate_padding($aw, $ah){
+  $result: math.div(strip-units($ah), strip-units($aw)) * 100%;
+  @return $result;
+}
+
+@function get-color($color){
+  $color_variable: map.get($color_map, $color);
+  @if ($color_variable == null){
+    @warn "The color key '#{$color}' does not exist in defined colors. Please add your color to the color map";
+  }
+  @return string.unquote("var(--color-#{$color})");
+}
