@@ -37,6 +37,7 @@ export default defineConfig(({ env }) => {
       },
     },
     output: {
+      cleanDistPath: false,
       filenameHash: false,
       legalComments: isDev ? "none" : "inline",
       sourceMap: {

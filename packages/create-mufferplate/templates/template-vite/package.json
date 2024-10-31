@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "@types/node": "^22.8.4",
+    "blaze-slider": "^1.9.3",
     "bootstrap": "^5.3.3",
     "fast-glob": "^3.3.2",
     "flowbite": "^2.5.2",
+    "glightbox": "^3.3.0",
     "imask": "^7.6.1",
     "lightningcss": "^1.27.0",
     "postcss": "^8.4.47",
     "sass-embedded": "^1.80.5",
     "sweetalert2": "^11.14.4",
+    "swiper": "^11.1.14",
     "tailwindcss": "^3.4.14",
     "typescript": "~5.6.2",
     "vite": "^5.4.9"
