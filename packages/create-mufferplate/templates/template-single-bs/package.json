@@ -21,7 +21,7 @@
     "pers-sign": "^0.5.0",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "mufferplate":"^1.12.1"
+    "mufferplate":"^1.14.1"
   },
   "scripts": {
     "dev-js": "mufferplate js",
