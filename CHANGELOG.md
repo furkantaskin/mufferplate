@@ -1,6 +1,10 @@
 # CHANGELOG
 
-Mufferplate artık semver yerine CalVer kullanacaktır.
+NPM CalVer desteklemediği için yeniden Semver kullanımına geçildi.
+
+## 3.4.1
+
+- fix(rsbuild): Banner içindeki tanımsız versiyon stringi kaldırıldı.
 
 ## 2024.10.31
 

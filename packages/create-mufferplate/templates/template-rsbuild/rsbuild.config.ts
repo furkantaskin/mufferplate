@@ -10,7 +10,7 @@ import * as sass from "sass-embedded";
 import tailwindcss from "tailwindcss";
 
 // Constants
-const BANNER = `/*!\n**********\n\n${new Date().toLocaleDateString()}\nMade with mufferplate\nVisit: https://github.com/furkantaskin/mufferplate process.env.PUBLIC_VER \n\n**********\n!*/`;
+const BANNER = `/*!\n**********\n\n${new Date().toLocaleDateString()}\nMade with mufferplate\nVisit: https://github.com/furkantaskin/mufferplate\n\n**********\n!*/`;
 
 export default defineConfig(({ env }) => {
   const isDev = env === "development";
